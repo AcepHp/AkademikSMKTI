@@ -1,0 +1,5 @@
+#oldImagePreview img, #previewImage img {
+    max-width: 80%;
+    height: auto;
+}
+

@@ -1,0 +1,120 @@
+/* CSS dari forumdiskusi.css */
+.forum-title {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+    margin-top: 5px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #ffffff;
+    border-radius: 0px 5px 5px 0px;
+}
+
+@media screen and (max-width: 768px) {
+    .forum-title {
+        font-size: 1.5em;
+        padding: 15px;
+    }
+}
+
+/* Tambahkan atau perbarui CSS berikut di dalam forumdiskusi.css */
+.facebook-post {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.facebook-post .card-header {
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.facebook-post .card-body {
+    padding: 20px;
+    margin-left: 30px;
+}
+
+.facebook-post .card-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+    color: #000000;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.facebook-post .media img {
+    margin-left: 30px;
+}
+
+.facebook-post .media-body {
+    font-family: 'Poppins', sans-serif;
+    color: #7c7777;
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+.facebook-post .card-footer {
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+/* Ganti font dan warna untuk deskripsi agar terlihat seperti font caption Instagram */
+.facebook-post .card-body p.card-text {
+    font-family: 'Poppins', sans-serif;
+    color: #333333;
+    font-size: 0.9rem;
+}
+
+.facebook-post .card-footer .btn-comment {
+    background: #ccc;
+    color: #555;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.facebook-post .card-footer .btn-comment i {
+    margin-right: 5px;
+}
+
+.facebook-post .card-body p {
+    white-space: pre-line;
+    font-family: 'Font Instagram';
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Tambahkan atau perbarui CSS berikut untuk tampilan mobile */
+@media screen and (max-width: 576px) {
+    .facebook-post {
+        width: 100%;
+        margin-left: 0; /* Hapus margin kiri */
+    }
+
+    .facebook-post .media img {
+        margin-left: 0; /* Hapus margin kiri untuk foto */
+    }
+
+    .facebook-post .card-title {
+        font-size: 1.5rem; /* Ukuran judul lebih kecil pada layar kecil */
+        margin-left: 0; /* Hapus margin kiri pada judul */
+    }
+
+    .facebook-post .media-body {
+        font-size: 0.8rem; /* Ukuran font nama lengkap lebih kecil pada layar kecil */
+    }
+
+    .facebook-post .card-footer .btn-comment {
+        margin-left: 0; /* Hapus margin kiri pada tombol */
+    }
+}

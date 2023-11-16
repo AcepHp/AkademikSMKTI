@@ -1,0 +1,52 @@
+/* Tambahkan CSS kustom di sini */
+.navbar {
+    background-color: #f5f5f5; /* Warna background navbar */
+    border-bottom: 1px solid #ccc; /* Garis bawah navbar */
+    padding: 10px 0; /* Padding atas dan bawah */
+}
+
+.navbar img {
+    max-width: 40px; /* Ukuran maksimum logo */
+    margin-right: 10px; /* Jarak antara logo dan teks */
+}
+
+.navbar .navbar-brand {
+    font-size: 24px; /* Ukuran teks brand */
+    color: #333; /* Warna teks brand */
+    font-weight: bold; /* Ketebalan teks brand */
+    text-decoration: none; /* Hapus dekorasi link */
+}
+
+.navbar .navbar-nav {
+    margin-left: auto; /* Posisi kanan untuk item navbar */
+}
+
+.navbar .nav-item {
+    margin-right: 20px; /* Jarak antara item navbar */
+}
+
+.navbar .nav-link {
+    color: #333; /* Warna teks item navbar */
+    font-weight: bold; /* Ketebalan teks item navbar */
+    text-decoration: none; /* Hapus dekorasi link */
+}
+
+.navbar .nav-link:hover {
+    color: #007bff; /* Warna teks saat dihover */
+}
+
+/* Warna latar belakang dropdown */
+.navbar .dropdown-menu {
+    background-color: #f5f5f5;
+}
+
+/* Warna teks item dropdown */
+.navbar .dropdown-item {
+    color: #333;
+}
+
+/* Warna teks item dropdown saat dihover */
+.navbar .dropdown-item:hover {
+    background-color: #007bff;
+    color: #fff;
+}

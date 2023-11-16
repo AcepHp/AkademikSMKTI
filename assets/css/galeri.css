@@ -1,0 +1,339 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+nav {
+    background-color: #002147;
+    height: 80px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.nav-link {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.nav-link.active {
+    font-weight: 700;
+}
+
+.navbar .nav-link.active {
+    color: #FDC800;
+}
+
+.navbar .nav-link:hover {
+    color: #FDC800;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.button a {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #FDC800;
+    width: 100px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.offcanvas-header img {
+    margin-right: -12px;
+    margin-left: 12px;
+}
+
+.offcanvas-title {
+    font-size: 24px;
+    font-weight: 700;
+
+}
+@media(max-width: 991px) {
+    .sidebar {
+        background-color: #002147;
+        backdrop-filter: blur(10px);
+    }
+
+}
+
+.inner {
+    position: relative;
+    width: 100%;
+    max-height: calc(100vh - 120px);
+}
+
+.inner img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.jdl-utama h1 {
+    font-size: 60px;
+    padding: 0 0 35rem 0;
+}
+.galerivideo {
+    top: 25px;
+    position: relative;
+    color: black;
+    font-size: 48px;
+    font-family: Montserrat;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+hr {
+    border-top: 5px solid black;
+    width: auto;
+    align-items: center;
+}
+
+.prestasi {
+    left: 1px;
+    top: 30px;
+    position: relative;
+    color: black;
+    font-size: 48px;
+    font-family: Montserrat;
+    font-weight: 400;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.event {
+    left: 1px;
+    top: 30px;
+    position: relative;
+    color: black;
+    font-size: 48px;
+    font-family: Montserrat;
+    font-weight: 400;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.jdl-kepsek {
+    text-align: center;
+    font-size: 48px;
+    font-family: Montserrat;
+}
+
+.jabatan {
+    font-size: 20px;
+}
+
+.nama {
+    margin-top: 10px;
+}
+
+.img-man {
+    height: 500px;
+    width: 70%;
+    border-radius: 28px;
+}
+
+.vid {
+    height: 500px;
+    width: 70%;
+    border-radius: 28px;
+}
+
+.back {
+    width: 35px;
+    height: 35px;
+    top: 250px;
+    background-size: 20px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.next {
+    width: 35px;
+    height: 35px;
+    top: 250px;
+    background-size: 20px;
+    background-color: black;
+    border-radius: 50%;
+}
+@media (max-width: 1500px) {
+    .jdl-utama h1 {
+        padding: 0 0 20rem  0;
+        font-size: 60px;
+    }
+}
+@media (max-width: 1400px) {
+    .jdl-utama h1 {
+        padding: 0 0 16rem  0;
+        font-size: 52px;
+    }
+    .jdl-kepsek {
+        font-size: 30px;
+    }
+}
+@media (max-width: 1200px) {
+    .jdl-utama h1 {
+        padding: 0 0 11rem  0;
+        font-size: 42px;
+    }
+    .img-man {
+        width: auto;
+        height: 327px;
+    }
+
+    .jabatan {
+        font-size: 15px;
+    }
+
+    .nama {
+        font-size: 13px;
+    }
+
+    .back {
+        background-size: 15px;
+        width: 30px;
+        height: 30px;
+        top: 180px;
+    }
+
+    .next {
+        background-size: 15px;
+        width: 30px;
+        height: 30px;
+        top: 180px;
+    }
+    .jdl-berita {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 991px) {
+    .jdl-utama h1 {
+        padding: 0 0 8rem  0;
+        font-size: 32px;
+    }
+    .img-man {
+        width: auto;
+        height: 277px;
+    }
+    .vid {
+        height: 350px;
+    }
+
+    .jabatan {
+        font-size: 12px;
+    }
+
+    .nama {
+        font-size: 9px;
+    }
+
+    .back {
+        background-size: 15px;
+        width: 25px;
+        height: 25px;
+        top: 150px;
+    }
+
+    .next {
+        background-size: 15px;
+        width: 25px;
+        height: 25px;
+        top: 150px;
+    }
+    .jdl-berita {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 765px) {
+    .jdl-utama h1 {
+        font-size: 25px;
+    }
+    .jdl-berita {
+        font-size: 15px;
+        text-align: center;
+    }
+}
+
+/* footer */
+
+.foot-1 {
+    background-color: #002147;
+    color: white;
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    display: flex;
+}
+.foot-1 .kontak {
+    display: flex;
+    max-width: 100%;
+}
+.foot-2 {
+    text-align: center;
+    font-size: 15px;
+}
+.bi {
+    padding: 15px;
+    font-size: 30px;
+    width: 50px;
+    color: white;
+}
+.kontak h5 {
+    text-align: center;
+}
+.icon-1 {
+    float: right;
+}
+.icon-1 a:hover {
+    color: #FDC800;
+}
+@media (max-width: 1330px) {
+    .kontak h5 {
+        font-size: 18px;
+    }
+    .bi {
+        font-size: 25px;
+    }
+}
+@media (max-width: 1211px) {
+    .kontak h5 {
+        font-size: 14px;
+    }
+    .bi {
+        font-size: 23px;
+    }
+}
+@media (max-width: 999px) {
+    .kontak h5 {
+        font-size: 12px;
+    }
+    .bi {
+        font-size: 20px;
+    }
+}
+@media (max-width: 891px) {
+    .kontak h5 {
+        font-size: 10px;
+    }
+    .bi {
+        font-size: 17px;
+    }
+}
+@media (max-width: 765px) {
+    .kontak h5 {
+        font-size: 9px;
+    }
+    .bi {
+        font-size: 15px;
+    }
+}

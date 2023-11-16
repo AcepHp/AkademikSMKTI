@@ -1,0 +1,201 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: #002147;
+    height: 80px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.nav-link {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.nav-link.active {
+    font-weight: 700;
+}
+
+.navbar .nav-link.active {
+    color: #FDC800;
+}
+
+.navbar .nav-link:hover {
+    color: #FDC800;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.button a {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #FDC800;
+    width: 100px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.offcanvas-header img {
+    margin-right: -12px;
+    margin-left: 12px;
+}
+
+.offcanvas-title {
+    font-size: 24px;
+    font-weight: 700;
+
+}
+@media(max-width: 991px) {
+    .sidebar {
+        background-color: #002147;
+        backdrop-filter: blur(10px);
+    }
+
+}
+
+.inner {
+    position: relative;
+    width: 100%;
+    max-height: calc(105vh - 120px);
+    /* Adjust this value to account for navbar and other elements */
+}
+
+.inner img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.next {
+    right: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keahlian {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: 100px;
+}
+
+.programText {
+    top: 20px;
+    text-align: center;
+    color: black;
+    font-size: 55px;
+    font-family: Montserrat;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.program a {
+    margin-left: 90px;
+    font-size: 20px;
+    color: black;
+    text-align: center
+}
+
+.program a:hover {
+    color: blue;
+}
+
+.program a:active {
+    color: orange;
+}
+
+.program img {
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+    margin-left: 150px;
+    margin-bottom: 20px;
+}
+
+.program {
+    max-width: 100%;
+    margin-right: 60px;
+}
+
+/* footer */
+
+.foot-1 {
+    background-color: #002147;
+    color: white;
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    display: flex;
+}
+.foot-1 .kontak {
+    display: flex;
+    max-width: 100%;
+}
+.foot-2 {
+    text-align: center;
+    font-size: 15px;
+}
+.bi {
+    padding: 15px;
+    font-size: 30px;
+    width: 50px;
+    color: white;
+}
+.kontak h5 {
+    text-align: center;
+}
+.icon-1 {
+    float: right;
+}
+.icon-1 a:hover {
+    color: #FDC800;
+}
+@media (max-width: 1330px) {
+    .kontak h5 {
+        font-size: 18px;
+    }
+    .bi {
+        font-size: 25px;
+    }
+}
+@media (max-width: 1211px) {
+    .kontak h5 {
+        font-size: 14px;
+    }
+    .bi {
+        font-size: 23px;
+    }
+}
+@media (max-width: 999px) {
+    .kontak h5 {
+        font-size: 12px;
+    }
+    .bi {
+        font-size: 20px;
+    }
+}
+@media (max-width: 891px) {
+    .kontak h5 {
+        font-size: 10px;
+    }
+    .bi {
+        font-size: 17px;
+    }
+}

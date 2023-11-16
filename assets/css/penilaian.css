@@ -1,0 +1,25 @@
+  /* Mengatur tinggi dan pinggiran lonjong pada card */
+  .card {
+    border-radius: 50px 50px 50px 50px;
+    border: 1px solid white; /* Menambahkan border dengan warna kuning */
+    /* Anda dapat menyesuaikan nilai sesuai dengan preferensi Anda */
+}
+
+/* Mengubah latar belakang accordion menjadi biru dengan border-radius 50px */
+.card-header {
+    background-color: rgb(75, 113, 221);
+    padding: 10px 10px 10px 10px;
+}
+
+/* Mengubah warna teks pada accordion menjadi putih */
+.btn-link {
+    color: white;
+    text-decoration: none;
+    /* Menghapus garis bawah */
+}
+
+/* Efek hover warna kuning */
+.btn-link:hover {
+    color: yellow;
+    text-decoration: none;
+}

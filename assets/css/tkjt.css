@@ -1,0 +1,352 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
+    background-color: #002147;
+    height: 80px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.nav-link {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.nav-link.active {
+    font-weight: 700;
+}
+
+.navbar .nav-link.active {
+    color: #FDC800;
+}
+
+.navbar .nav-link:hover {
+    color: #FDC800;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.button a {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #FDC800;
+    width: 100px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.offcanvas-header img {
+    margin-right: -12px;
+    margin-left: 12px;
+}
+
+.offcanvas-title {
+    font-size: 24px;
+    font-weight: 700;
+
+}
+@media(max-width: 991px) {
+    .sidebar {
+        background-color: #002147;
+        backdrop-filter: blur(10px);
+    }
+
+}
+
+.inner {
+    width: 100%;
+    max-height: calc(100vh - 120px);
+}
+
+.inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.jdl-utama h1 {
+    font-size: 60px;
+    padding: 0 0 25rem 0;
+}
+
+.judul {
+    text-align: center;
+    color: black;
+    font-size: 32px;
+    font-family: Montserrat;
+    font-weight: 400;
+}
+
+.penjelasan {
+    max-width: 58rem;
+}
+
+.penjelasan p ol {
+    text-align: justify;
+}
+
+.kepsek {
+    height: 440px;
+    width: 300px;
+    background-color: #013876;
+}
+
+.kepsek .isi img {
+    margin-left: 30px;
+    height: 300px;
+    width: 200px;
+}
+
+.kepsek .jabatan {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.kepsek .isi-text {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info {
+    background-color: #013876;
+    width: 300px;
+}
+
+.info a {
+    color: black;
+}
+
+.info a:hover {
+    color: #FDC800;
+}
+
+.info-title {
+    color: white;
+    float: right;
+}
+
+.populer {
+    width: 300px;
+}
+
+.populer img {
+    margin: 25px auto;
+    display: block;
+    width: 250px;
+}
+
+.populer p {
+    margin-left: 5px;
+    margin-top: -30px;
+    font-size: 13px;
+    color: black;
+}
+
+.populer a {
+    color: black;
+}
+
+.populer a:hover {
+    color: #FDC800;
+}
+
+.populer-judul {
+    background-color: #013876;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+.populer hr {
+    border: 0;
+    border-top: 2px solid black;
+    width: 16rem;
+}
+
+@media (max-width: 1500px) {
+    .jdl-utama h1 {
+        padding: 0 0 20rem  0;
+        font-size: 60px;
+    }
+}
+@media (max-width: 1400px) {
+    .jdl-utama h1 {
+        padding: 0 0 16rem  0;
+        font-size: 52px;
+    }
+}
+@media (max-width: 1200px) {
+    .judul {
+        font-size: 28px;
+    }
+    .jdl-utama h1 {
+        padding: 0 0 11rem  0;
+        font-size: 42px;
+    }
+}
+@media (max-width: 990px) {
+    .kepsek {
+        width: 250px;
+        height: 350px;
+    }
+    .kepsek .isi img {
+        height: 240px;
+        width: 160px;
+    }
+    .kepsek .jabatan {
+        font-size: 16px;
+    }
+    .kepsek .isi-text {
+        font-size: 12px;
+        margin-top: -10px;
+    }
+    .info {
+        width: 250px;
+    }
+    .info-title {
+        font-size: 15px;
+    }
+    .info li {
+        font-size: 15px;
+    }
+    .populer {
+        width: 250px;
+    }
+    .populer-judul {
+        font-size: 16px;
+    }
+    .populer img {
+        width: 200px;
+    }
+    .populer hr {
+        width: 13rem;
+    }
+    .populer p {
+        font-size: 10px;
+    }
+    .judul {
+        font-size: 23px;
+    }
+    .penjelasan h3 {
+        font-size: 18px;
+    }
+    .penjelasan p {
+        font-size: 12px;
+    }
+    .penjelasan li {
+        font-size: 12px;
+    }
+    .jdl-utama h1 {
+        padding: 0 0 11rem  0;
+        font-size: 42px;
+    }
+}
+@media (max-width: 765px) {
+    .info-title {
+        font-size: 14px;
+    }
+    .info li {
+        font-size: 12px;
+    }
+    .populer-judul {
+        font-size: 14px;
+    }
+    .judul {
+        font-size: 18px;
+    }
+    .penjelasan h3 {
+        font-size: 15px;
+    }
+    .penjelasan p {
+        font-size: 10px;
+    }
+    .penjelasan li {
+        font-size: 10px;
+    }
+}
+
+/* footer */
+
+.foot-1 {
+    background-color: #002147;
+    color: white;
+    text-align: center;
+    border-radius: 0;
+    border: none;
+    display: flex;
+}
+.foot-1 .kontak {
+    display: flex;
+    max-width: 100%;
+}
+.foot-2 {
+    text-align: center;
+    font-size: 15px;
+}
+.bi {
+    padding: 15px;
+    font-size: 30px;
+    width: 50px;
+    color: white;
+}
+.kontak h5 {
+    text-align: center;
+}
+.icon-1 {
+    float: right;
+}
+.icon-1 a:hover {
+    color: #FDC800;
+}
+@media (max-width: 1330px) {
+    .kontak h5 {
+        font-size: 18px;
+    }
+    .bi {
+        font-size: 25px;
+    }
+}
+@media (max-width: 1211px) {
+    .kontak h5 {
+        font-size: 14px;
+    }
+    .bi {
+        font-size: 23px;
+    }
+}
+@media (max-width: 999px) {
+    .kontak h5 {
+        font-size: 12px;
+    }
+    .bi {
+        font-size: 20px;
+    }
+}
+@media (max-width: 891px) {
+    .kontak h5 {
+        font-size: 10px;
+    }
+    .bi {
+        font-size: 17px;
+    }
+}
+@media (max-width: 765px) {
+    .kontak h5 {
+        font-size: 9px;
+    }
+    .bi {
+        font-size: 15px;
+    }
+}
