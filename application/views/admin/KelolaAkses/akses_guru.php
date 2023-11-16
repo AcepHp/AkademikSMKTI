@@ -69,22 +69,22 @@
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>NIP</th>
-                                                <th>Nama</th>
-                                                <th>Username</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">NO</th>
+                                                <th style="text-align: center; vertical-align: middle;">NIP</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama</th>
+                                                <th style="text-align: center; vertical-align: middle;">Username</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1;?>
                                             <?php foreach ($dataguru as $row) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
+                                                <td style="width:5%; text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
                                                 <td><?php echo $row->NIP ?></td>
                                                 <td><?php echo $row->nama_lengkap ?></td>
                                                 <td><?php echo $row->username ?></td>
-                                                <td>
+                                                <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <a href="<?php echo site_url('Akses/detailguru/'.$row->id_users); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-eye"></i>

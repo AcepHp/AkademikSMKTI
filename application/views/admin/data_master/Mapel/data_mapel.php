@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Guru</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,6 +27,7 @@
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 
 
@@ -77,21 +78,26 @@
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Kode Mapel</th>
-                                            <th>Nama Mapel</th>
-                                            <th>Nama Jurusan</th>
-                                            <th>Nama Tingkatan</th>
-                                            <th>Aksi</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                            <th style="text-align: center; vertical-align: middle;">Kode Mapel
+                                            </th>
+                                            <th style="text-align: center; vertical-align: middle;">Nama Mapel</th>
+                                            <th style="text-align: center; vertical-align: middle;">Nama Jurusan</th>
+                                            <th style="text-align: center; vertical-align: middle;">Nama Tingkatan</th>
+                                            <th style="width:10; text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $no = 1; ?>
                                         <?php foreach ($mapel_list as $mapel) { ?>
                                         <tr>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?>
+                                            </td>
                                             <td><?php echo htmlspecialchars($mapel->id_mapel); ?></td>
                                             <td><?php echo htmlspecialchars($mapel->nama_mapel); ?></td>
                                             <td><?php echo htmlspecialchars($mapel->nama_jurusan); ?></td>
                                             <td><?php echo htmlspecialchars($mapel->nama_tingkatan); ?></td>
-                                            <td>
+                                            <td style="text-align: center; vertical-align: middle;">
                                                 <a href="<?php echo site_url('mapel/edit_mapel/'.$mapel->id_mapel); ?>"
                                                     class="btn btn-sm btn-warning" title="Edit">
                                                     <i class="fas fa-edit"></i>

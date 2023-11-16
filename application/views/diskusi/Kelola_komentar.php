@@ -62,33 +62,36 @@
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Daftar Komentar</h6>
                             </div>
-                           
+
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>ID Komentar</th>
-                                                <th>Tanggal</th>
-                                                <th>Topik</th>
-                                                <th>Nama</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                                <th style="text-align: center; vertical-align: middle;">Tanggal</th>
+                                                <th style="text-align: center; vertical-align: middle;">Topik</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama</th>
+                                                <th style="text-align: center; vertical-align: middle;">Status</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Ambil parameter status dari URL
-                foreach ($komentar as $row) :
-                    if ($statusFilter === '' || $row['status'] === $statusFilter) :
-                ?>
+                                            $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Ambil parameter status dari URL
+                                            foreach ($komentar as $row) :
+                                                if ($statusFilter === '' || $row['status'] === $statusFilter) :
+                                            ?>
+                                            <?php $no = 1; ?>
+                                            
                                             <tr>
-                                                <td><?php echo $row['id_komentar']; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
                                                 <td><?php echo $row['tanggal']; ?></td>
                                                 <td><?php echo $row['deskripsi']; ?></td>
                                                 <td><?php echo $row['nama']; ?></td>
-                                                <td><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?></td>
-                                                <td>
+                                                <td><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
+                                                </td>
+                                                <td style="text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#komentarModal<?php echo $row['id_komentar']; ?>">
@@ -111,11 +114,11 @@
                     <!-- End of Main Content -->
 
                     <!-- Footer Admin -->
-                    
+
 
                 </div>
                 <!-- End of Content Wrapper -->
-                
+
 
             </div>
             <?php $this->load->view('Bar/Footer_admin'); ?>
@@ -126,8 +129,8 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-           <!-- include modal -->
-           <?php $this->load->view('Bar/Logout_modal'); ?>
+            <!-- include modal -->
+            <?php $this->load->view('Bar/Logout_modal'); ?>
 
             <!-- Modal -->
             <?php foreach ($komentar as $row): ?>
@@ -168,7 +171,8 @@
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?></td>
+                                        <td><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
+                                        </td>
                                     </tr>
                                     <!-- ... (other fields) ... -->
                                 </tbody>
@@ -195,7 +199,7 @@
             </div>
             <?php endforeach; ?>
 
-            
+
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

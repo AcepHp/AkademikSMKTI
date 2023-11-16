@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 </head>
 
@@ -42,12 +45,13 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <div class="container-fluid">>
+                    <div class="container-fluid">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Wali Kelas</h1>
                             <div class="btn-group">
                                 <a href="<?php echo site_url('Wali/tambah_wali'); ?>"
-                                    class="btn btn btn-success shadow-sm mr-2"><i class="fas fa-download fa-sm text-white-50"></i> Tambah Data Wali Kelas</a>
+                                    class="btn btn btn-success shadow-sm mr-2"><i
+                                        class="fas fa-download fa-sm text-white-50"></i> Tambah Data Wali Kelas</a>
                             </div>
                         </div>
                     </div>
@@ -59,23 +63,26 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>Nama Kelas</th>
-                                                <th>Wali Kelas</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No
+                                                </th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Kelas</th>
+                                                <th style="text-align: center; vertical-align: middle;">Wali Kelas</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1; ?>
                                             <?php foreach ($wali as $row) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                    <?php echo $no++; ?></td>
                                                 <td><?php echo $row->nama_kelas; ?></td>
                                                 <td><?php echo $row->Nama_Lengkap; ?></td>
-                                                <td>
+                                                <td style="text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#waliModal<?php echo $row->id_wali; ?>">
@@ -122,12 +129,9 @@
                     </button>
                 </div>
                 <div class="modal-body" style="font-size: 1rem;">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="example" class="display" style="width:100%">
                         <tbody>
-                            <tr>
-                                <th>ID Wali</th>
-                                <td><?php echo $row->id_wali; ?></td>
-                            </tr>
+                            
                             <tr>
                                 <th>Nama Kelas</th>
                                 <td><?php echo $row->nama_kelas; ?></td>
@@ -174,6 +178,25 @@
     <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+    <script>
+    new DataTable('#example', {
+        columnDefs: [{
+                targets: [0],
+                orderData: [0, 1]
+            },
+            {
+                targets: [1],
+                orderData: [1, 0]
+            },
+            {
+                targets: [3],
+                orderData: [3, 0]
+            }
+        ]
+    });
+    </script>
 
 
     <script>

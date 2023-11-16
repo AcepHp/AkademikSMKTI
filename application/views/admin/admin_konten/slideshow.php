@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Admin</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,6 +23,7 @@
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -76,25 +77,25 @@
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>Deskripsi</th>
-                                                <th>Gambar</th>
-                                                <th>Created</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align:center; vertical-align:center;">NO</th>
+                                                <th style="text-align:center; vertical-align:center;">Deskripsi</th>
+                                                <th style="text-align:center; vertical-align:center;">Gambar</th>
+                                                <th style="text-align:center; vertical-align:center;">Created</th>
+                                                <th style="width:15%; text-align:center; vertical-align:center;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1; ?>
                                             <?php foreach ($slide->result() as $row) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
+                                                <td style="width:5%; text-align:center; vertical-align:center;"><?php echo $no++; ?></td>
                                                 <td><?php echo $row->deskripsi ?></td>
-                                                <td>
+                                                <td style="text-align: center;">
                                                     <img src="<?php echo $row->gambar ?>" alt="Gambar"
-                                                        style="width: 80px; height: auto;">
+                                                        style="width: 120px; height: auto;">
                                                 </td>
                                                 <td><?php echo $row->created ?></td>
-                                                <td>
+                                                <td style="width:15%; text-align:center; vertical-align:center;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#guruModal<?php echo $row->id_slide; ?>">

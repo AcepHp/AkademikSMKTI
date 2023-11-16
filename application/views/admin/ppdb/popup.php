@@ -69,21 +69,21 @@
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>Judul</th>
-                                                <th>Isi</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">NO</th>
+                                                <th style="text-align: center; vertical-align: middle;">Judul</th>
+                                                <th style="text-align: center; vertical-align: middle;">Isi</th>
+                                                <th style="text-align: center; vertical-align: middle;">Status</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1;?>
                                             <?php foreach ($popup as $row) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
+                                                <td style="width:5%; text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
                                                 <td><?php echo $row->judul ?></td>
                                                 <td><?php echo $row->isi ?></td>
-                                                <td>
+                                                <td style="text-align: center; vertical-align: middle;">
                                                     <?php if ($row->aktif == 1) : ?>
                                                     <button class="btn btn-sm btn-success"
                                                         onclick="changeStatus(<?php echo $row->id_popup; ?>, 0)">Aktif</button>
@@ -93,7 +93,7 @@
                                                         Aktif</button>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td>
+                                                <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#popupModal<?php echo $row->id_popup; ?>">

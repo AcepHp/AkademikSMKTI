@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 </head>
 
@@ -57,47 +60,43 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
-                        <!-- Page Heading -->
-                        <!-- <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
-                        <!-- DataTales Example -->
-                        <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Daftar Mapel</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-inline mb-2">
-                                    <!-- Tambahkan class form-inline di sini -->
-                                    <label for="myInput" class="mr-2">Cari:</label> <!-- Tambahkan label "Cari" -->
-                                    <input class="form-control form-control-sm" id="myInput" type="text"
-                                        placeholder="Search..">
+
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No
+                                                </th>
                                                 <th style="display: none;">ID Mapel</th>
-                                                <th>Nama Pelajaran</th>
-                                                <th>Nama Jurusan</th>
-                                                <th>Nama Tingkatan</th>
-                                                <th style="text-align: center;">Aksi</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Pelajaran
+                                                </th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Jurusan
+                                                </th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Tingkatan
+                                                </th>
+                                                <th style="width:15%; text-align: center; vertical-align: middle;">Aksi
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody id="myTable">
                                             <?php $no = 1; ?>
                                             <?php foreach ($data as $row) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
+                                                <td style="width:5%; text-align: center; vertical-align: middle;">
+                                                    <?php echo $no++; ?></td>
                                                 <td style="display: none;"><?php echo $row->id_mapel; ?></td>
                                                 <td><?php echo $row->nama_mapel; ?></td>
                                                 <td><?php echo $row->nama_jurusan; ?></td>
                                                 <td><?php echo $row->nama_tingkatan; ?></td>
-                                                <td style="text-align: center;">
+                                                <td style="text-align: center; vertical-align: middle;">
                                                     <a href="<?php echo site_url('Penugasan/lihat/' . $row->id_mapel); ?>"
                                                         class="btn btn-sm btn-warning" title="masuk">
                                                         <i class="fas fa-eye"></i> Lihat Detail Penugasan
@@ -154,17 +153,26 @@
             <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
             <script>
-            $(document).ready(function() {
-                $("#myInput").on("keyup", function() {
-                    var value = $(this).val().toLowerCase();
-                    $("#myTable tr").filter(function() {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
+            new DataTable('#example', {
+                columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    },
+                    {
+                        targets: [1],
+                        orderData: [1, 0]
+                    },
+                    {
+                        targets: [4],
+                        orderData: [4, 0]
+                    }
+                ]
             });
             </script>
+
 
 
 </body>

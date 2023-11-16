@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Guru</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +24,7 @@
     <!-- Custom styles for this page -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -62,9 +63,9 @@
                                 <table id="example" class="table table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th style="text-align: center; vertical-align: middle; width:5%">No</th>
-                                            <th>Semester</th>
-                                            <th>Status</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle; width:5%">No</th>
+                                            <th style="text-align: center; vertical-align: middle;">Semester</th>
+                                            <th style="text-align: center; vertical-align: middle;">Status</th>
                                             <th style="text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>

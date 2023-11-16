@@ -26,7 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  
+
 
 
 
@@ -75,22 +75,22 @@
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Mata Pelajaran</th>
-                                            <th>Materi</th>
-                                            <th>Jurusan</th>
-                                            <th>Kelas</th>
-                                            <th>Tahun</th>
-                                            <th>Semester</th>
-                                            <th>Aksi</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                            <th style="text-align: center; vertical-align: middle;">Mata Pelajaran</th>
+                                            <th style="text-align: center; vertical-align: middle;">Materi</th>
+                                            <th style="text-align: center; vertical-align: middle;">Jurusan</th>
+                                            <th style="align: center; vertical-align: middle;">Kelas</th>
+                                            <th style="text-align: center; vertical-align: middle;">Tahun</th>
+                                            <th style="text-align: center; vertical-align: middle;">Semester</th>
+                                            <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1;?>
                                         <?php foreach ($materi as $row): ?>
                                         <tr>
-                                            <td><?php echo $no++;?></td>
-                                            <td><?php echo isset($row->nama_mapel) ? htmlspecialchars($row->nama_mapel) : ''; ?>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++;?></td>
+                                            <td ><?php echo isset($row->nama_mapel) ? htmlspecialchars($row->nama_mapel) : ''; ?>
                                             </td>
                                             <td><?php echo isset($row->nama_materi) ? htmlspecialchars($row->nama_materi) : ''; ?>
                                             </td>
@@ -102,16 +102,16 @@
                                             </td>
                                             <td><?php echo isset($row->nama_semester) ? htmlspecialchars($row->nama_semester) : ''; ?>
                                             </td>
-                                            <td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;">
                                                 <a href="<?= base_url('assets/uploads/materi/' . $row->file_materi); ?>"
                                                     class="btn btn-sm btn-info" title="Detail" target="_blank"
                                                     data-target="#detailModal<?php echo $row->id_materi; ?>">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                                 <a href="<?php echo site_url('Materi/edit_materi_admin/'.$row->id_materi); ?>"
-                                                        class="btn btn-sm btn-warning" title="Edit">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
+                                                    class="btn btn-sm btn-warning" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
                                                 <a href="#" class="btn btn-sm btn-danger" title="Hapus"
                                                     onclick="hapusMateri('<?php echo $row->id_materi; ?>')">
                                                     <i class="fas fa-trash"></i>
@@ -163,7 +163,7 @@
             <!-- Page level plugins -->
             <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
             <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
-            
+
 
             <!-- Page level custom scripts -->
             <script src="assets/js/demo/datatables-demo.js"></script>

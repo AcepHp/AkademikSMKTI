@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Guru</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +24,7 @@
     <!-- Custom styles for this page -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 
 
@@ -75,14 +76,18 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Tahun Akademik</th>
-                                            <th>Status</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                            <th style="text-align:center; vertical-align:center;">Tahun Akademik</th>
+                                            <th style="text-align: center; vertical-align: middle;">Status</th>
                                             <th style="text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $no = 1; ?>
                                         <?php foreach ($tahun_akademik as $tahun) { ?>
                                         <tr>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?>
+                                            </td>
                                             <td><?php echo htmlspecialchars($tahun->tahun_akademik); ?></td>
                                             <td><?php echo htmlspecialchars($tahun->status); ?></td>
                                             <td style="text-align: center; vertical-align: middle;">

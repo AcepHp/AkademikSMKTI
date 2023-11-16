@@ -179,7 +179,7 @@
                                                         </div>
 
                                                         <div class="text-center">
-                                                            <input type="submit" name="submit" value="Simpan"
+                                                            <input type="submit" name="submit" value="Simpan Perubahan"
                                                                 class="btn btn-primary"
                                                                 style="width: 100%; max-width: 300px;">
                                                         </div>

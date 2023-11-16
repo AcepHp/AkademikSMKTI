@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Guru</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +24,10 @@
     <!-- Custom styles for this page -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 
 
@@ -71,24 +75,28 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="example" style="width:100%">
+                                <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>ID Kelas</th>
-                                            <th>Nama Kelas</th>
-                                            <th>Tingkatan</th>
-                                            <th>Jurusan</th>
-                                            <th>Aksi</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                            <th style="text-align: center; vertical-align: middle;">ID Kelas</th>
+                                            <th style="text-align: center; vertical-align: middle;">Nama Kelas</th>
+                                            <th style="text-align: center; vertical-align: middle;">Tingkatan</th>
+                                            <th style="text-align: center; vertical-align: middle;">Jurusan</th>
+                                            <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $no = 1; ?>
                                         <?php foreach ($kelas as $kelas_item) { ?>
                                         <tr>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?>
+                                            </td>
                                             <td><?php echo htmlspecialchars($kelas_item->id_kelas); ?></td>
                                             <td><?php echo htmlspecialchars($kelas_item->nama_kelas); ?></td>
                                             <td><?php echo htmlspecialchars($kelas_item->nama_tingkatan); ?></td>
                                             <td><?php echo htmlspecialchars($kelas_item->nama_jurusan); ?></td>
-                                            <td>
+                                            <td style="text-align: center; vertical-align: middle;">
                                                 <a href="<?php echo site_url('kelas/edit/'.$kelas_item->id_kelas); ?>"
                                                     class="btn btn-sm btn-warning" title="Edit">
                                                     <i class="fas fa-edit"></i>
@@ -149,10 +157,25 @@
 
     <!-- Page level plugins -->
     <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="assets/js/demo/datatables-demo.js"></script>
+    <script>
+    new DataTable('#example', {
+        columnDefs: [{
+                targets: [0],
+                orderData: [0, 1]
+            },
+            {
+                targets: [1],
+                orderData: [1, 0]
+            },
+            {
+                targets: [4],
+                orderData: [4, 0]
+            }
+        ]
+    });
+    </script>
     <script>
     function hapusKelas(id_siswa) {
         Swal.fire({

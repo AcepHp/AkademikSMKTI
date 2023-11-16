@@ -67,16 +67,16 @@
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>ID Guru</th>
-                                            <th>NIP</th>
-                                            <th>Nama Lengkap</th>
-                                            <th>Tempat Lahir</th>
-                                            <th>Tanggal Lahir</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Alamat</th>
-                                            <th>Pendidikan</th>
-                                            <th>Tanggal Mulai</th>
-                                            <th>Aksi</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                            <th style="text-align: center; vertical-align: middle;">NIP</th>
+                                            <th style="text-align: center; vertical-align: middle;">Nama Lengkap</th>
+                                            <th style="text-align: center; vertical-align: middle;">Tempat Lahir</th>
+                                            <th style="text-align: center; vertical-align: middle;">Tanggal Lahir</th>
+                                            <th style="text-align: center; vertical-align: middle;">Jenis Kelamin</th>
+                                            <th style="text-align: center; vertical-align: middle;">Alamat</th>
+                                            <th style="text-align: center; vertical-align: middle;">Pendidikan</th>
+                                            <th style="text-align: center; vertical-align: middle;">Tanggal Mulai</th>
+                                            <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,7 +84,7 @@
                                         <?php foreach ($guru as $row) : ?>
 
                                         <tr>
-                                            <td><?php echo $no++; ?></td>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
                                             <td><?php echo $row->NIP ?></td>
                                             <td><?php echo $row->Nama_Lengkap ?></td>
                                             <td><?php echo $row->Tempat_Lahir ?></td>
@@ -93,7 +93,7 @@
                                             <td><?php echo $row->Alamat ?></td>
                                             <td><?php echo $row->Pendidikan ?></td>
                                             <td><?php echo $row->Tanggal_Mulai ?></td>
-                                            <td>
+                                            <td style="text-align: center; vertical-align: middle;">
                                                 <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                     data-toggle="modal"
                                                     data-target="#guruModal<?php echo $row->ID_Guru; ?>">

@@ -61,9 +61,9 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>Email</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                                <th style="text-align: center; vertical-align: middle;">Email</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -72,7 +72,7 @@
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $row->email ?></td>
-                                                <td>
+                                                <td style="text-align: center; vertical-align: middle;">
                                                     <a href="<?php echo site_url('PPDB/email/'.$row->id_email); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
