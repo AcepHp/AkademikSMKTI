@@ -19,8 +19,10 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 
 </head>
 
@@ -67,25 +69,31 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>ID Topik</th>
-                                                <th>Tanggal</th>
-                                                <th>Nama</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No
+                                                </th>
+                                                <th style="text-align: center; vertical-align: middle;">Tanggal</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                    Status</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $no = 1; ?>
                                             <?php foreach ($topik as $row) : ?>
                                             <tr>
-                                                <td><?php echo $row['id_topik']; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                    <?php echo $no++; ?></td>
                                                 <td><?php echo $row['tanggal']; ?></td>
                                                 <td><?php echo $row['nama']; ?></td>
-                                                <td><?php echo ($row['enum'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                    <?php echo ($row['enum'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
                                                 </td>
-                                                <td>
+                                                <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#topikModal<?php echo $row['id_topik']; ?>">
@@ -195,25 +203,25 @@
             <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
             <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
             <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
-            <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+
 
             <script>
-            $(document).ready(function() {
-                $('#dataTable').DataTable({
-                    "columnDefs": [{
-                            "targets": [0],
-                            "orderData": [0, 1]
-                        },
-                        {
-                            "targets": [1],
-                            "orderData": [1, 0]
-                        },
-                        {
-                            "targets": [4],
-                            "orderData": [4, 0]
-                        }
-                    ]
-                });
+            new DataTable('#example', {
+                columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    },
+                    {
+                        targets: [1],
+                        orderData: [1, 0]
+                    },
+                    {
+                        targets: [4],
+                        orderData: [4, 0]
+                    }
+                ]
             });
             </script>
 

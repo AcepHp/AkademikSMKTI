@@ -18,8 +18,9 @@
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
@@ -112,7 +113,8 @@
                                     <div class="card mb-4">
                                         <div class="card-body">
                                             <?php if (!empty($siswa)) : ?>
-                                            <table class="table table-bordered" style="width:100%">
+                                            <table class="table table-bordered" id="example" class="display"
+                                                style="width:100%">
                                                 <thead>
                                                     <tr>
 
@@ -181,6 +183,25 @@
             <!-- Page level plugins -->
             <script src="<?php echo base_url() ?>assets/datatables/jquery.dataTables.min.js"></script>
             <script src="<?php echo base_url() ?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+            <script>
+            new DataTable('#example', {
+                columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    },
+                    {
+                        targets: [1],
+                        orderData: [1, 0]
+                    },
+                    {
+                        targets: [2],
+                        orderData: [2, 0]
+                    }
+                ]
+            });
+            </script>
             <script type="text/javascript">
             $(document).ready(function() {
                 // Ketika halaman dimuat, periksa apakah ada data post sebelumnya untuk id_kelas

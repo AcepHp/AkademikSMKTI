@@ -67,15 +67,15 @@
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>Pilihan 1</th>
-                                                <th>Pilihan 2</th>
-                                                <th>Nama Lengkap</th>
-                                                <th>L/P</th>
-                                                <th>No Telepon</th>
-                                                <th>Email</th>
-                                                <th>Aksi</th>
-                                                <th>Status</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">NO</th>
+                                                <th style="text-align: center; vertical-align: middle;">Pilihan 1</th>
+                                                <th style="text-align: center; vertical-align: middle;">Pilihan 2</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Lengkap</th>
+                                                <th style="text-align: center; vertical-align: middle;">L/P</th>
+                                                <th style="text-align: center; vertical-align: middle;">No Telepon</th>
+                                                <th style="text-align: center; vertical-align: middle;">Email</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -83,20 +83,20 @@
                                             <?php foreach ($ppdb as $row) : ?>
                                             <?php if (stripos($row->status, '1') !== false) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
                                                 <td><?php echo $row->pilihan_satu ?></td>
                                                 <td><?php echo $row->pilihan_dua ?></td>
                                                 <td><?php echo $row->Nama_lengkap ?></td>
                                                 <td><?php echo $row->Jenis_kelamin ?></td>
                                                 <td><?php echo $row->nomor_telp ?></td>
                                                 <td><?php echo $row->email ?></td>
-                                                <td>
+                                                <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#pendaftarModal<?php echo $row->id_ppdb; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                <td>
+                                                <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <?php if ($row->status == 1) : ?>
                                                     <span class="text-success"
                                                         onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 0)">Diterima</span>

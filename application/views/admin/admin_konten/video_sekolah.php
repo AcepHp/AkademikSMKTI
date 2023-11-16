@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Admin</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -22,6 +22,7 @@
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -50,7 +51,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">VIdeo Sekolah</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Video Sekolah</h1>
                             <div class="btn-group">
                                 <a href="<?php echo site_url('Kelola_Dashboard/Video/tambah_video'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2">
@@ -82,25 +83,26 @@
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>Judul</th>
-                                                <th>Video</th>
-                                                <th>Created</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align:center; vertical-align:center;">NO</th>
+                                                <th style="text-align:center; vertical-align:center;">Judul</th>
+                                                <th style="text-align:center; vertical-align:center;">Video</th>
+                                                <th style="text-align:center; vertical-align:center;">Created</th>
+                                                <th style="width:10%; text-align:center; vertical-align:center;">Aksi
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1; ?>
                                             <?php foreach ($video->result() as $row) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo substr($row->judul,0,50) ?>...</td>
-                                                <td>
-                                                <?php
+                                                <td style="width:5%; text-align:center; vertical-align:center;"style="width:5%; text-align:center; vertical-align:center;"><?php echo $no++; ?></td>
+                                                <td><?php echo ($row->judul) ?>...</td>
+                                                <td style="width:20%; text-align:center; vertical-align:center;">
+                                                    <?php
                                                  // Mendapatkan ID video YouTube dari URL yang disimpan dalam database
-                                                 $video_id = $this->Video_Model->get_youtube_video_id($row->url);
+                                                $video_id = $this->Video_Model->get_youtube_video_id($row->url);
                                                 // Menampilkan video YouTube menggunakan iframe jika video_id ditemukan
-                                                 if (!empty($video_id)) {
+                                                if (!empty($video_id)) {
                                                     echo '<div class="embed-responsive embed-responsive-16by9">';
                                                     echo '<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/' . $video_id . '" allowfullscreen></iframe>';
                                                     echo '</div>';
@@ -109,8 +111,8 @@
                                                 }
                                                 ?>
                                                 </td>
-                                                <td><?php echo $row->created ?></td>
-                                                <td>
+                                                <td style="width:20%; text-align:center; vertical-align:center;"><?php echo $row->created ?></td>
+                                                <td style="width:10%; text-align:center; vertical-align:center;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#videoModal<?php echo $row->id_video; ?>">

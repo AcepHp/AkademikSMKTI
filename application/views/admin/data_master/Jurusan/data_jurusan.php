@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Guru</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +24,10 @@
     <!-- Custom styles for this page -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 
 
@@ -71,21 +75,22 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered display id=" example" class="display"
-                                    style="width:100%">
+                                <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Kode Jurusan</th>
-                                            <th>Nama Jurusan</th>
-                                            <th>Aksi</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                            <th style="text-align: center; vertical-align: middle;">Nama Jurusan</th>
+                                            <th style="text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $no = 1; ?>
                                         <?php foreach ($jurusan_list as $jurusan) { ?>
                                         <tr>
-                                            <td><?php echo htmlspecialchars($jurusan->kode_jurusan); ?></td>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?>
+                                            </td>
                                             <td><?php echo htmlspecialchars($jurusan->nama_jurusan); ?></td>
-                                            <td>
+                                            <td style="text-align: center; vertical-align: middle;">
                                                 <a href="
                                     <?php echo site_url('Jurusan/edit_jurusan/'.$jurusan->kode_jurusan); ?>"
                                                     class="btn btn-sm btn-warning" title="Edit">
@@ -143,6 +148,7 @@
 
             <!-- Page level plugins -->
             <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
             <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
 
             <!-- Page level custom scripts -->
@@ -164,6 +170,23 @@
                     }
                 });
             }
+            </script>
+            <script>
+            new DataTable('#example', {
+                columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    },
+                    {
+                        targets: [1],
+                        orderData: [1, 0]
+                    },
+                    {
+                        targets: [2],
+                        orderData: [2, 0]
+                    }
+                ]
+            });
             </script>
 
 

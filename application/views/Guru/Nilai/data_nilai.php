@@ -65,12 +65,7 @@
                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2">
                                 <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Nilai
                             </a>
-
-
-
-
                         </div>
-
                     </div>
                     <div class="container-fluid mt-3">
                         <div class="row">
@@ -115,7 +110,7 @@
                     <div class="card shadow mb-4 mx-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
-                                Data Nilai : <?php echo $nama_lengkap; ?>
+                                Data Nilai
                             </h6>
                         </div>
                         <div class="card-body">
@@ -124,27 +119,31 @@
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>NISN</th>
-                                            <th>Nama Mapel</th>
-                                            <th>Kehadiran</th>
-                                            <th>Tugas</th>
-                                            <th>UTS</th>
-                                            <th>UAS</th>
-                                            <th>Nilai Akhir</th>
-                                            <th>Aksi</th>
+                                            <th style=" width:5%; text-align: center; vertical-align: middle;">No</th>
+                                            <th style="text-align: center; vertical-align: middle;">NISN</th>
+                                            <th style="text-align: center; vertical-align: middle;">Nama Mapel</th>
+                                            <th style="text-align: center; vertical-align: middle;">Kehadiran</th>
+                                            <th style="text-align: center; vertical-align: middle;">Tugas</th>
+                                            <th style="text-align: center; vertical-align: middle;">UTS</th>
+                                            <th style="text-align: center; vertical-align: middle;">UAS</th>
+                                            <th style="text-align: center; vertical-align: middle;">Nilai Akhir</th>
+                                            <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $no = 1; ?>
                                         <?php foreach ($nilai as $n) { ?>
                                         <tr>
-                                            <td><?php echo htmlspecialchars($n->NISN); ?></td>
+                                            <td style="width:5%; text-align: center; vertical-align: middle;">
+                                                <?php echo $no++; ?></td>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->NISN); ?></td>
                                             <td><?php echo htmlspecialchars($n->nama_mapel); ?></td>
-                                            <td><?php echo htmlspecialchars($n->kehadiran); ?></td>
-                                            <td><?php echo htmlspecialchars($n->tugas); ?></td>
-                                            <td><?php echo htmlspecialchars($n->uts); ?></td>
-                                            <td><?php echo htmlspecialchars($n->uas); ?></td>
-                                            <td><?php echo htmlspecialchars($n->nilai_akhir); ?></td>
-                                            <td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->kehadiran); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->tugas); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->uts); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->uas); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->nilai_akhir); ?></td>
+                                            <td style="text-align: center; vertical-align: middle;">
                                                 <a href="<?php echo base_url('nilai/edit_nilai/' . $n->ID_Nilai); ?>"
                                                     class="btn btn-sm btn-warning" title="Edit">
                                                     <i class="fas fa-edit"></i>

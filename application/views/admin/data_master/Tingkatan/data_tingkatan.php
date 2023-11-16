@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Guru</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +24,7 @@
     <!-- Custom styles for this page -->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 
 
@@ -75,17 +76,20 @@
                                     style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Kode Tingkatan</th>
-                                            <th>Nama Tingkatan</th>
-                                            <th>Aksi</th>
+                                            <th style="width:5%; text-align:center; vertical-align:center;">No</th>
+                                            <th style="text-align:center; vertical-align:center;">Kode Tingkatan</th>
+                                            <th style="text-align:center; vertical-align:center;">Nama Tingkatan</th>
+                                            <th style="text-align:center; vertical-align:center;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $no = 1; ?>
                                         <?php foreach ($tingkatan_list as $tingkatan) { ?>
                                         <tr>
+                                            <td style="text-align:center; vertical-align:center;"><?php echo $no++; ?></td>
                                             <td><?php echo htmlspecialchars($tingkatan->kode_tingkatan); ?></td>
                                             <td><?php echo htmlspecialchars($tingkatan->nama_tingkatan); ?></td>
-                                            <td>
+                                            <td style="text-align:center; vertical-align:center;">
                                                 <a href="
                                     <?php echo site_url('Tingkatan/edit_tingkatan/'.$tingkatan->kode_tingkatan); ?>"
                                                     class="btn btn-sm btn-warning" title="Edit">

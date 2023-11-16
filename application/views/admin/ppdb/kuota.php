@@ -72,22 +72,22 @@
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>NO</th>
-                                                <th>Tahun</th>
-                                                <th>Program Keahlian</th>
-                                                <th>Kuota</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                                <th style="text-align: center; vertical-align: middle;">Tahun</th>
+                                                <th style="text-align: center; vertical-align: middle;">Program Keahlian</th>
+                                                <th style="text-align: center; vertical-align: middle;">Kuota</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1;?>
                                             <?php foreach ($kuota as $row) : ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
                                                 <td><?php echo $row->tahun ?></td>
                                                 <td><?php echo $row->nama_jurusan ?></td>
-                                                <td><?php echo $row->kuota ?></td>
-                                                <td>
+                                                <td style="text-align: center; vertical-align: middle;"><?php echo $row->kuota ?></td>
+                                                <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#kuotaModal<?php echo $row->id_kuota; ?>">
