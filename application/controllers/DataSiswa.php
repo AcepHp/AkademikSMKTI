@@ -21,7 +21,6 @@ class DataSiswa extends CI_Controller {
         if ($this->session->userdata('role') !== 'Admin') {
             redirect('auth');
         }
-        $data['siswa'] = $this->Datasiswa_model->get_siswa_all_nisn();
         $this->load->view('Admin/KelolaSiswa/tambah_data',);
     }
 
@@ -32,34 +31,16 @@ class DataSiswa extends CI_Controller {
     
         $this->form_validation->set_rules('nis', 'NIS', 'required');
         $this->form_validation->set_rules('nisn', 'NISN', 'required');
+        $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
     
-        $nisn = $this->input->post('nisn');
-        $nis = $this->input->post('nis');
-    
-        // Check if NISN is unique
-        $is_nisn_unique = !$this->Datasiswa_model->is_nisn_exists($nisn);
-    
-        // Check if NIS is unique
-        $is_nis_unique = !$this->Datasiswa_model->is_nis_exists($nis);
-    
-        if (!$is_nisn_unique) {
-            $this->form_validation->set_message('is_unique', 'NISN sudah digunakan.');
-        }
-    
-        if (!$is_nis_unique) {
-            $this->form_validation->set_message('is_unique', 'NIS sudah digunakan.');
-        }
-    
-        if ($this->form_validation->run() == FALSE || !$is_nisn_unique || !$is_nis_unique) {
-            // Load the view with the form data and error messages
-            $data['nisn_exists'] = $is_nisn_unique;
-            $data['nis_exists'] = $is_nis_unique;
-            redirect('datasiswa/tambah_siswa');
+        if ($this->form_validation->run() == FALSE) {
+            $this->tambah_siswa(); // Tampilkan form tambah dengan error
         } else {
-            $data_siswa = array(
+            $data = array(
                 'NIS' => $this->input->post('nis'),
                 'NISN' => $this->input->post('nisn'),
                 'Nama_lengkap' => $this->input->post('nama_lengkap'),
+                'Status' => $this->input->post('status'),
                 'Tempat_lahir' => $this->input->post('tempat_lahir'),
                 'Tanggal_lahir' => $this->input->post('tanggal_lahir'),
                 'Jenis_kelamin' => $this->input->post('jenis_kelamin'),
@@ -71,10 +52,13 @@ class DataSiswa extends CI_Controller {
                 'Nama_wali' => $this->input->post('nama_wali'),
                 'No_telp_ortu' => $this->input->post('no_telp_ortu'),
                 'No_telp_wali' => $this->input->post('no_telp_wali'),
-                // Add other fields as needed
+                // Tambahkan field lain yang dibutuhkan
             );
+            echo "<pre>";
+            print_r($data); // Output data yang akan diinsert
+            echo "</pre>";
     
-            $this->Datasiswa_model->tambah_siswa($data_siswa);
+            $this->Datasiswa_model->tambah_siswa($data);
     
             // Membuat akun pengguna (user account)
             $user_data = array(
@@ -82,9 +66,10 @@ class DataSiswa extends CI_Controller {
                 'NISN' => $this->input->post('nisn'),
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
                 'username' => $this->input->post('username'),
-                'password' => md5($this->input->post('password')), // You might consider using a more secure method for password hashing
+                'password' => md5($this->input->post('password')), // Enkripsi password dengan MD5
                 'role' => 'Siswa',
                 'NIP' => null,
+                'Foto' => null,
                 'aktif' => $this->input->post('aktif')
             );
     
@@ -131,6 +116,7 @@ class DataSiswa extends CI_Controller {
                     'NIS' => $this->input->post('nis'),
                     'NISN' => $this->input->post('nisn'),
                     'Nama_lengkap' => $this->input->post('nama_lengkap'),
+                    'Status' => $this->input->post('status'),
                     'Tempat_lahir' => $this->input->post('tempat_lahir'),
                     'Tanggal_lahir' => $this->input->post('tanggal_lahir'),
                     'Jenis_kelamin' => $this->input->post('jenis_kelamin'),
@@ -198,6 +184,7 @@ class DataSiswa extends CI_Controller {
                 $nis = $sheet->getCell('A' . $row)->getValue();
                 $nisn = $sheet->getCell('B' . $row)->getValue();
                 $nama_lengkap = $sheet->getCell('C' . $row)->getValue();
+                $status = $sheet->getCell('D' . $row)->getValue();
                 $tempat_lahir = $sheet->getCell('E' . $row)->getValue();
                 $tanggal_lahir = $sheet->getCell('F' . $row)->getValue();
                 $jenis_kelamin = $sheet->getCell('G' . $row)->getValue();
@@ -214,6 +201,7 @@ class DataSiswa extends CI_Controller {
                     'NIS' => $nis,
                     'NISN' => $nisn,
                     'Nama_lengkap' => $nama_lengkap,
+                    'Status' => $status,
                     'Tempat_lahir' => $tempat_lahir,
                     'Tanggal_Lahir' => $tanggal_lahir,
                     'Jenis_kelamin' => $jenis_kelamin,

@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 
 </head>
 
@@ -41,40 +44,61 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Edit Data Slide</h1>
+                    <div class="container mb-3 p-0">
+                        <span class="h3">Edit Data Slide</span>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="container" style="box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                                <div class="row">
+                                    <?php echo $this->session->userdata('error');?>
+                                    <?php $this->session->unset_userdata('error');?>
+                                </div>
+                                <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/Slide/proseseditslide/'.$slide->id_slide); ?>"
+                                    method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="deskripsi">Deskripsi:</label>
+                                        <div id="deskripsieditor"></div>
+                                        <input class="form-control" name="deskripsi" type="hidden" id="deskripsiinput"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gambar">Gambar Saat Ini:</label>
+                                        <img src="<?php echo $slide->gambar; ?>" alt="Gambar Saat Ini" width="150">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new_gambar">Pilih Gambar Baru:</label>
+                                        <input type="file" class="form-control" name="gambar">
+                                    </div>
+                                    <input type="submit" name="submit" value="Simpan" class="btn btn-primary mb-2" >
+                                </form>
+                            </div>
                         </div>
-                        <div class="container mt-5">
-                            <?php echo form_open_multipart('K_Konten/proseseditslide/' . $slide->id_slide); ?>
-                            <div class="form-group">
-                                <label for="deskripsi">Deskripsi:</label>
-                                <input type="text" class="form-control" name="deskripsi"
-                                    value="<?php echo $slide->deskripsi; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="gambar">Gambar Saat Ini:</label>
-                                <img src="<?php echo $slide->gambar; ?>" alt="Gambar Saat Ini" width="150">
-                            </div>
-                            <div class="form-group">
-                                <label for="new_gambar">Pilih Gambar Baru:</label>
-                                <input type="file" class="form-control" name="gambar">
-                            </div>
-
-                            <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                            <?php echo form_close(); ?>
-                        </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
-           <!-- Footer Admin -->
-           <?php $this->load->view('Bar/Footer_admin'); ?>
+            <!-- Footer Admin -->
+            <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
     </div>
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    var slide = `<?= $slide->deskripsi ?>`;
+    var deskripsieditor = new Quill('#deskripsieditor', {
+        theme: 'snow'
+    });
+    deskripsieditor.root.innerHTML = slide;
+
+    var form = document.getElementById('myForm');
+    var deskripsiinput = document.getElementById('deskripsiinput');
+
+    form.addEventListener('submit', function(event) {
+        deskripsiinput.value = deskripsieditor.root.innerHTML;
+    });
+    </script>
 
 
 

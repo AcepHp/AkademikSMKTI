@@ -45,11 +45,11 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Sambutan</h1>
-                            <div class="btn-group">
-                                <a href="<?php echo site_url('K_Konten/tambah_kepsek'); ?>"
+                            <!-- <div class="btn-group">
+                                <a href="<?php echo site_url('Kelola_Dashboard/Kepsek/tambah_kepsek'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
                                         class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- Begin Page Content -->
@@ -61,8 +61,9 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <?php $this->session->userdata('error');?>
-                                    <?php $this->session->userdata('success');?>
+                                    <!-- Flash Data Berhasil edit data -->
+                                    <?php echo $this->session->userdata('success');?>
+                                    <?php $this->session->unset_userdata('success');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -92,14 +93,14 @@
                                                         data-target="#kepsekModal<?php echo $row->id_kepsek; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('K_Konten/edit_kepsek/'.$row->id_kepsek); ?>"
+                                                    <a href="<?php echo site_url('Kelola_Dashboard/Kepsek/edit_kepsek/'.$row->id_kepsek); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger" title="Hapus"
+                                                    <!-- <a href="#" class="btn btn-sm btn-danger" title="Hapus"
                                                         onclick="Delete_Kepsek('<?php echo $row->id_kepsek; ?>')">
                                                         <i class="fas fa-trash"></i>
-                                                    </a>
+                                                    </a> -->
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
@@ -210,7 +211,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("K_Konten/delete_kepsek/") ?>' + id;
+                window.location.href = '<?=site_url("Kelola_Dashboard/Kepsek/delete_kepsek/") ?>' + id;
             }
         });
     }

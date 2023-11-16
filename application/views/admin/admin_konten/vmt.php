@@ -50,9 +50,9 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Visi, Misi & Tujuan</h1>
                             <div class="btn-group">
-                                <a href="<?php echo site_url('K_Konten/tambah_vmt'); ?>"
+                                <!-- <a href="<?php echo site_url('Kelola_Dashboard/VMT/tambah_vmt'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
-                                        class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a>
+                                        class="fas fa-download fa-sm text-white-50"></i> Tambah Data</a> -->
                             </div>
                         </div>
                     </div>
@@ -66,15 +66,16 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <?php $this->session->userdata('error');?>
-                                    <?php $this->session->userdata('success');?>
+                                    <?php echo $this->session->userdata('success_edit');?>
+                                    <?php $this->session->unset_userdata('success_edit');?>
+                                    
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
-                                                <th>Judul</th>
-                                                <th>Deskripsi</th>
-                                                <th>Created</th>
+                                                <th>Visi</th>
+                                                <th>Misi</th>
+                                                <th>Tujuan</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -83,16 +84,16 @@
                                             <?php foreach ($vmt->result() as $row) : ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $row->judul; ?></td>
-                                                <td><?php echo substr($row->deskripsi,0,90) ?>...</td>
-                                                <td><?php echo $row->created ?></td>
+                                                <td><?php echo substr($row->visi,0,50) ?>...</td>
+                                                <td><?php echo substr($row->misi,0,60) ?>...</td>
+                                                <td><?php echo substr($row->tujuan,0,60) ?>...</td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#vmtModal<?php echo $row->id_vmt; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('K_Konten/edit_vmt/'.$row->id_vmt); ?>"
+                                                    <a href="<?php echo site_url('Kelola_Dashboard/VMT/edit_vmt/'.$row->id_vmt); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -123,8 +124,7 @@
         <div class="modal-dialog modal-dialog-centered modal-sm" style="max-width: 50%; width: 100%;" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="vmtModalLabel" style="font-size: 1.25rem;">Detail
-                        <?php echo $row->judul; ?> </h5>
+                    <h5 class="modal-title" id="vmtModalLabel" style="font-size: 1.25rem;">Detail Visi, Misi dan Tujuan </h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,22 +133,17 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>ID MVT</th>
-                                <td><?php echo $row->id_vmt; ?></td>
+                                <th>Visi</th>
+                                <td><?php echo $row->visi; ?></td>
                             </tr>
                             <tr>
-                                <th>Judul</th>
-                                <td><?php echo $row->judul; ?></td>
+                                <th>misi</th>
+                                <td><?php echo $row->misi; ?></td>
                             </tr>
                             <tr>
-                                <th>Deskripsi</th>
-                                <td><?php echo $row->deskripsi; ?></td>
+                                <th>tujuan</th>
+                                <td><?php echo $row->tujuan; ?></td>
                             </tr>
-                            <tr>
-                                <th>Created</th>
-                                <td><?php echo $row->created; ?></td>
-                            </tr>
-                            <!-- ... (other fields) ... -->
                         </tbody>
                     </table>
                 </div>
@@ -202,7 +197,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("K_Konten/delete_vmt/") ?>' + id;
+                window.location.href = '<?=site_url("Kelola_Dashboard/VMT/delete_vmt/") ?>' + id;
             }
         });
     }

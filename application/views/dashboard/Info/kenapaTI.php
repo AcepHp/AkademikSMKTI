@@ -325,8 +325,6 @@
         </div>
     </main>
 
-
-
     <br><br>
 
     <div class="rectangle_fakta">

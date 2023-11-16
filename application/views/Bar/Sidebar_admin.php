@@ -29,21 +29,23 @@
         </a>
         <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/slideshow'); ?>">Slider</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/info'); ?>">Info</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/vmt'); ?>">Visi, Misi & Tujuan</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/kepsek'); ?>">Kepala Sekolah</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/berita'); ?>">Berita</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/acara'); ?>">Acara</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/video'); ?>">Video Sekolah</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/jurusan'); ?>">Jurusan</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/manajemen'); ?>">Manajemen Sekolah</a>
-                <a class="collapse-item" href="<?php echo site_url('K_Konten/ppdb'); ?>">PPDB</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Slide/slideshow'); ?>">Slider</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Info/info'); ?>">Info</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/VMT/vmt'); ?>">Visi, Misi & Tujuan</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Kepsek/kepsek'); ?>">Kepala Sekolah</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Berita/berita'); ?>">Berita</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Acara/acara'); ?>">Acara</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Video/video'); ?>">Video Sekolah</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Jurusan/jurusan'); ?>">Jurusan</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Manajemen/manajemen'); ?>">Manajemen Sekolah</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/PPDB_Admin/ppdb'); ?>">PPDB</a>
+                <a class="collapse-item" href="<?php echo site_url('Kelola_Dashboard/Galeri/galeri'); ?>">Galeri Foto</a>
             </div>
         </div>
     </li>
 
     <!-- Kelola Data Master -->
+    <?php if($this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComponents"
             aria-expanded="false" aria-controls="collapseComponents">
@@ -63,7 +65,10 @@
             </div>
         </div>
     </li>
+    <?php }?>
 
+    <!-- Kelola Data Peserta Didik -->
+    <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSiswa" aria-expanded="true"
             aria-controls="collapseSiswa">
@@ -78,15 +83,20 @@
             </div>
         </div>
     </li>
-
+    <?php }?>
+    
     <!-- Kelola Data Nilai -->
+    <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item <?php echo $this->uri->segment(2) == 'Nilai' ? 'active' : ''; ?>">
         <a class="nav-link" href="<?php echo site_url('Nilai/index'); ?>">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Data Nilai</span>
         </a>
     </li>
+    <?php }?>
+    
     <!-- Data Guru -->
+    <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item <?php echo $this->uri->segment(2) == 'Data_Guru' ? 'active' : ''; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwocollapseTwo">
@@ -101,16 +111,20 @@
             </div>
         </div>
     </li>
-
+    <?php }?>
+    
+    <!-- Data Materi -->
+    <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item <?php echo $this->uri->segment(2) == 'Materi' ? 'active' : ''; ?>">
-        <a class="nav-link" href="<?php echo site_url('Materi/index_admin'); ?>">
+        <a class="nav-link" href="<?php echo site_url('Materi/index'); ?>">
             <i class="fas fa-fw fa-wrench"></i>
             <span>Data Materi</span>
         </a>
     </li>
-
-
+    <?php }?>
+    
     <!-- PPDB -->
+    <?php if($this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item <?php echo $this->uri->segment(2) == 'PPDB' ? 'active' : ''; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
             aria-controls="collapseThree">
@@ -128,8 +142,10 @@
             </div>
         </div>
     </li>
+    <?php }?>
 
     <!-- Forum Diskusi -->
+    <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item <?php echo $this->uri->segment(2) == 'Forum_Diskusi' ? 'active' : ''; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true"
             aria-controls="collapseFive">
@@ -143,6 +159,23 @@
                 <!-- <a class="collapse-item" href="<?php echo site_url('Diskusi/index'); ?>">Forum Diskusi</a> -->
             </div>
     </li>
+    <?php }?>
+    
+    <!-- Kelola User -->
+    <?php if($this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
+    <li class="nav-item <?php echo $this->uri->segment(2) == 'Kelola_Akses' ? 'active' : ''; ?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAkses" aria-expanded="true"
+            aria-controls="collapseAkses">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Kelola Akses User</span>
+        </a>
+        <div id="collapseAkses" class="collapse" aria-labelledby="headingAkses" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="<?php echo site_url('Akses/siswa'); ?>">Siswa</a>
+                <a class="collapse-item" href="<?php echo site_url('Akses/guru'); ?>">Guru</a>
+            </div>
+    </li>
+    <?php }?>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

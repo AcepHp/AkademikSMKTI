@@ -88,19 +88,6 @@ class KelolaKelas_model extends CI_Model {
         $result = $query->row();
         return isset($result->id_tahun) ? $result->id_tahun : null;
     }
-    public function get_semester_aktif() {
-        // Mendapatkan semester aktif dari tabel semester atau sumber data lain yang sesuai
-        // Misalnya, dengan mengambil data dari tabel yang menyimpan semester aktif
-        $this->db->select('id_semester, nama_semester');
-        $this->db->where('status', 'aktif'); // Sesuaikan dengan aturan status semester aktif di tabel Anda
-        $query = $this->db->get('semester'); // Sesuaikan dengan nama tabel semester Anda
-
-        if ($query->num_rows() > 0) {
-            return $query->row();
-        }
-
-        return null; // Mengembalikan null jika tidak ada semester aktif
-    }
     public function get_kode_jurusan() {
         $this->db->select('kode_jurusan');
         $this->db->from('jurusan');

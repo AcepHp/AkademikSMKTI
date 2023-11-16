@@ -1,0 +1,25 @@
+#gantiModal {
+    display: none;
+    position: fixed;
+    top: 50%; /* Pusatkan modal secara vertikal */
+    left: 50%; /* Pusatkan modal secara horizontal */
+    transform: translate(-50%, -50%); /* Pusatkan modal secara tepat */
+    width: 450px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.ganti.content {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 5px;
+}
+
+#closeModal {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}

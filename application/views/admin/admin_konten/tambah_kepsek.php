@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <?php echo form_open_multipart('K_Konten/prosestambahkepsek'); ?>
+                        <?php echo form_open_multipart('Kelola_Dashboard/Kepsek/prosestambahkepsek'); ?>
                         <div class="form-group">
                             <label for="nama">Nama:</label>
                             <input type="text" class="form-control" name="nama" required>

@@ -27,7 +27,7 @@
             $this->load->library('upload', $config);
 
             if (!$this->upload->do_upload('gambar')) {
-                $this->session->set_flashdata("error", "<div class='alert alert-danger' role='alert'>Gunakan format gambar yang sesuai (.gif/.jpg/.png) !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+                $this->session->set_flashdata("error", "<div class='alert alert-danger' role='alert'>Format gambar tidak sesuai, Gunakan format sesuai (.gif/.jpg/.png) !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
                 redirect($_SERVER['HTTP_REFERER']);
             } else {
                 $upload_data = $this->upload->data();
@@ -35,9 +35,12 @@
             }
 
             $this->db->where("id_slide");
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-            return $this->db->insert("slideshow",$slideshow);
+            $this->session->set_flashdata("success_tambah_silder", "<div
+             class='alert alert-success' role='alert'>Gambar Slide berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' 
+             aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            return $this->db->insert("slideshow", $slideshow);
         }
+        
         public function editslide($id) {
             $deskripsi = $this->input->post("deskripsi");            
             
@@ -73,13 +76,22 @@
             }
         
             $this->db->where("id_slide", $id);
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("slideshow", $slideshow);
         }
 
         public function delete_slide($id) {
             $this->db->where('id_slide', $id);
-            return $this->db->delete('slideshow');
+            $slide = $this->db->get_where('slideshow', array('id_slide'=>$id))->row();
+
+            if($slide){
+                $foto = str_replace(base_url(), FCPATH, $slide->gambar);
+                if(file_exists($foto)){
+                    unlink($foto);
+                }
+                $this->db->where('id_slide', $id);
+                return $this->db->delete('slideshow');
+            }
         }
 
     }
