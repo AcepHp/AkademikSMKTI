@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="d-flex align-items-center navbar-brand fs-4" href="<?php echo site_url('#'); ?>">
                 <img src="<?php echo base_url('assets/images/logo.png') ?>" alt="Logo" width="45"
@@ -47,22 +47,30 @@
                         aria-label="Close"></button>
                 </div>
 
+
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
                             <a class="nav-link" aria-current="page" href="<?php echo site_url('#'); ?>">HOME</a>
                         </li>
+
                         <li class="nav-item mx-2 dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 JURUSAN
                             </a>
                             <ul class="dropdown-menu">
-                                <?php foreach ($jurusan as $item): ?>
                                 <li><a class="dropdown-item"
-                                        href="<?php echo site_url('Jurusan/Animasi/').$item->id_jurusan; ?>"><?php echo $item->nama_jurusan; ?></a>
+                                        href="<?php echo site_url('Jurusan/Animasi'); ?>">Animasi</a></li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/DKV'); ?>">DKV</a></li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TKJT'); ?>">TKJT</a>
                                 </li>
-                                <?php endforeach; ?>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TJAT'); ?>">TJAT</a>
+                                </li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/PPLG'); ?>">PPLG</a>
+                                </li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/MPLB'); ?>">MPLB</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item mx-2">
@@ -85,8 +93,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- <div class="row">
     <div class="carousel-inner inner">
         <div class="carousel-item active">
             <img src="<?php echo base_url('assets/images/background.png') ?>" class="d-block w-100" alt="...">
@@ -95,7 +101,6 @@
             </div>
         </div>
     </div>
-    </div> -->
 
 
     <!-- Tambahkan script JavaScript dari Bootstrap -->
@@ -104,74 +109,90 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Judul -->
-    <?php if($jurusan2 !==null){?>
-    <div class="judul mb-5 mt-5">
-        <span>PROFIL JURUSAN <?php echo $jurusan2->nama_jurusan?></span><br>
-        <span>SMK TI GARUDA NUSANTARA CIMAHI</span>
+    <div class="judul-dkv">
+        <div class="judul mb-3">PROFIL JURUSAN ANIMASI</div>
+        <div class="judul mb-5">SMK TI GARUDA NUSANTARA CIMAHI</div>
     </div>
 
     <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="container" style="box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-                        <div class="row mb-5" style="display: flex; justify-content: center; align-items: center;">
-                            <img src="<?php echo $jurusan2->gambar ?>" alt="" style="max-width: 70%; height: auto display: inline-block;">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row g-3">
+                    <div class="col d-flex flex-column">
+                        <div class="penjelasan mb-3">
+                            <div class="card-header mb-4" style="background-color: white; border: none; color: black;">
+                                <h3>POTENSI PENGAJAR PRODUKTIF</h3>
+                            </div>
+                            <div class="card-body" style="margin-top: -10px;">
+                                <p class="card-text ">
+                                    Pada tahun 2009 di Provinsi Jawa Barat hanya ada 3 SMK yang memiliki jurusan Animasi
+                                    yaitu di Kota Bekasi, Kota Depok dan di Kota Cimahi. Waktu itu Jurusan Animasi di
+                                    kota Cimahi hanya ada Satu yaitu di SMK-TI Garuda Nusantara Cimahi.
+                                </p>
+                            </div>
                         </div>
-                        <div class="row mb-3">
-                            <h3><?php echo $jurusan2->judul ?></h3>
-                        </div>
-                        <div class="row mb-5">
-                            <span><?php echo $jurusan2->deskripsi?></span>
+                        <div class="penjelasan mb-3">
+                            <div class="card-header mb-4" style="background-color: white; border: none; color: black;">
+                                <h3>MATERI YANG DIAJARKAN</h3>
+                            </div>
+                            <div class="card-body" style="margin-top: -10px;">
+                                <p class="card-text ">
+                                <ol>
+                                    <li>Komputer Desain</li>
+                                    <li>Komputer Animasi 2D</li>
+                                    <li>Komputer Animasi 3D</li>
+                                    <li>Auto Cad</li>
+                                    <li>Video Editing</li>
+                                    <li>Gambar Manual</li>
+                                </ol>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-3 d-flex flex-column align-items-end">
-                    <div class="kepsek card text-white mb-5">
-                        <h5 class="jabatan">Kepala Sekolah</h5>
-                        <div class="isi card-body">
-                            <img src="<?php echo $kepsek->gambar?>" alt="Foto Kepala Sekolah">
-                        </div>
-                        <p class="isi-text card-text"><?php echo $kepsek->nama?></p>
+            </div>
+            <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                <div class="kepsek card text-white mb-5">
+                    <h5 class="jabatan">Kepala Sekolah</h5>
+                    <div class="isi card-body">
+                        <img src="<?php echo base_url('assets/images/background.png') ?>" alt="Foto Kepala Sekolah">
                     </div>
-                    <div class="info card mb-5">
-                        <ul class="list-group list-group-flush">
-                            <div class="info-title card-header">Info</div>
-                            <?php $counter = 0; $infoterbaru=array_reverse($info->result());?>
-                            <?php foreach ($infoterbaru as $row) : ?>
-                            <?php if ($counter < 3) : ?>
-                            <a href="<?php echo site_url('K_Konten/detailinfo/'.$row->id_info); ?>">
-                                <li class="list-group-item"><?php echo $row->judul ?></li>
-                            </a>
-                            <?php endif; ?>
-                            <?php $counter++; ?>
-                            <?php endforeach; ?>
-                        </ul>
+                    <p class="isi-text card-text">RidoAmaludinToyibST</p>
+                </div>
+                <div class="info card mb-5">
+                    <ul class="list-group list-group-flush">
+                        <div class="info-title card-header">Info</div>
+                        <a href="<?php echo site_url('Info/kenapaTI'); ?>">
+                            <li class="list-group-item">Kenapa TI?</li>
+                        </a>
+                        <a href="<?php echo site_url('Info/kompetensi'); ?>">
+                            <li class="list-group-item">Kompetensi Keahlian</li>
+                        </a>
+                        <a href="<?php echo site_url('Info/Ekstrakulikuler'); ?>">
+                            <li class="list-group-item">Ekstrakulikuler</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="populer card">
+                    <div class="populer-judul card-header">Berita</div>
+                    <img src="<?php echo base_url('assets/images/background.png') ?>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p><a href="<?php echo site_url('Berita/isi'); ?>" class="isi-berita">Some quick example text to build on
+                                the card title and make up
+                                the bulk of the card's content.</a></p>
+                        <hr>
                     </div>
-                    <div class="populer card mb-5">
-                        <div class="populer-judul card-header">Berita</div>
-                        <?php $counter = 0; $beritaterbaru=array_reverse($berita->result());?>
-                        <?php foreach ($beritaterbaru as $row) : ?>
-                        <?php if ($counter < 2) : ?>
-                        <img src="<?php echo $row->gambar ?>" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <p><a href="<?php echo site_url('Berita/isi/' . $row->id_berita); ?>" class="isi-berita"><?php echo substr($row->judul, 0,100) ?></a></p>
-                            <hr>
-                        </div>
-                        <?php endif; ?>
-                        <?php $counter++; ?>
-                        <?php endforeach; ?>
+                    <img src="<?php echo base_url('assets/images/background.png') ?>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p><a href="<?php echo site_url('Berita/isi'); ?>" class="isi-berita">Some quick example text to build on
+                                the card title and make up
+                                the bulk of the card's content.</a></p>
+                        <hr>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php }else { 
-            echo "<div class='alert alert-danger'>
-            Data Tidak ditemukan
-          </div> "; } ?>
 
 
     <!-- Footer -->
@@ -201,7 +222,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-    </script>
+        </script>
 </body>
 
 </html>

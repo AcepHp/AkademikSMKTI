@@ -54,8 +54,7 @@
 
                         <div class="form-group">
                             <label for="nip">NIP:</label>
-                            <input type="text" class="form-control" name="nip" id="nip" oninput="setUsernameFromNIP()"
-                                required>
+                            <input type="text" class="form-control" name="nip"  oninput="setUsernameFromNIP()"> required>
                         </div>
 
                         <div class="form-group">
@@ -82,7 +81,7 @@
                                         required> Perempuan</label>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="alamat">Alamat:</label>
                             <textarea class="form-control" name="alamat" required></textarea>
@@ -108,17 +107,17 @@
                             <input type="date" class="form-control" name="tanggal_mulai" required>
                         </div>
 
-                        <div class="form-group" style="display: none;">
-                            <input type="text" class="form-control" name="aktif" id="aktif" value="1" required>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="aktif" id="aktif" value="1" required>
                         </div>
 
-                        <div class="form-group" style="display: none;">
-                            <input type="text" class="form-control" name="username" id="username" required readonly>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="username" id="username" required readonly>
                         </div>
 
-                        <div class="form-group" style="display: none;">
+                        <div class="form-group">
 
-                            <input type="text" class="form-control" name="password" value="gurusmktignc" readonly>
+                            <input type="hidden" class="form-control" name="password" value="gurusmktignc" readonly>
                         </div>
 
                         <input type="submit" name="Submit" value="Simpan" class="btn btn-primary">
@@ -126,9 +125,8 @@
                     </div>
                 </div>
                 <!-- Footer Admin -->
-                <br>
+                <?php $this->load->view('Bar/Footer_admin'); ?>
             </div>
-            <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
 
         <?php $this->load->view('Bar/Logout_modal'); ?>
@@ -153,17 +151,17 @@
         <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
         <script>
-        function setUsernameFromNIP() {
-            var nipInput = document.getElementById('nip');
-            var usernameInput = document.getElementById('username');
+            function setUsernameFromNIP() {
+                var nipInput = document.getElementById('nip');
+                var usernameInput = document.getElementById('username');
 
-            // Menghapus spasi pada nilai nisn dan mengganti karakter non-alfanumerik dengan _
-            var nipValue = nipInput.value.replace(/\s+/g, '').replace(/\W/g, '_');
+                // Menghapus spasi pada nilai nisn dan mengganti karakter non-alfanumerik dengan _
+                var nipValue = nipInput.value.replace(/\s+/g, '').replace(/\W/g, '_');
 
-            // Mengisi nilai username dengan nilai nisn yang telah diubah
-            usernameInput.value = nipValue;
-        }
-        </script>
+                // Mengisi nilai username dengan nilai nisn yang telah diubah
+                usernameInput.value = nispValue;
+            }
+            </script>
 
 </body>
 

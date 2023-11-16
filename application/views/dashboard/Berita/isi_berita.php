@@ -22,7 +22,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="d-flex align-items-center navbar-brand fs-4" href="<?php echo site_url('#'); ?>">
                 <img src="<?php echo base_url('assets/images/logo.png') ?>" alt="Logo" width="45"
@@ -55,17 +55,24 @@
                         <li class="nav-item mx-2">
                             <a class="nav-link" aria-current="page" href="<?php echo site_url('#'); ?>">HOME</a>
                         </li>
+
                         <li class="nav-item mx-2 dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 JURUSAN
                             </a>
                             <ul class="dropdown-menu">
-                                <?php foreach ($jurusan as $item): ?>
                                 <li><a class="dropdown-item"
-                                        href="<?php echo site_url('Jurusan/Animasi/').$item->id_jurusan; ?>"><?php echo $item->nama_jurusan; ?></a>
+                                        href="<?php echo site_url('Jurusan/Animasi'); ?>">Animasi</a></li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/DKV'); ?>">DKV</a></li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TKJT'); ?>">TKJT</a>
                                 </li>
-                                <?php endforeach; ?>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TJAT'); ?>">TJAT</a>
+                                </li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/PPLG'); ?>">PPLG</a>
+                                </li>
+                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/MPLB'); ?>">MPLB</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item mx-2">
@@ -95,73 +102,80 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <br>
     <!-- Judul -->
-    <div class="judul mb-5 mt-5">
-        <span><?php echo $berita_isi->judul?></span>
+    <div class="judul-dkv">
+        <div class="judul mb-5">KELULUSAN TP. 2019 - 2020</div>
     </div>
-
-    <div class="garis container mb-5">
+    <div class="garis container">
         <hr>
     </div>
 
     <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="row g-3">
-                        <div class="col">
-                            <div class="penjelasan card">
-                                <img src="<?php echo $berita_isi->gambar?>" class="card-img-top">
-                                <div class="card-body">
-                                    <h2 class="card-title"><?php echo $berita_isi->judul?></h2>
-                                    <div class="author mb-3">
-                                        <i class="bi bi-person-fill"></i>
-                                        <p><?php echo $berita_isi->author?></p>
-                                        <p>|</p>
-                                        <p><?php echo $berita_isi->created?></p>
-                                    </div>
-                                    <p class="card-text"><?php echo $berita_isi->deskripsi?>.</p>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row g-3">
+                    <div class="col">
+                        <div class="penjelasan card">
+                            <img src="<?php echo base_url('assets/images/background.png') ?>" class="card-img-top">
+                            <div class="card-body">
+                                <h2 class="card-title">Kelulusan TP. 2019 - 2020</h2>
+                                <div class="author mb-3">
+                                    <i class="bi bi-person-fill"></i>
+                                    <p>by Author</p>
+                                    <p>|</p>
+                                    <p>02 Mei 2020</p>
                                 </div>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                                    qui officia deserunt mollit anim id est laborum.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 d-flex flex-column align-items-end">
-                    <div class="kepsek card text-white mb-5">
-                        <h5 class="jabatan">Kepala Sekolah</h5>
-                        <div class="isi card-body">
-                            <img src="<?php echo $kepsek->gambar?>" alt="Foto Kepala Sekolah">
-                        </div>
-                        <p class="isi-text card-text"><?php echo $kepsek->nama?></p>
+            </div>
+            <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                <div class="kepsek card text-white mb-5">
+                    <h5 class="jabatan">Kepala Sekolah</h5>
+                    <div class="isi card-body">
+                        <img src="<?php echo base_url('assets/images/background.png') ?>" alt="Foto Kepala Sekolah">
                     </div>
-                    <div class="info card mb-5">
-                        <ul class="list-group list-group-flush">
-                            <div class="info-title card-header">Info</div>
-                            <?php $counter = 0; $infoterbaru=array_reverse($info->result());?>
-                            <?php foreach ($infoterbaru as $row) : ?>
-                            <?php if ($counter < 3) : ?>
-                            <a href="<?php echo site_url('K_Konten/detailinfo/'.$row->id_info); ?>">
-                                <li class="list-group-item"><?php echo $row->judul ?></li>
-                            </a>
-                            <?php endif; ?>
-                            <?php $counter++; ?>
-                            <?php endforeach; ?>
-                        </ul>
+                    <p class="isi-text card-text">RidoAmaludinToyibST</p>
+                </div>
+                <div class="info card mb-5">
+                    <ul class="list-group list-group-flush">
+                        <div class="info-title card-header">Info</div>
+                        <a href="<?php echo site_url('Info/kenapaTI'); ?>">
+                            <li class="list-group-item">Kenapa TI?</li>
+                        </a>
+                        <a href="<?php echo site_url('Info/kompetensi'); ?>">
+                            <li class="list-group-item">Kompetensi Keahlian</li>
+                        </a>
+                        <a href="<?php echo site_url('Info/Ekstrakulikuler'); ?>">
+                            <li class="list-group-item">Ekstrakulikuler</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="populer card">
+                    <div class="populer-judul card-header">Berita</div>
+                    <img src="<?php echo base_url('assets/images/background.png') ?>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p><a href="<?php echo site_url('Berita/isi'); ?>" class="isi-berita">Some quick example text to
+                                build on
+                                the card title and make up
+                                the bulk of the card's content.</a></p>
+                        <hr>
                     </div>
-                    <div class="populer card mb-5">
-                        <div class="populer-judul card-header">Berita</div>
-                        <?php $counter = 0; $beritaterbaru=array_reverse($berita->result());?>
-                        <?php foreach ($beritaterbaru as $row) : ?>
-                        <?php if ($counter < 2) : ?>
-                        <img src="<?php echo $row->gambar ?>" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <p><a href="<?php echo site_url('Berita/isi/' . $row->id_berita); ?>" class="isi-berita"><?php echo substr($row->judul, 0,100) ?></a></p>
-                            <hr>
-                        </div>
-                        <?php endif; ?>
-                        <?php $counter++; ?>
-                        <?php endforeach; ?>
+                    <img src="<?php echo base_url('assets/images/background.png') ?>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p><a href="<?php echo site_url('Berita/isi'); ?>" class="isi-berita">Some quick example text to
+                                build on
+                                the card title and make up
+                                the bulk of the card's content.</a></p>
+                        <hr>
                     </div>
                 </div>
             </div>
@@ -195,7 +209,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-    </script>
+        </script>
 </body>
 
 </html>

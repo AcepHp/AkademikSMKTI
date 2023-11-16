@@ -19,9 +19,6 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
 
 </head>
 
@@ -48,35 +45,31 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <form id="myForm"
-                            action="<?php echo site_url('Kelola_Dashboard/Kepsek/proseseditkepsek/'.$kepsek->id_kepsek); ?>"
-                            method="POST" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label for="nama">Nama:</label>
-                                <input type="text" class="form-control" name="nama"
-                                    value="<?php echo $kepsek->nama; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="gambar">Gambar Saat Ini:</label>
-                                <img src="<?php echo $kepsek->gambar; ?>" alt="Gambar Saat Ini" width="150">
-                            </div>
-                            <div class="form-group">
-                                <label for="new_gambar">Pilih Gambar Baru:</label>
-                                <input type="file" class="form-control" name="gambar">
-                            </div>
-                            <div class="form-group">
-                                <label for="judul">Judul:</label>
-                                <input type="text" class="form-control" name="judul"
-                                    value="<?php echo $kepsek->judul; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="deskripsi">Deskripsi:</label>
-                                <div id="deskripsieditor"></div>
-                                <input class="form-control" name="deskripsi" type="hidden" id="deskripsiinput" required>
-                            </div>
+                        <?php echo form_open_multipart('K_Konten/proseseditkepsek/' . $kepsek->id_kepsek); ?>
+                        <div class="form-group">
+                            <label for="nama">Nama:</label>
+                            <input type="text" class="form-control" name="nama" value="<?php echo $kepsek->nama; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="gambar">Gambar Saat Ini:</label>
+                            <img src="<?php echo $kepsek->gambar; ?>" alt="Gambar Saat Ini" width="150">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_gambar">Pilih Gambar Baru:</label>
+                            <input type="file" class="form-control" name="gambar">
+                        </div>
+                        <div class="form-group">
+                            <label for="judul">Judul:</label>
+                            <input type="text" class="form-control" name="judul" value="<?php echo $kepsek->judul; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi">Deskripsi:</label>
+                            <textarea type="text" class="form-control" name="deskripsi"
+                                value="<?php echo $kepsek->deskripsi; ?>"><?php echo $kepsek->deskripsi; ?></textarea>
+                        </div>
 
-                            <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                        </form>
+                        <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
+                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -86,22 +79,6 @@
     </div>
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
-
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script>
-    var kepsek = `<?= $kepsek->deskripsi ?>`;
-    var deskripsieditor = new Quill('#deskripsieditor', {
-        theme: 'snow'
-    });
-    deskripsieditor.root.innerHTML = kepsek;
-
-    var form = document.getElementById('myForm');
-    var deskripsiinput = document.getElementById('deskripsiinput');
-
-    form.addEventListener('submit', function(event) {
-        deskripsiinput.value = deskripsieditor.root.innerHTML;
-    });
-    </script>
 
 
 

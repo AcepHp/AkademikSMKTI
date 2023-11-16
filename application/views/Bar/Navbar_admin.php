@@ -6,7 +6,19 @@
     <i class="fa fa-bars"></i>
 </button>
 
-
+<!-- Topbar Search -->
+<form
+    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <div class="input-group">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+            aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
+        </div>
+    </div>
+</form>
 
 <!-- Topbar Navbar -->
 <ul class="navbar-nav ml-auto">
@@ -49,15 +61,16 @@
                      </span>
                      ( <?php echo $this->session->userdata('NIP'); ?> )
                  </span>
-                 <img class="img-profile rounded-circle" src="<?php $photoBlob = $this->session->userdata('Foto');
-                if ($photoBlob) {
-                    $photoData = base64_encode($photoBlob);
-                    $photoSrc = 'data:image/jpeg;base64,' . $photoData;
-                    echo $photoSrc;
-                } else {
-                    echo base_url('assets/images/avatar2.png');
-                }
-        ?>" alt="Foto Profil">
+                 <img class="img-profile rounded-circle" src="<?php
+                        $file_foto = $this->session->userdata('Foto'); // Mengambil data file_foto dari sesi
+
+                        if ($file_foto) {
+                            $photoSrc = base_url('assets/uploads/foto/') . $file_foto; // Mendapatkan URL gambar dari direktori foto
+                            echo $photoSrc;
+                        } else {
+                            echo base_url('assets/images/avatar2.png'); // Jika tidak ada gambar, tampilkan avatar default
+                        }
+                        ?>" alt="Foto Profil">
 
              </a>
              <!-- Dropdown - User Information -->
@@ -66,7 +79,7 @@
                      <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                      Profile
                  </a>
-                 <a class="dropdown-item" href="#">
+                 <a class="dropdown-item" href="<?php echo base_url('admin_profile/index'); ?>">
                      <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                      Settings
                  </a>

@@ -52,9 +52,11 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Manajemen Sekolah</h1>
                             <div class="btn-group">
-                                <a href="<?php echo site_url('Kelola_Dashboard/Manajemen/tambah_manajemen'); ?>"
+                                <a href="<?php echo site_url('K_Konten/tambah_manajemen'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
                                         class="fas fa-download fa-sm text-white-50"></i> Tambah Data Manajemen</a>
+                                <a href="#" class="btn btn-sm btn-primary shadow-sm"><i
+                                        class="fas fa-download fa-sm text-white-50"></i> Import Data Manajemen</a>
                             </div>
                         </div>
 
@@ -71,17 +73,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <!-- Flash Data Berhasil tambah data -->
-                                    <?php echo $this->session->userdata('success_tambah');?>
-                                    <?php $this->session->unset_userdata('success_tambah');?>
-
-                                    <!-- Flash Data Berhasil edit data -->
-                                    <?php echo $this->session->userdata('success_edit');?>
-                                    <?php $this->session->unset_userdata('success_edit');?>
-
-                                    <!-- Flash Data Berhasil Hapus data -->
-                                    <?php echo $this->session->userdata('success_hapus');?>
-                                    <?php $this->session->unset_userdata('success_hapus');?>
+                                    <?php $this->session->userdata('error');?>
+                                    <?php $this->session->userdata('success');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -109,7 +102,7 @@
                                                         data-target="#manajemenModal<?php echo $row->id_manajemen; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('Kelola_Dashboard/Manajemen/edit_manajemen/'.$row->id_manajemen); ?>"
+                                                    <a href="<?php echo site_url('K_Konten/edit_manajemen/'.$row->id_manajemen); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -219,7 +212,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("Kelola_Dashboard/Manajemen/delete_manajemen/") ?>' + id;
+                window.location.href = '<?=site_url("k_konten/delete_manajemen/") ?>' + id;
             }
         });
     }

@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="container mt-5">
-                        <?php echo form_open_multipart('Kelola_Dashboard/PPDB_Admin/proseseditppdb/' . $ppdb_admin->id_ppdb); ?>
+                        <?php echo form_open_multipart('K_Konten/proseseditppdb/' . $ppdb_admin->id_ppdb); ?>
                         <div class="form-group">
                             <label for="nama">Nama:</label>
                             <input type="text" class="form-control" name="nama"

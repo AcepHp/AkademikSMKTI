@@ -15,7 +15,7 @@ final class Admin_Model extends CI_Model{
 
     public function get_guru() {
         // Pilih semua kolom yang diinginkan
-        $this->db->select('ID_Guru, NIP, Nama_Lengkap, Tempat_Lahir, Tanggal_Lahir, Jenis_Kelamin, Alamat, Pendidikan, Tanggal_Mulai');
+        $this->db->select('ID_Guru, NIP, Nama_Lengkap, Tempat_Lahir, Tanggal_Lahir, Jenis_Kelamin, Alamat, Pendidikan, Wali, Tanggal_Mulai');
         $query = $this->db->get('guru'); // Mengambil data dari tabel "guru"
         return $query->result(); // Mengembalikan hasil dalam bentuk array of objects
     }
@@ -23,10 +23,6 @@ final class Admin_Model extends CI_Model{
     public function tambah_guru($data) {
         // Masukkan data guru ke dalam tabel database
         $this->db->insert('guru', $data);
-    }
-
-    public function create_user_account($user_data) {
-        $this->db->insert('users', $user_data);
     }
 
     public function edit_guru($id) {
@@ -49,6 +45,10 @@ final class Admin_Model extends CI_Model{
     public function delete_guru($id) {
         $this->db->where('ID_Guru', $id);
         return $this->db->delete('guru');
+    }
+
+    public function create_user_account($user_data) {
+        $this->db->insert('users', $user_data);
     }
     
 }

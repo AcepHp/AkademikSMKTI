@@ -10,9 +10,6 @@ class Mapel extends CI_Controller {
     }
 
     public function index() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $data['mapel_list'] = $this->Mapel_model->get_mapel();
         $data['jurusan'] = $this->Mapel_model->get_all_jurusan();
         $data['tingkatan'] = $this->Mapel_model->get_tingkatan();
@@ -21,9 +18,6 @@ class Mapel extends CI_Controller {
         $this->load->view('admin/data_master/mapel/data_mapel', $data);
     }
     public function tambah_mapel() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         // Panggil model jurusan_model untuk mendapatkan daftar jurusan
         $data['jurusan_list'] = $this->Jurusan_model->get_all_jurusan();
 
@@ -34,10 +28,8 @@ class Mapel extends CI_Controller {
     }
 
     public function proses_tambah_mapel() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $this->form_validation->set_rules('nama_mapel', 'Nama Mata Pelajaran', 'required');
+        $this->form_validation->set_rules('capaian', 'Capaian Mata Pelajran', 'required');
         $this->form_validation->set_rules('kode_jurusan', 'Kode Jurusan', 'required');
         $this->form_validation->set_rules('kode_tingkatan', 'Kode Tingkatan', 'required');
 
@@ -46,6 +38,7 @@ class Mapel extends CI_Controller {
         } else {
             $data = array(
                 'nama_mapel' => $this->input->post('nama_mapel'),
+                'capaian' => $this->input->post('capaian'),
                 'kode_jurusan' => $this->input->post('kode_jurusan'),
                 'kode_tingkatan' => $this->input->post('kode_tingkatan'),
                 // Tambahkan field lainnya sesuai kebutuhan
@@ -57,9 +50,6 @@ class Mapel extends CI_Controller {
     }
 
     public function edit_mapel($id_mapel) {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $data['mapel'] = $this->Mapel_model->get_mapel_by_id($id_mapel);
         $data['jurusan_list'] = $this->Jurusan_model->get_all_jurusan();
         $data['tingkatan_list'] = $this->Tingkatan_model->get_all_tingkatan();
@@ -68,10 +58,8 @@ class Mapel extends CI_Controller {
     
 
     public function update_mapel($id_mapel) {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $this->form_validation->set_rules('nama_mapel', 'Nama Mata Pelajaran', 'required');
+        $this->form_validation->set_rules('capaian', 'Capaian Mata Pelajaran', 'required');
         $this->form_validation->set_rules('kode_jurusan', 'Kode Jurusan', 'required');
         $this->form_validation->set_rules('kode_tingkatan', 'Kode Tingkatan', 'required');
     
@@ -80,6 +68,7 @@ class Mapel extends CI_Controller {
         } else {
             $data = array(
                 'nama_mapel' => $this->input->post('nama_mapel'),
+                'capaian' => $this->input->post('capaian'),
                 'kode_jurusan' => $this->input->post('kode_jurusan'),
                 'kode_tingkatan' => $this->input->post('kode_tingkatan'),
                 // Tambahkan field lainnya sesuai kebutuhan
@@ -90,18 +79,13 @@ class Mapel extends CI_Controller {
         }
     }
     
+
     public function hapus_mapel($id_mapel) {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $this->Mapel_model->hapus_mapel($id_mapel);
         redirect('Mapel');
     }
 
     public function get_tingkatan() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
     $tingkatan = $this->Mapel_model->get_tingkatan();
 
     $tingkatan_dropdown = array();

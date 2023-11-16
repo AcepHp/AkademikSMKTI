@@ -157,6 +157,7 @@
                                 <th>Kuota</th>
                                 <td><?php echo $row->kuota; ?></td>
                             </tr>
+                            <!-- ... (other fields) ... -->
                         </tbody>
                     </table>
                 </div>

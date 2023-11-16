@@ -8,36 +8,25 @@ class admin extends CI_Controller {
         $this->load->library('form_validation');
     }
     public function index() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
-            redirect('auth');
-        }
         
         $this->load->view('admin/d_admin');
     }
 
     public function data_nilai() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $this->load->model('Admin_Model');
         $data['nilai'] = $this->Admin_Model->get_nilai();
         $this->load->view('admin/filter_kelola_nilai', $data); // Gunakan $data untuk mengirim data ke view
     }
 
     public function pengajar(){
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $this->load->model('Admin_Model');
         $data['guru'] = $this->Admin_Model->get_guru();
         $this->load->view('admin/pengajar', $data); // Gunakan $data untuk mengirim data ke view
     }
 
-    public function tambah_guru() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
+    
 
+    public function tambah_guru() {
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
             $data = array(
                 'NIP' => $this->input->post('nip'),
@@ -51,8 +40,10 @@ class admin extends CI_Controller {
             );
 
             $this->Admin_Model->tambah_guru($data);
-            
+            redirect('admin/pengajar'); // Ganti dengan halaman tujuan setelah submit
+
             $user_data = array(
+                'id_users' => $this->input->post('id_users'),
                 'NISN' => null,
                 'Nama_Lengkap' => $this->input->post('nama_lengkap'),
                 'username' => $this->input->post('username'),
@@ -63,18 +54,14 @@ class admin extends CI_Controller {
                 'aktif'=> $this->input->post('aktif')
             );
 
-            $this->Admin_Model->create_user_account($user_data);
-
-            redirect('admin/pengajar');
+            $this->Datasiswa_model->create_user_account($user_data);
         }
 
-        $this->load->view('admin/tambah_guru'); // Tampilkan view form tambah guru
+        $this->load->view('admin/tambah_guru'); // Tampilkan view form tambah guru
     }
 
+
     public function edit_guru($id) {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $data['guru'] = $this->Admin_Model->get_single_guru($id);
     
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
@@ -98,9 +85,6 @@ class admin extends CI_Controller {
     }
 
     public function delete_guru($id) {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         if ($this->Admin_Model->delete_guru($id)) {
             redirect('admin/pengajar');
         } else {
@@ -108,10 +92,8 @@ class admin extends CI_Controller {
         }
     }    
 
+
     public function filter_data() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $this->load->library('form_validation');
         
         // Set validation rules

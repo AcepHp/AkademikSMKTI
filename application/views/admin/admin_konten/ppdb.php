@@ -51,12 +51,17 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Halaman PPDB</h1>
-                            <!-- <div class="btn-group">
-                                <a href="<?php echo site_url('Kelola_Dashboard/PPDB/tambah_ppdb'); ?>"
+                            <div class="btn-group">
+                                <a href="<?php echo site_url('K_Konten/tambah_ppdb'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
                                         class="fas fa-download fa-sm text-white-50"></i> Tambah Data PPDB</a>
-                            </div> -->
+                                <a href="#" class="btn btn-sm btn-primary shadow-sm"><i
+                                        class="fas fa-download fa-sm text-white-50"></i> Import Data PPDB</a>
+                            </div>
                         </div>
+
+                        <!-- ... (content lainnya) ... -->
+
                     </div>
 
                     <!-- Begin Page Content -->
@@ -68,17 +73,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <!-- Flash Data Berhasil tambah data -->
-                                    <?php echo $this->session->userdata('success_tambah');?>
-                                    <?php $this->session->unset_userdata('success_tambah');?>
-
-                                    <!-- Flash Data Berhasil edit data -->
-                                    <?php echo $this->session->userdata('success_edit');?>
-                                    <?php $this->session->unset_userdata('success_edit');?>
-
-                                    <!-- Flash Data Berhasil Hapus data -->
-                                    <?php echo $this->session->userdata('success_hapus');?>
-                                    <?php $this->session->unset_userdata('success_hapus');?>
+                                    <?php $this->session->userdata('error');?>
+                                    <?php $this->session->userdata('success');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -100,7 +96,7 @@
                                                     <img src="<?php echo $row->gambar ?>" alt="Gambar"
                                                         style="width: 80px; height: auto;">
                                                 </td>
-                                                <td><?php echo substr($row->judul,0,50) ?>...</td>
+                                                <td><?php echo substr($row->judul,0,55) ?>...</td>
                                                 <td><?php echo $row->created ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
@@ -108,14 +104,14 @@
                                                         data-target="#ppdbModal<?php echo $row->id_ppdb; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('Kelola_Dashboard/PPDB_Admin/edit_ppdb/'.$row->id_ppdb); ?>"
+                                                    <a href="<?php echo site_url('K_Konten/edit_ppdb/'.$row->id_ppdb); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <!-- <a href="#" class="btn btn-sm btn-danger" title="Hapus"
+                                                    <a href="#" class="btn btn-sm btn-danger" title="Hapus"
                                                         onclick="Delete_Guru('<?php echo $row->id_ppdb; ?>')">
                                                         <i class="fas fa-trash"></i>
-                                                    </a> -->
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
@@ -225,7 +221,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("Kelola_Dashboard/PPDB/delete_ppdb/") ?>' + id;
+                window.location.href = '<?=site_url("k_konten/delete_ppdb/") ?>' + id;
             }
         });
     }

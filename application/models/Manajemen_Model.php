@@ -37,7 +37,7 @@
             }
 
             $this->db->where("id_slide");
-            $this->session->set_flashdata("success_tambah", "<div class='alert alert-success' role='alert'>Manajemen Sekolah berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->insert("manajemen",$manajemen);
         }
         
@@ -78,13 +78,12 @@
             }
         
             $this->db->where("id_manajemen", $id);
-            $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Manajemen Sekolah berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("manajemen", $manajemen);
         }
 
         public function delete_manajemen($id) {
             $this->db->where('id_manajemen', $id);
-            $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Manajemen Sekolah berhasil dihapus !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->delete('manajemen');
         }
 

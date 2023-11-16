@@ -44,18 +44,20 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
                     <!-- Page Heading -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Acara</h1>
                             <div class="btn-group">
-                                <a href="<?php echo site_url('Kelola_Dashboard/Acara/tambah_acara'); ?>"
+                                <a href="<?php echo site_url('K_Konten/tambah_acara'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
                                         class="fas fa-download fa-sm text-white-50"></i> Tambah Data Acara</a>
                             </div>
                         </div>
                     </div>
+
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- DataTales Example -->
@@ -65,17 +67,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <!-- Flash Data Berhasil tambah data -->
-                                    <?php echo $this->session->userdata('success_tambah');?>
-                                    <?php $this->session->unset_userdata('success_tambah');?>
-
-                                    <!-- Flash Data Berhasil edit data -->
-                                    <?php echo $this->session->userdata('success_edit');?>
-                                    <?php $this->session->unset_userdata('success_edit');?>
-
-                                    <!-- Flash Data Berhasil Hapus data -->
-                                    <?php echo $this->session->userdata('success_hapus');?>
-                                    <?php $this->session->unset_userdata('success_hapus');?>
+                                    <?php $this->session->userdata('error');?>
+                                    <?php $this->session->userdata('success');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -95,14 +88,14 @@
                                                 <td><?php echo $row->judul; ?></td>
                                                 <td><?php echo substr($row->deskripsi,0,50) ?>...</td>
                                                 <td><?php echo $row->tanggal; ?></td>
-                                                <td><?php echo $row->created; ?></td>
+                                                <td><?php echo $row->created ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#acaraModal<?php echo $row->id_acara; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('Kelola_Dashboard/Acara/edit_acara/'.$row->id_acara); ?>"
+                                                    <a href="<?php echo site_url('K_Konten/edit_acara/'.$row->id_acara); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -166,6 +159,7 @@
                                 <th>Created</th>
                                 <td><?php echo $row->created; ?></td>
                             </tr>
+                            <!-- ... (other fields) ... -->
                         </tbody>
                     </table>
                 </div>
@@ -219,7 +213,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("Kelola_Dashboard/Acara/delete_acara/") ?>' + id;
+                window.location.href = '<?=site_url("K_Konten/delete_acara/") ?>' + id;
             }
         });
     }

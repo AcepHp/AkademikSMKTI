@@ -51,10 +51,11 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Semua Pendaftar</h1>
-                            <!-- <div class="btn-group">
-                                <a href="<?php echo site_url('admin/tambah_guru'); ?>" class="btn btn btn-success shadow-sm mr-2">
-                                <i class="fas fa-download fa-sm text-white-50"></i> Tambah Pendaftar</a>
-                            </div> -->
+                            <div class="btn-group">
+                                <a href="<?php echo site_url('admin/tambah_guru'); ?>"
+                                    class="btn btn btn-success shadow-sm mr-2"><i
+                                        class="fas fa-download fa-sm text-white-50"></i> Tambah Pendaftar</a>
+                            </div>
                         </div>
                     </div>
 
@@ -71,11 +72,10 @@
                                         <thead>
                                             <tr>
                                                 <th>NO</th>
-                                                <th>NO Registrasi</th>
                                                 <th>Pilihan 1</th>
                                                 <th>Pilihan 2</th>
                                                 <th>Nama Lengkap</th>
-                                                <th>Jenis Kelamin</th>
+                                                <th>L/P</th>
                                                 <th>Aksi</th>
                                                 <th>Status</th>
                                             </tr>
@@ -85,7 +85,6 @@
                                             <?php foreach ($ppdb as $row) : ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $row->nomor_registrasi; ?></td>
                                                 <td><?php echo $row->pilihan_satu ?></td>
                                                 <td><?php echo $row->pilihan_dua ?></td>
                                                 <td><?php echo $row->Nama_lengkap ?></td>
@@ -96,20 +95,12 @@
                                                         data-target="#pendaftarModal<?php echo $row->id_ppdb; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <!-- Tombol untuk membuka modal -->
-                                                    <a href="#" class="btn btn-sm btn-success" title="Kirim Balasan"
-                                                        data-toggle="modal"
-                                                        data-target="#exampleModal<?php echo $row->id_ppdb; ?>">
-                                                        <i class="fas fa-envelope"></i>
-                                                    </a>
                                                     <!-- Tombol untuk membuka modal Edit Data -->
-                                                    <?php if($row->status == '2'):?>
                                                     <a href="#" class="btn btn-sm btn-warning" title="Edit Data"
                                                         data-toggle="modal"
                                                         data-target="#modalEditData<?php echo $row->id_ppdb; ?>">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <?php endif;?>
                                                     <a href="#" class="btn btn-sm btn-danger" title="Hapus"
                                                         onclick="Delete_Pendaftar('<?php echo $row->id_ppdb; ?>')">
                                                         <i class="fas fa-trash"></i>
@@ -117,17 +108,16 @@
                                                 </td>
                                                 <td>
                                                     <?php if ($row->status == 1) : ?>
-                                                    <span class="text-success"
-                                                        onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 0)">Diterima</span>
+                                                    <button class="btn btn-sm btn-success"
+                                                        onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 0)">Diterima</button>
                                                     <?php elseif ($row->status == 0) : ?>
-                                                    <span class="text-danger"
+                                                    <button class="btn btn-sm btn-danger"
                                                         onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 1)">Tidak
-                                                        Diterima</span>
+                                                        Diterima</button>
                                                     <?php else : ?>
-                                                    <span class="text-warning"
-                                                        onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 2)">Pending</span>
+                                                    <button class="btn btn-sm btn-warning"
+                                                        onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 2)">Pending</button>
                                                     <?php endif; ?>
-
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
@@ -143,42 +133,8 @@
             <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
     </div>
-
-    <!-- Modal Kirim Pesan Untuk Pendaftar -->
-    <?php foreach ($ppdb as $row): ?>
-    <div class="modal fade" id="exampleModal<?php echo $row->id_ppdb; ?>" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pemberitahuan Lewat Email</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <form method="post" action="<?php echo site_url('PPDB/sendemail/'.$row->id_ppdb);?>">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="subjek" class="col-form-label">Subjek:</label>
-                            <input type="text" class="form-control" id="subjek" name="subjek">
-                        </div>
-                        <div class="mb-3">
-                            <label for="pesan" class="col-form-label">Pesan:</label>
-                            <textarea class="form-control" id="pesan" name="pesan"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Kirim PDF</button>
-                    </div>
-                </form>
-                <div class="modal-footer">
-                    <button class="btn btn-danger cetak-pdf-btn" data-id="<?= $row->id_ppdb ?>">Cetak PDF</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php endforeach; ?>
-
-    <!-- Modal Lihat Data Pendaftar -->
+    <?php $this->load->view('Bar/Logout_modal'); ?>
+    <!-- Modal Edit Data Siswa -->
     <?php foreach ($ppdb as $row): ?>
     <div class="modal fade" id="modalEditData<?php echo $row->id_ppdb; ?>" tabindex="-1" role="dialog"
         aria-labelledby="modalEditDataLabel" aria-hidden="true">
@@ -193,7 +149,7 @@
                 <form method="post" action="<?php echo site_url('PPDB/proseseditpendaftar/'.$row->id_ppdb);?>">
                     <div class="modal-body">
                         <div class="form-group" style="display:none;">
-                            <input type="text" name="NISN" value="<?php echo $row->NISN; ?>">
+                            <input type="text" name="NISN" value="<?php echo $row->nisn; ?>">
                         </div>
                         <div class="form-group" style="display:none;">
                             <input type="text" name="email" value="<?php echo $row->email; ?>">
@@ -220,14 +176,6 @@
     </div>
     <?php endforeach; ?>
 
-    <!-- JavaScript untuk menangani klik tombol Cetak PDF -->
-    <script>
-    $(document).on('click', '.cetak-pdf-btn', function() {
-        var id = $(this).data('id');
-        window.location.href = "<?php echo site_url('Cetak/cetakpdf/') ?>" + id;
-    });
-    </script>
-
     <!-- Modal -->
     <?php foreach ($ppdb as $row): ?>
     <div class="modal fade" id="pendaftarModal<?php echo $row->id_ppdb; ?>" tabindex="-1" role="dialog"
@@ -245,16 +193,12 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
+                                <th>ID PPDB</th>
+                                <td><?php echo $row->id_ppdb; ?></td>
+                            </tr>
+                            <tr>
                                 <th>NISN</th>
-                                <td><?php echo $row->NISN; ?></td>
-                            </tr>
-                            <tr>
-                                <th>Nomor Registrasi</th>
-                                <td><?php echo $row->nomor_registrasi; ?></td>
-                            </tr>
-                            <tr>
-                                <th>Tanggal Registrasi</th>
-                                <td><?php echo $row->tanggal_registrasi; ?></td>
+                                <td><?php echo $row->nisn; ?></td>
                             </tr>
                             <tr>
                                 <th>Pilihan 1</th>
@@ -323,10 +267,6 @@
                             <tr>
                                 <th>Nomor Telp</th>
                                 <td><?php echo $row->nomor_telp; ?></td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td><?php echo $row->email; ?></td>
                             </tr>
                             <tr>
                                 <th>Nama ayah</th>
@@ -404,6 +344,7 @@
                                 <th>Tahun Akademik</th>
                                 <td><?php echo $row->Tahun_akademik; ?></td>
                             </tr>
+                            <!-- ... (other fields) ... -->
                         </tbody>
                     </table>
                 </div>
@@ -460,6 +401,7 @@
     }
     </script>
 
+
     <script>
     new DataTable('#example', {
         columnDefs: [{
@@ -477,6 +419,7 @@
         ]
     });
     </script>
+
 
 </body>
 
