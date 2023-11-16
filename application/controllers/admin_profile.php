@@ -30,6 +30,9 @@ class admin_profile extends CI_Controller {
         $this->form_validation->set_rules('pwdsekarang', 'Password Sekarang', 'required');
         $this->form_validation->set_rules('pwdbaru', 'Password Baru', 'required|min_length[6]');
     
+        $success_msg = 'Password berhasil diubah.';
+        $error_msg = 'Password yang Anda masukkan salah.';
+    
         if ($this->form_validation->run() == TRUE) {
             $NIP = $this->session->userdata('NIP');
             $password_sekarang = md5($this->input->post('pwdsekarang'));
@@ -37,17 +40,26 @@ class admin_profile extends CI_Controller {
     
             // Verifikasi password saat ini
             $admin = $this->admin_profile_model->get_admin_by_nip_password($NIP, $password_sekarang);
-
+    
             if ($admin) {
+                // Proceed with password change
                 $this->admin_profile_model->update_password($NIP, $password_baru);
-                $this->session->set_flashdata('success_msg', 'Password berhasil diubah.');
+                $this->session->set_flashdata('alert', 'success');
+                $this->session->set_flashdata('msg', $success_msg);
             } else {
-                $this->session->set_flashdata('error_msg', 'Password yang anda masukkan salah.');
+                $this->session->set_flashdata('alert', 'error');
+                $this->session->set_flashdata('msg', $error_msg);
             }
-            
+        } else {
+            $this->session->set_flashdata('alert', 'error');
+            $this->session->set_flashdata('msg', $error_msg);
         }
+    
         redirect('admin_profile/index');
     }
+    
+    
+    
     
     public function tambah_dan_rubah_foto() {
         $NIP = $this->session->userdata('NIP');

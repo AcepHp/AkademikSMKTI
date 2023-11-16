@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Dashboard Siswa</title>
+    <title>SMKTIGNC</title>
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -16,6 +16,7 @@
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?=base_url('assets/')?>css/csssiswa.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body id="page-top">
@@ -35,9 +36,6 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Setting profile</h1>
                     </div>
-                    <div id="notification-container">
-                        <!-- Pemberitahuan akan muncul di sini -->
-                    </div>
                     <!-- Content Row -->
                     <div class="row">
                         <!-- Card kiri -->
@@ -45,15 +43,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="fixed-card card"
-                                        style="width: 280px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);border-radius: 10px;">
+                                        style="width: 280px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); border-radius: 10px;">
                                         <div class="card" style="margin: 30px auto; width: 220px; border: none;">
                                             <div class="rounded-circle border"
                                                 style="width: 156px; height: 156px; padding: 3px; background-color: white; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
-                                                <?php if (isset($this->session->userdata['Foto'])) : ?>
-                                                <?php $photoData = base64_encode($this->session->userdata['Foto']); ?>
+                                                <?php if (isset($guruu->file_foto) && !empty($guruu->file_foto)) : ?>
                                                 <img class="card-img-top rounded-circle"
-                                                    src="data:image/jpeg;base64,<?= $photoData ?>" alt="Card image"
-                                                    style="width: 100%; height: 100%;">
+                                                    src="<?= base_url('assets/uploads/foto/') . $guruu->file_foto ?>"
+                                                    alt="Card image" style="width: 100%; height: 100%;">
                                                 <?php else : ?>
                                                 <img class="card-img-top rounded-circle"
                                                     src="<?= base_url('assets/images/avatar2.png') ?>" alt="Card image"
@@ -63,7 +60,7 @@
                                             <div class="card-body text-center">
                                                 <p class="card-text"
                                                     style="font-family: Poppins,sans-serif;font-size: 12px;color: #617182;">
-                                                    Max Upload Photo 64kb :</p>
+                                                    Max Upload Photo 10 MB :</p>
                                                 <h4 class="card-title"
                                                     style="font-family: Poppins,sans-serif;font-size: 15px; margin-bottom: 0px;">
                                                     <?= isset($guru->Nama_Lengkap) ? $guru->Nama_Lengkap : 'Guru'; ?>
@@ -73,20 +70,19 @@
                                                     TI GNC</span>
                                                 <br></br>
                                                 <!-- Input for image preview -->
-                                                <div id="photoPreview" style="display: none;">
-                                                    <img id="previewImage" src="" alt="Pratinjau Foto">
-                                                </div>
                                                 <form id="uploadPhotoForm"
-                                                    action="<?= base_url('Guru_profile/update_photo'); ?>" method="post"
-                                                    enctype="multipart/form-data">
-                                                    <input type="file" id="uploadPhotoInput" name="uploadPhoto"
+                                                    action="<?= base_url('Guru_profile/tambah_dan_rubah_foto'); ?>"
+                                                    method="post" enctype="multipart/form-data">
+                                                    <input type="file" id="uploadPhotoInput" name="file_foto"
                                                         accept="image/*" style="display: none;">
-                                                    <br>
                                                     <button type="button" id="choosePhotoButton"
                                                         class="btn btn-primary">Pilih Foto</button>
-                                                    <!-- Update Photo button -->
+                                                    <div id="photoPreview" style="display: none;">
+                                                        <img id="previewImage" src="" alt="Pratinjau Foto">
+                                                    </div>
                                                     <button class="btn btn-primary" id="updatePhotoBtn"
-                                                        style="margin-top: 5px;">Perbarui Foto</button>
+                                                        style="display: none; width: 150px; text-align: center; margin: 10px auto 0;">Perbarui
+                                                        Foto</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -106,7 +102,8 @@
                                         <div class="card"
                                             style="margin: 30px;padding-left: 30px; width: 640px; border: none;">
                                             <form class="form-horizontal" style="padding-left: 40px;" method="post"
-                                                action="<?= base_url('Guru_profile/change_password'); ?>">
+                                                action="<?= base_url('guru_profile/change_password'); ?>"
+                                                id="changePasswordForm">
                                                 <!-- Menampilkan pesan kesalahan jika ada -->
                                                 <div class="form-group">
                                                     <label for="pwdsekarang" style="font-size: 13px;">Masukkan Password
@@ -140,7 +137,7 @@
                                         <div class="card"
                                             style="margin: 30px; padding-left: 30px; width: 640px; border: none;">
                                             <form class="form-horizontal" style="padding-left: 40px;" method="post"
-                                                action="<?= base_url('Guru_profile/update_data'); ?>">
+                                                action="<?= base_url('Guru_profile/update_data'); ?>" id="ubahdata">
                                                 <div class="form-group">
                                                     <label for="NIP" style="font-size: 13px;">NIP:</label>
                                                     <div class="col-sm-10">
@@ -175,7 +172,8 @@
                                                     <div class="col-sm-10">
                                                         <input class="form-control no-border" id="Tanggal_Lahir"
                                                             type="date" name="Tanggal_Lahir"
-                                                            value="<?= isset($guru->Tanggal_Lahir) ? $guru->Tanggal_Lahir : ''; ?>">
+                                                            value="<?= isset($guru->Tanggal_Lahir) ? $guru->Tanggal_Lahir : ''; ?>"
+>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -183,7 +181,7 @@
                                                         Kelamin:</label>
                                                     <div class="col-sm-10">
                                                         <select class="form-control no-border" id="Jenis_kelamin"
-                                                            name="Jenis_kelamin" readonly>
+                                                            name="Jenis_kelamin" required>
                                                             <option value="Laki-laki"
                                                                 <?= (isset($guru->Jenis_Kelamin) && $guru->Jenis_Kelamin === 'Laki-laki') ? 'selected' : ''; ?>>
                                                                 Laki-laki</option>
@@ -197,8 +195,8 @@
                                                     <label for="Alamat" style="font-size: 13px;">Alamat:</label>
                                                     <div class="col-sm-10">
                                                         <textarea class="form-control no-border" id="Alamat"
-                                                            name="Alamat"
-                                                            rows="3"><?= isset($guru->Alamat) ? $guru->Alamat : ''; ?></textarea>
+                                                            name="Alamat" rows="3"
+                                                            ><?= isset($guru->Alamat) ? $guru->Alamat : ''; ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -207,7 +205,7 @@
                                                         <input class="form-control no-border" id="Pendidikan"
                                                             type="text" name="Pendidikan"
                                                             value="<?= isset($guru->Pendidikan) ? $guru->Pendidikan : ''; ?>"
-                                                            readonly>
+                                                            >
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -216,7 +214,8 @@
                                                     <div class="col-sm-10">
                                                         <input class="form-control no-border" id="Tanggal_Mulai"
                                                             type="date" name="Tanggal_Mulai"
-                                                            value="<?= isset($guru->Tanggal_Mulai) ? $guru->Tanggal_Mulai : ''; ?>">
+                                                            value="<?= isset($guru->Tanggal_Mulai) ? $guru->Tanggal_Mulai : ''; ?>"
+                                                            >
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Update Data</button>
@@ -228,7 +227,7 @@
                             </div>
                             <!-- End of Main Content -->
                             <!-- Footer -->
-                           <?php $this->load->view('Bar/Footer_admin'); ?>
+                            <?php $this->load->view('Bar/Footer_admin'); ?>
                             <!-- End of Footer -->
                         </div>
                         <!-- End of Content Wrapper -->
@@ -250,136 +249,102 @@
     <!-- Custom scripts for all pages-->
     <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
     <!-- Page level plugins -->
-    <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
-    <!-- Page level custom scripts -->
-    <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
-    <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const uploadPhotoInput = document.getElementById("uploadPhotoInput");
-        const choosePhotoButton = document.getElementById("choosePhotoButton");
-        const updatePhotoButton = document.getElementById("updatePhotoBtn");
-        const photoPreview = document.getElementById("photoPreview");
-        const previewImage = document.getElementById("previewImage");
-
-        choosePhotoButton.addEventListener("click", function() {
-            uploadPhotoInput.click();
+    // JavaScript untuk menampilkan pratinjau foto sebelum diunggah
+    $(document).ready(function() {
+        $('#choosePhotoButton').click(function() {
+            $('#uploadPhotoInput').click();
         });
 
-        uploadPhotoInput.addEventListener("change", function() {
-            const selectedFile = uploadPhotoInput.files[0];
-
-            if (selectedFile) {
-                const reader = new FileReader();
-
-                reader.onload = function(event) {
-                    previewImage.src = event.target.result;
-                    previewImage.style.maxWidth = "100%";
-                    previewImage.style.maxHeight = "200px";
-                    photoPreview.style.display = "block";
-                };
-
-                reader.readAsDataURL(selectedFile);
+        $('#uploadPhotoInput').change(function() {
+            var file = $(this)[0].files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#photoPreview').show();
+                    $('#previewImage').attr('src', e.target.result);
+                    $('#updatePhotoBtn').show();
+                }
+                reader.readAsDataURL(file);
             }
         });
-
-        updatePhotoButton.addEventListener("click", function() {
-            const selectedFile = uploadPhotoInput.files[0];
-
-            if (selectedFile) {
-                const formData = new FormData();
-                formData.append('uploadPhoto', selectedFile);
-
-                updatePhoto(formData);
-            }
-        });
-
-        function updatePhoto(photoData) {
-            console.log('Mengirim permintaan pembaruan foto...');
-
-            fetch('<?= base_url('Guru_profile/update_photo'); ?>', {
-                    method: 'POST',
-                    body: photoData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Respons JSON diterima:', data);
-
-                    if (data.success) {
-                        // Buat pemberitahuan Bootstrap untuk pesan keberhasilan
-                        let successAlert = `
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Foto berhasil diperbarui
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        `;
-                        // Sisipkan pemberitahuan ke dalam elemen dengan ID "notification-container"
-                        document.getElementById("notification-container").innerHTML =
-                            successAlert;
-
-                        // Muat ulang halaman settingprofile.php
-                        window.location.reload(); // Ini adalah perubahan yang ditambahkan
-                    } else {
-                        // Buat pemberitahuan Bootstrap untuk pesan kesalahan
-                        let errorAlert = `
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Terjadi kesalahan saat memperbarui foto
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        `;
-                        // Sisipkan pemberitahuan ke dalam elemen dengan ID "notification-container"
-                        document.getElementById("notification-container").innerHTML =
-                            errorAlert;
-                    }
-                })
-                .catch(error => {
-                    // Buat pemberitahuan Bootstrap untuk pesan kesalahan
-                    let errorAlert = `
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        Terjadi kesalahan saat memperbarui foto
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    `;
-                    // Sisipkan pemberitahuan ke dalam elemen dengan ID "notification-container"
-                    document.getElementById("notification-container").innerHTML =
-                        errorAlert;
-                });
-        }
     });
     </script>
     <script>
-    function showNotification(message, type) {
-        const notificationContainer = document.getElementById('notification-container');
+    // JavaScript for SweetAlert confirmation
+    $(document).ready(function() {
+        $('#changePasswordForm').submit(function(e) {
+            e.preventDefault(); // Mencegah pengiriman formulir otomatis
 
-        const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Ganti!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika pengguna mengonfirmasi, kirim formulir
+                    this.submit();
+                } else {
+                    Swal.fire(
+                        'Dibatalkan',
+                        'Password tidak jadi diganti',
+                        'info'
+                    );
+                }
+            });
+        });
 
-        // Buat elemen pemberitahuan
-        const notification = document.createElement('div');
-        notification.classList.add('alert', 'alert-dismissible', 'fade', 'show', alertClass);
-        notification.role = 'alert';
-        notification.innerHTML = `
-${message}
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-</button>
-`;
+        // Check for success or error flashdata and display SweetAlert accordingly
+        <?php if ($this->session->flashdata('alert') && $this->session->flashdata('msg')): ?>
+        var alertType = '<?= $this->session->flashdata("alert") ?>';
+        var message = '<?= $this->session->flashdata("msg") ?>';
 
-        // Sisipkan pemberitahuan ke dalam container
-        notificationContainer.innerHTML = '';
-        notificationContainer.appendChild(notification);
-    }
+        Swal.fire({
+            title: alertType === 'success' ? 'Berhasil' : 'Gagal',
+            text: message,
+            icon: alertType,
+            confirmButtonText: 'OK'
+        }).then(() => {
+            <?php unset($_SESSION['alert']); ?>
+            <?php unset($_SESSION['msg']); ?>
+        });
+        <?php endif; ?>
+    });
+    </script>
+    <script>
+    // JavaScript for SweetAlert confirmation
+    $(document).ready(function() {
+        $('#ubahdata').submit(function(e) {
+            e.preventDefault(); // Mencegah pengiriman formulir otomatis
 
-    // Contoh penggunaan:
-    // Tampilkan pemberitahuan kesalahan
-    showNotification('Terjadi kesalahan saat memperbarui foto', 'error');
-    // Tampilkan pemberitahuan keberhasilan
-    showNotification('Foto berhasil diperbarui', 'success');
+            Swal.fire({
+                title: 'Apakah Anda Yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Update!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Jika pengguna mengonfirmasi, kirim formulir
+                    this.submit();
+                } else {
+                    Swal.fire(
+                        'Dibatalkan',
+                        'Perubahan data dibatalkan',
+                        'info'
+                    );
+                }
+            });
+        });
+    });
     </script>
 </body>
 

@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="<?= base_url('assets/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body id="page-top">
@@ -68,28 +69,28 @@
                                 <div class="row mt-2">
                                     <div class="col mb-3 mx-4">
                                         <a href="<?= base_url('assets/uploads/materi/' . $item->file_materi); ?>"
-                                            target="_blank" class="btn btn-primary w-100" style="width: 100%;">Lihat
+                                            target="_blank" class="btn btn-primary w-100 mb-1"
+                                            style="width: 100%;">Lihat Materi</a>
+                                        <a href="<?php echo site_url('Materi/edit_materi_guru/'.$item->id_materi); ?>"
+                                            title="Edit" class="btn btn-warning w-100 mb-1" style="width: 100%;">Edit
                                             Materi</a>
+                                        <a href="#" class="btn btn-danger w-100" style="width: 100%;"
+                                            onclick="hapusMateri('<?php echo $item->id_materi ?>', '<?php echo $id_kelas ?>', '<?php echo $id_mapel ?>')">Hapus
+                                            Materi</a>
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                         <?php $materiCount++; // Increment hitungan materi ?>
                         <?php } ?>
                     </div>
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
         </div>
     </div>
+    <?php $this->load->view('Bar/Logout_modal'); ?>
     <!-- Bootstrap core JavaScript -->
     <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
     <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -97,6 +98,29 @@
     <script src="<?= base_url('assets/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Custom scripts for all pages -->
     <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+    function hapusMateri(id_materi, id_kelas, id_mapel) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data Materi akan dihapus dan tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '<?= site_url("Materi/hapus_materi_guru/") ?>' + id_materi + '/' +
+                    id_kelas + '/' + id_mapel;
+            }
+        });
+    }
+    </script>
+
+
 </body>
 
 </html>

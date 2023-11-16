@@ -54,7 +54,7 @@
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         <?php $dataFound = false; ?>
-                                        <?php if (!empty($siswa)) { ?>
+                                        <?php if (!empty($nilai)) { ?>
                                         <table class="table table-bordered bg-white" id="example" class="display"
                                             style="width:100%">
                                             <thead>
@@ -69,7 +69,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($siswa as $data) {
+                                                <?php foreach ($nilai as $data) {
                                                             if ($data->kode_tingkatan == $tingkat->kode_tingkatan) {
                                                                 $dataFound = true;
                                                                 ?>
