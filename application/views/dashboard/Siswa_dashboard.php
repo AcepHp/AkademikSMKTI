@@ -20,7 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/modal_password.css') ?>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 
@@ -47,8 +47,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
@@ -152,24 +150,31 @@
             </footer>
             <!-- End of Footer -->
 
-            <!-- include modal -->
-            <div id="passwordModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 style="color: black; font-weight: bold">Pemberitahuan</h5>
-                    </div>
-                    <p>Ganti password terlebih dahulu!</p>
-                    <div class="modal-body">
-                        <button
-                            onclick="window.location.href='<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>'"
-                            class="btn btn-primary">Ganti Password</button>
-                    </div>
-                </div>
+            <!-- Button trigger modal -->
+            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Launch static backdrop modal
+            </button> -->
+
+            <!-- Modal -->
+<div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
             </div>
-
-            <!-- ... (script yang sama seperti sebelumnya) ... -->
-
-
+            <div class="modal-body">
+                <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah password default dari akun siswa.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Nanti Saja</button>
+                <button
+                    onclick="gantiPassword()"
+                    class="btn btn-primary">Ganti Password Sekarang</button>
+            </div>
+        </div>
+    </div>
+</div>
         </div>
 
     </div>
@@ -183,35 +188,37 @@
     <!-- include modal Logout -->
     <?php $this->load->view('Bar/Logout_modal'); ?>
 
-    <script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
     // Mengambil elemen modal
-    var passwordModal = document.getElementById('passwordModal');
+    var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
     var closeModalButton = document.getElementById('closeModal');
 
     // Simulasikan nilai aktif dari database
     var aktif = "<?php echo $this->session->userdata('aktif'); ?>"; // Ganti nilainya sesuai dengan data dari database
 
+    // Tampilkan modal jika aktif = 0
     if (aktif === '0') {
-        // Tampilkan modal jika aktif = 0
-        passwordModal.style.display = 'block';
-    } else {
-        // Sembunyikan modal jika aktif = 1
-        passwordModal.style.display = 'none';
+        passwordModal.show();
     }
 
     // Menutup modal saat tombol close diklik
     closeModalButton.addEventListener('click', function() {
-        passwordModal.style.display = 'none';
+        passwordModal.hide();
     });
 
     // Menutup modal saat luar modal diklik
     window.addEventListener('click', function(event) {
-        if (event.target == passwordModal) {
-            passwordModal.style.display = 'none';
+        if (event.target == passwordModal._element) {
+            passwordModal.hide();
         }
     });
-    </script>
 
+    // Fungsi untuk mengganti password
+    function gantiPassword() {
+        window.location.href='<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>';
+    }
+</script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
@@ -235,29 +242,11 @@
     <!-- Include SweetAlert2 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- <script>
-        function periksaakun(){
-            var aktif = "<?php echo $this->session->userdata('aktif'); ?>";
-            if (aktif==='0'){
-                tampilpopup();
+    <!-- Bootstrap JavaScript (requires Popper.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-            }
-        }
-
-        function tampilpopup(){
-            Swal.fire({
-                title: 'SILAHKAN MASUKKAN KATA SANDI YANG BARU',
-                icon: 'info',
-                confirmButtomText: '<a id="ganti">Ubah Kata Sandi</a>'
-            });
-
-            const ganti = document.getElementById('ganti');
-            ganti.addEventListener('click', function(event){
-                event.preventDefault();
-                const url=""
-            })
-        }
-    </script> -->
 
 </body>
 
