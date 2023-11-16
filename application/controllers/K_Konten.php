@@ -13,56 +13,38 @@ class K_Konten extends CI_Controller {
         $this->load->model('Jurusan_Model');
         $this->load->model('Manajemen_Model');
         $this->load->model('PPDB_Model');
-        $this->load->model('Galeri_Model');
-        $this->load->library('session');
+
     }
 
     //slideshow
     public function slideshow() {
-        if ($this->session->userdata('role') !== 'Admin') {
-            redirect('auth');
-        }
         $data['slide']=$this->Slide_Model->getslide();
         $this->load->view('admin/admin_konten/slideshow',$data);
     }
 
     public function tambah_slide() {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin') {
-            redirect('auth');
-        }
         $this->load->view('admin/admin_konten/tambah_slide');
     }
 
     public function edit_slide($id) {
-        if ($this->session->userdata('role') !== 'Admin') {
-            redirect('auth');
-        }
         $data['slide']= $this->Slide_Model->getslidebyid($id)->row();
         $this->load->view('admin/admin_konten/edit_slide', $data);
     }
 
+
     public function prosestambahslide(){
-        if ($this->session->userdata('role') !== 'Admin') {
-            redirect('auth');
-        }
         if($this->Slide_Model->tambahslide()){
-            $this->session->set_flashdata("error", "<div class='alert alert-danger' role='alert'>Gunakan format gambar yang sesuai (.gif/.jpg/.png) !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-            $this->session->set_flashdata("success_tambah_silder", "<div class='alert alert-success' role='alert'>Gambar Slide berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             redirect('K_Konten/slideshow','refresh');
 
         } else {
+            
             redirect('K_Konten/tambah_slide','refresh');
             
         }
     }
 
     public function proseseditslide($id){
-        if ($this->session->userdata('role') !== 'Admin') {
-            redirect('auth');
-        }
-
         if($this->Slide_Model->editslide($id)){
-            $this->session->set_flashdata("success_edit_silder", "<div class='alert alert-success' role='alert'>Gambar Slide berhasil diedit !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             redirect('K_Konten/slideshow','refresh');
 
         } else {
@@ -72,13 +54,10 @@ class K_Konten extends CI_Controller {
     }
 
     public function delete_slide($id) {
-        if ($this->session->userdata('role') !== 'Admin') {
-            redirect('auth');
-        }
         if ($this->Slide_Model->delete_slide($id)) {
             redirect('K_Konten/slideshow','refresh');
         } else {
-            
+            // Handle error
         }
     } 
 
@@ -138,24 +117,25 @@ class K_Konten extends CI_Controller {
         $this->load->view('admin/admin_konten/vmt',$data);
     }
     
-    // public function tambah_vmt() {
-    //     $this->load->view('admin/admin_konten/tambah_vmt');
-    // }
-
-    // public function prosestambahvmt(){
-    //     if($this->VMT_Model->tambahvmt()){
-    //         redirect('K_Konten/vmt','refresh');
-
-    //     } else {
-            
-    //         redirect('K_Konten/tambah_vmt','refresh');
-            
-    //     }
-    // }
+    public function tambah_vmt() {
+        $this->load->view('admin/admin_konten/tambah_vmt');
+    }
 
     public function edit_vmt($id) {
         $data['vmt']= $this->VMT_Model->getvmtbyid($id)->row();
         $this->load->view('admin/admin_konten/edit_vmt', $data);
+    }
+
+
+    public function prosestambahvmt(){
+        if($this->VMT_Model->tambahvmt()){
+            redirect('K_Konten/vmt','refresh');
+
+        } else {
+            
+            redirect('K_Konten/tambah_vmt','refresh');
+            
+        }
     }
 
     public function proseseditvmt($id){
@@ -407,10 +387,16 @@ class K_Konten extends CI_Controller {
         $data['manajemen']=$this->Manajemen_Model->getmanajemen();
         $this->load->view('admin/admin_konten/manajemen',$data);
     }
-
+    
     public function tambah_manajemen() {
         $this->load->view('admin/admin_konten/tambah_manajemen');
     }
+
+    public function edit_manajemen($id) {
+        $data['manajemen']= $this->Manajemen_Model->getmanajemenbyid($id)->row();
+        $this->load->view('admin/admin_konten/edit_manajemen', $data);
+    }
+
 
     public function prosestambahmanajemen(){
         if($this->Manajemen_Model->tambahmanajemen()){
@@ -421,11 +407,6 @@ class K_Konten extends CI_Controller {
             redirect('K_Konten/tambah_manajemen','refresh');
             
         }
-    }
-
-    public function edit_manajemen($id) {
-        $data['manajemen']= $this->Manajemen_Model->getmanajemenbyid($id)->row();
-        $this->load->view('admin/admin_konten/edit_manajemen', $data);
     }
 
     public function proseseditmanajemen($id){
@@ -486,51 +467,6 @@ class K_Konten extends CI_Controller {
     public function delete_ppdb($id) {
         if ($this->PPDB_Model->delete_ppdb($id)) {
             redirect('K_Konten/ppdb','refresh');
-        } else {
-            // Handle error
-        }
-    } 
-
-    //Galeri
-    public function galeri() {
-        $data['galeri']=$this->Galeri_Model->getgaleri();
-        $this->load->view('admin/admin_konten/galeri',$data);
-    }
-
-    public function tambah_galeri() {
-        $this->load->view('admin/admin_konten/tambah_galeri');
-    }
-
-    public function edit_galeri($id) {
-        $data['galeri']= $this->Galeri_Model->getgaleribyid($id)->row();
-        $this->load->view('admin/admin_konten/edit_galeri', $data);
-    }
-
-
-    public function prosestambahgaleri(){
-        if($this->Galeri_Model->tambahgaleri()){
-            redirect('K_Konten/galeri','refresh');
-
-        } else {
-            
-            redirect('K_Konten/tambah_galeri','refresh');
-            
-        }
-    }
-
-    public function proseseditgaleri($id){
-        if($this->Galeri_Model->editgaleri($id)){
-            redirect('K_Konten/galeri','refresh');
-
-        } else {
-            redirect('K_Konten/galeri','refresh');
-            
-        }
-    }
-
-    public function delete_galeri($id) {
-        if ($this->Galeri_Model->delete_galeri($id)) {
-            redirect('K_Konten/galeri','refresh');
         } else {
             // Handle error
         }

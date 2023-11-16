@@ -98,14 +98,13 @@
                                                     </a>
                                                 <td>
                                                     <?php if ($row->status == 1) : ?>
-                                                    <span class="text-success"
-                                                        onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 0)">Diterima</span>
-                                                    <?php elseif ($row->status == 0) : ?>
-                                                    <span class="text-danger"
+                                                    <button class="btn btn-sm btn-success"
+                                                        onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 0)">Diterima</button>
+                                                    <?php else : ?>
+                                                    <button class="btn btn-sm btn-danger"
                                                         onclick="changeStatus(<?php echo $row->id_ppdb; ?>, 1)">Tidak
-                                                        Diterima</span>
+                                                        Diterima</button>
                                                     <?php endif; ?>
-
                                                 </td>
                                             </tr>
                                             <?php endif; ?>
@@ -145,7 +144,7 @@
                             </tr>
                             <tr>
                                 <th>NISN</th>
-                                <td><?php echo $row->NISN; ?></td>
+                                <td><?php echo $row->nisn; ?></td>
                             </tr>
                             <tr>
                                 <th>Pilihan 1</th>
@@ -198,6 +197,10 @@
                             <tr>
                                 <th>Kelurahan/Desa</th>
                                 <td><?php echo $row->kelurahan_desa; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Dusun/Kampung</th>
+                                <td><?php echo $row->dusun_kampung; ?></td>
                             </tr>
                             <tr>
                                 <th>RT</th>

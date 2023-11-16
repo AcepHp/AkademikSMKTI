@@ -10,19 +10,14 @@ class Tahun_akademik extends CI_Controller
     // Fungsi untuk menampilkan daftar tahun akademik
     public function index()
     {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         $data['tahun_akademik'] = $this->Tahun_akademik_model->get_all_tahun_akademik();
         $this->load->view('admin/data_master/tahun_akademik/data_tahun', $data);
     }
 
     // Fungsi untuk menambahkan tahun akademik
     // Fungsi untuk menambahkan tahun akademik
-    public function tambah_tahun(){
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
+    public function tambah_tahun()
+{
      $data['statuses'] = $this->Tahun_akademik_model->get_all_status_as_array();
     
     // Mengambil data tahun akademik dari model
@@ -50,10 +45,6 @@ class Tahun_akademik extends CI_Controller
 
     public function edit_tahun($id)
     {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array(
                 'tahun_akademik' => $this->input->post('tahun_akademik'),
@@ -74,12 +65,12 @@ class Tahun_akademik extends CI_Controller
         $this->load->view('admin/data_master/tahun_akademik/edit_tahun', $data);
     }
     
+    
+    
+
     // Fungsi untuk menghapus tahun akademik
     public function hapus_tahun($id)
     {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
-            redirect('auth');
-        }
         if ($this->Tahun_akademik_model->delete_tahun_akademik($id)) {
             redirect('tahun_akademik');
         }

@@ -87,23 +87,25 @@
                                         <tr>
                                             <td><?php echo htmlspecialchars($n->NISN); ?></td>
                                             <td><?php echo htmlspecialchars($n->Nama_lengkap); ?></td>
-                                            <td><?php echo htmlspecialchars($n->kehadiran); ?></td>
-                                            <td><?php echo htmlspecialchars($n->tugas); ?></td>
-                                            <td><?php echo htmlspecialchars($n->uts); ?></td>
-                                            <td><?php echo htmlspecialchars($n->uas); ?></td>
-                                            <td><?php echo htmlspecialchars($n->nilai_akhir); ?></td>
-                                            <td>
+                                            <td><?php echo htmlspecialchars(number_format($n->kehadiran, 2)); ?></td>
+                                            <td><?php echo htmlspecialchars(number_format($n->tugas, 2)); ?></td>
+                                            <td><?php echo htmlspecialchars(number_format($n->uts, 2)); ?></td>
+                                            <td><?php echo htmlspecialchars(number_format($n->uas, 2)); ?></td>
+                                            <td><?php echo htmlspecialchars(number_format($n->nilai_akhir, 2)); ?></td>
 
+                                            <td>
+                                                <?php if ($n->ID_Nilai === null ) : ?>
                                                 <a href="<?php echo base_url('nilai/tambah_nilai_guru/'. $n->NISN . '/' . $kelas[0]->id_kelas); ?>"
                                                     class="d-none d-sm-inline-block btn btn-sm btn-primary">
                                                     <i class="fas fa-plus"></i>
                                                 </a>
-
+                                                <?php endif; ?>
+                                                <?php if ($n->ID_Nilai !== null) : ?>
                                                 <a href="<?php echo base_url('nilai/edit_nilai_guru/'. $n->NISN . '/' . $kelas[0]->id_kelas. '/' . $mapel[0]->id_mapel); ?>"
                                                     class="btn btn-sm btn-warning" title="Edit" id="tambahDataSiswa">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-
+                                                <?php endif; ?>
                                             </td>
                                             <?php } ?>
                                         </tr>

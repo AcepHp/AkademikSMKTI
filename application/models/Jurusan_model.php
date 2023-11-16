@@ -11,20 +11,9 @@ class Jurusan_model extends CI_Model {
     }
     public function get_jurusan() {
         return $this->db->get('jurusan');
-    } 
-
+    }
     public function getjurusan() {
-        return $this->db->get('jurusan_admin')->result();
-    }
-    
-    public function getkuotabynama($jurusan) {
-        $this->db->where('nama_jurusan', $jurusan);
-        return $this->db->get('kuota');
-    }
-
-    public function ambilkuota($jurusan, $kuota) {
-        $this->db->where('nama_jurusan', $jurusan);
-        return $this->db->update('kuota', $kuota);
+        return $this->db->get('jurusan_admin');
     }
 
     public function insert_jurusan($data) {
@@ -49,7 +38,8 @@ class Jurusan_model extends CI_Model {
     //Untuk Admin Mengatur di web
 
     public function getjurusanbyid($id) {
-       return $this->db->get_where('jurusan_admin', array('id_jurusan'=>$id));
+        $this->db->where('id_jurusan', $id);
+        return $this->db->get('jurusan_admin');
     }
 
     public function tambahjurusan(){
@@ -79,7 +69,7 @@ class Jurusan_model extends CI_Model {
         }
 
         $this->db->where("id_jurusan");
-        $this->session->set_flashdata("success_tambah", "<div class='alert alert-success' role='alert'>Data Halaman Jurusan berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+        $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
         return $this->db->insert("jurusan_admin",$jurusan_admin);
     }
     
@@ -124,13 +114,12 @@ class Jurusan_model extends CI_Model {
         }
     
         $this->db->where("id_jurusan", $id);
-        $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Data Halaman Jurusan berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+        $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
         return $this->db->update("jurusan_admin", $jurusan_admin);
     }
 
     public function delete_jurusanbyadmin($id) {
         $this->db->where('id_jurusan', $id);
-        $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Data Halaman Jurusan berhasil dihapus !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
         return $this->db->delete('jurusan_admin');
     }
 }

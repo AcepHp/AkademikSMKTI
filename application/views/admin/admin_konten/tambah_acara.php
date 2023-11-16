@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <?php echo form_open_multipart('Kelola_Dashboard/Acara/prosestambahacara'); ?>
+                        <?php echo form_open_multipart('K_Konten/prosestambahacara'); ?>
                         <div class="form-group">
                             <label for="judul">Judul:</label>
                             <input type="text" class="form-control" name="judul" required>

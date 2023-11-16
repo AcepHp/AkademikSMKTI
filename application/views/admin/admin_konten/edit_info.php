@@ -48,7 +48,7 @@
                         </div>
                     </div>
                         <div class="container mt-5">
-                            <?php echo form_open_multipart('Kelola_Dashboard/Info/proseseditinfo/' . $info->id_info); ?>
+                            <?php echo form_open_multipart('K_Konten/proseseditinfo/' . $info->id_info); ?>
                             <div class="form-group">
                                 <label for="judul">Judul:</label>
                                 <input type="text" class="form-control" name="judul"

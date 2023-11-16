@@ -30,20 +30,19 @@
         }
 
         public function editvmt($id) {
-            $visi = $this->input->post("visi");
-            $misi = $this->input->post("misi");
-            $tujuan = $this->input->post("tujuan");            
+            $judul = $this->input->post("judul");
+            $deskripsi = $this->input->post("deskripsi");            
             
             $vmt = array(
-                "visi" => $visi,
-                "misi" => $misi,                
-                "tujuan" => $tujuan,
+                "judul" => $judul,
+                "deskripsi" => $deskripsi,                
+                "created" => date('Y-m-d'),
             );
         
             $existing_vmt = $this->db->get_where("vmt", array("id_vmt" => $id))->row();
         
             $this->db->where("id_vmt", $id);
-            $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Visi Misi Dan Tujuan berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("vmt", $vmt);
         }
 

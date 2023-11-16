@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Guru</title>
+    <title>Dashboard Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -76,11 +76,6 @@
                                 value="<?php echo $siswa_data->Nama_lengkap; ?>" required>
                         </div>
 
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <input type="text" class="form-control" name="status"
-                                value="<?php echo $siswa_data->Status; ?>">
-                        </div>
 
                         <div class="form-group">
                             <label for="tempat_lahir">Tempat Lahir</label>

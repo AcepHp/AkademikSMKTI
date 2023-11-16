@@ -50,13 +50,18 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Data Halaman jurusan</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Data jurusan</h1>
                             <div class="btn-group">
-                                <a href="<?php echo site_url('Kelola_Dashboard/Jurusan/tambah_jurusan'); ?>"
+                                <a href="<?php echo site_url('K_Konten/tambah_jurusan'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
                                         class="fas fa-download fa-sm text-white-50"></i> Tambah Data jurusan</a>
+                                <a href="#" class="btn btn-sm btn-primary shadow-sm"><i
+                                        class="fas fa-download fa-sm text-white-50"></i> Import Data jurusan</a>
                             </div>
                         </div>
+
+                        <!-- ... (content lainnya) ... -->
+
                     </div>
 
                     <!-- Begin Page Content -->
@@ -67,17 +72,9 @@
                                 <h6 class="m-0 font-weight-bold text-primary">Tabel jurusan</h6>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive"><!-- Flash Data Berhasil tambah data -->
-                                    <?php echo $this->session->userdata('success_tambah');?>
-                                    <?php $this->session->unset_userdata('success_tambah');?>
-
-                                    <!-- Flash Data Berhasil edit data -->
-                                    <?php echo $this->session->userdata('success_edit');?>
-                                    <?php $this->session->unset_userdata('success_edit');?>
-
-                                    <!-- Flash Data Berhasil Hapus data -->
-                                    <?php echo $this->session->userdata('success_hapus');?>
-                                    <?php $this->session->unset_userdata('success_hapus');?>
+                                <div class="table-responsive">
+                                    <?php $this->session->userdata('error');?>
+                                    <?php $this->session->userdata('success');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -85,21 +82,21 @@
                                                 <th>Nama Jurusan</th>
                                                 <th>Gambar</th>
                                                 <th>Judul</th>
-                                                <th>Deskripsi</th>
+                                                <!-- <th>Deskripsi</th> -->
                                                 <th>Created</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1; ?>
-                                            <?php foreach ($jurusan_admin as $row) : ?>
+                                            <?php foreach ($jurusan_admin->result() as $row) : ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $row->nama_jurusan; ?></td>
                                                 <td><img src="<?php echo $row->gambar ?>" alt="Gambar"
                                                         style="width: 80px; height: auto;"></td>
-                                                <td><?php echo substr($row->judul,0,30) ?>...</td>
-                                                <td><?php echo substr($row->deskripsi,0,30) ?>...</td>
+                                                <td><?php echo substr($row->judul,0,60) ?>...</td>
+                                                <!-- <td><?php echo substr($row->deskripsi,0,30) ?>...</td> -->
                                                 <td><?php echo $row->created ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
@@ -107,7 +104,7 @@
                                                         data-target="#jurusanModal<?php echo $row->id_jurusan; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('Kelola_Dashboard/Jurusan/edit_jurusan/'.$row->id_jurusan); ?>"
+                                                    <a href="<?php echo site_url('K_Konten/edit_jurusan/'.$row->id_jurusan); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -133,7 +130,7 @@
     </div>
 
     <!-- Modal -->
-    <?php foreach ($jurusan_admin as $row): ?>
+    <?php foreach ($jurusan_admin->result() as $row): ?>
     <div class="modal fade" id="jurusanModal<?php echo $row->id_jurusan; ?>" tabindex="-1" role="dialog"
         aria-labelledby="jurusanModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" style="max-width: 50%; width: 100%;" role="document">
@@ -172,6 +169,7 @@
                                 <th>Created</th>
                                 <td><?php echo $row->created; ?></td>
                             </tr>
+                            <!-- ... (other fields) ... -->
                         </tbody>
                     </table>
                 </div>
@@ -225,7 +223,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("Kelola_Dashboard/Jurusan/delete_jurusan/") ?>' + id;
+                window.location.href = '<?=site_url("K_Konten/delete_jurusan/") ?>' + id;
             }
         });
     }

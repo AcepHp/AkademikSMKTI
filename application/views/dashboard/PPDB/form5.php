@@ -111,7 +111,7 @@
     <div class="container d-flex flex-column align-items-center mb-5">
         <div class="card" style="width: 60%; background-color: #F5F5F5; border: none;">
             <div class="header card-header">Form Pendaftaran</div>
-            <!-- <div class="container" style="padding: 40px;">
+            <div class="container" style="padding: 40px;">
                 <div class="position-relative m-4">
                     <div class="progress" style="height: 1px;">
                         <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
@@ -127,23 +127,23 @@
                         class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
                         style="width: 2rem; height:2rem;">3</button>
                 </div>
-            </div> -->
+            </div>
 
             <!-- form -->
             <form class="form-register" id="mainForm" action="<?php echo base_url('PPDB/simpan_pendaftaran'); ?>"
                 method="post" style="padding: 20px;">
                 <div class="form-page" id="form1">
-                    <div class="container" style="text-align: center;">
+                    <div class="container">
                         <div class="col-12">
-                            <h2 style="text-align: center;">Data Siswa Pendaftar</h2>
-                            <p style="text-align: center;">Isilah data-data berikut:</p>
+                            <h1>Data Pendaftaran Siswa</h1>
+                            <p>Isilah data-data berikut:</p>
                         </div>
                     </div>
                     <div class="inner">
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
-                                <label for="NISN">NISN</label>
-                                <input type="text" class="form-control col-sm-10" id="NISN" name="NISN" required
+                                <label for="nisn">NISN</label>
+                                <input type="text" class="form-control col-sm-10" id="nisn" name="nisn" required
                                     style="width: 100%" placeholder="Masukkan NISN" maxlength="10"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '').substring(0, 10);" />
                             </div>
@@ -170,12 +170,12 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="Nama_lengkap">Nama Lengkap</label>
                                 <input type="text" class="form-control col-sm-10" id="Nama_lengkap" name="Nama_lengkap"
-                                    style="width: 100%;" placeholder="Masukkan Nama Lengkap" required
-                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '').substring(0, 255);" />
+                                    style="width: 100%;">
                             </div>
                         </div>
                         <div class="form-row">
@@ -206,8 +206,6 @@
                                 <label for="Tanggal_Lahir">Tanggal Lahir</label>
                                 <input type="date" class="form-control col-sm-10" id="Tanggal_Lahir"
                                     name="Tanggal_Lahir" style="width: 100%;">
-                                <div id="tanggal-error" style="color: red; display: none;">Tanggal lahir tidak boleh
-                                    melebihi hari ini.</div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -221,9 +219,11 @@
                                     <option value="Hindu">Hindu</option>
                                     <option value="Buddha">Buddha</option>
                                     <option value="Konghucu">Konghucu</option>
+                                    <!-- Tambahkan opsi agama lainnya sesuai kebutuhan Anda -->
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="Alamat">Alamat</label>
@@ -247,7 +247,7 @@
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="kabupaten">Kabupaten :</label>
                                 <select name="kabupaten_kota" class="form-control" id="kabupaten">
-                                    <option></option>
+                                    <option value='' disabled selected>Pilih Kabupaten</option>
                                 </select>
                             </div>
                         </div>
@@ -255,7 +255,7 @@
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="kecamatan">Kecamatan :</label>
                                 <select name="kecamatan" class="form-control" id="kecamatan">
-                                    <option></option>
+                                    <option disabled selected>Pilih Kecamatan</option>
                                 </select>
                             </div>
                         </div>
@@ -263,28 +263,25 @@
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="desa">Desa :</label>
                                 <select name="kelurahan_desa" class="form-control" id="desa">
-                                    <option></option>
+                                    <option disabled selected>Pilih Desa</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row" style="display: flex;">
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1; margin-right: 10px;">
                                 <label for="rt">RT</label>
-                                <input type="text" class="form-control col-sm-10" id="rt" name="rt" style="width: 100%;"
-                                    maxlength="2" pattern="[0-9]{2}"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                <input type="text" class="form-control col-sm-10" id="rt" name="rt"
+                                    style="width: 100%;">
                             </div>
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1; margin-right: 10px;">
                                 <label for="rw">RW</label>
-                                <input type="text" class="form-control col-sm-10" id="rw" name="rw" style="width: 100%;"
-                                    maxlength="2" pattern="[0-9]{2}"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                <input type="text" class="form-control col-sm-10" id="rw" name="rw"
+                                    style="width: 100%;">
                             </div>
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1;">
                                 <label for="kode_pos">Kode Pos</label>
                                 <input type="text" class="form-control col-sm-10" id="kode_pos" name="kode_pos"
-                                    style="width: 100%;" maxlength="5" pattern="[0-9]{5}"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    style="width: 100%;">
                             </div>
                         </div>
                         <div class="form-row" style="display: flex;">
@@ -298,22 +295,19 @@
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control col-sm-10" id="email" name="email"
                                     style="width: 100%;">
-                                <div id="email-error" class="text-danger"
-                                    style="display: none; font-size: 14px; margin-top: 5px;"></div>
                             </div>
                         </div>
                         <div class="col-12 mb-4 text-end" style="padding: 0px 30px 0px 0px">
-                            <button id="nextButton1" class="btn btn-primary btn-lg"
-                                onclick="validateEmail()">Selanjutnya</button>
+                            <button id="nextButton1" class="btn btn-primary btn-lg">Selanjutnya</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-page" id="form4">
-                    <div class="container" style="text-align: center;">
+                    <div class="container" style="margin-left: -15px;">
                         <div class="col-12">
-                            <h2 style="text-align: center;">Data Orang Tua</h2>
-                            <p style="text-align: center;">Isi Data-data dibawah ini jika tinggal bersama Oranga Tua</p>
+                            <h1>Data Orang Tua</h1>
+                            <p>Isilah data-data berikut:</p>
                         </div>
                     </div>
                     <div class="inner">
@@ -327,61 +321,23 @@
                         <div class="form-row" style="display: flex;">
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1; margin-right: 10px;">
                                 <label for="pendidikan_ayah">Pendidikan Ayah</label>
-                                <select class="form-control col-sm-10" id="pendidikan_ayah" name="pendidikan_ayah"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Pendidikan</option>
-                                    <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                    <option value="Putus SD">Putus SD</option>
-                                    <option value="SD Sederajat">SD Sederajat</option>
-                                    <option value="SMP Sederajat">SMP Sederajat</option>
-                                    <option value="SMA Sederajat">SMA Sederajat</option>
-                                    <option value="D1">D1</option>
-                                    <option value="D2">D2</option>
-                                    <option value="D3">D3</option>
-                                    <option value="D4/S1">D4/S1</option>
-                                    <option value="S2">S2</option>
-                                    <option value="S3">S3</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="pendidikan_ayah"
+                                    name="pendidikan_ayah" style="width: 100%;">
                             </div>
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1;">
                                 <label for="pekerjaan_ayah">Pekerjaan Ayah</label>
-                                <select class="form-control col-sm-10" id="pekerjaan_ayah" name="pekerjaan_ayah"
-                                    style="width: 100%;" placeholder>
-                                    <option value="" disabled selected>Pilih Pekerjaan</option>
-                                    <option value="Tidak Bekerja">Tidak Bekerja</option>
-                                    <option value="Nelayan">Nelayan</option>
-                                    <option value="Petani">Petani</option>
-                                    <option value="Peternak">Peternak</option>
-                                    <option value="PNS/TNI/Polri">PNS/TNI/Polri</option>
-                                    <option value="Karyawan Swasta">Karyawan Swasta</option>
-                                    <option value="Pedagang Kecil">Pedagang Kecil</option>
-                                    <option value="Pedagang Besar">Pedagang Besar</option>
-                                    <option value="Wiraswasta">Wiraswasta</option>
-                                    <option value="Wirausaha">Wirausaha</option>
-                                    <option value="Buruh">Buruh</option>
-                                    <option value="Pensiunan">Pensiunan</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="pekerjaan_ayah"
+                                    name="pekerjaan_ayah" style="width: 100%;">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="penghasilan_ayah">Penghasilan Bulanan Ayah</label>
-                                <select class="form-control col-sm-10" id="penghasilan_ayah" name="penghasilan_ayah"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Gajih</option>
-                                    <option value="Kurang dari 500.000">Kurang dari 500.000</option>
-                                    <option value="500.000 - 1 Juta">500.000 - 1 Juta</option>
-                                    <option value="1 Juta - 2 Juta">1 Juta - 2 Juta</option>
-                                    <option value="2 Juta - 5 Juta">2 Juta - 5 Juta</option>
-                                    <option value="5 Juta - 20 Juta">5 Juta - 20 Juta</option>
-                                    <option value="Lebih dari 20 Juta">Lebih dari 20 Juta</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="penghasilan_ayah"
+                                    name="penghasilan_ayah" style="width: 100%;">
                             </div>
                         </div>
-
-
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="Nama_ibu">Nama Ibu</label>
@@ -392,66 +348,28 @@
                         <div class="form-row" style="display: flex;">
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1; margin-right: 10px;">
                                 <label for="pendidikan_ibu">Pendidikan Ibu</label>
-                                <select class="form-control col-sm-10" id="pendidikan_ibu" name="pendidikan_ibu"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Pendidikan</option>
-                                    <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                    <option value="Putus SD">Putus SD</option>
-                                    <option value="SD Sederajat">SD Sederajat</option>
-                                    <option value="SMP Sederajat">SMP Sederajat</option>
-                                    <option value="SMA Sederajat">SMA Sederajat</option>
-                                    <option value="D1">D1</option>
-                                    <option value="D2">D2</option>
-                                    <option value="D3">D3</option>
-                                    <option value="D4/S1">D4/S1</option>
-                                    <option value="S2">S2</option>
-                                    <option value="S3">S3</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="pendidikan_ibu"
+                                    name="pendidikan_ibu" style="width: 100%;">
                             </div>
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1;">
                                 <label for="pekerjaan_ibu">Pekerjaan Ibu</label>
-                                <select class="form-control col-sm-10" id="pekerjaan_ibu" name="pekerjaan_ibu"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Pekerjaan</option>
-                                    <option value="Tidak Bekerja">Tidak Bekerja</option>
-                                    <option value="Nelayan">Nelayan</option>
-                                    <option value="Petani">Petani</option>
-                                    <option value="Peternak">Peternak</option>
-                                    <option value="PNS/TNI/Polri">PNS/TNI/Polri</option>
-                                    <option value="Karyawan Swasta">Karyawan Swasta</option>
-                                    <option value="Pedagang Kecil">Pedagang Kecil</option>
-                                    <option value="Pedagang Besar">Pedagang Besar</option>
-                                    <option value="Wiraswasta">Wiraswasta</option>
-                                    <option value="Wirausaha">Wirausaha</option>
-                                    <option value="Buruh">Buruh</option>
-                                    <option value="Pensiunan">Pensiunan</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="pekerjaan_ibu"
+                                    name="pekerjaan_ibu" style="width: 100%;">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="penghasilan_ibu">Penghasilan Bulanan Ibu</label>
-                                <select class="form-control col-sm-10" id="penghasilan_ibu" name="penghasilan_ibu"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Gajih</option>
-                                    <option value="Kurang dari 500.000">Kurang dari 500.000</option>
-                                    <option value="500.000 - 1 Juta">500.000 - 1 Juta</option>
-                                    <option value="1 Juta - 2 Juta">1 Juta - 2 Juta</option>
-                                    <option value="2 Juta - 5 Juta">2 Juta - 5 Juta</option>
-                                    <option value="5 Juta - 20 Juta">5 Juta - 20 Juta</option>
-                                    <option value="Lebih dari 20 Juta">Lebih dari 20 Juta</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="penghasilan_ibu"
+                                    name="penghasilan_ibu" style="width: 100%;">
                             </div>
                         </div>
-
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="No_telp_ortu">Nomor Telepon Orang Tua</label>
                                 <input type="text" class="form-control col-sm-10" id="No_telp_ortu" name="No_telp_ortu"
-                                    style="width: 100%;" maxlength="13" pattern="[0-9]{13}"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                                    style="width: 100%;" required>
                             </div>
                         </div>
 
@@ -463,11 +381,10 @@
                 </div>
 
                 <div class="form-page" id="form3">
-                    <div class="container" style="text-align: center;">
+                    <div class="container" style="margin-left: -15px;">
                         <div class="col-12">
-                            <h2 style="text-align: center;">Data Wali</h2>
-                            <p style="text-align: center;">Halaman ini bisa dilewati jika tadi sudah mengisi data orang
-                                tua.</p>
+                            <h1>Data Wali</h1>
+                            <p>Isilah data-data berikut:</p>
                         </div>
                     </div>
                     <div class="inner">
@@ -481,64 +398,27 @@
                         <div class="form-row" style="display: flex;">
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1; margin-right: 10px;">
                                 <label for="pendidikan_wali">Pendidikan Wali</label>
-                                <select class="form-control col-sm-10" id="pendidikan_wali" name="pendidikan_wali"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Pendidikan</option>
-                                    <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                    <option value="Putus SD">Putus SD</option>
-                                    <option value="SD Sederajat">SD Sederajat</option>
-                                    <option value="SMP Sederajat">SMP Sederajat</option>
-                                    <option value="SMA Sederajat">SMA Sederajat</option>
-                                    <option value="D1">D1</option>
-                                    <option value="D2">D2</option>
-                                    <option value="D3">D3</option>
-                                    <option value="D4/S1">D4/S1</option>
-                                    <option value="S2">S2</option>
-                                    <option value="S3">S3</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="pendidikan_wali"
+                                    name="pendidikan_wali" style="width: 100%;">
                             </div>
                             <div class="form-holder form-holder-2 col-12 mb-3" style="flex: 1;">
-                                <label for="pekerjaan Wali">Pekerjaan Wali</label>
-                                <select class="form-control col-sm-10" id="pekerjaan Wali" name="pekerjaan Wali"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Pekerjaan</option>
-                                    <option value="Tidak Bekerja">Tidak Bekerja</option>
-                                    <option value="Nelayan">Nelayan</option>
-                                    <option value="Petani">Petani</option>
-                                    <option value="Peternak">Peternak</option>
-                                    <option value="PNS/TNI/Polri">PNS/TNI/Polri</option>
-                                    <option value="Karyawan Swasta">Karyawan Swasta</option>
-                                    <option value="Pedagang Kecil">Pedagang Kecil</option>
-                                    <option value="Pedagang Besar">Pedagang Besar</option>
-                                    <option value="Wiraswasta">Wiraswasta</option>
-                                    <option value="Wirausaha">Wirausaha</option>
-                                    <option value="Buruh">Buruh</option>
-                                    <option value="Pensiunan">Pensiunan</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
+                                <label for="pekerjaan_wali">Pekerjaan Wali</label>
+                                <input type="text" class="form-control col-sm-10" id="pekerjaan_wali"
+                                    name="pekerjaan_wali" style="width: 100%;">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="penghasilan_wali">Penghasilan Bulanan Wali</label>
-                                <select class="form-control col-sm-10" id="penghasilan_wali" name="penghasilan_wali"
-                                    style="width: 100%;">
-                                    <option value="" disabled selected>Pilih Gajih</option>
-                                    <option value="Kurang dari 500.000">Kurang dari 500.000</option>
-                                    <option value="500.000 - 1 Juta">500.000 - 1 Juta</option>
-                                    <option value="1 Juta - 2 Juta">1 Juta - 2 Juta</option>
-                                    <option value="2 Juta - 5 Juta">2 Juta - 5 Juta</option>
-                                    <option value="5 Juta - 20 Juta">5 Juta - 20 Juta</option>
-                                    <option value="Lebih dari 20 Juta">Lebih dari 20 Juta</option>
-                                </select>
+                                <input type="text" class="form-control col-sm-10" id="penghasilan_wali"
+                                    name="penghasilan_wali" style="width: 100%;">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="No_telp_wali">Nomor Telepon Wali</label>
                                 <input type="text" class="form-control col-sm-10" id="No_telp_wali" name="No_telp_wali"
-                                    style="width: 100%;" maxlength="13" pattern="[0-9]{13}"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                    style="width: 100%;">
                             </div>
                         </div>
                     </div>
@@ -549,10 +429,10 @@
                 </div>
                 <div class="form-page" id="form4">
                     <div class="inner">
-                        <div class="container" style="text-align: center;">
+                        <div class="container" style="margin-left: -15px;">
                             <div class="col-12">
-                                <h2 style="text-align: center;">Data Rinci</h2>
-                                <p style="text-align: center;">Isilah data-data berikut:</p>
+                                <h1>Data Rinci</h1>
+                                <p>Isilah data-data berikut:</p>
                             </div>
                         </div>
                         <div class="form-row" style="display: flex;">
@@ -616,72 +496,6 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const tanggalLahirInput = document.getElementById("Tanggal_Lahir");
-        const tanggalError = document.getElementById("tanggal-error");
-
-        function validateDate() {
-            // Parse the selected date and today's date
-            const selectedDate = new Date(tanggalLahirInput.value);
-            const today = new Date();
-
-            // Check if the selected date is greater than today
-            if (selectedDate > today) {
-                tanggalError.style.display = "block";
-            } else {
-                // Hide the error message if the date is valid
-                tanggalError.style.display = "none";
-            }
-        }
-
-        function showErrorMessage() {
-            const today = new Date();
-            const selectedDate = new Date(tanggalLahirInput.value);
-
-            // Check if the selected date is today
-            if (
-                selectedDate.getDate() === today.getDate() &&
-                selectedDate.getMonth() === today.getMonth() &&
-                selectedDate.getFullYear() === today.getFullYear()
-            ) {
-                tanggalError.style.display = "block";
-            }
-        }
-
-        tanggalLahirInput.addEventListener("input", function() {
-            validateDate();
-            showErrorMessage();
-        });
-    });
-    </script>
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const emailInput = document.getElementById("email");
-        const emailError = document.getElementById("email-error");
-
-        emailInput.addEventListener("input", function() {
-            if (!isValidEmail(emailInput.value)) {
-                emailError.style.display = "block";
-                emailError.textContent = "Email tidak valid.";
-            } else {
-                emailError.style.display = "none";
-                emailError.textContent = "";
-            }
-        });
-
-        function isValidEmail(email) {
-            // Implementasi validasi email sesuai kebutuhan Anda.
-            // Berikut adalah contoh validasi sederhana:
-            const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-            return emailRegex.test(email);
-        }
-    });
-    </script>
-
-
     <script>
     $(document).ready(function() {
         $("#provinsi").change(function() {
@@ -703,6 +517,40 @@
         });
     });
     </script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+    document.getElementById('nextButton1').addEventListener('click', function() {
+        var emailInput = document.getElementById('email');
+        var emailValue = emailInput.value;
+
+        if (!isValidEmail(emailValue)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Email tidak valid',
+                text: 'Mohon periksa kembali alamat email Anda.'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    emailInput.focus();
+                }
+            });
+        } else {
+            // Alamat email valid, pindah ke langkah berikutnya
+            // Anda dapat menambahkan kode untuk mengirim data ke server atau mengarahkan pengguna ke halaman berikutnya dalam formulir.
+            window.location.href =
+                'halaman_berikutnya.html'; // Gantilah 'halaman_berikutnya.html' sesuai dengan tujuan Anda.
+        }
+    });
+
+    function isValidEmail(email) {
+        // Validasi alamat email menggunakan ekspresi reguler
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+    }
+    </script> -->
+
+
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {

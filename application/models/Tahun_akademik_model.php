@@ -12,10 +12,6 @@ class Tahun_akademik_model extends CI_Model
         return $this->db->insert('tahun_akademik', $data);
     }
 
-    public function get_tahun_akademik() {
-        return $this->db->get('tahun_akademik');
-    }
-
     // Fungsi untuk mengambil semua tahun akademik
     public function get_all_tahun_akademik()
     {
@@ -68,6 +64,16 @@ public function get_tahun_akademik_aktif() {
     $this->db->where('status', 'Aktif');
     $query = $this->db->get('tahun_akademik'); // Sesuaikan dengan nama tabel tahun_akademik
     return $query->row();
+}
+public function getTahunAkademikById($tahun_akademik_id) {
+    $this->db->where('id_tahun', $tahun_akademik_id);
+    $query = $this->db->get('tahun_akademik');
+
+    if ($query->num_rows() == 1) {
+        return $query->row();
+    } else {
+        return null;
+    }
 }
 
 
