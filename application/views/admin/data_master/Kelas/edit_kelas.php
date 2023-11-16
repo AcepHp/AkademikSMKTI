@@ -34,18 +34,18 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-       <!-- Sidebar Guru -->
-    <?php $this->load->view('Bar/Sidebar_admin'); ?>
+        <!-- Sidebar Guru -->
+        <?php $this->load->view('Bar/Sidebar_admin'); ?>
 
-<!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column">
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-    <!-- Main Content -->
-    <div id="content">
+            <!-- Main Content -->
+            <div id="content">
 
-     <!-- TopBar Guru -->
-    <?php $this->load->view('Bar/Navbar_admin'); ?>
-    
+                <!-- TopBar Guru -->
+                <?php $this->load->view('Bar/Navbar_admin'); ?>
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -105,6 +105,8 @@
 
                 </div>
             </div>
+            <!-- Footer Admin -->
+            <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
 
 
@@ -116,11 +118,10 @@
     </div>
     <!-- End of Main Content -->
 
-     <!-- Footer Admin -->
-     <?php $this->load->view('Bar/Footer_admin'); ?>
 
-     <!-- include modal -->
-     <?php $this->load->view('Bar/Logout_modal'); ?>
+
+    <!-- include modal -->
+    <?php $this->load->view('Bar/Logout_modal'); ?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>

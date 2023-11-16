@@ -50,110 +50,151 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Data Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Edit Data Siswa</h1>
                     </div>
                     <div class="container mt-5">
-                        <?php echo form_open('datasiswa/update_data_siswa/'.$siswa_data->ID_Siswa); ?>
+                        <div class="row">
+                            <div class="col-lg-12 mb-4">
+                                <div class="box box-info">
+                                    <div class="box-body">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <?php echo form_open('datasiswa/update_data_siswa/'.$siswa_data->ID_Siswa); ?>
+                                                <h1 class="h6 text-gray-800" style="text-align: center;">Data Pribadi
+                                                    Siswa
+                                                </h1>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <label for="nis">NIS</label>
+                                                    <input type="text" class="form-control" name="nis"
+                                                        value="<?php echo $siswa_data->NIS; ?>" required>
+                                                </div>
 
-                        <div class="form-group">
-                            <label for="nis">NIS</label>
-                            <input type="text" class="form-control" name="nis" value="<?php echo $siswa_data->NIS; ?>"
-                                required>
+                                                <div class="form-group">
+                                                    <label for="nisn">NISN</label>
+                                                    <input type="text" class="form-control" name="nisn"
+                                                        value="<?php echo $siswa_data->NISN; ?>" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="nama_lengkap">Nama Lengkap</label>
+                                                    <input type="text" class="form-control" name="nama_lengkap"
+                                                        value="<?php echo $siswa_data->Nama_lengkap; ?>" required>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="tempat_lahir">Tempat Lahir</label>
+                                                    <input type="text" class="form-control" name="tempat_lahir"
+                                                        value="<?php echo $siswa_data->Tempat_lahir; ?>" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                                                    <input type="date" class="form-control" name="tanggal_lahir"
+                                                        value="<?php echo $siswa_data->Tanggal_Lahir; ?>" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                                    <input type="text" class="form-control" name="jenis_kelamin"
+                                                        value="<?php echo $siswa_data->Jenis_kelamin; ?>" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="alamat">Alamat</label>
+                                                    <textarea class="form-control" name="alamat"
+                                                        required><?php echo $siswa_data->Alamat; ?></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="tinggal_dengan">Tinggal Dengan</label>
+                                                    <input type="text" class="form-control" name="tinggal_dengan"
+                                                        value="<?php echo $siswa_data->Tinggal_dengan; ?>">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="email">Email</label>
+                                                    <input type="text" class="form-control" name="email"
+                                                        value="<?php echo $siswa_data->email; ?>">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="box box-info">
+                                            <div class="box-body">
+                                                <div class="card mb-4">
+                                                    <div class="card-body">
+
+                                                        <h1 class="h6 text-gray-800" style="text-align: center;">Data
+                                                            Lanjutan
+                                                            Siswa
+                                                        </h1>
+                                                        <hr>
+
+                                                        <div class="form-group">
+                                                            <label for="nama_ayah">Nama Ayah</label>
+                                                            <input type="text" class="form-control" name="nama_ayah"
+                                                                value="<?php echo $siswa_data->Nama_ayah; ?>">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="nama_ibu">Nama Ibu</label>
+                                                            <input type="text" class="form-control" name="nama_ibu"
+                                                                value="<?php echo $siswa_data->Nama_ibu; ?>">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="nama_wali">Nama Wali</label>
+                                                            <input type="text" class="form-control" name="nama_wali"
+                                                                value="<?php echo $siswa_data->Nama_wali; ?>">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="no_telp_ortu">No Telp Orang
+                                                                Tua</label>
+                                                            <input type="text" class="form-control" name="no_telp_ortu"
+                                                                value="<?php echo $siswa_data->No_telp_ortu; ?>">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="no_telp_wali">No Telp
+                                                                Wali</label>
+                                                            <input type="text" class="form-control" name="no_telp_wali"
+                                                                value="<?php echo $siswa_data->No_telp_wali; ?>">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="new_password">Password
+                                                                Baru</label>
+                                                            <input type="password" class="form-control"
+                                                                name="new_password"
+                                                                placeholder="Masukkan password baru">
+                                                        </div>
+
+                                                        <div class="text-center">
+                                                            <input type="submit" name="submit" value="Simpan"
+                                                                class="btn btn-primary"
+                                                                style="width: 100%; max-width: 300px;">
+                                                        </div>
+                                                        <?php echo form_close(); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="nisn">NISN</label>
-                            <input type="text" class="form-control" name="nisn" value="<?php echo $siswa_data->NISN; ?>"
-                                required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nama_lengkap">Nama Lengkap</label>
-                            <input type="text" class="form-control" name="nama_lengkap"
-                                value="<?php echo $siswa_data->Nama_lengkap; ?>" required>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="tempat_lahir">Tempat Lahir</label>
-                            <input type="text" class="form-control" name="tempat_lahir"
-                                value="<?php echo $siswa_data->Tempat_lahir; ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tanggal_lahir"
-                                value="<?php echo $siswa_data->Tanggal_Lahir; ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="jenis_kelamin">Jenis Kelamin</label>
-                            <input type="text" class="form-control" name="jenis_kelamin"
-                                value="<?php echo $siswa_data->Jenis_kelamin; ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="alamat">Alamat</label>
-                            <textarea class="form-control" name="alamat"
-                                required><?php echo $siswa_data->Alamat; ?></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tinggal_dengan">Tinggal Dengan</label>
-                            <input type="text" class="form-control" name="tinggal_dengan"
-                                value="<?php echo $siswa_data->Tinggal_dengan; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nama_ayah">Nama Ayah</label>
-                            <input type="text" class="form-control" name="nama_ayah"
-                                value="<?php echo $siswa_data->Nama_ayah; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nama_ibu">Nama Ibu</label>
-                            <input type="text" class="form-control" name="nama_ibu"
-                                value="<?php echo $siswa_data->Nama_ibu; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nama_wali">Nama Wali</label>
-                            <input type="text" class="form-control" name="nama_wali"
-                                value="<?php echo $siswa_data->Nama_wali; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="no_telp_ortu">No Telp Orang Tua</label>
-                            <input type="text" class="form-control" name="no_telp_ortu"
-                                value="<?php echo $siswa_data->No_telp_ortu; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="no_telp_wali">No Telp Wali</label>
-                            <input type="text" class="form-control" name="no_telp_wali"
-                                value="<?php echo $siswa_data->No_telp_wali; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email"
-                                value="<?php echo $siswa_data->email; ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new_password">Password Baru</label>
-                            <input type="password" class="form-control" name="new_password"
-                                placeholder="Masukkan password baru">
-                        </div>
-
-                        <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
-                        <br></br>
                     </div>
-
                 </div>
+
 
                 <!-- Footer Admin -->
                 <?php $this->load->view('Bar/Footer_admin'); ?>
@@ -164,10 +205,12 @@
 
                 <!-- Bootstrap core JavaScript-->
                 <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
-                <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js">
+                </script>
 
                 <!-- Core plugin JavaScript-->
-                <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
+                <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js">
+                </script>
 
                 <!-- Custom scripts for all pages-->
                 <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
@@ -180,8 +223,10 @@
                 <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
                 <!-- Page level plugins -->
-                <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
-                <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+                <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js">
+                </script>
+                <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js">
+                </script>
 
                 <!-- Page level custom scripts -->
                 <script src="<?php echo base_url()?>assets/js/demo/datatables-demo.js"></script>

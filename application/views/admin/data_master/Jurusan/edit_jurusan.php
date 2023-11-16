@@ -82,6 +82,8 @@
 
                 </div>
             </div>
+            <!-- Footer Admin -->
+            <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
 
 
@@ -93,8 +95,7 @@
     </div>
     <!-- End of Main Content -->
 
-    <!-- Footer Admin -->
-    <?php $this->load->view('Bar/Footer_admin'); ?>
+
 
     <!-- include modal -->
     <?php $this->load->view('Bar/Logout_modal'); ?>

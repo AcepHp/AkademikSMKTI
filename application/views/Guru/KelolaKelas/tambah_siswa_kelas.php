@@ -36,7 +36,7 @@
     <div id="wrapper">
 
         <!-- Sidebar Guru -->
-        <?php $this->load->view('Bar/Sidebar_guru'); ?>
+        <?php $this->load->view('Bar/Sidebar_admin'); ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -45,7 +45,7 @@
             <div id="content">
 
                 <!-- TopBar Guru -->
-                <?php $this->load->view('Bar/Navbar_guru'); ?>
+                <?php $this->load->view('Bar/Navbar_admin'); ?>
 
                 <!-- Display additional information -->
                 <div class="container-fluid mt-3">

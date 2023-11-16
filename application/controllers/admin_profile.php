@@ -8,7 +8,7 @@ class admin_profile extends CI_Controller {
     }
 
     public function index() {
-        if ($this->session->userdata('role') !== 'Admin') {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
             redirect('auth');
         }
         

@@ -74,7 +74,13 @@
                             <h6 class="m-0 font-weight-bold text-primary">Table Data Siswa</h6>
                         </div>
                         <div class="card-body">
+                            <?php if ($this->session->flashdata('success_message')): ?>
+                            <div class="alert alert-success">
+                                <?php echo $this->session->flashdata('success_message'); ?>
+                            </div>
+                            <?php endif; ?>
                             <div class="table-responsive">
+
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
@@ -94,7 +100,8 @@
                                             </td>
                                             <td><?php echo isset($row->Nama_lengkap) ? htmlspecialchars($row->Nama_lengkap) : ''; ?>
                                             </td>
-                                            <td><?php echo isset($row->Jenis_kelamin) ? htmlspecialchars($row->Jenis_kelamin):'';?></td>
+                                            <td><?php echo isset($row->Jenis_kelamin) ? htmlspecialchars($row->Jenis_kelamin):'';?>
+                                            </td>
                                             <td>
                                                 <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                     data-toggle="modal"

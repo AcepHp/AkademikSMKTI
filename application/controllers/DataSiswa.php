@@ -10,7 +10,7 @@ class DataSiswa extends CI_Controller {
     }
 
     public function index() {
-        if ($this->session->userdata('role') !== 'Admin') {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
             redirect('auth');
         }
         $data['siswa'] = $this->Datasiswa_model->get_siswa_data();
@@ -18,7 +18,7 @@ class DataSiswa extends CI_Controller {
     }
 
     public function tambah_siswa() {
-        if ($this->session->userdata('role') !== 'Admin') {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
             redirect('auth');
         }
         $data['siswa'] = $this->Datasiswa_model->get_siswa_all_nisn();
@@ -26,7 +26,7 @@ class DataSiswa extends CI_Controller {
     }
 
     public function proses_tambah_siswa() {
-        if ($this->session->userdata('role') !== 'Admin') {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
             redirect('auth');
         }
     
@@ -36,25 +36,39 @@ class DataSiswa extends CI_Controller {
         $nisn = $this->input->post('nisn');
         $nis = $this->input->post('nis');
     
-        // Check if NISN is unique
         $is_nisn_unique = !$this->Datasiswa_model->is_nisn_exists($nisn);
-    
-        // Check if NIS is unique
         $is_nis_unique = !$this->Datasiswa_model->is_nis_exists($nis);
     
         if (!$is_nisn_unique) {
-            $this->form_validation->set_message('is_unique', 'NISN sudah digunakan.');
+            $this->form_validation->set_message('is_unique', 'NISN ' . $nisn . ' sudah digunakan.');
         }
     
         if (!$is_nis_unique) {
-            $this->form_validation->set_message('is_unique', 'NIS sudah digunakan.');
+            $this->form_validation->set_message('is_unique', 'NIS ' . $nis . ' sudah digunakan.');
         }
     
-        if ($this->form_validation->run() == FALSE || !$is_nisn_unique || !$is_nis_unique) {
+        if ($this->form_validation->run() == FALSE) {
             // Load the view with the form data and error messages
             $data['nisn_exists'] = $is_nisn_unique;
             $data['nis_exists'] = $is_nis_unique;
-            redirect('datasiswa/tambah_siswa');
+            $this->session->set_flashdata('error_message', 'Error: Data siswa gagal ditambahkan.');
+            $this->load->view('admin/KelolaSiswa/tambah_data', $data);
+        } elseif (!$is_nisn_unique && !$is_nis_unique) {
+            // Load the view with the form data and error messages for both NISN and NIS
+            $data['nisn_exists'] = $nisn;
+            $data['nis_exists'] = $nis;
+            $this->session->set_flashdata('error_message', 'Error: Data siswa gagal ditambahkan.');
+            $this->load->view('admin/KelolaSiswa/tambah_data', $data);
+        } elseif (!$is_nisn_unique) {
+            // Load the view with the form data and error message for NISN
+            $data['nisn_exists'] = $nisn;
+            $this->session->set_flashdata('error_message', 'Error: Data siswa gagal ditambahkan.');
+            $this->load->view('admin/KelolaSiswa/tambah_data', $data);
+        } elseif (!$is_nis_unique) {
+            // Load the view with the form data and error message for NIS
+            $data['nis_exists'] = $nis;
+            $this->session->set_flashdata('error_message', 'Error: Data siswa gagal ditambahkan.');
+            $this->load->view('admin/KelolaSiswa/tambah_data', $data);
         } else {
             $data_siswa = array(
                 'NIS' => $this->input->post('nis'),
@@ -89,14 +103,14 @@ class DataSiswa extends CI_Controller {
             );
     
             $this->Datasiswa_model->create_user_account($user_data);
-    
+            
             redirect('datasiswa/index');
         }
     }
     
 
     public function edit_siswa($id) {
-        if ($this->session->userdata('role') !== 'Admin') {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
             redirect('auth');
         }
     
@@ -110,9 +124,10 @@ class DataSiswa extends CI_Controller {
     }
     
     public function update_data_siswa($id) {
-        if ($this->session->userdata('role') !== 'Admin') {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
             redirect('auth');
         }
+        
 
         if ($this->input->post('submit')) {
             $this->form_validation->set_rules('tanggal_lahir', 'Tanggal Lahir', 'required');
@@ -163,7 +178,7 @@ class DataSiswa extends CI_Controller {
     
     
     public function hapus_siswa($id) {
-        if ($this->session->userdata('role') !== 'Admin') {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
             redirect('auth');
         }
     

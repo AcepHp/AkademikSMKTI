@@ -51,23 +51,23 @@
 
 
                 <div class="container mt-5">
-                    <?php if (isset($nisn_exists) && !$nisn_exists) : ?>
-                    <div class="alert alert-danger" role="alert">
-                        NISN sudah digunakan.
+                    <!-- Periksa apakah NISN dan NIS sudah ada dan tampilkan pesan kesalahan -->
+                    <?php if ((isset($nisn_exists) && $nisn_exists) && (isset($nis_exists) && $nis_exists)): ?>
+                    <div class="alert alert-danger">
+                        NISN dan NIS sudah digunakan. Silakan gunakan NISN dan NIS yang berbeda.
+                    </div>
+                    <?php elseif ((isset($nisn_exists) && $nisn_exists) && (!isset($nis_exists) || !$nis_exists)): ?>
+                    <!-- Periksa apakah NISN sudah ada dan tampilkan pesan kesalahan -->
+                    <div class="alert alert-danger">
+                        NISN sudah digunakan. Silakan gunakan NISN yang berbeda.
+                    </div>
+                    <?php elseif ((!isset($nisn_exists) || !$nisn_exists) && (isset($nis_exists) && $nis_exists)): ?>
+                    <!-- Periksa apakah NIS sudah ada dan tampilkan pesan kesalahan -->
+                    <div class="alert alert-danger">
+                        NIS sudah digunakan. Silakan gunakan NIS yang berbeda.
                     </div>
                     <?php endif; ?>
 
-                    <?php if (isset($nis_exists) && !$nis_exists) : ?>
-                    <div class="alert alert-danger" role="alert">
-                        NIS sudah digunakan.
-                    </div>
-                    <?php endif; ?>
-
-                    <?php if(validation_errors()) : ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo validation_errors(); ?>
-                    </div>
-                    <?php endif; ?>
 
                     <div class="row">
                         <div class="col-lg-12 mb-4">

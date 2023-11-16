@@ -59,7 +59,7 @@ class admin extends CI_Controller {
                 'password' => md5($this->input->post('password')),
                 'role' => 'Guru',
                 'NIP' => $this->input->post('nip'),
-                'Foto'=> null,
+                'file_foto'=> null,
                 'aktif'=> $this->input->post('aktif')
             );
 
