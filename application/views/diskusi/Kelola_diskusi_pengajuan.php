@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Admin</title>
+    <title>Kelola Diskusi</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -85,7 +85,7 @@
                                                 <td><?php echo $row['id_topik']; ?></td>
                                                 <td><?php echo $row['tanggal']; ?></td>
                                                 <td><?php echo $row['nama']; ?></td>
-                                                <td><?php echo ($row['enum'] == 'tunggu') ? 'Pending' : ''; ?></td>
+                                                <td><?php echo $row['enum']; ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
@@ -163,7 +163,7 @@
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><?php echo ($row['enum'] == 'tunggu') ? 'Pending' : ''; ?></td>
+                                        <td><?php echo $row['enum']; ?></td>
                                     </tr>
                                     <!-- ... (other fields) ... -->
                                 </tbody>

@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <?php echo form_open_multipart('K_Konten/proseseditacara/' . $acara->id_acara); ?>
+                        <?php echo form_open_multipart('Kelola_Dashboard/Acara/proseseditacara/' . $acara->id_acara); ?>
                         <div class="form-group">
                             <label for="judul">Judul:</label>
                             <input type="text" class="form-control" name="judul"
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tanggal">Tanggal Acara:</label>   
-                            <input type="text" class="form-control" name="tanggal"
+                            <input type="date" class="form-control" name="tanggal"
                                 value="<?php echo $acara->tanggal; ?>">
                         </div>
                         <div class="form-group">

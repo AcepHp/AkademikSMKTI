@@ -1,7 +1,4 @@
 <?php
-
-require_once(APPPATH.'libraries/tcpdf/tcpdf.php');
-
 class Nilai extends CI_Controller {
     public function __construct() {
         parent::__construct();
@@ -15,8 +12,7 @@ class Nilai extends CI_Controller {
         $this->load->model('Tahun_akademik_model'); 
     }
 
-    public function index()
-    {
+    public function index() {
         // Mendapatkan data siswa berdasarkan filter jika ada
         $kode_jurusan = $this->input->post('kode_jurusan'); // Ganti 'kode_jurusan' sesuai dengan nama input pada form
         $kode_tingkatan = $this->input->post('kode_tingkatan'); // Ganti 'kode_tingkatan' sesuai dengan nama input pada form
@@ -25,69 +21,61 @@ class Nilai extends CI_Controller {
         $nama_kelas = $this->KelolaKelas_model->get_nama_kelas_by_id($id_kelas);
 
         $data['tahun'] = $this->KelolaKelas_model->get_all_tahun_akademik();
-        $tahun_akademik_aktif_id = $this->KelolaKelas_model->get_tahun_akademik_aktif_id();
-
+    
         if (!empty($kode_jurusan) && !empty($kode_tingkatan) && !empty($id_kelas) && !empty($id_tahun)) {
             $data['siswa'] = $this->KelolaKelas_model->get_siswa_by_jurusan_kelas_tahun($kode_jurusan, $kode_tingkatan, $id_kelas, $id_tahun);
         } else {
             $data['siswa'] = array(); // Jika tidak ada filter, set array kosong
         }
-
+    
         $data['id_kelas'] = $id_kelas; // Menambahkan id_kelas ke dalam data
         $data['kode_jurusan'] = $kode_jurusan; // Pass kode_jurusan to the view
         $data['id_tahun'] = $id_tahun; // Tambahkan id_tahun ke dalam data
         $data['nama_kelas'] = $nama_kelas;
-        $data['tahun_akademik_aktif_id'] = $tahun_akademik_aktif_id;
-
+    
         // Anda mungkin masih perlu mendapatkan data jurusan dan tingkatan dari model jika diperlukan
         $data['jurusan'] = $this->Jurusan_model->get_all_jurusan();
         $data['tingkatan'] = $this->Tingkatan_model->get_all_tingkatan();
+    
+        $this->load->view('Guru/Nilai/filter_nilai', $data);
+    }   
 
-        $this->load->view('guru/nilai/filter_nilai', $data);
-    }
-
-
-
-    public function cari_data()
-    {
-        $kode_jurusan = $this->input->get('kode_jurusan');
-        $kode_tingkatan = $this->input->get('kode_tingkatan');
-        $id_kelas = $this->input->get('id_kelas');
-        $id_tahun = $this->input->get('id_tahun');
+    public function filter_data() {
+        $kode_jurusan = $this->input->post('kode_jurusan');
+        $kode_tingkatan = $this->input->post('kode_tingkatan');
+        $id_kelas = $this->input->post('id_kelas');
+        $id_tahun = $this->input->post('id_tahun');
         $nama_kelas = $this->KelolaKelas_model->get_nama_kelas_by_id($id_kelas);
-
+    
         // Mendapatkan ID tahun akademik aktif
         $data['tahun'] = $this->KelolaKelas_model->get_all_tahun_akademik();
         $tahun_akademik_aktif_id = $this->KelolaKelas_model->get_tahun_akademik_aktif_id();
-
+    
         if (!empty($tahun_akademik_aktif_id)) {
             // Menggunakan kode_jurusan, kode_tingkatan, dan id_kelas sebagai filter
             $data['siswa'] = $this->KelolaKelas_model->get_siswa_by_jurusan_kelas_tahun($kode_jurusan, $kode_tingkatan, $id_kelas, $tahun_akademik_aktif_id);
         } else {
             $data['siswa'] = array();
         }
-
+    
         // Mengirim data filter jurusan, tingkatan, dan kelas ke view
         $data['jurusan'] = $this->Jurusan_model->get_all_jurusan();
         $data['tingkatan'] = $this->Tingkatan_model->get_all_tingkatan();
         $data['selected_jurusan'] = $kode_jurusan;
         $data['selected_tingkatan'] = $kode_tingkatan;
-        $data['tahun_akademik_aktif_id'] = $tahun_akademik_aktif_id;
-
-
+    
         // Menambahkan id_kelas, kode_jurusan, id_tahun, dan kode_tingkatan ke dalam data
         $data['id_kelas'] = $id_kelas;
         $data['kode_jurusan'] = $kode_jurusan;
         $data['id_tahun'] = $tahun_akademik_aktif_id;
         $data['kode_tingkatan'] = $kode_tingkatan;
         $data['nama_kelas'] = $nama_kelas;
-
+    
         // Menyaring kelas berdasarkan jurusan dan tingkatan yang dipilih
         $data['kelas'] = $this->KelolaKelas_model->get_kelas_by_jurusan_tingkatan($kode_jurusan, $kode_tingkatan);
-
-        $this->load->view('Guru/nilai/filter_nilai', $data);
+    
+        $this->load->view('Guru/Nilai/filter_nilai', $data);
     }
-
     public function get_kelas_by_jurusan() {
         $kode_jurusan = $this->input->post('kode_jurusan');
         $kelas = $this->Kelas_model->get_kelas_by_jurusan($kode_jurusan);
@@ -152,9 +140,7 @@ class Nilai extends CI_Controller {
     
             if ($data['siswa']) {
                 // Mendapatkan semua data mata pelajaran yang tersedia berdasarkan kode jurusan dan kode_tingkatan siswa
-                $data['semesteraktif'] = $this->Nilai_model->get_active_semester();
-                $data['mata_pelajaran'] = $this->Nilai_model->get_mata_pelajaran_by_jurusan_kelas_tingkatan($data['siswa']->NISN ,$kode_jurusan, $data['siswa']->id_kelas, $kode_tingkatan, $data['semesteraktif']->id_semester);
-                $data['validasi'] = $this->Nilai_model->validasi_mata_pelajaran_admin();
+                $data['mata_pelajaran'] = $this->Nilai_model->get_mata_pelajaran_by_jurusan_kelas($kode_jurusan, $data['siswa']->id_kelas);
     
                 // Mendapatkan tahun akademik aktif
                 $this->load->model('Tahun_Akademik_model');
@@ -196,14 +182,10 @@ class Nilai extends CI_Controller {
         $tugas = $this->input->post('tugas');
         $uts = $this->input->post('uts');
         $uas = $this->input->post('uas');
-        $persentase_kehadiran = $this->input->post('persentase_kehadiran');
-        $persentase_tugas = $this->input->post('persentase_tugas');
-        $persentase_uts = $this->input->post('persentase_uts');
-        $persentase_uas = $this->input->post('persentase_uas');
         $nilai_akhir = $this->input->post('nilai_akhir');
     
         // Memanggil model untuk menyimpan data
-        $this->Nilai_model->simpan_tambah_nilai($nisn, $id_tahun, $id_semester, $id_mapel, $kehadiran, $tugas, $uts, $uas, $nilai_akhir, $persentase_kehadiran, $persentase_tugas, $persentase_uts, $persentase_uas);
+        $this->Nilai_model->simpan_tambah_nilai($nisn, $id_tahun, $id_semester, $id_mapel, $kehadiran, $tugas, $uts, $uas, $nilai_akhir);
     
         // Redirect ke halaman yang sesuai dengan NISN
         redirect('nilai/tampil_nilai/' . $nisn); // Pastikan NISN ada di sini
@@ -250,14 +232,10 @@ class Nilai extends CI_Controller {
         $tugas = $this->input->post('tugas');
         $uts = $this->input->post('uts');
         $uas = $this->input->post('uas');
-        $persentase_kehadiran = $this->input->post('persentase_kehadiran');
-        $persentase_tugas = $this->input->post('persentase_tugas');
-        $persentase_uts = $this->input->post('persentase_uts');
-        $persentase_uas = $this->input->post('persentase_uas');
         $nilai_akhir = $this->input->post('nilai_akhir');
     
         // Memanggil model untuk menyimpan data
-        $this->Nilai_model->edit_nilai($id_nilai, $id_mapel, $id_tahun, $id_semester, $kehadiran, $tugas, $uts, $uas, $nilai_akhir, $persentase_kehadiran, $persentase_tugas, $persentase_uts, $persentase_uas);
+        $this->Nilai_model->edit_nilai($id_nilai, $id_mapel, $id_tahun, $id_semester, $kehadiran, $tugas, $uts, $uas, $nilai_akhir);
     
         // Redirect ke halaman yang sesuai dengan NISN
         $nisn = $this->input->post('nisn');
@@ -337,14 +315,11 @@ class Nilai extends CI_Controller {
         $tugas = $this->input->post('tugas');
         $uts = $this->input->post('uts');
         $uas = $this->input->post('uas');
-        $persentase_kehadiran = $this->input->post('persentase_kehadiran');
-        $persentase_tugas = $this->input->post('persentase_tugas');
-        $persentase_uts = $this->input->post('persentase_uts');
-        $persentase_uas = $this->input->post('persentase_uas');
         $nilai_akhir = $this->input->post('nilai_akhir');
     
         // Memanggil model untuk menyimpan data
-        $this->Nilai_model->simpan_data_nilai($nisn, $id_tahun, $id_semester, $id_mapel, $kehadiran, $tugas, $uts, $uas, $nilai_akhir, $persentase_kehadiran, $persentase_tugas, $persentase_uts, $persentase_uas);
+        $this->Nilai_model->simpan_data_nilai($nisn, $id_tahun, $id_semester, $id_mapel, $kehadiran, $tugas, $uts, $uas, $nilai_akhir);
+    
         // Redirect ke halaman yang sesuai tujuan
         redirect('nilai/penilaian_siswa/' . $id_kelas . '/' . $id_tahun. '/' . $id_mapel); // Pastikan NISN ada di sini
     }
@@ -361,14 +336,10 @@ class Nilai extends CI_Controller {
         $tugas = $this->input->post('tugas');
         $uts = $this->input->post('uts');
         $uas = $this->input->post('uas');
-        $persentase_kehadiran = $this->input->post('persentase_kehadiran');
-        $persentase_tugas = $this->input->post('persentase_tugas');
-        $persentase_uts = $this->input->post('persentase_uts');
-        $persentase_uas = $this->input->post('persentase_uas');
         $nilai_akhir = $this->input->post('nilai_akhir');
     
         // Memanggil model untuk mengedit data
-        $this->Nilai_model->edit_nilai($id_nilai, $id_mapel, $id_tahun, $id_semester, $kehadiran, $tugas, $uts, $uas, $nilai_akhir, $persentase_kehadiran, $persentase_tugas, $persentase_uts, $persentase_uas);
+        $this->Nilai_model->edit_nilai($id_nilai, $id_mapel, $id_tahun, $id_semester, $kehadiran, $tugas, $uts, $uas, $nilai_akhir);
 
         // Redirect ke halaman yang sesuai tujuan
         redirect('nilai/penilaian_siswa/' . $id_kelas . '/' . $id_tahun . '/' . $id_mapel); // Pastikan NISN ada di sini
@@ -387,9 +358,7 @@ class Nilai extends CI_Controller {
         
         $data['tahun'] = $tahun;
         $data['semester'] = $semester;
-        $data['nilai'] = $this->Nilai_model->get_nilai_datasiswa_nilai($this->session->userdata('nisn'));
-        $data['siswa'] = $this->Nilai_model->get_nilai_datasiswa_siswa($this->session->userdata('nisn'));
-       // $data['siswa'] = $this->Nilai_model->get_nilai_datasiswa($this->session->userdata('nisn'));
+        $data['siswa'] = $this->Nilai_model->get_nilai_datasiswa($this->session->userdata('nisn'));
         $data['tingkatan'] = $this->Nilai_model->get_tingkatan();
         
         $this->load->view('siswa/nilai/tampil_nilai', $data);
@@ -406,13 +375,8 @@ class Nilai extends CI_Controller {
         // Ambil nilai id_semester dari hasil query semester yang didapat
         $id_semester = $semester[0]->id_semester; 
 
-         // Initialize $kode_tingkatan to handle the case where $tingkat is null
-        $kode_tingkatan = null;
-
-        // Check if $tingkat is not null before accessing its properties
-        if ($tingkat !== null) {
-            $kode_tingkatan = $tingkat->kode_tingkatan;
-        }
+        // Ambil nilai id_tingkatan dari hasil query semester yang didapat
+        $kode_tingkatan = $tingkat->kode_tingkatan; 
         
         $data['tahun'] = $tahun;
         $data['semester'] = $semester;
@@ -423,66 +387,6 @@ class Nilai extends CI_Controller {
 
         $this->load->view('siswa/nilai/tampil_nilai_semester',$data);
     }
-
-    public function cetak_nilai($nisn) {
-    // Mendapatkan data nilai siswa berdasarkan tahun akademik dan semester aktif
-    $tahun_akademik_id = $this->KelolaKelas_model->get_tahun_akademik_aktif_id();
-    $semester_aktif = $this->KelolaKelas_model->get_semester_aktif();
-    
-    // Pastikan tahun akademik dan semester aktif sudah ditemukan
-    if (!empty($tahun_akademik_id) && !empty($semester_aktif)) {
-        // Mendapatkan nama peserta didik berdasarkan NISN
-        $this->load->model('Nilai_model');
-        $nama_peserta_didik = $this->Nilai_model->get_nama_lengkap_by_nisn($nisn);
-        $this->load->model('Nilai_model');
-        $kelas_info = $this->Nilai_model->getKelasInfoByNISN($nisn);
-
-        $tahun_akademik = $this->Tahun_akademik_model->getTahunAkademikById($tahun_akademik_id);
-    
-        if ($nama_peserta_didik) {
-            // Mendapatkan data nilai siswa dari model berdasarkan tahun akademik dan semester aktif
-            $data['nilai_siswa'] = $this->Nilai_model->get_nilai_by_nisn_tahun_semester($nisn, $tahun_akademik_id, $semester_aktif->id_semester);
-    
-            // Tambahkan tahun akademik aktif dan semester aktif ke data
-            $data['tahun_akademik_id'] = $tahun_akademik_id;
-            $data['semester_aktif'] = $semester_aktif;
-            $data['nisn'] = $nisn;
-            $data['kelas_info'] = $kelas_info;
-            $data['tahun_akademik'] = $tahun_akademik;
-            
-            // Tambahkan nama peserta didik ke data
-            $data['nama_peserta_didik'] = $nama_peserta_didik;
-
-            // Mendapatkan capaian kompetensi untuk setiap mata pelajaran
-            foreach ($data['nilai_siswa'] as $nilai) {
-                $nilai->capaian = $this->Nilai_model->getCapaianKompetensiById($nilai->id_mapel);
-            }
-
-            // Membuat objek PDF
-            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-            $pdf->SetMargins(15, 15, 15, true);
-            // Menambahkan halaman pertama
-            $pdf->AddPage();
-
-            // Menambahkan isi HTML ke halaman PDF
-            $html = $this->load->view('guru/nilai/cetak_nilai', $data, true);
-            $pdf->writeHTML($html, true, false, true, false, '');
-
-            // Output PDF ke browser
-            $pdf->Output('Nilai_Siswa.pdf', 'I');
-        } else {
-            // Handle jika nama peserta didik tidak ditemukan
-            echo "Nama peserta didik tidak ditemukan";
-        }
-    } else {
-        // Handle jika tahun akademik atau semester aktif tidak ditemukan
-        echo "Tahun akademik atau semester aktif tidak ditemukan";
-    }
-}
-
-    
-    
-    
 
     
 

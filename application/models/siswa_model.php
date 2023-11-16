@@ -22,16 +22,14 @@ class siswa_model extends CI_Model {
         $this->db->update('users', array('password' => $new_password));
     }
 
-    public function update_file_photo($nisn, $file_foto) {
-        $this->db->where('NISN', $nisn);
-        $this->db->set('file_foto', $file_foto);
-        $this->db->update('users');
-    }
 
-    public function update_siswa_by_nisn($nisn, $siswa_data) {
-        // Panggil model untuk melakukan pembaruan data siswa
+    public function update_photo($nisn, $photoData) {
         $this->db->where('NISN', $nisn);
-        $this->db->update('siswa', $siswa_data);
+        $this->db->set('Foto', $photoData);
+        if (!$this->db->update('users')) {
+            // Pembaruan gagal, cetak pesan kesalahan
+            echo $this->db->error(); 
+        }
     }
     
 

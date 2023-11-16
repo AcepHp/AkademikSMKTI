@@ -48,23 +48,20 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        
-                    <?php echo form_open_multipart('PPDB/proseseditemail/' . $email->id_email); ?>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" name="email"
-                                    value="<?php echo $email->email; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="pass_app">Password:</label>
-                                <input type="text" class="form-control" name="pass_app"
-                                    value="<?php echo $email->pass_app; ?>">
-                            </div>
+                        <?php echo form_open_multipart('PPDB/proseseditemail/' . $email->id_email); ?>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" name="email" value="<?php echo $email->email; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="pass_app">Password Apps:</label>
+                            <input type="text" class="form-control" name="pass_app"
+                                value="<?php echo $email->pass_app; ?>">
+                        </div>
 
-                            <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                            <?php echo form_close(); ?>
+                        <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
+                        <?php echo form_close(); ?>
                     </div>
-
                 </div>
             </div>
             <!-- Footer Admin -->

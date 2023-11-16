@@ -78,22 +78,22 @@
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
-                                            <th style="text-align: center; vertical-align: middle;">NISN</th>
-                                            <th style="text-align: center; vertical-align: middle;">Nama Lengkap</th>
-                                            <th style="text-align: center; vertical-align: middle;">Jenis Kelamin</th>
-                                            <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
+                                            <th>No</th>
+                                            <th>NISN</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $no = 1;?>
                                         <?php foreach ($siswa as $row): ?>
                                         <tr>
-                                            <td style="width:5%; text-align: center; vertical-align: middle;"><?php echo $no++;?></td>
+                                            <td><?php echo $no++;?></td>
                                             <td><?php echo isset($row->NISN) ? htmlspecialchars($row->NISN) : ''; ?></td>
                                             <td><?php echo isset($row->Nama_lengkap) ? htmlspecialchars($row->Nama_lengkap) : ''; ?></td>
                                             <td><?php echo isset($row->Jenis_kelamin) ? htmlspecialchars($row->Jenis_kelamin) : ''; ?></td>
-                                            <td style="width:10%; text-align: center; vertical-align: middle;">
+                                            <td>
                                                 <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                     data-toggle="modal"
                                                     data-target="#detailModal<?php echo $row->ID_siswa; ?>">
@@ -152,6 +152,11 @@
                                             <tr>
                                                 <th>Nama Lengkap</th>
                                                 <td><?php echo $row->Nama_lengkap; ?></td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Status</th>
+                                                <td><?php echo $row->Status; ?></td>
                                             </tr>
                                             <tr>
                                                 <th>Tempat Lahir</th>

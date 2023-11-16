@@ -61,13 +61,6 @@
                             <input type="text" class="form-control" name="nama_mapel"
                                 value="<?php echo $mapel->nama_mapel; ?>" required>
                         </div>
-
-                        <div class="form-group">
-                            <label for="capaian">Capaian :</label>
-                            <textarea class="form-control" id="capaian" name="capaian"
-                                required><?php echo $mapel->capaian; ?></textarea>
-                        </div>
-
                         <div class="form-group">
                             <label for="kode_jurusan">Jurusan</label>
                             <select class="form-control" name="kode_jurusan" required>
@@ -84,21 +77,13 @@
                         <div class="form-group">
                             <label for="kode_tingkatan">Tingkatan</label>
                             <select class="form-control" name="kode_tingkatan" id="kode_tingkatan" required>
-                                <?php foreach ($tingkatan as $tingkatan_item) : ?>
+                                <?php foreach ($tingkatan_list as $tingkatan_item) : ?>
                                 <option value="<?php echo $tingkatan_item->kode_tingkatan; ?>"
                                     <?php echo $mapel->kode_tingkatan == $tingkatan_item->kode_tingkatan ? 'selected' : ''; ?>>
                                     <?php echo $tingkatan_item->nama_tingkatan; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
-
-
-
-
-
-
-
                         <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
                         <?php echo form_close(); ?>
                     </div>
@@ -136,68 +121,6 @@
 
             <!-- Page level custom scripts -->
             <script src="<?php echo base_url()?>assets/js/demo/datatables-demo.js"></script>
-            <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
-                // Menyimpan referensi ke dropdown Kelas
-                var dropdownTingkatan = document.querySelector('select[name="kode_tingkatan"]');
-                var kodeJurusanDropdown = document.querySelector('select[name="kode_jurusan"]');
-
-                // Pilih nilai Jurusan yang sudah ada
-                var kode_jurusan_selected = kodeJurusanDropdown.value;
-
-                // Jika Jurusan sudah dipilih, ambil tingkatan secara langsung
-                if (kode_jurusan_selected) {
-                    fetch('<?php echo site_url('Mapel/get_tingkatan'); ?>', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: 'kode_jurusan=' + kode_jurusan_selected,
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            dropdownTingkatan.innerHTML = '<option value="">Pilih Tingkatan</option>';
-                            Object.entries(data).forEach(([key, value]) => {
-                                dropdownTingkatan.innerHTML += '<option value="' + key + '">' +
-                                    value + '</option>';
-                            });
-
-                            // Setel nilai dropdown Kelas sesuai dengan data yang dipilih
-                            var selectedTingkatan = '<?php echo $mapel->kode_tingkatan; ?>';
-                            dropdownTingkatan.value = selectedTingkatan;
-                        });
-                }
-
-                // Ketika pilihan jurusan berubah
-                kodeJurusanDropdown.addEventListener('change', function() {
-                    var kode_jurusan = this.value;
-                    if (kode_jurusan) {
-                        fetch('<?php echo site_url('Mapel/get_tingkatan'); ?>', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded',
-                                },
-                                body: 'kode_jurusan=' + kode_jurusan,
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                dropdownTingkatan.innerHTML =
-                                    '<option value="">Pilih Tingkatan</option>';
-                                Object.entries(data).forEach(([key, value]) => {
-                                    dropdownTingkatan.innerHTML += '<option value="' + key +
-                                        '">' + value + '</option>';
-                                });
-                            });
-                    } else {
-                        // Jika Jurusan tidak dipilih, kosongkan dan tampilkan opsi "Pilih Kelas"
-                        dropdownTingkatan.innerHTML = '<option value="">Pilih Jurusan Terlebih Dahulu</option>';
-                    }
-                });
-            });
-            </script>
-
-
-
 
 </body>
 

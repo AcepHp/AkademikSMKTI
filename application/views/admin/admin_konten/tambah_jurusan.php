@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 </head>
 
@@ -46,29 +48,31 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <?php echo form_open_multipart('K_Konten/prosestambahjurusan'); ?>
-                        <div class="form-group">
-                            <label for="nama_jurusan">Nama Jurusan:</label>
-                            <input type="text" class="form-control" name="nama_jurusan" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="gambar">Gambar:</label>
-                            <input type="file" class="form-control" name="gambar" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="judul">Judul:</label>
-                            <input type="text" class="form-control" name="judul" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi:</label>
-                            <textarea class="form-control" name="deskripsi" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="author">Author:</label>
-                            <input type="text" class="form-control" name="author" required>
-                        </div>
-                        <input type="submit" name="Submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
+                        <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/Jurusan/prosestambahjurusan'); ?>" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="nama_jurusan">Nama Jurusan:</label>
+                                <input type="text" class="form-control" name="nama_jurusan" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gambar">Gambar:</label>
+                                <input type="file" class="form-control" name="gambar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="judul">Judul:</label>
+                                <input type="text" class="form-control" name="judul" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi:</label>
+                                <div id="deskripsieditor"></div>
+                                <input class="form-control" name="deskripsi" type="hidden" id="deskripsiinput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="author">Author:</label>
+                                <input type="text" class="form-control" name="author" required>
+                            </div>
+                            <input type="submit" name="Submit" value="Simpan" class="btn btn-primary">
+                            <?php echo form_close(); ?>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -97,6 +101,20 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
     <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    var deskripsieditor = new Quill('#deskripsieditor', {
+        theme: 'snow'
+    });
+
+    var form = document.getElementById('myForm');
+    var deskripsiinput = document.getElementById('deskripsiinput');
+
+    form.addEventListener('submit', function(event) {
+        deskripsiinput.value = deskripsieditor.root.innerHTML;
+    });
+    </script>
 
 </body>
 

@@ -47,10 +47,7 @@
                             <h1 class="h3 mb-0 text-gray-800">Data Wali Kelas</h1>
                             <div class="btn-group">
                                 <a href="<?php echo site_url('Wali/tambah_wali'); ?>"
-                                    class="btn btn btn-success shadow-sm mr-2"><i
-                                        class="fas fa-download fa-sm text-white-50"></i> Tambah Data Wali Kelas</a>
-                                <a href="#" class="btn btn-sm btn-primary shadow-sm"><i
-                                        class="fas fa-download fa-sm text-white-50"></i> Import Data Wali Kelas</a>
+                                    class="btn btn btn-success shadow-sm mr-2"><i class="fas fa-download fa-sm text-white-50"></i> Tambah Data Wali Kelas</a>
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,7 @@ class Mapel_model extends CI_Model {
 
     public function get_mapel() {
         // Ambil semua data mata pelajaran dengan informasi jurusan dan kelas
-        $this->db->select('mp.id_mapel, mp.nama_mapel, mp.capaian, mp.kode_jurusan, mp.kode_tingkatan, j.nama_jurusan, t.nama_tingkatan');
+        $this->db->select('mp.id_mapel, mp.nama_mapel, mp.kode_jurusan, mp.kode_tingkatan, j.nama_jurusan, t.nama_tingkatan');
         $this->db->from('mata_pelajaran mp');
         $this->db->join('jurusan j', 'mp.kode_jurusan = j.kode_jurusan');
         $this->db->join('tingkatan t', 'mp.kode_tingkatan = t.kode_tingkatan');

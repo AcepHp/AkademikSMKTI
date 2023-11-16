@@ -53,24 +53,17 @@
                         <li class="nav-item mx-2">
                             <a class="nav-link" aria-current="page" href="<?php echo site_url('#'); ?>">HOME</a>
                         </li>
-
                         <li class="nav-item mx-2 dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 JURUSAN
                             </a>
                             <ul class="dropdown-menu">
+                                <?php foreach ($jurusan as $item): ?>
                                 <li><a class="dropdown-item"
-                                        href="<?php echo site_url('Jurusan/Animasi'); ?>">Animasi</a></li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/DKV'); ?>">DKV</a></li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TKJT'); ?>">TKJT</a>
+                                        href="<?php echo site_url('Jurusan/Animasi/').$item->id_jurusan; ?>"><?php echo $item->nama_jurusan; ?></a>
                                 </li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TJAT'); ?>">TJAT</a>
-                                </li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/PPLG'); ?>">PPLG</a>
-                                </li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/MPLB'); ?>">MPLB</a>
-                                </li>
+                                <?php endforeach; ?>
                             </ul>
                         </li>
                         <li class="nav-item mx-2">
@@ -95,191 +88,63 @@
     </nav>
     <div class="carousel-inner inner">
         <div class="carousel-item active">
-            <img src="<?php echo base_url('assets/images/background.png') ?>" class="d-block w-100" alt="...">
-            <div class="jdl-utama carousel-caption d-none d-md-block">
-                <h1>GALERI FOTO DAN VIDEO</h1>
-            </div>
-        </div>
-    </div>
-    <!-- Prestasi -->
-    <div class="container-fluid" style="padding: 20px 0 0 0">
-        <h1 class="jdl-kepsek text-center mb-5">Prestasi Sekolah</h1>
-        <div id="carouselPrestasi" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">Juara 1 Lomba</h4>
-                            <img src="<?php echo base_url('assets/images/background.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">Juara 1 Lomba</h4>
-                            <img src="<?php echo base_url('assets/images/background2.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">Juara 1 Lomba</h4>
-                            <img src="<?php echo base_url('assets/images/background3.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="back carousel-control-prev btn-dark" type="button" data-bs-target="#carouselPrestasi"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="next carousel-control-next btn-dark" type="button" data-bs-target="#carouselPrestasi"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <img src="<?php echo base_url('assets/images/background.png') ?>" class="d-block w-100" alt="..."
+                style="height: 30vh">
+            <h1 class="jdl-utama carousel-caption d-none d-md-block mb-5">GALERI FOTO DAN VIDEO</h1>
         </div>
     </div>
 
-    <!-- Event Sekolah -->
-    <div class="container-fluid">
-        <hr class="mb-5">
-        <h1 class="jdl-kepsek text-center mb-5">Event Sekolah</h1>
-        <div id="carouselEvent" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">17 Agustus</h4>
-                            <img src="<?php echo base_url('assets/images/background.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">17 Agustus</h4>
-                            <img src="<?php echo base_url('assets/images/background2.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">17 Agustus</h4>
-                            <img src="<?php echo base_url('assets/images/background3.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row text-center mb-3 mt-3">
+            <span class="fw-bold" style="font-size: 30px">FOTO</span>
+        </div>
+        <?php $counter = 0; $galeriterbaru = array_reverse($galeri->result()); ?>
+        <div class="row text-center mb-3">
+            <?php foreach ($galeriterbaru as $row) : ?>
+            <?php if ($counter < 6) : ?>
+            <div class="col-md-4 mb-3">
+                <img src="<?php echo $row->gambar ?>" alt="" style="height: 250px; width: 70%">
+                <h4><?php echo $row->caption ?></h4>
             </div>
-            <button class="back carousel-control-prev btn-dark" type="button" data-bs-target="#carouselEvent"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="next carousel-control-next btn-dark" type="button" data-bs-target="#carouselEvent"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <?php endif; ?>
+            <?php $counter++; ?>
+            <?php endforeach; ?>
+        </div>
+        <div class="row text-center" style="padding-left: 7%; padding-right: 7%">
+            <hr color="black">
         </div>
     </div>
 
-    <!-- Wisuda -->
-    <div class="container-fluid">
-        <hr class="mb-5">
-        <h1 class="jdl-kepsek text-center mb-5">Wisuda Sekolah</h1>
-        <div id="carouselWisuda" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">Wisuda Angkatan 2023</h4>
-                            <img src="<?php echo base_url('assets/images/background.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">Wisuda Angkatan 2023</h4>
-                            <img src="<?php echo base_url('assets/images/background2.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="jabatan">Wisuda Angkatan 2023</h4>
-                            <img src="<?php echo base_url('assets/images/background3.png') ?>" class="img-man d-block">
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="row text-center mb-3 mt-3">
+            <span class="fw-bold" style="font-size: 30px">VIDEO</span>
+        </div>
+        <div class="row text-center mb-3">
+            <div class="col">
+                <img src="<?php echo base_url('assets/images/background.png') ?>" alt=""
+                    style="height: 250px; width: 250px">
             </div>
-            <button class="back carousel-control-prev btn-dark" type="button" data-bs-target="#carouselWisuda"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="next carousel-control-next btn-dark" type="button" data-bs-target="#carouselWisuda"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <div class="col">
+                <img src="<?php echo base_url('assets/images/background.png') ?>" alt=""
+                    style="height: 250px; width: 250px">
+            </div>
+            <div class="col">
+                <img src="<?php echo base_url('assets/images/background.png') ?>" alt=""
+                    style="height: 250px; width: 250px">
+            </div>
+        </div>
+        <div class="row text-center mb-3">
+            <div class="col">
+                <span>caption</span>
+            </div>
+            <div class="col">
+                <span>caption</span>
+            </div>
+            <div class="col">
+                <span>caption</span>
+            </div>
         </div>
     </div>
-
-    <!-- GALERI VIDEO -->
-    <div class="container-fluid">
-        <hr class="mb-5">
-        <h1 class="jdl-kepsek text-center mb-5">Video Sekolah</h1>
-        <div id="carouselVideo" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active mb-5">
-                    <div class="row">
-                        <div class="col-md-12 d-flex flex-column justify-content-center align-items-center embed-responsive embed-responsive-16by9">
-                            <iframe class="vid embed-responsive-item"
-                                src="https://www.youtube.com/embed/u8lwQdnVBB8?si=hq1ScqIBN6bJeVgJ"
-                                allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                    <div class="col-md-12 d-flex flex-column justify-content-center align-items-center embed-responsive embed-responsive-16by9">
-                            <iframe class="vid embed-responsive-item"
-                                src="https://www.youtube.com/embed/u8lwQdnVBB8?si=hq1ScqIBN6bJeVgJ"
-                                allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item mb-5">
-                    <div class="row">
-                    <div class="col-md-12 d-flex flex-column justify-content-center align-items-center embed-responsive embed-responsive-16by9">
-                            <iframe class="vid embed-responsive-item"
-                                src="https://www.youtube.com/embed/u8lwQdnVBB8?si=hq1ScqIBN6bJeVgJ"
-                                allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="back carousel-control-prev btn-dark" type="button" data-bs-target="#carouselVideo"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="next carousel-control-next btn-dark" type="button" data-bs-target="#carouselVideo"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-
-    <br><br><br>
 
     <!-- Tambahkan script JavaScript dari Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -314,7 +179,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-        </script>
+    </script>
 </body>
 
 </html>

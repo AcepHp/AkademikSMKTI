@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
 
 </head>
 
@@ -41,29 +44,33 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Begin Page Content -->
-                    <div class="container-fluid">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tambah Data Slide</h1>
-                        </div>
+                    <div class="container mb-3 p-0">
+                            <span class="h3">Tambah Data Slide</span>
                     </div>
-
-                    <div class="container mt-5">
-                        <?php echo form_open_multipart('K_Konten/prosestambahslide'); ?>
-
-                        <div class="form-group">
-                            <label for="deskripsi">deskripsi:</label>
-                            <input type="text" class="form-control" name="deskripsi" required>
+                    <div class="row">
+                        <div class="col">
+                            <div class="container" style="box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                                <div class="row">
+                                    <?php echo $this->session->userdata('error');?>
+                                    <?php $this->session->unset_userdata('error');?>
+                                </div>
+                                <form id="myForm"
+                                    action="<?php echo site_url('Kelola_Dashboard/Slide/prosestambahslide'); ?>"
+                                    method="POST" enctype="multipart/form-data">
+                                    <div class="form-group mt-2">
+                                        <label for="deskripsi">Deskripsi:</label>
+                                        <div id="deskripsieditor"></div>
+                                        <input class="form-control" name="deskripsi" type="hidden" id="deskripsiinput"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gambar:</label>
+                                        <input type="file" class="form-control" name="gambar" required>
+                                    </div>
+                                    <input type="submit" name="Submit" value="Simpan" class="btn btn-primary mb-2">
+                                </form>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="gambar">gambar:</label>
-                            <input type="file" class="form-control" name="gambar" required>
-                        </div>
-
-                        <input type="submit" name="Submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -71,25 +78,39 @@
             <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
     </div>
-    
+
     <?php $this->load->view('Bar/Logout_modal'); ?>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
-        <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    var deskripsieditor = new Quill('#deskripsieditor', {
+        theme: 'snow'
+    });
 
-        <!-- Core plugin JavaScript-->
-        <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    var form = document.getElementById('myForm');
+    var deskripsiinput = document.getElementById('deskripsiinput');
 
-        <!-- Custom scripts for all pages-->
-        <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
+    form.addEventListener('submit', function(event) {
+        deskripsiinput.value = deskripsieditor.root.innerHTML;
+    });
+    </script>
 
-        <!-- Page level plugins -->
-        <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
-        <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
+    <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
 </body>
 

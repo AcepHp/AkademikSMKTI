@@ -147,7 +147,7 @@
                             </tr>
                             <tr>
                                 <th>NISN</th>
-                                <td><?php echo $row->nisn; ?></td>
+                                <td><?php echo $row->NISN; ?></td>
                             </tr>
                             <tr>
                                 <th>Pilihan 1</th>
@@ -200,10 +200,6 @@
                             <tr>
                                 <th>Kelurahan/Desa</th>
                                 <td><?php echo $row->kelurahan_desa; ?></td>
-                            </tr>
-                            <tr>
-                                <th>Dusun/Kampung</th>
-                                <td><?php echo $row->dusun_kampung; ?></td>
                             </tr>
                             <tr>
                                 <th>RT</th>
