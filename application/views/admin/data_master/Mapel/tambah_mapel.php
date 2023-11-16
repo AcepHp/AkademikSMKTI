@@ -13,17 +13,17 @@
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/') ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <linkhm
+    <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-        <!-- Custom styles for this template-->
-        <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
-        <!-- Custom styles for this page -->
+    <!-- Custom styles for this template-->
+    <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="<?php echo base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Custom styles for this page -->
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -42,6 +42,8 @@
 
                 <!-- TopBar Guru -->
                 <?php $this->load->view('Bar/Navbar_admin'); ?>
+
+
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -62,8 +64,14 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="capaian">Capaian :</label>
+                            <textarea class="form-control" id="capaian" name="capaian"
+                                placeholder="Masukkan Capian Mata Pelajaran" required></textarea>
+                        </div>
+
+                        <div class="form-group">
                             <label for="kode_jurusan">Jurusan</label>
-                            <select class="form-control" name="kode_jurusan" id="kode_jurusan" required>
+                            <select class="form-control" name="kode_jurusan" required>
                                 <option value="">Pilih Jurusan</option>
                                 <?php foreach ($jurusan_list as $jurusan_item): ?>
                                 <option value="<?php echo $jurusan_item->kode_jurusan; ?>">
@@ -77,10 +85,10 @@
                             <label for="kode_tingkatan">Tingkatan</label>
                             <select class="form-control" name="kode_tingkatan" id="kode_tingkatan" required>
                                 <option value="">Pilih Tingkatan</option>
-                                <?php foreach ($tingkatan_list as $tingkatan_item) : ?>
-                                <option value="<?php echo $tingkatan_item->kode_tingkatan; ?>">
-                                    <?php echo $tingkatan_item->nama_tingkatan; ?>
-                                </option>
+                                <?php foreach ($tingkatan as $tingkatan_item) : ?>
+                                <option value="<?php echo $tingkatan_item->kode_tingkatan; ?>"
+                                    <?php echo isset($_POST['kode_tingkatan']) && $_POST['kode_tingkatan'] == $tingkatan_item->kode_tingkatan ? 'selected' : ''; ?>>
+                                    <?php echo $tingkatan_item->nama_tingkatan; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -98,7 +106,9 @@
     <!-- End of Main Content -->
 
     <!-- Footer Admin -->
+
     <?php $this->load->view('Bar/Logout_modal'); ?>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
@@ -123,39 +133,42 @@
 
     <!-- Page level custom scripts -->
     <script src="assets/js/demo/datatables-demo.js"></script>
-    <!-- <script type="text/javascript">
-    $(document).ready(function() {
-        // Ketika pilihan jurusan berubah
-        $('#kode_jurusan').on('change', function() {
-            var kode_jurusan = $(this).val();
-            var dropdownTingkatan = $('#kode_tingkatan');
+    <script type="text/javascript">
+    // Ketika pilihan jurusan berubah
+    document.querySelector('select[name="kode_jurusan"]').addEventListener('change', function() {
+        var kode_jurusan = this.value;
+        var dropdownTingkatan = document.querySelector('select[name="kode_tingkatan"]');
+        var selectedTingkatan = dropdownTingkatan.value;
 
-            if (kode_jurusan) {
-                // Filter tingkatan berdasarkan jurusan (sesuai dengan data yang sudah dimuat)
-                var filteredTingkatan = <?php echo json_encode($filteredTingkatan); ?>;
+        if (kode_jurusan) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '<?php echo site_url('Mapel/get_tingkatan'); ?>', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data); // Log the received data for debugging
 
-                // Hapus opsi lama dan tambahkan opsi yang sesuai
-                dropdownTingkatan.empty();
-                dropdownTingkatan.append('<option value="">Pilih Tingkatan</option>');
-                $.each(filteredTingkatan, function(key, value) {
-                    dropdownTingkatan.append('<option value="' + key + '">' + value +
-                        '</option>');
-                });
-            } else {
-                // Jika Jurusan tidak dipilih, kosongkan dan tampilkan opsi "Pilih Tingkatan"
-                dropdownTingkatan.empty();
-                dropdownTingkatan.append('<option value="">Pilih Tingkatan</option>');
-            }
-        });
+                    dropdownTingkatan.innerHTML = '<option value="">Pilih Tingkatan</option>';
+                    for (var key in data) {
+                        dropdownTingkatan.innerHTML += '<option value="' + key + '">' + data[key] +
+                            '</option>';
+                    }
 
-        // Ketika halaman dimuat, periksa apakah Jurusan telah dipilih sebelumnya
-        var kode_jurusan_selected = $('#kode_jurusan').val();
-        if (kode_jurusan_selected) {
-            // Jika Jurusan telah dipilih sebelumnya, secara otomatis memicu perubahan pada dropdown Tingkatan
-            $('#kode_jurusan').change();
+                    // Setel kembali nilai Kelas yang dipilih sebelumnya (jika ada)
+                    dropdownTingkatan.value = selectedTingkatan;
+                }
+            };
+            xhr.send('kode_jurusan=' + kode_jurusan);
+        } else {
+            // Jika Jurusan tidak dipilih, kosongkan dan tampilkan opsi "Pilih Kelas"
+            dropdownTingkatan.innerHTML = '<option value="">Pilih Tingkatan</option>';
         }
     });
-    </script> -->
+    </script>
+
+
+
 
 </body>
 

@@ -204,6 +204,7 @@
                         <div class="form-group">
                             <label for="status">Status:</label>
                             <select class="form-control" name="status">
+                            <option value="" disabled>Pilih</option>
                                 <option value="1" <?php if ($row->status == 1) echo "selected"; ?>>Diterima</option>
                                 <option value="0" <?php if ($row->status == 0) echo "selected"; ?>>Tidak Diterima
                                 </option>

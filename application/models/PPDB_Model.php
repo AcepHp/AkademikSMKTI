@@ -371,6 +371,12 @@ require_once APPPATH.'../vendor/autoload.php';
                 "role" => 'siswa',
                 "NIP" => $NISN,
             );
+
+            // $siswa = array(
+            //     "NISN" => $NISN,
+            //     "nama_lengkap" => $nama_lengkap,
+            //     "NIS" => $NIS
+            // )
         
             $config = array(
                 'mailtype' => 'html',

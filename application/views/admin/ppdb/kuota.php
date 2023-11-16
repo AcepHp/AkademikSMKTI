@@ -133,7 +133,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title" id="kuotaModalLabel" style="font-size: 1.25rem;">Detail Kuota Pendaftaran -
-                        <?php echo $row->kode_jurusan; ?></h5>
+                        <?php echo $row->nama_jurusan; ?></h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -151,7 +151,7 @@
                             </tr>
                             <tr>
                                 <th>Jurusan</th>
-                                <td><?php echo $row->jurusan; ?></td>
+                                <td><?php echo $row->nama_jurusan; ?></td>
                             </tr>
                             <tr>
                                 <th>Kuota</th>

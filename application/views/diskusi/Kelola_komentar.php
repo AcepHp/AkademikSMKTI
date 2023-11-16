@@ -62,19 +62,7 @@
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Daftar Komentar</h6>
                             </div>
-                            <div class="card-header py-3">
-                                <div class="mt-2">
-                                    <form method="get" action="">
-                                        <label for="statusFilter">Filter Status:</label>
-                                        <select id="statusFilter" name="status" class="form-control">
-                                            <option value="">Semua</option>
-                                            <option value="Iya">Iya</option>
-                                            <option value="Tidak">Tidak</option>
-                                        </select>
-                                        <button type="submit" class="btn btn-primary mt-2">Filter</button>
-                                    </form>
-                                </div>
-                            </div>
+                           
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -99,7 +87,7 @@
                                                 <td><?php echo $row['tanggal']; ?></td>
                                                 <td><?php echo $row['deskripsi']; ?></td>
                                                 <td><?php echo $row['nama']; ?></td>
-                                                <td><?php echo $row['status']; ?></td>
+                                                <td><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
@@ -123,12 +111,14 @@
                     <!-- End of Main Content -->
 
                     <!-- Footer Admin -->
-                    <?php $this->load->view('Bar/Footer_admin'); ?>
+                    
 
                 </div>
                 <!-- End of Content Wrapper -->
+                
 
             </div>
+            <?php $this->load->view('Bar/Footer_admin'); ?>
             <!-- End of Page Wrapper -->
 
             <!-- Scroll to Top Button-->
@@ -178,7 +168,7 @@
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><?php echo $row['status']; ?></td>
+                                        <td><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?></td>
                                     </tr>
                                     <!-- ... (other fields) ... -->
                                 </tbody>
@@ -218,23 +208,6 @@
             <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
             <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-            <script>
-            $(document).ready(function() {
-                $('#filterBtn').click(function() {
-                    var selectedStatus = $('#statusFilter').val();
-                    var url = window.location.href.split('?')[0]; // Ambil URL sebelum parameter
-
-                    if (selectedStatus) {
-                        window.location.href = url + '?status=' + selectedStatus;
-                    } else {
-                        window.location.href = url;
-                    }
-                });
-            });
-            </script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 

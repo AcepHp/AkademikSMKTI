@@ -85,14 +85,18 @@
 
                 </div>
             </div>
+            <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
+        
     </div>
+    
     <!-- /.container-fluid -->
+   
     </div>
     <!-- End of Main Content -->
 
     <!-- Footer Admin -->
-    <?php $this->load->view('Bar/Footer_admin'); ?>
+   
 
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
