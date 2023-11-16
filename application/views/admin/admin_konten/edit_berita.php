@@ -49,8 +49,7 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <form id="myForm" action="<?php echo site_url('K_Konten/proseseditberita/'.$berita->id_berita); ?>" method="POST"
-                            enctype="multipart/form-data">
+                        <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/Berita/proseseditberita/'.$berita->id_berita); ?>" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="judul">Judul:</label>
                                 <input type="text" class="form-control" name="judul"
@@ -60,9 +59,7 @@
                                 <label for="deskripsi">Deskripsi:</label>
                                 <div id="deskripsieditor"></div>
                                 <input class="form-control" name="deskripsi" type="hidden" id="deskripsiinput" required>
-
                             </div>
-
                             <div class="form-group">
                                 <label for="gambar">Gambar Saat Ini:</label>
                                 <img src="<?php echo $berita->gambar; ?>" alt="Gambar Saat Ini" width="150">

@@ -19,8 +19,6 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    
 
 </head>
 
@@ -31,6 +29,7 @@
 
         <!-- Sidebar Admin -->
         <?php $this->load->view('Bar/Sidebar_admin'); ?>
+
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -50,8 +49,6 @@
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Kelola Diskusi</h1>
-                            <a href="<?php echo site_url('Diskusi/pengajuan'); ?>"
-                                class="btn btn-primary mt-2">Pengajuan Topik (<?php echo $jumlahBaris; ?>)</a>
                         </div>
 
                         <!-- ... (content lainnya) ... -->
@@ -64,6 +61,20 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Daftar Topik</h6>
+                            </div>
+                            <div class="card-header py-3">
+                            <a href="<?php echo site_url('Diskusi/pengajuan'); ?>" class="btn btn-primary mt-2">Pengajuan Topik (<?php echo $jumlahBaris; ?>)</a>
+                                <div class="mt-2">
+                                    <form method="get" action="">
+                                        <label for="statusFilter">Filter Status:</label>
+                                        <select id="statusFilter" name="status" class="form-control">
+                                            <option value="">Semua</option>
+                                            <option value="Iya">Iya</option>
+                                            <option value="Tidak">Tidak</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary mt-2">Filter</button>
+                                    </form>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -78,13 +89,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($topik as $row) : ?>
+                                            <?php
+                $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Ambil parameter status dari URL
+                foreach ($topik as $row) :
+                    if ($statusFilter === '' || $row['enum'] === $statusFilter) :
+                ?>
                                             <tr>
                                                 <td><?php echo $row['id_topik']; ?></td>
                                                 <td><?php echo $row['tanggal']; ?></td>
                                                 <td><?php echo $row['nama']; ?></td>
-                                                <td><?php echo ($row['enum'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
-                                                </td>
+                                                <td><?php echo $row['enum']; ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
@@ -93,6 +107,7 @@
                                                     </a>
                                                 </td>
                                             </tr>
+                                            <?php endif; ?>
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
@@ -100,16 +115,19 @@
                             </div>
                         </div>
 
+
+
                         <!-- Content Row -->
                     </div>
                     <!-- End of Main Content -->
 
                     <!-- Footer Admin -->
+                    <?php $this->load->view('Bar/Footer_admin'); ?>
+
                 </div>
                 <!-- End of Content Wrapper -->
 
             </div>
-            <?php $this->load->view('Bar/Footer_admin'); ?>
             <!-- End of Page Wrapper -->
 
             <!-- Scroll to Top Button-->
@@ -117,8 +135,8 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-            <!-- include modal -->
-            <?php $this->load->view('Bar/Logout_modal'); ?>
+             <!-- include modal -->
+             <?php $this->load->view('Bar/Logout_modal'); ?>
 
             <!-- Modal -->
             <?php foreach ($topik as $row): ?>
@@ -129,7 +147,7 @@
                     <div class="modal-content">
                         <div class="modal-header bg-primary text-white">
                             <h5 class="modal-title" id="topikModalLabel" style="font-size: 1.25rem;">Detail Topik
-                            </h5>
+                                </h5>
                             <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -158,7 +176,7 @@
                                     </tr>
                                     <tr>
                                         <th>Status</th>
-                                        <td><?php echo ($row['enum'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?></td>
+                                        <td><?php echo $row['enum']; ?></td>
                                     </tr>
                                     <!-- ... (other fields) ... -->
                                 </tbody>
@@ -185,37 +203,39 @@
             </div>
             <?php endforeach; ?>
 
-
+           
 
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <!-- Bootstrap core JavaScript-->
+            <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
             <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
             <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
             <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
             <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
             <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
             <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
-            <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
             <script>
             $(document).ready(function() {
-                $('#dataTable').DataTable({
-                    "columnDefs": [{
-                            "targets": [0],
-                            "orderData": [0, 1]
-                        },
-                        {
-                            "targets": [1],
-                            "orderData": [1, 0]
-                        },
-                        {
-                            "targets": [4],
-                            "orderData": [4, 0]
-                        }
-                    ]
+                $('#filterBtn').click(function() {
+                    var selectedStatus = $('#statusFilter').val();
+                    var url = window.location.href.split('?')[0]; // Ambil URL sebelum parameter
+
+                    if (selectedStatus) {
+                        window.location.href = url + '?status=' + selectedStatus;
+                    } else {
+                        window.location.href = url;
+                    }
                 });
             });
             </script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </body>
 

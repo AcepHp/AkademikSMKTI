@@ -82,10 +82,10 @@ nav {
 
 .judul {
     text-align: center;
-    color: black;
+    /* color: black; */
     font-size: 32px;
     font-family: Montserrat;
-    font-weight: 400;
+    /* font-weight: 400; */
 }
 
 .penjelasan {

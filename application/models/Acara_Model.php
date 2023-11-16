@@ -31,7 +31,7 @@
             );
 
             $this->db->where("id_acara");
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success_tambah", "<div class='alert alert-success' role='alert'>Acara berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->insert("acara",$acara);
         }
         
@@ -52,12 +52,13 @@
             );
         
             $this->db->where("id_acara", $id);
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Acara berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("acara", $acara);
         }
 
         public function delete_acara($id) {
             $this->db->where('id_acara', $id);
+            $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Acara berhasil dihapus! !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->delete('acara');
         }
 

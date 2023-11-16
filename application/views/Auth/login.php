@@ -25,8 +25,8 @@
             <form action="<?= base_url('auth/do_login') ?>" method="post">
                 <img src="<?php echo base_url('assets/images/logo.png') ?>">
                 <h2 class="title">Login</h2>
-                <?php if(isset($error) && !empty($error)): ?>
-                <div class="error-message"><?= $error ?></div>
+                <?php if (isset($error) && !empty($error)): ?>
+                <div class="alert alert-danger" role="alert"><?= $error ?></div>
                 <?php endif; ?>
                 <div class="input-div one">
                     <div class="i">
@@ -48,7 +48,6 @@
                 </div>
                 <input type="submit" class="btn" value="Login">
             </form>
-
         </div>
     </div>
     <script type="text/javascript" src="<?php echo base_url('assets/js/login.js')?>"></script>

@@ -50,8 +50,7 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <form id="myForm" action="<?php echo site_url('K_Konten/prosestambahberita'); ?>" method="POST"
-                            enctype="multipart/form-data">
+                        <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/Berita/prosestambahberita'); ?>" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="judul">Judul:</label>
                                 <input type="text" class="form-control" name="judul" required>
@@ -79,6 +78,7 @@
         </div>
     </div>
     <?php $this->load->view('Bar/Logout_modal'); ?>
+
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
     var deskripsieditor = new Quill('#deskripsieditor', {

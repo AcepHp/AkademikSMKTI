@@ -138,10 +138,18 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Content Row -->
             </div>
 
             <!-- Footer -->
-            <?php $this->load->view('Bar/Footer_admin'); ?>
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
             <!-- End of Footer -->
 
             <!-- include modal -->
@@ -158,6 +166,9 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ... (script yang sama seperti sebelumnya) ... -->
+
 
         </div>
 

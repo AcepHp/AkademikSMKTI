@@ -36,22 +36,18 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="<?php echo base_url('Materi/index_siswa')?>">
+        <a class="nav-link" href="#">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Materi</span></a>
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
     
-
-
     <li class="nav-item">
         <a class="nav-link" href="<?php echo base_url('Diskusi/index')?>">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Forum Diskusi</span></a>
     </li>
-
-
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

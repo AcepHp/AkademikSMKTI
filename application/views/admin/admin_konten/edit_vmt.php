@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 </head>
 
@@ -41,28 +43,31 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="container-fluid">
-
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Edit Visi, Misi & Tujuan</h1>
                         </div>
                     </div>
-
                     <div class="container mt-5">
-                        <?php echo form_open_multipart('K_Konten/proseseditvmt/' . $vmt->id_vmt); ?>
-                        <div class="form-group">
-                            <label for="judul">Judul:</label>
-                            <input type="text" class="form-control" name="judul" value="<?php echo $vmt->judul; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi:</label>
-                            <textarea type="text" class="form-control" name="deskripsi"
-                                value="<?php echo $vmt->deskripsi; ?>"><?php echo $vmt->deskripsi; ?></textarea>
-                        </div>
-                        <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
+                        <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/VMT/proseseditvmt/'.$vmt->id_vmt); ?>" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="visi">Visi:</label>
+                                <div id="visieditor"></div>
+                                <input class="form-control" name="visi" type="hidden" id="visiinput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="misi">Misi:</label>
+                                <div id="misieditor"></div>
+                                <input class="form-control" name="misi" type="hidden" id="misiinput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tujuan">Tujuan:</label>
+                                <div id="tujuaneditor"></div>
+                                <input class="form-control" name="tujuan" type="hidden" id="tujuaninput" required>
+                            </div>
+                            <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -72,8 +77,51 @@
     </div>
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    var visi = `<?= $vmt->visi ?>`;
+    var visieditor = new Quill('#visieditor', {
+        theme: 'snow'
+    });
+    visieditor.root.innerHTML = visi;
 
+    var form = document.getElementById('myForm');
+    var visiinput = document.getElementById('visiinput');
 
+    form.addEventListener('submit', function(event) {
+        visiinput.value = visieditor.root.innerHTML;
+    });
+    </script>
+
+    <script>
+    var misi = `<?= $vmt->misi ?>`;
+    var misieditor = new Quill('#misieditor', {
+        theme: 'snow'
+    });
+    misieditor.root.innerHTML = misi;
+
+    var form = document.getElementById('myForm');
+    var misiinput = document.getElementById('misiinput');
+
+    form.addEventListener('submit', function(event) {
+        misiinput.value = misieditor.root.innerHTML;
+    });
+    </script>
+
+    <script>
+    var tujuan = `<?= $vmt->tujuan ?>`;
+    var tujuaneditor = new Quill('#tujuaneditor', {
+        theme: 'snow'
+    });
+    tujuaneditor.root.innerHTML = tujuan;
+
+    var form = document.getElementById('myForm');
+    var tujuaninput = document.getElementById('tujuaninput');
+
+    form.addEventListener('submit', function(event) {
+        tujuaninput.value = tujuaneditor.root.innerHTML;
+    });
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>

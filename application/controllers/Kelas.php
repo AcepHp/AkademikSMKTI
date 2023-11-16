@@ -10,12 +10,18 @@ class Kelas extends CI_Controller
 
     public function index()
     {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
+            redirect('auth');
+        }
         $data['kelas'] = $this->Kelas_model->get_kelas();
         $this->load->view('admin/data_master/kelas/data_kelas', $data);
     }
 
     public function create()
     {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
+            redirect('auth');
+        }
         $data['tingkatan'] = $this->Kelas_model->get_tingkatan();
         $data['jurusan'] = $this->Kelas_model->get_jurusan();
 
@@ -48,6 +54,9 @@ class Kelas extends CI_Controller
     // Fungsi untuk menampilkan form tambah kelas
     public function add()
     {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
+            redirect('auth');
+        }
         $data['tingkatan'] = $this->Kelas_model->get_tingkatan();
         $data['jurusan'] = $this->Kelas_model->get_jurusan();
         $this->load->view('admin/data_master/kelas/tambah_kelas', $data);
@@ -55,6 +64,9 @@ class Kelas extends CI_Controller
 
     public function edit($id_kelas)
     {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
+            redirect('auth');
+        }
         $data['tingkatan'] = $this->Kelas_model->get_tingkatan();
         $data['jurusan'] = $this->Kelas_model->get_jurusan();
         $data['kelas_item'] = $this->Kelas_model->get_kelas_by_id($id_kelas);
@@ -84,6 +96,9 @@ class Kelas extends CI_Controller
     }
     
     public function delete($id_kelas){
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
+            redirect('auth');
+        }
         if ($this->Kelas_model->delete_kelas($id_kelas)) {
             redirect('kelas/index');
         } else {

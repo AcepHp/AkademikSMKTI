@@ -200,6 +200,11 @@ nav {
     width: 16rem;
 }
 
+a.btn.btn-warning:hover {
+    color: #fd3b00;
+    background-color: #0a0808;
+}
+
 @media (max-width: 1500px) {
     .jdl-utama h1 {
         padding: 0 0 20rem  0;

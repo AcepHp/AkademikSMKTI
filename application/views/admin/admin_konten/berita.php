@@ -50,11 +50,9 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Berita</h1>
                             <div class="btn-group">
-                                <a href="<?php echo site_url('K_Konten/tambah_berita'); ?>"
+                                <a href="<?php echo site_url('Kelola_Dashboard/Berita/tambah_berita'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
                                         class="fas fa-download fa-sm text-white-50"></i> Tambah Data Berita</a>
-                                <a href="#" class="btn btn-sm btn-primary shadow-sm"><i
-                                        class="fas fa-download fa-sm text-white-50"></i> Import Data Berita</a>
                             </div>
                         </div>
                     </div>
@@ -67,8 +65,17 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <?php $this->session->userdata('error');?>
-                                    <?php $this->session->userdata('success');?>
+                                    <!-- Flash Data Berhasil tambah data -->
+                                    <?php echo $this->session->userdata('success_tambah');?>
+                                    <?php $this->session->unset_userdata('success_tambah');?>
+
+                                    <!-- Flash Data Berhasil edit data -->
+                                    <?php echo $this->session->userdata('success_edit');?>
+                                    <?php $this->session->unset_userdata('success_edit');?>
+
+                                    <!-- Flash Data Berhasil Hapus data -->
+                                    <?php echo $this->session->userdata('success_hapus');?>
+                                    <?php $this->session->unset_userdata('success_hapus');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -82,25 +89,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $no = 1;?>
                                             <?php foreach ($berita->result() as $row) : ?>
-
                                             <tr>
-                                                <td><?php echo $row->id_berita; ?></td>
+                                                <td><?php echo $no++; ?></td>
                                                 <td><?php echo $row->judul; ?></td>
-                                                <td><?php echo substr($row->deskripsi,0,50) ?>...</td>
-                                                <td>
-                                                    <img src="<?php echo $row->gambar ?>" alt="Gambar"
-                                                        style="width: 80px; height: auto;">
-                                                </td>
+                                                <td><?php echo substr($row->deskripsi, 0, 50) . '...'; ?></td>
+                                                <td><img src="<?php echo $row->gambar; ?>" alt="Gambar"
+                                                        style="width: 80px; height: auto;"></td>
                                                 <td><?php echo $row->author; ?></td>
-                                                <td><?php echo $row->created ?></td>
+                                                <td><?php echo $row->created; ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#beritaModal<?php echo $row->id_berita; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('K_Konten/edit_berita/'.$row->id_berita); ?>"
+                                                    <a href="<?php echo site_url('Kelola_Dashboard/Berita/edit_berita/'.$row->id_berita); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -217,7 +222,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("K_Konten/delete_berita/") ?>' + id;
+                window.location.href = '<?=site_url("Kelola_Dashboard/Berita/delete_berita/") ?>' + id;
             }
         });
     }

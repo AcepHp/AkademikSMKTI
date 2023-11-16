@@ -83,7 +83,7 @@
             }
         
             $this->db->where("id_kepsek", $id);
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Data Sambutan Kepala Sekolah berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("kepsek", $kepsek);
         }
 

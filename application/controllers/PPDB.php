@@ -1,14 +1,17 @@
 <?php
+require_once APPPATH.'../vendor/autoload.php';
 class PPDB extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->model('PPDB_Model');
         $this->load->model('Jurusan_Model');
+        $this->load->model('Jurusan_model');
         $this->load->model('Tahun_akademik_model');
     }
 
     public function index() {
+        $data['jurusan']=$this->Jurusan_model->getjurusan();
         $this->load->view('dashboard/PPDB/ppdb');
     }
 
@@ -18,6 +21,8 @@ class PPDB extends CI_Controller {
    		$data['path'] = base_url('assets');
         $data['jurusan_item']=$this->Jurusan_Model->get_jurusan();
         $data['jurusan'] = $this->Jurusan_Model->get_jurusan();
+        $data['nomor_registrasi'] = $this->PPDB_Model->generate_nomor_registrasi();
+
         // var_dump($data);
         $this->load->view('dashboard/PPDB/form5', $data);   
     }
@@ -51,33 +56,16 @@ class PPDB extends CI_Controller {
     	}
     	echo $data;
 	}
-    
-    //Dropdown Bertingkat
-    // public function getKotaByPropinsi() {
-    //     $propinsi_id = $this->input->post('propinsi_id');
-    //     $kota = $this->PPDB_Model->getKotaByPropinsi($propinsi_id);
-    //     $options = "<option value=''>- Pilih Kabupaten/Kota -</option>";
-    //     foreach ($kota as $k) {
-    //         $options .= "<option value='" . $k['id_kabkot'] . "'>" . $k['nama_kabkot'] . "</option>";
-    //     }
-    //     echo $options;
-    // }
 
-    // public function getKecamatanByKota() {
-    //     $kota_id = $this->input->post('kota_id');
-    //     $kecamatan = $this->PPDB_Model->getKecamatanByKota($kota_id);
-    //     $options = "<option value=''>- Pilih Kecamatan -</option>";
-    //     foreach ($kecamatan as $kec) {
-    //         $options .= "<option value='" . $kec['id_kec'] . "'>" . $kec['nama_kec'] . "</option>";
-    //     }
-    //     echo $options;
-    // }
+    // Bagian Admin
 
+    //Diterima
     public function diterima() {
         $data['ppdb'] = $this->PPDB_Model->getpendaftar();
         $this->load->view('admin/ppdb/diterima', $data);
     }
 
+    //Tidak Diterima
     public function tidakditerima() {
         $data['ppdb'] = $this->PPDB_Model->getpendaftar();
         $this->load->view('admin/ppdb/tidakditerima', $data);
@@ -88,8 +76,28 @@ class PPDB extends CI_Controller {
         // Load model
         $this->load->model('PPDB_Model');
         // Ambil data dari form yang dikirimkan
+        $provinsi = $this->input->post('provinsi', true);
+        $kabkot = $this->input->post('kabupaten_kota', true);
+        $kecamatan = $this->input->post('kecamatan', true);
+        $desa = $this->input->post('kelurahan_desa', true);
+        
+        $provinsi_data = $this->db->get_where('wilayah_provinsi', array('id' => $provinsi))->row();
+        $provinsi_input = ($provinsi_data) ? $provinsi_data->nama : "Provinsi Tidak Ditemukan";
+        
+        $kabkot_data = $this->db->get_where('wilayah_kabupaten', array('id' => $kabkot))->row();
+        $kabkot_input = ($kabkot_data) ? $kabkot_data->nama : "Kabupaten/Kota Tidak Ditemukan";
+        
+        $kecamatan_data = $this->db->get_where('wilayah_kecamatan', array('id' => $kecamatan))->row();
+        $kecamatan_input = ($kecamatan_data) ? $kecamatan_data->nama : "Kecamatan Tidak Ditemukan";
+        
+        $desa_data = $this->db->get_where('wilayah_desa', array('id' => $desa))->row();
+        $desa_input = ($desa_data) ? $desa_data->nama : "Desa Tidak Ditemukan";
+        // Generate the registration number
+        $nomor_registrasi = $this->PPDB_Model->generate_nomor_registrasi();
+        
         $data = array(
-            'nisn' => $this->input->post('nisn', true),
+            'NISN' => $this->input->post('NISN', true),
+            'nomor_registrasi' => $nomor_registrasi,
             'pilihan_satu' => $this->input->post('pilihan_satu', true),
             'pilihan_dua' => $this->input->post('pilihan_dua', true),
             'Nama_lengkap' => $this->input->post('Nama_lengkap', true),
@@ -99,10 +107,10 @@ class PPDB extends CI_Controller {
             'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir', true),
             'agama' => $this->input->post('agama', true),
             'Alamat' => $this->input->post('Alamat', true),
-            'provinsi' => $this->input->post('provinsi', true),
-            'kabupaten_kota' => $this->input->post('kabupaten_kota', true),
-            'kecamatan' => $this->input->post('kecamatan', true),
-            'kelurahan_desa' => $this->input->post('kelurahan_desa', true),
+            'provinsi' => $provinsi_input,
+            'kabupaten_kota' => $kabkot_input,
+            'kecamatan' => $kecamatan_input,
+            'kelurahan_desa' => $desa_input,
             'rt' => $this->input->post('rt', true),
             'rw' => $this->input->post('rw', true),
             'kode_pos' => $this->input->post('kode_pos', true),
@@ -129,13 +137,13 @@ class PPDB extends CI_Controller {
             'jumlah_saudara' => $this->input->post('jumlah_saudara', true),
             'Tahun_akademik' => $this->input->post('Tahun_akademik', true),
             'status' => 2
-            // Tambahkan field lain sesuai dengan form Anda
         );
     
         // Panggil fungsi simpan_pendaftaran dari model untuk menyimpan data
         if ($this->PPDB_Model->simpan_pendaftaran($data)) {
             $data = array(
-            'nisn' => $this->input->post('nisn', true),
+            'NISN' => $this->input->post('NISN', true),
+            'nomor_registrasi' => $nomor_registrasi,
             'pilihan_satu' => $this->input->post('pilihan_satu', true),
             'pilihan_dua' => $this->input->post('pilihan_dua', true),
             'Nama_lengkap' => $this->input->post('Nama_lengkap', true),
@@ -145,10 +153,10 @@ class PPDB extends CI_Controller {
             'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir', true),
             'agama' => $this->input->post('agama', true),
             'Alamat' => $this->input->post('Alamat', true),
-            'provinsi' => $this->input->post('provinsi', true),
-            'kabupaten_kota' => $this->input->post('kabupaten_kota', true),
-            'kecamatan' => $this->input->post('kecamatan', true),
-            'kelurahan_desa' => $this->input->post('kelurahan_desa', true),
+            'provinsi' => $provinsi_input,
+            'kabupaten_kota' => $kabkot_input,
+            'kecamatan' => $kecamatan_input,
+            'kelurahan_desa' => $desa_input,
             'rt' => $this->input->post('rt', true),
             'rw' => $this->input->post('rw', true),
             'kode_pos' => $this->input->post('kode_pos', true),
@@ -179,6 +187,12 @@ class PPDB extends CI_Controller {
         
             // Panggil model atau lakukan operasi database di sini
             $this->load->model('PPDB_Model'); // Gantilah 'PPDB_model' dengan nama model yang sesuai
+
+            // Tambahkan tanggal registrasi beserta jam, menit, dan detik
+            $tanggal_registrasi = date("Y-m-d H:i:s");
+
+            // Update tanggal registrasi dalam data yang sudah disimpan
+            $this->PPDB_Model->update_tanggal_registrasi($nisn, $tanggal_registrasi);
         
             // Setelah data berhasil disimpan, arahkan pengguna kembali ke halaman lain atau tampilkan pesan sukses
             redirect('PPDB/form');
@@ -191,7 +205,6 @@ class PPDB extends CI_Controller {
         // Mengembalikan respons dalam format JSON
         echo json_encode($response);
     }
-    
 
     //Pop Up
     public function popup() {
@@ -200,15 +213,14 @@ class PPDB extends CI_Controller {
     }
 
     public function tambah_popup() {
-        $this->load->view('admin/ppdb/tambah_popup'); // Tampilkan view form tambah popup
+        $this->load->view('admin/ppdb/tambah_popup');
     }
 
     public function prosestambahpopup(){
         if($this->PPDB_Model->tambahpopup()){
-            redirect('PPDB/popup','refresh');
+            redirect('PPDB/popup');
 
         } else {
-            
             redirect('PPBD/tambah_popup','refresh');
             
         }
@@ -233,7 +245,6 @@ class PPDB extends CI_Controller {
         if ($this->PPDB_Model->delete_popup($id)) {
             redirect('PPDB/popup','refresh');
         } else {
-            // Handle error
         }
     }
     
@@ -269,6 +280,11 @@ class PPDB extends CI_Controller {
 
     public function edit_kuota($id) {
         $data['kuota']= $this->PPDB_Model->getkuotabyid($id)->row();
+        $data['kuota2']= $this->PPDB_Model->getkuotabyid($id);
+        $data['tahun']=$this->Tahun_akademik_model->get_tahun_akademik();
+        $data['tahun_item']=$this->Tahun_akademik_model->get_all_tahun_akademik();
+        $data['jurusan_item']=$this->Jurusan_Model->get_jurusan();
+        $data['jurusan'] = $this->Jurusan_Model->get_jurusan();
         $this->load->view('admin/ppdb/edit_kuota', $data);
     }
 
@@ -286,7 +302,6 @@ class PPDB extends CI_Controller {
         if ($this->PPDB_Model->delete_kuota($id)) {
             redirect('PPDB/kuota','refresh');
         } else {
-            // Handle error
         }
     } 
 
@@ -296,33 +311,35 @@ class PPDB extends CI_Controller {
         $this->load->view('admin/ppdb/pendaftar' , $data);
     }
 
-    public function tambah_pendaftar() {
-        $this->load->view('admin/ppdb/tambah_kuota'); // Tampilkan view form tambah popup
-    }
+    // public function tambah_pendaftar() {
+    //     $this->load->view('admin/ppdb/tambah_kuota');
+    // }
 
-    public function prosestambahpendaftar(){
-        if($this->PPDB_Model->tambahkuota()){
-            redirect('PPDB/kuota','refresh');
+    // public function prosestambahpendaftar(){
+    //     if($this->PPDB_Model->tambahkuota()){
+    //         redirect('PPDB/kuota','refresh');
 
-        } else {
+    //     } else {
             
-            redirect('PPBD/tambah_kuota','refresh');
+    //         redirect('PPBD/tambah_kuota','refresh');
             
-        }
-    }
+    //     }
+    // }
 
     public function editpendaftaran($id) {
         if($this->PPDB_Model->editpendaftar($id)){
             redirect('PPDB/pendaftar','refresh');
 
         } else {
-            redirect('PPDB/editpendaftar','refresh');
+            redirect('PPDB/pendaftar','refresh');
             
         };
     }
 
     public function proseseditpendaftar($id){
         if($this->PPDB_Model->editpendaftar($id)){
+            $this->session->set_flashdata("error", "<div class='alert alert-danger' role='alert'>Gunakan format gambar yang sesuai (.gif/.jpg/.png) !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Kuota Penuh !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             redirect('PPDB/pendaftar','refresh');
 
         } else {
@@ -335,10 +352,46 @@ class PPDB extends CI_Controller {
         if ($this->PPDB_Model->delete_pendaftar($id)) {
             redirect('PPDB/pendaftar','refresh');
         } else {
-            // Handle error
         }
     }
 
+    public function sendemail($id) {
+        // Muat data yang diperlukan dari Model
+        $data = $this->PPDB_Model->getDataById($id);
+    
+        if ($data) {
+            // Set variabel file dan pesan sesuai dengan data yang diambil
+            $file = 'Kartu_Registrasi_PPDB'; // Ganti dengan nama file yang sesuai dengan kebutuhan Anda
+    
+            // Panggil sendPdfToEmail dengan parameter yang sesuai
+            if ($this->PPDB_Model->sendPdfToEmail($id, $data['email'], $file)) {
+                redirect('PPDB/pendaftar', 'refresh');
+            } else {
+                redirect('PPDB/sendemail', 'refresh');
+            }
+        } else {
+            // Handle jika data tidak ditemukan
+            redirect('PPDB/sendemail', 'refresh');
+        }
+    }
+    
+    public function prosessendemail($id) {
+        // Muat data yang diperlukan dari Model, set file dan pesan, dan panggil sendPdfToEmail
+        $data = $this->PPDB_Model->getDataById($id);
+    
+        if ($data) {
+            $file = 'Kartu_Registrasi_PPDB'; // Ganti dengan nama file yang sesuai dengan kebutuhan Anda
+    
+            if ($this->PPDB_Model->sendPdfToEmail($id, $data['email'], $file)) {
+                redirect('PPDB/pendaftar', 'refresh');
+            } else {
+                redirect('PPDB/sendemail', 'refresh');
+            }
+        } else {
+            redirect('PPDB/sendemail', 'refresh');
+        }
+    }    
+    
     //Email Pengirim
     public function tampil_email(){
         $data['email'] = $this->PPDB_Model->email();

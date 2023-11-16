@@ -49,11 +49,9 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Data Info</h1>
                             <div class="btn-group">
-                                <a href="<?php echo site_url('K_Konten/tambah_info'); ?>"
+                                <a href="<?php echo site_url('Kelola_Dashboard/Info/tambah_info'); ?>"
                                     class="btn btn btn-success shadow-sm mr-2"><i
                                         class="fas fa-download fa-sm text-white-50"></i> Tambah Data Info</a>
-                                <a href="#" class="btn btn-sm btn-primary shadow-sm"><i
-                                        class="fas fa-download fa-sm text-white-50"></i> Import Data Info</a>
                             </div>
                         </div>
                     </div>
@@ -66,8 +64,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <?php $this->session->userdata('error');?>
-                                    <?php $this->session->userdata('success');?>
+                                    <!-- Flash Data Berhasil tambah data -->
+                                    <?php echo $this->session->userdata('success_tambah');?>
+                                    <?php $this->session->unset_userdata('success_tambah');?>
+
+                                    <!-- Flash Data Berhasil edit data -->
+                                    <?php echo $this->session->userdata('success_edit');?>
+                                    <?php $this->session->unset_userdata('success_edit');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -98,7 +101,7 @@
                                                         data-target="#guruModal<?php echo $row->id_info; ?>">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="<?php echo site_url('K_Konten/edit_info/'.$row->id_info); ?>"
+                                                    <a href="<?php echo site_url('Kelola_Dashboard/Info/edit_info/'.$row->id_info); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
@@ -213,7 +216,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus guru
-                window.location.href = '<?=site_url("K_Konten/delete_info/") ?>' + id;
+                window.location.href = '<?=site_url("Kelola_Dashboard/Info/delete_info/") ?>' + id;
             }
         });
     }
