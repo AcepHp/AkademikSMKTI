@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Tambah Data Siswa</title>
+    <title>Dashboard Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,7 +32,7 @@
     <div id="wrapper">
 
         <!-- Sidebar Guru -->
-        <?php $this->load->view('Bar/Sidebar_guru'); ?>
+        <?php $this->load->view('Bar/Sidebar_admin'); ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -41,7 +41,7 @@
             <div id="content">
 
                 <!-- TopBar Guru -->
-                <?php $this->load->view('Bar/Navbar_guru'); ?>
+                <?php $this->load->view('Bar/Navbar_admin'); ?>
 
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -51,25 +51,45 @@
 
 
                 <div class="container mt-5">
+                    <?php if (isset($nisn_exists) && !$nisn_exists) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        NISN sudah digunakan.
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($nis_exists) && !$nis_exists) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        NIS sudah digunakan.
+                    </div>
+                    <?php endif; ?>
+
+                    <?php if(validation_errors()) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo validation_errors(); ?>
+                    </div>
+                    <?php endif; ?>
+
                     <div class="row">
                         <div class="col-lg-12 mb-4">
                             <div class="box box-info">
                                 <div class="box-body">
                                     <div class="card mb-4">
                                         <div class="card-body">
-                                            <?php echo form_open('datasiswa/proses_tambah_siswa'); ?>
+                                            <?php echo form_open('DataSiswa/proses_tambah_siswa'); ?>
                                             <h1 class="h6 text-gray-800" style="text-align: center;">Data Pribadi Siswa
                                             </h1>
                                             <hr>
                                             <div class="form-group">
                                                 <label for="nis">NIS</label>
                                                 <input type="text" class="form-control" name="nis" required>
+                                                <?php echo form_error('nis', '<small class="text-danger">', '</small>'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="nisn">NISN</label>
                                                 <input type="text" class="form-control" name="nisn" id="nisn" required
                                                     oninput="setUsernameFromNISN()">
+                                                <?php echo form_error('nisn', '<small class="text-danger">', '</small>'); ?>
                                             </div>
 
                                             <div class="form-group">
@@ -111,17 +131,7 @@
                                                 <label for="email">Email</label>
                                                 <input type="email" class="form-control" name="email">
                                             </div>
-                                            
 
-                                            <div class="form-group">
-                                                <!-- Menyembunyikan elemen select -->
-                                                <select class="form-control" name="status" style="display: none;">
-                                                    <option value="Aktif">Aktif</option>
-                                                    <option value="Tidak Aktif">Tidak Aktif</option>
-                                                </select>
-                                                <!-- Menampilkan nilai yang dipilih -->
-                                                <span style="display: none;" id="selected-status">Aktif</span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -168,10 +178,10 @@
                                                 <label for="no_telp_wali">No. Telp Wali</label>
                                                 <input type="text" class="form-control" name="no_telp_wali">
                                             </div>
-                                            
+
                                             <div class="form-group">
-                                                <input type="hidden" class="form-control" name="aktif" id="aktif" value="1"
-                                                    required>
+                                                <input type="hidden" class="form-control" name="aktif" id="aktif"
+                                                    value="1" required>
                                             </div>
 
                                             <div class="form-group">
@@ -251,16 +261,6 @@
             <!-- Page level custom scripts -->
             <script src="assets/js/demo/datatables-demo.js"></script>
 
-            <script>
-            // Mendapatkan elemen select dan elemen span
-            var selectStatus = document.querySelector('select[name="status"]');
-            var selectedStatus = document.getElementById('selected-status');
-
-            // Menggunakan event change untuk memperbarui nilai span saat pemilihan berubah
-            selectStatus.addEventListener('change', function() {
-                selectedStatus.textContent = selectStatus.value;
-            });
-            </script>
 
 </body>
 
