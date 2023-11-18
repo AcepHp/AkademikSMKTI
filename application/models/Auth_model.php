@@ -82,9 +82,10 @@
             $this->session->set_userdata('aktif', $user->aktif);
 
             $this->db->where('id_users', $id_users);
-            $this->db->update('users', $data);
+
+            return $this->db->update('users', $data);
             
-            return ($this->db->affected_rows() > 0);
+            // return ($this->db->affected_rows() > 0);
         }        
 
     }

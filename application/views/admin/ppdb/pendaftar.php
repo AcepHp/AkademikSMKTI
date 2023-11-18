@@ -90,7 +90,7 @@
                                                 <td><?php echo $row->pilihan_dua ?></td>
                                                 <td><?php echo $row->Nama_lengkap ?></td>
                                                 <td><?php echo $row->Jenis_kelamin ?></td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td>
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#pendaftarModal<?php echo $row->id_ppdb; ?>">
@@ -200,6 +200,30 @@
                         </div>
                         <div class="form-group" style="display:none;">
                             <input type="text" name="username" value="<?php echo $row->Nama_lengkap; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="Tempat_lahir" value="<?php echo $row->Tempat_lahir; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="Tanggal_Lahir" value="<?php echo $row->Tanggal_Lahir; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="Jenis_kelamin" value="<?php echo $row->Jenis_kelamin; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="Alamat" value="<?php echo $row->Alamat; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="Nama_ayah" value="<?php echo $row->Nama_ayah; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="Nama_ibu" value="<?php echo $row->Nama_ibu; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="No_telp_ortu" value="<?php echo $row->No_telp_ortu; ?>">
+                        </div>
+                        <div class="form-group" style="display:none;">
+                            <input type="text" name="No_telp_wali" value="<?php echo $row->No_telp_wali; ?>">
                         </div>
                         <div class="form-group">
                             <label for="status">Status:</label>
