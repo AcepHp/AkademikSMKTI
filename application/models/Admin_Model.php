@@ -20,6 +20,10 @@ final class Admin_Model extends CI_Model{
         return $query->result(); // Mengembalikan hasil dalam bentuk array of objects
     }
 
+    public function get_all(){
+        return $this->db->count_all('guru');
+    }
+
     public function tambah_guru($data) {
         // Masukkan data guru ke dalam tabel database
         $this->db->insert('guru', $data);

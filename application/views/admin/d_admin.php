@@ -1,3 +1,7 @@
+<?php
+$current_page = basename($_SERVER['PHP_SELF']); // Mengambil nama file halaman saat ini
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +42,7 @@
             <div id="content">
 
                 <!-- TopBar Admin -->
-                <?php $this->load->view('Bar/Navbar_admin'); ?>
+                <?php $this->load->view('Bar/Navbar_admin', $current_page); ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -50,7 +54,6 @@
 
                     <!-- Content Row -->
                     <div class="row">
-
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
@@ -58,8 +61,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Manajemen Sekolah</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Jurusan Sekolah</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $jurusan ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -76,8 +80,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Guru</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Manajemen Sekolah</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $manajemen; ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -93,12 +98,12 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Kategoti
-                                                Tulisan
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Guru
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                        <?php echo $guru ?></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -124,8 +129,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Tag</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Berita</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $berita ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -138,7 +144,6 @@
 
                     <!-- Second Row -->
                     <div class="row">
-
                         <!-- Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-danger shadow h-100 py-2">
@@ -146,8 +151,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                Tulisan</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Acara</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $acara ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-users fa-2x text-gray-300"></i>
@@ -164,8 +170,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
-                                                Halaman</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Foto</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $foto?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-newspaper fa-2x text-gray-300"></i>
@@ -182,8 +188,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                                                Testimoni</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Video</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $video ?>
+                                            </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
@@ -200,8 +207,8 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Agenda</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                                Komentar</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $diskusi?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-chart-bar fa-2x text-gray-300"></i>
@@ -211,11 +218,53 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Content Column -->
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Tujuan Sekolah</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p class="font-weight-bold"><?php echo $vmt->tujuan?></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Visi</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><?php echo $vmt->visi?></p>
+                                </div>
+                            </div>
+
+                            <!-- Approach -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Misi</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><?php echo $vmt->misi?></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <!-- End of Main Content -->
+
 
             </div>
+
+
 
             <!-- Footer Admin -->
             <?php $this->load->view('Bar/Footer_admin'); ?>

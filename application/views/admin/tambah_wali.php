@@ -51,7 +51,7 @@
                         <?php echo form_open('Wali/tambah_wali'); ?>
                         <div class="form-group">
                             <label for="kode_jurusan">Jurusan</label>
-                            <select class="form-control" name="kode_jurusan" required>
+                            <select class="form-control" name="kode_jurusan" id="kode_jurusan" required>
                                 <option value="">Pilih Jurusan</option>
                                 <?php foreach ($jurusan as $jurusan_item): ?>
                                 <option value="<?php echo $jurusan_item->kode_jurusan; ?>">
@@ -59,12 +59,14 @@
                                 <?php endforeach; ?>
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="id_kelas">Kelas:</label>
-                            <select class="form-control" name="id_kelas" required>
+                            <select class="form-control" name="id_kelas" id="id_kelas" required>
                                 <option value="">Pilih Kelas</option>
                                 <?php foreach ($kelas as $kelas_item): ?>
-                                <option value="<?php echo $kelas_item->id_kelas; ?>">
+                                <option value="<?php echo $kelas_item->id_kelas; ?>"
+                                    data-jurusan="<?php echo $kelas_item->kode_jurusan; ?>">
                                     <?php echo $kelas_item->nama_kelas; ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -92,25 +94,48 @@
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
-        <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
+    <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
+    <script>
+    // Get the Jurusan and Kelas dropdowns
+    var jurusanDropdown = document.getElementById('kode_jurusan');
+    var kelasDropdown = document.getElementById('id_kelas');
 
-        <!-- Page level custom scripts -->
-        <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
-        <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+    // Add event listener to Jurusan dropdown
+    jurusanDropdown.addEventListener('change', function() {
+        // Get the selected Jurusan value
+        var selectedJurusan = jurusanDropdown.value;
 
+        // Clear previous options in Kelas dropdown
+        kelasDropdown.innerHTML = '<option value="">Pilih Kelas</option>';
+
+        // Filter and add new options in Kelas dropdown based on selected Jurusan
+        <?php foreach ($kelas as $kelas_item): ?>
+        <?php // Check if the current Kelas item matches the selected Jurusan ?>
+        if ('<?php echo $kelas_item->kode_jurusan; ?>' === selectedJurusan) {
+            var option = document.createElement('option');
+            option.value = '<?php echo $kelas_item->id_kelas; ?>';
+            option.textContent = '<?php echo $kelas_item->nama_kelas; ?>';
+            kelasDropdown.appendChild(option);
+        }
+        <?php endforeach; ?>
+    });
+    </script>
 </body>
 
 </html>

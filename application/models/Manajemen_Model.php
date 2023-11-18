@@ -14,6 +14,10 @@
             return $this->db->get('manajemen');
         }
 
+        public function get_all(){
+            return $this->db->count_all('manajemen');
+        }
+
         public function tambahmanajemen(){
             $nama = $this->input->post("nama");
             $jabatan = $this->input->post("jabatan");        

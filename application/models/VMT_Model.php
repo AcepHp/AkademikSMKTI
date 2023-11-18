@@ -14,6 +14,10 @@
             return $this->db->get('vmt');
         }
 
+        public function get_all(){
+            return $this->db->get('vmt');
+        }
+
         public function tambahvmt(){
             $judul = $this->input->post("judul"); 
             $deskripsi = $this->input->post("deskripsi");           

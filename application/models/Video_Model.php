@@ -14,6 +14,10 @@
             return $this->db->get('video');
         }
 
+        public function get_all(){
+            return $this->db->count_all('video');
+        }
+
         public function get_youtube_video_id($url) {
             $video_id = '';
         

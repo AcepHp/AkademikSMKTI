@@ -14,6 +14,10 @@
             return $this->db->get('berita');
         }
 
+        public function get_all(){
+            return $this->db->count_all('berita');
+        }
+
         public function tambahberita(){
             $judul = $this->input->post("judul");
             $deskripsi = $this->input->post("deskripsi");

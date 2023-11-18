@@ -5,14 +5,32 @@ class admin extends CI_Controller {
         $this->load->model('Admin_Model');
         $this->load->model('Jurusan_model');
         $this->load->model('Kelas_model');
+        $this->load->model('Berita_Model');
+        $this->load->model('Acara_Model');
+        $this->load->model('Galeri_Model');
+        $this->load->model('Video_Model');
+        $this->load->model('Manajemen_Model');
+        $this->load->model('VMT_Model');
+        $this->load->model('diskusi_model');
+
         $this->load->library('form_validation');
     }
     public function index() {
         if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
             redirect('auth');
         }
+
+        $data['berita'] = $this->Berita_Model->get_all();
+        $data['acara'] = $this->Acara_Model->get_all();
+        $data['foto'] = $this->Galeri_Model->get_all();
+        $data['video'] = $this->Video_Model->get_all();
+        $data['jurusan'] = $this->Jurusan_model->get_all();
+        $data['manajemen'] = $this->Manajemen_Model->get_all();
+        $data['guru'] = $this->Admin_Model->get_all();
+        $data['vmt'] = $this->VMT_Model->get_all()->row();
+        $data['diskusi'] = $this->diskusi_model->get_all();
         
-        $this->load->view('admin/d_admin');
+        $this->load->view('admin/d_admin', $data);
     }
 
     public function data_nilai() {
