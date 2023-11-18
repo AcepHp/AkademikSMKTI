@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Lihat Topik</title>
+    <title>SMK-TI GNC</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/siswa_dashboard.css'); ?>">
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url('assets/css/sb-admin-2.min.css'); ?>" rel="stylesheet">
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 </head>
 
 <body id="page-top">

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Siswa</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
 
@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/gantimodal.css') ?>">
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 

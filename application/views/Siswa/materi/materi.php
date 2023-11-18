@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SMK TI GNC</title>
+    <title>SMK-TI GNC</title>
     <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
     <!-- Custom fonts for this template-->
@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?=base_url('assets/')?>css/penilaian.css" rel="stylesheet">
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
