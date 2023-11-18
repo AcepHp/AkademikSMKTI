@@ -225,6 +225,20 @@ class DataSiswa extends CI_Controller {
                 $no_telp_wali = $sheet->getCell('N' . $row)->getValue();
                 $email = $sheet->getCell('O' . $row)->getValue();
 
+                // Add the $user_data array
+                $user_data = array(
+                    'NISN' => $nisn,
+                    'nama_lengkap' => $nama_lengkap,
+                    'username' => $nisn,
+                    'password' => md5('siswasmktignc'), // You might consider using a more secure method for password hashing
+                    'role' => 'Siswa',
+                    'NIP' => null,
+                    'aktif' => '0',
+                );
+
+                // Insert user data into 'users' table
+                $this->db->insert('users', $user_data);
+
                 $data = array(
                     'NIS' => $nis,
                     'NISN' => $nisn,
