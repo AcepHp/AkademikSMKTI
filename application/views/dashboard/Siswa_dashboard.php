@@ -9,18 +9,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Siswa</title>
+    <title>SMK-TI GNC</title>
 
     <!-- Custom fonts for this template-->
-
-    <link href="<?=base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
+    <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?=base_url('assets/css/sb-admin-2.min.css')?>" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -29,7 +28,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar Guru -->
+        <!-- Sidebar Admin -->
         <?php $this->load->view('Bar/Sidebar_siswa'); ?>
 
         <!-- Content Wrapper -->
@@ -38,7 +37,7 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- TopBar Guru -->
+                <!-- TopBar Admin -->
                 <?php $this->load->view('Bar/Navbar_siswa'); ?>
 
                 <!-- Begin Page Content -->
@@ -138,47 +137,44 @@
                         </div>
                     </div>
 
-
                     <!-- Content Row -->
-                </div>
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
-                <!-- Button trigger modal -->
-                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Launch static backdrop modal
-            </button> -->
-
-                <!-- Modal -->
-                <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
-                            </div>
-                            <div class="modal-body">
-                                <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah password
-                                    default dari akun siswa.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                    id="closeModal">Nanti Saja</button>
-                                <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password
-                                    Sekarang</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah
+                                        password
+                                        default dari akun siswa.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                        id="closeModal">Nanti Saja</button>
+                                    <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password
+                                        Sekarang</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
                 </div>
             </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <?php $this->load->view('Bar/Footer_admin'); ?>
+            <!-- End of Footer -->
+
+
+            <!-- End of Content Wrapper -->
 
         </div>
         <!-- End of Page Wrapper -->
@@ -251,7 +247,6 @@
         <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
 
 </body>
 

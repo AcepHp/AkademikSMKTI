@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Forum Diskusi</title>
+    <title>SMK-TI GNC</title>
     <!-- Tambahkan link CSS dari Bootstrap -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,6 +31,7 @@
     <link href="<?php echo base_url()?>assets/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
     <style>
     .custom-textarea {
         border: 1px solid #ccc;

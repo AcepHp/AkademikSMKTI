@@ -20,6 +20,10 @@
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -82,30 +86,25 @@
                                     <?php echo $mapel[0]->nama_jurusan; ?>)</h6>
                             </div>
                             <div class="card-body">
-                                <div class="form-inline mb-2">
-                                    <!-- Tambahkan class form-inline di sini -->
-                                    <label for="myInput" class="mr-2">Cari:</label> <!-- Tambahkan label "Cari" -->
-                                    <input class="form-control form-control-sm" id="myInput" type="text"
-                                        placeholder="Search..">
-                                </div>
+                                
                                 <div class="table-responsive">
-                                    <table class="table table-bordered">
+                                <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>ID Guru</th>
-                                                <th>Nama Guru</th>
-                                                <th>Nama Kelas</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Guru</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Kelas</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody id="myTable">
+                                        <?php $no = 1; ?>
                                             <?php foreach ($pengajar_mapel as $row) : ?>
                                             <tr>
-                                                <td style="display: none;"><?php echo $row->ID_PM; ?></td>
-                                                <td><?php echo $row->ID_Guru; ?></td>
+                                                <td style="width:5%; text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
                                                 <td><?php echo $row->Nama_Lengkap; ?></td>
                                                 <td><?php echo $row->nama_kelas; ?></td>
-                                                <td>
+                                                <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#penugasanModal<?php echo $row->ID_PM; ?>">
@@ -214,11 +213,26 @@
             <!-- Page level plugins -->
             <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
-            <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
-
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+            <script>
+            new DataTable('#example', {
+                columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    },
+                    {
+                        targets: [1],
+                        orderData: [1, 0]
+                    },
+                    {
+                        targets: [3],
+                        orderData: [3, 0]
+                    }
+                ]
+            });
+            </script>
 
             <script>
             $(document).ready(function() {
