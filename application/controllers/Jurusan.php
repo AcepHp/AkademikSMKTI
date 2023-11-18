@@ -30,6 +30,7 @@ class Jurusan extends CI_Controller {
             );
 
             if ($this->Jurusan_model->insert_jurusan($data)) {
+                $this->session->set_flashdata("success_tambah", "Data Jurusan berhasil ditambahkan!");
                 redirect('jurusan/index');
             } else {
                 // Handle error
@@ -51,6 +52,7 @@ class Jurusan extends CI_Controller {
             );
 
             if ($this->Jurusan_model->update_jurusan($kode, $updated_data)) {
+                $this->session->set_flashdata("success_edit", "Data Jurusan berhasil diupdate!");
                 redirect('jurusan/index');
             } else {
                 // Handle error
@@ -65,6 +67,7 @@ class Jurusan extends CI_Controller {
             redirect('auth');
         }
         if ($this->Jurusan_model->delete_jurusan($kode)) {
+            $this->session->set_flashdata("success_hapus", "Data Jurusan berhasil dihapus!");
             redirect('jurusan/index');
         } else {
             // Handle error

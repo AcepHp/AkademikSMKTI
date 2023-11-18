@@ -66,14 +66,41 @@
 
                     </div>
 
-
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Table Data Mata Pelajaran</h6>
                         </div>
                         <div class="card-body">
+                            <?php if ($this->session->userdata('success_tambah')): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo $this->session->userdata('success_tambah'); ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <?php $this->session->unset_userdata('success_tambah'); ?>
+                            <?php endif; ?>
+
+                            <?php if ($this->session->userdata('success_edit')): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo $this->session->userdata('success_edit'); ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <?php $this->session->unset_userdata('success_edit'); ?>
+                            <?php endif; ?>
+
+                            <?php if ($this->session->userdata('success_hapus')): ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?php echo $this->session->userdata('success_hapus'); ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <?php $this->session->unset_userdata('success_hapus'); ?>
+                            <?php endif; ?>
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>

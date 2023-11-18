@@ -35,9 +35,7 @@
             }
 
             $this->db->where("id_slide");
-            $this->session->set_flashdata("success_tambah_silder", "<div
-             class='alert alert-success' role='alert'>Gambar Slide berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' 
-             aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success_tambah_silder", "<div class='alert alert-success' role='alert'>Gambar Slide berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->insert("slideshow", $slideshow);
         }
         
@@ -90,6 +88,7 @@
                     unlink($foto);
                 }
                 $this->db->where('id_slide', $id);
+                $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Slide show berhasil dihapus!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
                 return $this->db->delete('slideshow');
             }
         }

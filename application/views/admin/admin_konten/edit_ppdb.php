@@ -49,6 +49,8 @@
                     </div>
 
                     <div class="container mt-5">
+                        <?php echo $this->session->userdata('error');?>
+                        <?php $this->session->unset_userdata('error');?>
                         <?php echo form_open_multipart('Kelola_Dashboard/PPDB_Admin/proseseditppdb/' . $ppdb_admin->id_ppdb); ?>
                         <div class="form-group">
                             <label for="nama">Nama:</label>

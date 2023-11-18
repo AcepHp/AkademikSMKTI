@@ -70,24 +70,40 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <!-- Flash Data Berhasil tambah data -->
+                                    <?php echo $this->session->userdata('success_tambah');?>
+                                    <?php $this->session->unset_userdata('success_tambah');?>
+
+                                    <!-- Flash Data Berhasil edit data -->
+                                    <?php echo $this->session->userdata('success_edit');?>
+                                    <?php $this->session->unset_userdata('success_edit');?>
+
+                                    <!-- Flash Data Berhasil Hapus data -->
+                                    <?php echo $this->session->userdata('success_hapus');?>
+                                    <?php $this->session->unset_userdata('success_hapus');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No
+                                                </th>
                                                 <th style="text-align: center; vertical-align: middle;">Tahun</th>
-                                                <th style="text-align: center; vertical-align: middle;">Program Keahlian</th>
+                                                <th style="text-align: center; vertical-align: middle;">Program Keahlian
+                                                </th>
                                                 <th style="text-align: center; vertical-align: middle;">Kuota</th>
-                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1;?>
                                             <?php foreach ($kuota as $row) : ?>
                                             <tr>
-                                                <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                    <?php echo $no++; ?></td>
                                                 <td><?php echo $row->tahun ?></td>
                                                 <td><?php echo $row->nama_jurusan ?></td>
-                                                <td style="text-align: center; vertical-align: middle;"><?php echo $row->kuota ?></td>
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                    <?php echo $row->kuota ?></td>
                                                 <td style="width:10%; text-align: center; vertical-align: middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"

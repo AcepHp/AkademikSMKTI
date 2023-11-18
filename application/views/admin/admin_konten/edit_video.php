@@ -51,24 +51,24 @@
                         <?php echo form_open_multipart('Kelola_Dashboard/Video/proseseditvideo/' . $video->id_video); ?>
                         <div class="form-group">
                             <label for="judul">Judul:</label>
-                            <input type="text" class="form-control" name="judul"
-                                value="<?php echo $video->judul; ?>">
+                            <input type="text" class="form-control" name="judul" value="<?php echo $video->judul; ?>">
                         </div>
                         <div class="form-group">
-                            <label for="url">Video:</label>
-                            <textarea type="text" class="form-control" name="url"
-                                value="<?php echo $video->url; ?>"><?php echo $video->url; ?></textarea>
+                            <label for="url">Link Video:</label>
+                            <textarea class="form-control" name="url"
+                                id="urlTextarea"><?php echo $video->url; ?></textarea>
+                            <div class="invalid-feedback" id="errorMessage">Masukkan URL yang valid.</div>
                         </div>
                         <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
                         <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
-           <!-- Footer Admin -->
-           <?php $this->load->view('Bar/Footer_admin'); ?>
+            <!-- Footer Admin -->
+            <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
     </div>
-    
+
     <?php $this->load->view('Bar/Logout_modal'); ?>
 
 
@@ -88,6 +88,24 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
     <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+        $('form').submit(function(event) {
+            var urlValue = $('#urlTextarea').val();
+            var urlPattern = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+
+            if (!urlPattern.test(urlValue)) {
+                $('#urlTextarea').addClass('is-invalid');
+                event.preventDefault(); // Mencegah pengiriman formulir jika URL tidak valid
+            } else {
+                $('#urlTextarea').removeClass('is-invalid');
+            }
+        });
+    });
+    </script>
 
 </body>
 

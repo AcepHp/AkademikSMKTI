@@ -48,31 +48,32 @@
                             <h1 class="h3 mb-0 text-gray-800">Edit Data Info</h1>
                         </div>
                     </div>
-                        <div class="container mt-5">
-                            <?php echo form_open_multipart('Kelola_Dashboard/Info/proseseditinfo/' . $info->id_info); ?>
-                            <div class="form-group">
-                                <label for="judul">Judul:</label>
-                                <input type="text" class="form-control" name="judul"
-                                    value="<?php echo $info->judul; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label for="deskripsi">Deskripsi:</label>
-                                <textarea type="text" class="form-control" name="deskripsi"
-                                    value="<?php echo $info->deskripsi; ?>"><?php echo $info->deskripsi; ?></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="gambar">Gambar Saat Ini:</label>
-                                <img src="<?php echo $info->gambar; ?>" alt="Gambar Saat Ini" width="150">
-                            </div>
-                            <div class="form-group">
-                                <label for="new_gambar">Pilih Gambar Baru:</label>
-                                <input type="file" class="form-control" name="gambar">
-                            </div>
-
-                            <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                            <?php echo form_close(); ?>
+                    <div class="container mt-5">
+                        <?php echo $this->session->userdata('error');?>
+                        <?php $this->session->unset_userdata('error');?>
+                        <?php echo form_open_multipart('Kelola_Dashboard/Info/proseseditinfo/' . $info->id_info); ?>
+                        <div class="form-group">
+                            <label for="judul">Judul:</label>
+                            <input type="text" class="form-control" name="judul" value="<?php echo $info->judul; ?>">
                         </div>
+                        <div class="form-group">
+                            <label for="deskripsi">Deskripsi:</label>
+                            <textarea type="text" class="form-control" name="deskripsi"
+                                value="<?php echo $info->deskripsi; ?>"><?php echo $info->deskripsi; ?></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gambar">Gambar Saat Ini:</label>
+                            <img src="<?php echo $info->gambar; ?>" alt="Gambar Saat Ini" width="150">
+                        </div>
+                        <div class="feditorm-group">
+                            <label for="new_gambar">Pilih Gambar Baru:</label>
+                            <input type="file" class="form-control" name="gambar">
+                        </div>
+
+                        <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
+                        <?php echo form_close(); ?>
+                    </div>
                 </div>
             </div>
             <!-- Footer Admin -->

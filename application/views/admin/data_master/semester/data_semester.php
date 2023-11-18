@@ -60,10 +60,20 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <?php if ($this->session->userdata('success_edit')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_edit'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_edit'); ?>
+                                <?php endif; ?>
                                 <table id="example" class="table table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th style="width:5%; text-align: center; vertical-align: middle; width:5%">No</th>
+                                            <th style="width:5%; text-align: center; vertical-align: middle; width:5%">
+                                                No</th>
                                             <th style="text-align: center; vertical-align: middle;">Semester</th>
                                             <th style="text-align: center; vertical-align: middle;">Status</th>
                                             <th style="text-align: center; vertical-align: middle;">Aksi</th>
@@ -74,7 +84,8 @@
 
                                         <?php foreach ($semesters as $semester): ?>
                                         <tr>
-                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++;?></td>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++;?>
+                                            </td>
                                             <td><?php echo htmlspecialchars($semester->nama_semester); ?></td>
                                             <td><?php echo htmlspecialchars($semester->status); ?></td>
                                             <td style="text-align: center; vertical-align: middle;">

@@ -37,11 +37,11 @@ class Wali extends CI_Controller {
             $result = $this->Wali_model->tambah_wali($data_posted);
     
             if ($result) {
-                // Ambil data wali kelas terbaru dari database
+                $this->session->set_flashdata('success_tambah', 'Wali Kelas berhasil ditambahkan!');
                 $data['wali'] = $this->Wali_model->get_wali();
     
                 // Tampilkan view dengan data yang sudah diperbarui
-                $this->load->view('admin/walikelas', $data);
+                redirect('Wali/index');
             } else {
                 echo "Gagal menambahkan data wali.";
             }
@@ -65,7 +65,8 @@ class Wali extends CI_Controller {
             );
     
             $this->Wali_model->update_wali($id, $data_to_update);
-    
+
+            $this->session->set_flashdata('success_edit', 'Wali Kelas berhasil ditambahkan!');
             redirect('wali/index');
         }
     
@@ -78,6 +79,7 @@ class Wali extends CI_Controller {
             redirect('auth');
         }
         if ($this->Wali_model->delete_wali($id)) {
+            $this->session->set_flashdata('success_hapus', 'Wali Kelas berhasil dihapus!');
             redirect('wali/index');
         } else {
             // Handle error

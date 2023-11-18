@@ -74,6 +74,11 @@
                                     <!-- Flash Data Berhasil edit data -->
                                     <?php echo $this->session->userdata('success_edit_silder');?>
                                     <?php $this->session->unset_userdata('success_edit_silder');?>
+
+                                    <!-- Flash Data Berhasil hapus data -->
+                                    <?php echo $this->session->userdata('success_hapus');?>
+                                    <?php $this->session->unset_userdata('success_hapus');?>
+                                    
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -100,11 +105,11 @@
                                                         data-toggle="modal"
                                                         data-target="#guruModal<?php echo $row->id_slide; ?>">
                                                         <i class="fas fa-eye"></i>
-                                                    </a><hr>
+                                                    </a>
                                                     <a href="<?php echo site_url('Kelola_Dashboard/Slide/edit_slide/'.$row->id_slide); ?>"
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-edit"></i>
-                                                    </a><hr>
+                                                    </a>
                                                     <a href="#" class="btn btn-sm btn-danger" title="Hapus"
                                                         onclick="Delete_Slide('<?php echo $row->id_slide; ?>')">
                                                         <i class="fas fa-trash"></i>

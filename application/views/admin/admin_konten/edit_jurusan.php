@@ -16,7 +16,7 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-        <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
@@ -52,7 +52,11 @@
                     </div>
 
                     <div class="container mt-5">
-                        <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/Jurusan/proseseditjurusan/'. $jurusan_admin->id_jurusan); ?>" method="POST" enctype="multipart/form-data">
+                        <?php echo $this->session->userdata('error');?>
+                        <?php $this->session->unset_userdata('error');?>
+                        <form id="myForm"
+                            action="<?php echo site_url('Kelola_Dashboard/Jurusan/proseseditjurusan/'. $jurusan_admin->id_jurusan); ?>"
+                            method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nama_jurusan">Nama Jurusan:</label>
                                 <input type="text" class="form-control" name="nama_jurusan"

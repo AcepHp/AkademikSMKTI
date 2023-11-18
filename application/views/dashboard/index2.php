@@ -213,7 +213,7 @@
         <div class="kepsek row">
             <div class="col-md-4 p-0">
                 <div class="kiri card text-center">
-                    <img class="Foto" style="height:350px; width:80%" src="<?php echo $kepsek->gambar?>">
+                    <img class="Foto" style="height:60%; width:60%" src="<?php echo $kepsek->gambar?>">
                     <h4 class="card-title"><?php echo $kepsek->nama?></h4>
                 </div>
             </div>

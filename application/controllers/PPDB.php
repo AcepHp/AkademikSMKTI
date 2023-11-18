@@ -311,21 +311,6 @@ class PPDB extends CI_Controller {
         $this->load->view('admin/ppdb/pendaftar' , $data);
     }
 
-    // public function tambah_pendaftar() {
-    //     $this->load->view('admin/ppdb/tambah_kuota');
-    // }
-
-    // public function prosestambahpendaftar(){
-    //     if($this->PPDB_Model->tambahkuota()){
-    //         redirect('PPDB/kuota','refresh');
-
-    //     } else {
-            
-    //         redirect('PPBD/tambah_kuota','refresh');
-            
-    //     }
-    // }
-
     public function editpendaftaran($id) {
         if($this->PPDB_Model->editpendaftar($id)){
             redirect('PPDB/pendaftar','refresh');
@@ -365,8 +350,10 @@ class PPDB extends CI_Controller {
     
             // Panggil sendPdfToEmail dengan parameter yang sesuai
             if ($this->PPDB_Model->sendPdfToEmail($id, $data['email'], $file)) {
+                $this->session->set_flashdata('success_send_email', 'Email berhasil dikirim!');
                 redirect('PPDB/pendaftar', 'refresh');
             } else {
+                $this->session->set_flashdata('error_send_email', 'Gagal mengirim email.');
                 redirect('PPDB/sendemail', 'refresh');
             }
         } else {
