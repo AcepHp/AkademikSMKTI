@@ -156,25 +156,25 @@
             </button> -->
 
             <!-- Modal -->
-<div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
+            <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah password
+                                default dari akun siswa.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="closeModal">Nanti Saja</button>
+                            <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password Sekarang</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah password default dari akun siswa.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Nanti Saja</button>
-                <button
-                    onclick="gantiPassword()"
-                    class="btn btn-primary">Ganti Password Sekarang</button>
-            </div>
-        </div>
-    </div>
-</div>
         </div>
 
     </div>
@@ -189,7 +189,7 @@
     <?php $this->load->view('Bar/Logout_modal'); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
+    <script>
     // Mengambil elemen modal
     var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
     var closeModalButton = document.getElementById('closeModal');
@@ -216,9 +216,9 @@
 
     // Fungsi untuk mengganti password
     function gantiPassword() {
-        window.location.href='<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>';
+        window.location.href = '<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>';
     }
-</script>
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>

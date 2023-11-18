@@ -181,7 +181,7 @@
 
                                             <div class="form-group">
                                                 <input type="hidden" class="form-control" name="aktif" id="aktif"
-                                                    value="1" required>
+                                                    value="0" required>
                                             </div>
 
                                             <div class="form-group">
