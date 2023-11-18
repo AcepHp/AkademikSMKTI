@@ -129,7 +129,7 @@ require_once APPPATH.'../vendor/autoload.php';
             );
 
             $this->db->where("id_popup", $id);
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success_tambah", "<div class='alert alert-success' role='alert'>Pop Up berhasil ditambahkan!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->insert("popup",$data);
         }
 
@@ -157,13 +157,13 @@ require_once APPPATH.'../vendor/autoload.php';
             }
         
             // Redirect dengan pesan sukses
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-        
+            $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Pop Up berhasil diupdate!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return true; // Mengembalikan true sebagai tanda sukses
         }
 
         public function delete_popup($id) {
             $this->db->where('id_popup', $id);
+            $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Pop Up berhasil dihapus!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->delete('popup');
         }
 
@@ -189,7 +189,7 @@ require_once APPPATH.'../vendor/autoload.php';
             );
 
             $this->db->where("id_kuota");
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Kuota berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success_tambah", "<div class='alert alert-success' role='alert'>Kuota berhasil ditambahkan !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->insert("kuota",$data);
         }
 
@@ -206,12 +206,13 @@ require_once APPPATH.'../vendor/autoload.php';
             $existing_kuota = $this->db->get_where("kuota", array("id_kuota" => $id))->row();
         
             $this->db->where("id_kuota", $id);
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Kuota berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Kuota berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("kuota", $data);
         }
 
         public function delete_kuota($id) {
             $this->db->where('id_kuota', $id);
+            $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Kuota berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->delete('kuota');
         }
 

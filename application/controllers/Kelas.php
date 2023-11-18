@@ -44,6 +44,7 @@ class Kelas extends CI_Controller
             );
 
             if ($this->Kelas_model->create_kelas($data_kelas)) {
+                $this->session->set_flashdata("success_tambah", "Data Kelas berhasil ditambahkan!");
                 redirect('kelas/index');
             } else {
                 // Handle error
@@ -88,6 +89,7 @@ class Kelas extends CI_Controller
             );
 
             if ($this->Kelas_model->update_kelas($id_kelas, $data_kelas)) {
+                $this->session->set_flashdata("success_edit", "Data Kelas berhasil diupdate!");
                 redirect('kelas/index');
             } else {
                 // Handle error
@@ -100,6 +102,7 @@ class Kelas extends CI_Controller
             redirect('auth');
         }
         if ($this->Kelas_model->delete_kelas($id_kelas)) {
+            $this->session->set_flashdata("success_hapus", "Data Kelas berhasil dihapus!");
             redirect('kelas/index');
         } else {
             // Handle error

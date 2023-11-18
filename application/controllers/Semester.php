@@ -34,6 +34,7 @@ class Semester extends CI_Controller
             }
 
             if ($this->Semester_model->update_semester($id, $data)) {
+                $this->session->set_flashdata("success_edit", "Tahun Akademik berhasil diedit!");
                 redirect('semester');
             }
         }

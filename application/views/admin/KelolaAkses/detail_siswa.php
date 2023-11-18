@@ -34,42 +34,51 @@
                     <!-- Page Heading -->
                     <div class="row mb-3">
                         <div class="col">
-                            <span class="h2" style="font-weight: bold; padding-right: 10px">Atur Siswa |</span><span class="h4">Detail Akses Siswa</span>
+                            <span class="h2" style="font-weight: bold; padding-right: 10px">Atur Siswa |</span><span
+                                class="h4">Detail Akses Siswa</span>
                         </div>
                     </div>
                     <!-- Content Row -->
                     <div class="row">
                         <div class="col">
-                            <div class="card-body" style="box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-                                <!-- <?php if ($this->session->flashdata('sukses')) { ?>
-                                <div class="alert alert-success alert-dismissible fade show">
-                                    <button type="button" class="close" data-dismiss="alert"
-                                        aria-label="Close">&times;</button>
-                                    <h6>
-                                        <i class="icon fa fa-check"></i>
-                                        Data Berhasil
-                                        <strong>
-                                            <?= $this->session->flashdata('sukses');   ?>
-                                        </strong>
-                                    </h6>
-                                </div>
-                                <?php } ?>
+                            <div class="card-body"
+                                style="box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
 
-                                <?php
-                                    if ($this->session->flashdata('gagal')) { ?>
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="close" data-dismiss="alert"
-                                        aria-label="Close">&times;</button>
-                                    <h6>
-                                        <i class="icon fa fa-check"></i>
-                                        Gagal
-                                        <strong>
-                                            <?= $this->session->flashdata('gagal');   ?>
-                                        </strong>
-                                    </h6>
+                                <!-- Aktifkan Siswa -->
+                                <?php if ($this->session->flashdata('sukses_aktif')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->flashdata('sukses_aktif'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <?php } ?> -->
-                                <div class="row mb-4" style="display: flex; align-items: center; justify-content: center">
+                                <?php $this->session->unset_userdata('sukses_aktif'); ?>
+                                <?php endif; ?>
+
+                                <!-- Nonaktifkan Siswa -->
+                                <?php if ($this->session->flashdata('sukses_nonaktif')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->flashdata('sukses_nonaktif'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('sukses_nonaktif'); ?>
+                                <?php endif; ?>
+
+                                 <!-- Reset Password Siswa -->
+                                 <?php if ($this->session->flashdata('sukses_reset')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->flashdata('sukses_reset'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('sukses_reset'); ?>
+                                <?php endif; ?>
+
+                                <div class="row mb-4"
+                                    style="display: flex; align-items: center; justify-content: center">
                                     <div class="col-2">
                                         <span>NISN</span>
                                     </div>
@@ -90,7 +99,8 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-5" style="display: flex; align-items: center; justify-content: center">
+                                <div class="row mb-5"
+                                    style="display: flex; align-items: center; justify-content: center">
                                     <div class="col-2">
                                         <span>Username</span>
                                     </div>
@@ -107,18 +117,25 @@
                                         <span>:</span>
                                     </div>
                                     <div class="col-3">
-                                        <input class="form-control  <?php echo ($datasiswa['aktif'] == '2') ? 'text-danger' : ''; ?> "value="<?php echo ($datasiswa['aktif'] == '0')  || ($datasiswa['aktif'] == '1') ? 'Aktif': 'Tidak Aktif'; ?>" disabled>
+                                        <input
+                                            class="form-control  <?php echo ($datasiswa['aktif'] == '2') ? 'text-danger' : ''; ?> "
+                                            value="<?php echo ($datasiswa['aktif'] == '0')  || ($datasiswa['aktif'] == '1') ? 'Aktif': 'Tidak Aktif'; ?>"
+                                            disabled>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col" style="display: flex; justify-content: flex-end">
                                         <?php if ($datasiswa['aktif'] == '1' || $datasiswa['aktif'] == '0') { ?>
-                                            <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#nonAktivasiModal">Non-Aktifkan</button>
+                                        <button type="button" class="btn btn-danger mr-2" data-toggle="modal"
+                                            data-target="#nonAktivasiModal">Non-Aktifkan</button>
                                         <?php } else { ?>
-                                            <button type="button" class="btn btn-success mr-2" data-toggle="modal" data-target="#aktivasiModal">Aktifkan</button>
+                                        <button type="button" class="btn btn-success mr-2" data-toggle="modal"
+                                            data-target="#aktivasiModal">Aktifkan</button>
                                         <?php } ?>
-                                            <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#resetKonfirmPasswordModal">Reset Password</button>
-                                            <a href="<?php echo site_url('Akses/siswa')?>" class="btn btn-secondary" style="margin-right: 95px">Kembali</a>
+                                        <button type="button" class="btn btn-warning mr-2" data-toggle="modal"
+                                            data-target="#resetKonfirmPasswordModal">Reset Password</button>
+                                        <a href="<?php echo site_url('Akses/siswa')?>" class="btn btn-secondary"
+                                            style="margin-right: 95px">Kembali</a>
                                     </div>
                                 </div>
                                 <!-- </form> -->
@@ -190,7 +207,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header justify-content-center" style="background-color: #4e73df;">
-                        <h5 class="modal-title" id="resetPasswordModalLabel" style="font-weight: bold; color: black">KONFIRMASI RESET PASSWORD</h5>
+                        <h5 class="modal-title" id="resetPasswordModalLabel" style="font-weight: bold; color: black">
+                            KONFIRMASI RESET PASSWORD</h5>
                     </div>
                     <div class="modal-body">
                         Apakah Anda yakin ingin mereset password karyawan ini?<br>

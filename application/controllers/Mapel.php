@@ -45,6 +45,7 @@ class Mapel extends CI_Controller {
             );
 
             $this->Mapel_model->tambah_mapel($data);
+            $this->session->set_flashdata("success_tambah", "Data Mata Pelajaran berhasil ditambahkan!");
             redirect('Mapel');
         }
     }
@@ -75,6 +76,7 @@ class Mapel extends CI_Controller {
             );
     
             $this->Mapel_model->update_mapel($id_mapel, $data);
+            $this->session->set_flashdata("success_edit", "Data Mata Pelajaran berhasil diedit!");
             redirect('Mapel'); // Redirect ke halaman daftar mata pelajaran setelah pembaruan
         }
     }
@@ -82,6 +84,7 @@ class Mapel extends CI_Controller {
 
     public function hapus_mapel($id_mapel) {
         $this->Mapel_model->hapus_mapel($id_mapel);
+        $this->session->set_flashdata("success_hapus", "Data Mata Pelajaran berhasil ditambahkan!");
         redirect('Mapel');
     }
 

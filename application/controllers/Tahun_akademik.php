@@ -34,6 +34,7 @@ class Tahun_akademik extends CI_Controller
         }
 
         if ($this->Tahun_akademik_model->tambah_tahun_akademik($data_post)) {
+            $this->session->set_flashdata("success_tambah", "Tahun Akademik berhasil ditambahkan!");
             redirect('tahun_akademik');
         }
     }
@@ -57,6 +58,7 @@ class Tahun_akademik extends CI_Controller
             }
 
             if ($this->Tahun_akademik_model->update_tahun_akademik($id, $data)) {
+                $this->session->set_flashdata("success_edit", "Tahun Akademik berhasil diupdate!");
                 redirect('tahun_akademik');
             }
         }
@@ -72,6 +74,7 @@ class Tahun_akademik extends CI_Controller
     public function hapus_tahun($id)
     {
         if ($this->Tahun_akademik_model->delete_tahun_akademik($id)) {
+            $this->session->set_flashdata("success_hapus", "Tahun Akademik berhasil dihapus!");
             redirect('tahun_akademik');
         }
     }

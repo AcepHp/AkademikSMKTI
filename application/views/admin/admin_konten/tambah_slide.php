@@ -51,10 +51,8 @@
                     <div class="row">
                         <div class="col">
                             <div class="container" style="box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-                                <div class="row">
                                     <?php echo $this->session->userdata('error');?>
                                     <?php $this->session->unset_userdata('error');?>
-                                </div>
                                 <form id="myForm"
                                     action="<?php echo site_url('Kelola_Dashboard/Slide/prosestambahslide'); ?>"
                                     method="POST" enctype="multipart/form-data">

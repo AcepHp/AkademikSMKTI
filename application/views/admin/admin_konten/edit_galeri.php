@@ -49,6 +49,8 @@
                             <h1 class="h3 mb-0 text-gray-800">Edit Data Galeri</h1>
                         </div>
                         <div class="container mt-5">
+                            <?php echo $this->session->userdata('error');?>
+                            <?php $this->session->unset_userdata('error');?>
                             <?php echo form_open_multipart('Kelola_Dashboard/Galeri/proseseditgaleri/' . $galeri->id_galeri); ?>
                             <div class="form-group">
                                 <label for="gambar">Gambar Saat Ini:</label>
@@ -66,11 +68,11 @@
                             <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
                             <?php echo form_close(); ?>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
-           <!-- Footer Admin -->
-           <?php $this->load->view('Bar/Footer_admin'); ?>
+            <!-- Footer Admin -->
+            <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
     </div>
 

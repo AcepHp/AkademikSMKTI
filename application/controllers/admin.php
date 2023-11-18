@@ -64,7 +64,7 @@ class admin extends CI_Controller {
             );
 
             $this->Admin_Model->create_user_account($user_data);
-
+            $this->session->set_flashdata('success_tambah', 'Guru berhasil ditambahkan!');
             redirect('admin/pengajar');
         }
 
@@ -90,7 +90,7 @@ class admin extends CI_Controller {
             );
     
             $this->Admin_Model->update_guru($id, $data_to_update);
-    
+            $this->session->set_flashdata('success_edit', 'Guru berhasil diupdate!');
             redirect('admin/pengajar'); // Redirect ke halaman daftar guru (pengajar) setelah proses update
         }
     
@@ -102,6 +102,7 @@ class admin extends CI_Controller {
             redirect('auth');
         }
         if ($this->Admin_Model->delete_guru($id)) {
+            $this->session->set_flashdata('success_hapus', 'Guru berhasil dihapus!');
             redirect('admin/pengajar');
         } else {
             // Handle error

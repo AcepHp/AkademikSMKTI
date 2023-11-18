@@ -30,7 +30,7 @@ class Akses extends CI_Controller{
             redirect('auth');
         }
         $this->KelolaAkses_Model->aktifkan($id_users);
-        $this->session->set_flashdata('sukses', 'Akun Siswa telah Aktif');
+        $this->session->set_flashdata('sukses_aktif', 'Akun Siswa telah Aktif');
 
         redirect('Akses/detailsiswa/' .$id_users); 
     }
@@ -40,7 +40,7 @@ class Akses extends CI_Controller{
             redirect('auth');
         }
         $this->KelolaAkses_Model->nonaktifkan($id_users);
-        $this->session->set_flashdata('sukses', 'Akun Siswa berhasil di Non-Aktifkan');
+        $this->session->set_flashdata('sukses_nonaktif', 'Akun Siswa berhasil di Non-Aktifkan');
 
         redirect('Akses/detailsiswa/' .$id_users); 
     }
@@ -50,7 +50,7 @@ class Akses extends CI_Controller{
             redirect('auth');
         }
         $this->KelolaAkses_Model->resetpasswordsiswa($id_users);
-        $this->session->set_flashdata('sukses', 'Password tekah berhasil di reset');
+        $this->session->set_flashdata('sukses_reset', 'Password telah berhasil di reset');
         // Redirect atau tampilkan pesan berhasil
         redirect('Akses/detailsiswa/' .$id_users);
     }
@@ -77,7 +77,7 @@ class Akses extends CI_Controller{
             redirect('auth');
         }
         $this->KelolaAkses_Model->aktifkan($id_users);
-        $this->session->set_flashdata('sukses', 'Akun guru telah Aktif');
+        $this->session->set_flashdata('sukses_aktif', 'Akun guru telah Aktif');
 
         redirect('Akses/detailguru/' .$id_users); 
     }
@@ -87,7 +87,7 @@ class Akses extends CI_Controller{
             redirect('auth');
         }
         $this->KelolaAkses_Model->nonaktifkan($id_users);
-        $this->session->set_flashdata('sukses', 'Akun guru berhasil di Non-Aktifkan');
+        $this->session->set_flashdata('sukses_nonaktif', 'Akun guru berhasil di Non-Aktifkan');
 
         redirect('Akses/detailguru/' .$id_users); 
     }
@@ -97,7 +97,7 @@ class Akses extends CI_Controller{
             redirect('auth');
         }
         $this->KelolaAkses_Model->resetpasswordguru($id_users);
-        $this->session->set_flashdata('sukses', 'Password tekah berhasil di reset');
+        $this->session->set_flashdata('sukses_reset', 'Password telah berhasil di reset');
         // Redirect atau tampilkan pesan berhasil
         redirect('Akses/detailguru/' .$id_users);
     }

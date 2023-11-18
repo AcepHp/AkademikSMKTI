@@ -50,10 +50,10 @@ class Berita extends CI_Controller
             redirect('auth');
         }
         if($this->Berita_Model->editberita($id)){
-            redirect('Kelola_Dashboard/Berita/berita','refresh');
+            redirect('Kelola_Dashboard/Berita/berita');
 
         } else {
-            redirect('Kelola_Dashboard/Berita/berita','refresh');
+            redirect('Kelola_Dashboard/Berita/berita');
             
         }
     }

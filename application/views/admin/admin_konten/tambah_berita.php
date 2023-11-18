@@ -51,7 +51,10 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/Berita/prosestambahberita'); ?>" method="POST" enctype="multipart/form-data">
+                        <?php echo $this->session->userdata('error');?>
+                        <?php $this->session->unset_userdata('error');?>
+                        <form id="myForm" action="<?php echo site_url('Kelola_Dashboard/Berita/prosestambahberita'); ?>"
+                            method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="judul">Judul:</label>
                                 <input type="text" class="form-control" name="judul" required>

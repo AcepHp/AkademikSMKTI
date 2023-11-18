@@ -64,6 +64,38 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <!-- Guru Berhasil ditambahkan -->
+                                <?php if ($this->session->flashdata('success_tambah')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->flashdata('success_tambah'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_tambah'); ?>
+                                <?php endif; ?>
+
+                                <!-- Guru Berhasil diedit -->
+                                <?php if ($this->session->flashdata('success_edit')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->flashdata('success_edit'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_edit'); ?>
+                                <?php endif; ?>
+
+                                <!-- Guru Berhasil dihapus -->
+                                <?php if ($this->session->flashdata('success_hapus')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->flashdata('success_hapus'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_hapus'); ?>
+                                <?php endif; ?>
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
@@ -84,7 +116,8 @@
                                         <?php foreach ($guru as $row) : ?>
 
                                         <tr>
-                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?>
+                                            </td>
                                             <td><?php echo $row->NIP ?></td>
                                             <td><?php echo $row->Nama_Lengkap ?></td>
                                             <td><?php echo $row->Tempat_Lahir ?></td>
@@ -207,8 +240,8 @@
     <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
     <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
-     <!-- Page level plugins -->
-     <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
@@ -236,7 +269,7 @@
     }
     </script>
 
-<script>
+    <script>
     new DataTable('#example', {
         columnDefs: [{
                 targets: [0],

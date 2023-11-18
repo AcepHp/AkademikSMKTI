@@ -67,24 +67,50 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <?php if ($this->session->flashdata('success_send_email')): ?>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <?php echo $this->session->flashdata('success_send_email'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <?php $this->session->unset_userdata('success_send_email'); ?>
+                                    <?php endif; ?>
+
+                                    <?php if ($this->session->flashdata('error_send_email')): ?>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?php echo $this->session->flashdata('error_send_email'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <?php $this->session->unset_userdata('error_send_email'); ?>
+                                    <?php endif; ?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
-                                                <th style="text-align: center; vertical-align: middle;">NO Registrasi</th>
+                                                <th style="width:5%; text-align: center; vertical-align: middle;">No
+                                                </th>
+                                                <th style="text-align: center; vertical-align: middle;">NO Registrasi
+                                                </th>
                                                 <th style="text-align: center; vertical-align: middle;">Pilihan 1</th>
                                                 <th style="text-align: center; vertical-align: middle;">Pilihan 2</th>
-                                                <th style="text-align: center; vertical-align: middle;">Nama Lengkap</th>
-                                                <th style="text-align: center; vertical-align: middle;">Jenis Kelamin</th>
-                                                <th style="width:15%; text-align: center; vertical-align: middle;">Aksi</th>
-                                                <th style="width:10%; text-align: center; vertical-align: middle;">Status</th>
+                                                <th style="text-align: center; vertical-align: middle;">Nama Lengkap
+                                                </th>
+                                                <th style="text-align: center; vertical-align: middle;">Jenis Kelamin
+                                                </th>
+                                                <th style="width:15%; text-align: center; vertical-align: middle;">Aksi
+                                                </th>
+                                                <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                    Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no = 1;?>
                                             <?php foreach ($ppdb as $row) : ?>
                                             <tr>
-                                                <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
+                                                <td style="text-align: center; vertical-align: middle;">
+                                                    <?php echo $no++; ?></td>
                                                 <td><?php echo $row->nomor_registrasi; ?></td>
                                                 <td><?php echo $row->pilihan_satu ?></td>
                                                 <td><?php echo $row->pilihan_dua ?></td>
@@ -228,7 +254,7 @@
                         <div class="form-group">
                             <label for="status">Status:</label>
                             <select class="form-control" name="status">
-                            <option value="" disabled>Pilih</option>
+                                <option value="" disabled>Pilih</option>
                                 <option value="1" <?php if ($row->status == 1) echo "selected"; ?>>Diterima</option>
                                 <option value="0" <?php if ($row->status == 0) echo "selected"; ?>>Tidak Diterima
                                 </option>

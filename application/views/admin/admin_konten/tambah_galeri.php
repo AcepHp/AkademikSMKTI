@@ -51,6 +51,8 @@
                     </div>
 
                     <div class="container mt-5">
+                        <?php echo $this->session->userdata('error');?>
+                        <?php $this->session->unset_userdata('error');?>
                         <?php echo form_open_multipart('Kelola_Dashboard/Galeri/prosestambahgaleri'); ?>
                         <div class="form-group">
                             <label for="gambar">Gambar:</label>
@@ -69,25 +71,25 @@
             <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
     </div>
-    
+
     <?php $this->load->view('Bar/Logout_modal'); ?>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
-        <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
-        <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
+    <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
 </body>
 
