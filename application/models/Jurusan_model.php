@@ -13,6 +13,10 @@ class Jurusan_model extends CI_Model {
         return $this->db->get('jurusan');
     } 
 
+    public function get_all(){
+        return $this->db->count_all('jurusan');
+    }
+
     public function getjurusan() {
         return $this->db->get('jurusan_admin')->result();
     }

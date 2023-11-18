@@ -14,6 +14,10 @@
             return $this->db->get('galeri');
         }
 
+        public function get_all(){
+            return $this->db->count_all('galeri');
+        }
+
         public function tambahgaleri(){
             $caption = $this->input->post("caption");
 

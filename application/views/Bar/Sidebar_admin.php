@@ -13,7 +13,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Dashboard -->
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'Admin' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('Admin') === current_url() )? 'active':'';?>">
         <a class="nav-link" href="<?php echo site_url('Admin'); ?>">
             <i class="fas fa-home"></i>
             <span>Dashboard</span>
@@ -21,7 +21,12 @@
     </li>
 
     <!-- Kelola Dashboard -->
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'Kelola_Dashboard' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('kelola_dashboard') === current_url() || site_url('Kelola_Dashboard/Slide/slideshow') === current_url() || site_url('Kelola_Dashboard/Info/info') === current_url() 
+        || site_url('Kelola_Dashboard/VMT/vmt') === current_url() || site_url('Kelola_Dashboard/Kepsek/kepsek') === current_url() || site_url('Kelola_Dashboard/Berita/berita') === current_url() 
+        || site_url('Kelola_Dashboard/Acara/acara') === current_url() || site_url('Kelola_Dashboard/Video/video') === current_url() || site_url('Kelola_Dashboard/Jurusan/jurusan') === current_url()
+        || site_url('Kelola_Dashboard/Manajemen/manajemen') === current_url() || site_url('Kelola_Dashboard/PPDB_Admin/ppdb') === current_url() 
+        || site_url('Kelola_Dashboard/Galeri/galeri') === current_url()  ) ? 'active':'';?>">
+
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true"
             aria-controls="collapseFour">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -51,7 +56,9 @@
 
     <!-- Kelola Data Master -->
     <?php if($this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item">
+    <li class="nav-item <?php echo (site_url('data_master') === current_url() || site_url('Tahun_akademik/index') === current_url() || site_url('Semester/index') === current_url() 
+        || site_url('Tingkatan/index') === current_url() || site_url('Jurusan/index') === current_url() || site_url('Kelas/index') === current_url() 
+        || site_url('Mapel/index') === current_url()  ) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComponents"
             aria-expanded="false" aria-controls="collapseComponents">
             <i class="fas fa-fw fa-cog"></i>
@@ -74,7 +81,9 @@
 
     <!-- Kelola Data Peserta Didik -->
     <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item">
+    <li class="nav-item <?php echo (site_url('datasiswa') === current_url() || site_url('DataSiswa/index') === current_url() || site_url('KelolaKelas/index') === current_url() 
+        || site_url('Tingkatan/index') === current_url() || site_url('Jurusan/index') === current_url() || site_url('Kelas/index') === current_url() 
+        || site_url('Mapel/index') === current_url()  ) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSiswa" aria-expanded="true"
             aria-controls="collapseSiswa">
             <i class="fas fa-user"></i>
@@ -92,7 +101,7 @@
 
     <!-- Kelola Data Nilai -->
     <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'Nilai' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('Nilai/index') === current_url() )? 'active':'';?>">
         <a class="nav-link" href="<?php echo site_url('Nilai/index'); ?>">
             <i class="fa fa-graduation-cap"></i>
             <span>Data Nilai</span>
@@ -102,7 +111,9 @@
 
     <!-- Data Guru -->
     <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'Data_Guru' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('admin') === current_url() || site_url('Wali/index') === current_url() || site_url('admin/pengajar') === current_url() 
+        || site_url('Penugasan') === current_url() || site_url('Jurusan/index') === current_url() || site_url('Kelas/index') === current_url() 
+        || site_url('Mapel/index') === current_url()  ) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwocollapseTwo">
             <i class="fas fa-users"></i>
@@ -120,7 +131,7 @@
 
     <!-- Data Materi -->
     <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'Materi' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('Materi/index_admin') === current_url() )? 'active':'';?>">
         <a class="nav-link" href="<?php echo site_url('Materi/index_admin'); ?>">
             <i class="fas fa-book"></i>
             <span>Data Materi</span>
@@ -130,7 +141,9 @@
 
     <!-- PPDB -->
     <?php if($this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'PPDB' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('ppdb') === current_url() || site_url('PPDB/popup') === current_url() || site_url('PPDB/kuota') === current_url() 
+        || site_url('PPDB/pendaftar') === current_url() || site_url('PPDB/diterima') === current_url() || site_url('PPDB/tidakditerima') === current_url() 
+        || site_url('PPDB/tampil_email') === current_url()  ) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
             aria-controls="collapseThree">
             <i class="fas fa-fw fa-university"></i>
@@ -151,7 +164,7 @@
 
     <!-- Forum Diskusi -->
     <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'Forum_Diskusi' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('Diskusi') === current_url() || site_url('Diskusi/Kelola_diskusi') === current_url() || site_url('Diskusi/Kelola_komentar') === current_url()) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true"
             aria-controls="collapseFive">
             <i class="fas fa-bullhorn"></i>
@@ -168,7 +181,7 @@
 
     <!-- Kelola User -->
     <?php if($this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item <?php echo $this->uri->segment(2) == 'Kelola_Akses' ? 'active' : ''; ?>">
+    <li class="nav-item <?php echo (site_url('Akses') === current_url() || site_url('Akses/siswa') === current_url() || site_url('Akses/guru') === current_url()) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAkses" aria-expanded="true"
             aria-controls="collapseAkses">
             <i class="fa fa-id-card"></i>

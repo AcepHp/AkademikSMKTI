@@ -14,6 +14,10 @@
             return $this->db->get('acara');
         }
 
+        public function get_all(){
+            return $this->db->count_all('acara');
+        }
+
         public function tambahacara(){
             $judul = $this->input->post("judul");
             $deskripsi = $this->input->post("deskripsi");

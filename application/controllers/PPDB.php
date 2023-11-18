@@ -12,7 +12,7 @@ class PPDB extends CI_Controller {
 
     public function index() {
         $data['jurusan']=$this->Jurusan_model->getjurusan();
-        $this->load->view('dashboard/PPDB/ppdb');
+        $this->load->view('dashboard/PPDB/ppdb', $data);
     }
 
     public function form() {

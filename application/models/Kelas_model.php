@@ -9,13 +9,14 @@ class Kelas_model extends CI_Model
 
     public function get_kelas()
     {
-        $this->db->select('kelas.id_kelas, kelas.nama_kelas, tingkatan.nama_tingkatan, jurusan.nama_jurusan');
+        $this->db->select('kelas.id_kelas, kelas.nama_kelas, tingkatan.nama_tingkatan,jurusan.kode_jurusan,jurusan.nama_jurusan');
         $this->db->from('kelas');
         $this->db->join('tingkatan', 'kelas.kode_tingkatan = tingkatan.kode_tingkatan');
         $this->db->join('jurusan', 'kelas.kode_jurusan = jurusan.kode_jurusan');
         $query = $this->db->get();
         return $query->result();
     }
+
 
     public function create_kelas($data)
     {

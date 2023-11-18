@@ -1,6 +1,10 @@
 <?php
 class diskusi_model extends CI_Model {
 
+    public function get_all(){
+        return $this->db->count_all('topik');
+    }
+
     public function get_siswa_data($nisn) {
         $this->db->where('nisn', $nisn);
         return $this->db->get('siswa')->row();
