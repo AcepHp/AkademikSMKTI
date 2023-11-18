@@ -106,8 +106,6 @@
                                     <thead>
                                         <tr>
                                             <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
-                                            <th style="text-align: center; vertical-align: middle;">Kode Mapel
-                                            </th>
                                             <th style="text-align: center; vertical-align: middle;">Nama Mapel</th>
                                             <th style="text-align: center; vertical-align: middle;">Nama Jurusan</th>
                                             <th style="text-align: center; vertical-align: middle;">Nama Tingkatan</th>
@@ -120,7 +118,6 @@
                                         <tr>
                                             <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?>
                                             </td>
-                                            <td><?php echo htmlspecialchars($mapel->id_mapel); ?></td>
                                             <td><?php echo htmlspecialchars($mapel->nama_mapel); ?></td>
                                             <td><?php echo htmlspecialchars($mapel->nama_jurusan); ?></td>
                                             <td><?php echo htmlspecialchars($mapel->nama_tingkatan); ?></td>
