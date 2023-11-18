@@ -123,17 +123,13 @@ class Auth extends CI_Controller {
                 $this->Auth_model->updatePassword($id_users, $password);
     
                 // Redirect setelah mengubah kata sandi
-                redirect('Siswa/index', 'refresh');
+                redirect('Siswa/index');
             } else {
                 $data['error'] = 'Password dan konfirmasi password tidak cocok.';
                 $data['id_users'] = $id_users;
                 $this->load->view('Auth/gantipass', $data);
             }
-        } else {
-            // Handle jika tidak ada pengguna dengan ID yang sesuai
-            // Misalnya, tampilkan pesan kesalahan atau arahkan ke halaman lain.
-            // Di sini Anda dapat menambahkan logika untuk menangani kesalahan.
-        }
+        } 
     }
     
     

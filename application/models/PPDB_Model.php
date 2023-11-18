@@ -335,6 +335,15 @@ require_once APPPATH.'../vendor/autoload.php';
             $nama_lengkap = $this->input->post("username");
             $NISN = $this->input->post("NISN");
             $email = $this->input->post("email");
+            $Tempat_lahir = $this->input->post("Tempat_lahir");
+            $Tanggal_Lahir = $this->input->post("Tanggal_Lahir");
+            $Jenis_kelamin = $this->input->post("Jenis_kelamin");
+            $Alamat = $this->input->post("Alamat");
+            $Nama_ayah = $this->input->post("Nama_ayah");
+            $Nama_ibu = $this->input->post("Nama_ibu");
+            $Nama_wali = $this->input->post("Nama_wali");
+            $No_telp_ortu = $this->input->post("No_telp_ortu");
+            $No_telp_wali = $this->input->post("No_telp_wali");
             $akun = $this->PPDB_Model->email()->row();
             $biodata = $this->db->get_where('ppdb', array('id_ppdb' => $id))->row();
             $nama_jurusan = $biodata->pilihan_satu;
@@ -359,6 +368,26 @@ require_once APPPATH.'../vendor/autoload.php';
                 return redirect('PPDB/pendaftar','refresh');
             }
 
+            $siswa = array(
+
+                "NIS" => $NISN,
+                "NISN" => $NISN,
+                "Nama_lengkap" => $nama_lengkap,
+                "Status" => $status,
+                "Tempat_lahir" => $Tempat_lahir,
+                "Tanggal_Lahir" => $Tanggal_Lahir,
+                "Jenis_kelamin" => $Jenis_kelamin,
+                "Alamat" => $Alamat,
+                "TInggal_dengan" => $Nama_ayah,
+                "Nama_ayah" => $Nama_ayah,
+                "Nama_ibu" => $Nama_ibu,
+                "Nama_wali" => $Nama_wali,
+                "No_telp_ortu" => $No_telp_ortu,
+                "No_telp_wali" => $No_telp_wali,
+                "email" => $email,
+            );
+
+
             $data = array(
                 "status" => $status,
             );
@@ -367,7 +396,7 @@ require_once APPPATH.'../vendor/autoload.php';
                 "NISN" => $NISN,
                 "nama_lengkap" => $nama_lengkap,
                 "username" => str_replace(" ", "", $nama_lengkap),
-                "password" => md5('siswatignc'),
+                "password" => md5('siswasmktignc'),
                 "role" => 'siswa',
                 "NIP" => $NISN,
             );
@@ -409,6 +438,7 @@ require_once APPPATH.'../vendor/autoload.php';
                 
                 // Jika pengguna (users) belum ada, lakukan insert
                 $this->PPDB_Model->insert_account($account);
+                $this->PPDB_Model->insert_siswa($siswa);
             }
         
             if (!$this->email->send()) {
@@ -427,6 +457,10 @@ require_once APPPATH.'../vendor/autoload.php';
 
         public function insert_account($id) {
             return $this->db->insert('users', $id);
+        }
+
+        public function insert_siswa($siswa) {
+            return $this->db->insert('siswa', $siswa);
         }
 
         public function delete_pendaftar($id) {
