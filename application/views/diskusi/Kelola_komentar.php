@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 </head>
 
@@ -65,33 +68,33 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
-                                                <th style="text-align: center; vertical-align: middle;">Tanggal</th>
-                                                <th style="text-align: center; vertical-align: middle;">Topik</th>
-                                                <th style="text-align: center; vertical-align: middle;">Nama</th>
-                                                <th style="text-align: center; vertical-align: middle;">Status</th>
-                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
+                                                <th style="width:5%; text-align:center; vertical-align:middle;">No</th>
+                                                <th style="text-align:center; vertical-align:middle;">Tanggal</th>
+                                                <th style="text-align:center; vertical-align:middle;">Topik</th>
+                                                <th style="text-align:center; vertical-align:middle;">Nama</th>
+                                                <th style="text-align:center; vertical-align:middle;">Status</th>
+                                                <th style="width:10%; text-align:center; vertical-align:middle;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $no = 1;?>
                                             <?php
-                                            $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Ambil parameter status dari URL
-                                            foreach ($komentar as $row) :
-                                                if ($statusFilter === '' || $row['status'] === $statusFilter) :
-                                            ?>
-                                            <?php $no = 1; ?>
                                             
+                $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Ambil parameter status dari URL
+                foreach ($komentar as $row) :
+                    if ($statusFilter === '' || $row['status'] === $statusFilter) :
+                ?>
                                             <tr>
-                                                <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
+                                                <td style="width:5%; text-align:center; vertical-align:middle;"><?php echo $no++;?></td>
                                                 <td><?php echo $row['tanggal']; ?></td>
                                                 <td><?php echo $row['deskripsi']; ?></td>
                                                 <td><?php echo $row['nama']; ?></td>
-                                                <td><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
+                                                <td style="text-align:center; vertical-align:middle;"><?php echo ($row['status'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
                                                 </td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td style="text-align:center; vertical-align:middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#komentarModal<?php echo $row['id_komentar']; ?>">
@@ -213,6 +216,27 @@
             <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+
+            <script>
+            new DataTable('#example', {
+                columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    },
+                    {
+                        targets: [1],
+                        orderData: [1, 0]
+                    },
+                    {
+                        targets: [5],
+                        orderData: [5, 0]
+                    }
+                ]
+            });
+            </script>
 
 
 </body>

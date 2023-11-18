@@ -160,12 +160,12 @@
                                                     </div>
                                                 </div>
                                                 <?php
-                                      }
+                                    }
                                     }
                                     ?>
                                             </div>
 
-                                            <?php if ($this->session->userdata('role') === 'Guru') { ?>
+                                            <?php if ($this->session->userdata('role') === 'Guru' || $this->session->userdata('role') === 'Siswa') { ?>
                                         </div>
                                     </div>
                                 </div>

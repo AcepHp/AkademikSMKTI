@@ -81,20 +81,30 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label for="nis">NIS</label>
-                                                <input type="text" class="form-control" name="nis" required>
+                                                <input type="text" class="form-control" name="nis"
+                                                    oninput="allowOnlyNumericInput(this, 'errorNIS')" required>
+                                                <small id="errorNIS" class="text-danger" style="display:none;">Hanya
+                                                    bisa diisi oleh angka.</small>
                                                 <?php echo form_error('nis', '<small class="text-danger">', '</small>'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="nisn">NISN</label>
-                                                <input type="text" class="form-control" name="nisn" id="nisn" required
-                                                    oninput="setUsernameFromNISN()">
+                                                <input type="text" class="form-control" name="nisn" id="nisn"
+                                                    oninput="allowOnlyNumericInput(this, 'errorNISN'); setUsernameFromNISN()"
+                                                    required>
+                                                <small id="errorNISN" class="text-danger" style="display:none;">Hanya
+                                                    bisa diisi oleh angka.</small>
                                                 <?php echo form_error('nisn', '<small class="text-danger">', '</small>'); ?>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="nama_lengkap">Nama Lengkap</label>
-                                                <input type="text" class="form-control" name="nama_lengkap" required>
+                                                <input type="text" class="form-control" name="nama_lengkap"
+                                                    oninput="allowOnlyAlphabeticInput(this, 'errorNamaLengkap')"
+                                                    required>
+                                                <small id="errorNamaLengkap" class="text-danger"
+                                                    style="display:none;">Hanya bisa diisi oleh huruf saja.</small>
                                             </div>
 
                                             <div class="form-group">
@@ -156,32 +166,45 @@
 
                                             <div class="form-group">
                                                 <label for="nama_ayah">Nama Ayah</label>
-                                                <input type="text" class="form-control" name="nama_ayah">
+                                                <input type="text" class="form-control" name="nama_ayah"
+                                                    oninput="allowOnlyAlphabeticInput(this, 'errorNamaAyah')">
+                                                <small id="errorNamaAyah" class="text-danger"
+                                                    style="display:none;">Hanya bisa diisi oleh huruf saja.</small>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="nama_ibu">Nama Ibu</label>
-                                                <input type="text" class="form-control" name="nama_ibu">
+                                                <input type="text" class="form-control" name="nama_ibu"
+                                                    oninput="allowOnlyAlphabeticInput(this, 'errorNamaIbu')">
+                                                <small id="errorNamaIbu" class="text-danger" style="display:none;">Hanya
+                                                    bisa diisi oleh huruf saja.</small>
                                             </div>
-
                                             <div class="form-group">
                                                 <label for="nama_wali">Nama Wali</label>
-                                                <input type="text" class="form-control" name="nama_wali">
+                                                <input type="text" class="form-control" name="nama_wali"
+                                                    oninput="allowOnlyAlphabeticInput(this, 'errorNamaWali')">
+                                                <small id="errorNamaWali" class="text-danger"
+                                                    style="display:none;">Hanya bisa diisi oleh huruf saja.</small>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="no_telp_ortu">No. Telp Orang Tua</label>
-                                                <input type="text" class="form-control" name="no_telp_ortu">
+                                                <input type="text" class="form-control" name="no_telp_ortu"
+                                                    oninput="allowOnlyNumericInput(this, 'errorNoTelpOrtu')">
+                                                <small id="errorNoTelpOrtu" class="text-danger"
+                                                    style="display:none;">Hanya bisa diisi oleh angka.</small>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="no_telp_wali">No. Telp Wali</label>
-                                                <input type="text" class="form-control" name="no_telp_wali">
+                                                <input type="text" class="form-control" name="no_telp_wali"
+                                                    oninput="allowOnlyNumericInput(this, 'errorNoTelpWali')">
+                                                <small id="errorNoTelpWali" class="text-danger"
+                                                    style="display:none;">Hanya bisa diisi oleh angka.</small>
                                             </div>
-
                                             <div class="form-group">
                                                 <input type="hidden" class="form-control" name="aktif" id="aktif"
-                                                    value="0" required>
+                                                    value="1" required>
                                             </div>
 
                                             <div class="form-group">
@@ -261,6 +284,38 @@
             <!-- Page level custom scripts -->
             <script src="assets/js/demo/datatables-demo.js"></script>
 
+            <script>
+            function allowOnlyNumericInput(inputElement, errorElementId) {
+                var inputValue = inputElement.value.replace(/[^0-9]/g, '');
+                inputElement.value = inputValue;
+
+                // Display error message if non-numeric characters are entered
+                var errorElement = document.getElementById(errorElementId);
+                if (!/^[0-9]+$/.test(inputValue)) {
+                    errorElement.style.display = 'block';
+                } else {
+                    errorElement.style.display = 'none';
+                }
+            }
+
+            function allowOnlyAlphabeticInput(inputElement, errorElementId) {
+                var inputValue = inputElement.value.trim();
+
+                // Replace non-alphabetic characters with an empty string
+                var alphabeticValue = inputValue.replace(/[^a-zA-Z\s]/g, '');
+
+                // Update the input value with the cleaned alphabetic value
+                inputElement.value = alphabeticValue;
+
+                // Display error message if non-alphabetic characters are entered
+                var errorElement = document.getElementById(errorElementId);
+                if (/[^a-zA-Z\s]/.test(inputValue)) {
+                    errorElement.style.display = 'block';
+                } else {
+                    errorElement.style.display = 'none';
+                }
+            }
+            </script>
 
 </body>
 

@@ -260,39 +260,40 @@ public function hapus_materi_guru($id_materi, $id_kelas, $id_mapel) {
 
 public function lihat_materi_siswa($id_kelas, $id_mapel) {
      // Panggil model dan method untuk mengambil id_tahun dan id_semester aktif
-    $id_tahun = $this->Materi_model->get_active_id_tahun();
-    $id_semester = $this->Materi_model->get_active_id_semester();
-    if ($id_tahun && $id_semester) {
-        $data['juti'] = $this->Materi_model->get_jurusan_tingkatan_byid($id_mapel);
-        
-        if (!empty($data['juti']) && isset($data['juti'][0]->kode_jurusan) && isset($data['juti'][0]->kode_tingkatan)) {
-            $kode_jurusan = $data['juti'][0]->kode_jurusan;
-            $kode_tingkatan = $data['juti'][0]->kode_tingkatan;
-
+     $id_tahun = $this->Materi_model->get_active_id_tahun();
+     $id_semester = $this->Materi_model->get_active_id_semester();
+     
+     if ($id_tahun && $id_semester) {
+         $data['juti'] = $this->Materi_model->get_jurusan_tingkatan_byid($id_mapel);
+         
+         if (!empty($data['juti']) && isset($data['juti'][0]->kode_jurusan) && isset($data['juti'][0]->kode_tingkatan)) {
+             $kode_jurusan = $data['juti'][0]->kode_jurusan;
+             $kode_tingkatan = $data['juti'][0]->kode_tingkatan;
+ 
              // Panggil model untuk mendapatkan materi detail sesuai dengan filter
-            $data['materi'] = $this->Materi_model->get_materi_detail($id_kelas, $id_mapel, $id_tahun, $id_semester, $kode_jurusan, $kode_tingkatan);
-            
+             $data['materi'] = $this->Materi_model->get_materi_detail($id_kelas, $id_mapel, $id_tahun, $id_semester, $kode_jurusan, $kode_tingkatan);
+             
              // Pass the $id_kelas and $id_mapel variables to the view
-            $data['id_kelas'] = $id_kelas;
-            $data['id_mapel'] = $id_mapel;
-        
+             $data['id_kelas'] = $id_kelas;
+             $data['id_mapel'] = $id_mapel;
+         
              // Kirim data ke view yang menampilkan materi detail
-            $this->load->view('Siswa/materi/lihat_materi', $data);
-        } else {
+             $this->load->view('Siswa/materi/lihat_materi', $data);
+         } else {
              // Tampilkan pesan kesalahan jika data jurusan dan tingkatan tidak ditemukan
-            echo "Data jurusan dan tingkatan tidak ditemukan";
-        }
-    } else {
+             echo "Data jurusan dan tingkatan tidak ditemukan";
+         }
+     } else {
          // Tampilkan pesan kesalahan jika tahun atau semester aktif tidak ditemukan
-        echo "Tahun atau semester aktif tidak ditemukan";
-    }
+         echo "Tahun atau semester aktif tidak ditemukan";
+     }
 }
 
 // Materi untuk admin
 public function index_admin() {
    // Mengambil data tahun dan semester akademik aktif dari model
-    $id_tahun = $this->Materi_model->get_active_id_tahun();
-    $id_semester = $this->Materi_model->get_active_id_semester();
+   $id_tahun = $this->Materi_model->get_active_id_tahun();
+   $id_semester = $this->Materi_model->get_active_id_semester();
 
     $data['materi'] = $this->Materi_model->get_all_materi_detail_admin($id_tahun, $id_semester);
     

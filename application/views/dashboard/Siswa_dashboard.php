@@ -13,13 +13,13 @@
 
     <!-- Custom fonts for this template-->
 
-    <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?=base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?=base_url('assets/css/sb-admin-2.min.css')?>" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -47,6 +47,8 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
@@ -135,117 +137,120 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <!-- Content Row -->
                 </div>
 
-                <!-- Content Row -->
-            </div>
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2021</span>
+                        </div>
                     </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+                </footer>
+                <!-- End of Footer -->
 
-            <!-- Button trigger modal -->
-            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <!-- Button trigger modal -->
+                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Launch static backdrop modal
             </button> -->
 
-            <!-- Modal -->
-            <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
-                        </div>
-                        <div class="modal-body">
-                            <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah password
-                                default dari akun siswa.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                id="closeModal">Nanti Saja</button>
-                            <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password Sekarang</button>
+                <!-- Modal -->
+                <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
+                            </div>
+                            <div class="modal-body">
+                                <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah password
+                                    default dari akun siswa.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                    id="closeModal">Nanti Saja</button>
+                                <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password
+                                    Sekarang</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <!-- include modal Logout -->
+        <?php $this->load->view('Bar/Logout_modal'); ?>
 
-    <!-- include modal Logout -->
-    <?php $this->load->view('Bar/Logout_modal'); ?>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        // Mengambil elemen modal
+        var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
+        var closeModalButton = document.getElementById('closeModal');
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    // Mengambil elemen modal
-    var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
-    var closeModalButton = document.getElementById('closeModal');
+        // Simulasikan nilai aktif dari database
+        var aktif =
+        "<?php echo $this->session->userdata('aktif'); ?>"; // Ganti nilainya sesuai dengan data dari database
 
-    // Simulasikan nilai aktif dari database
-    var aktif = "<?php echo $this->session->userdata('aktif'); ?>"; // Ganti nilainya sesuai dengan data dari database
-
-    // Tampilkan modal jika aktif = 0
-    if (aktif === '0') {
-        passwordModal.show();
-    }
-
-    // Menutup modal saat tombol close diklik
-    closeModalButton.addEventListener('click', function() {
-        passwordModal.hide();
-    });
-
-    // Menutup modal saat luar modal diklik
-    window.addEventListener('click', function(event) {
-        if (event.target == passwordModal._element) {
-            passwordModal.hide();
+        // Tampilkan modal jika aktif = 0
+        if (aktif === '0') {
+            passwordModal.show();
         }
-    });
 
-    // Fungsi untuk mengganti password
-    function gantiPassword() {
-        window.location.href = '<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>';
-    }
-    </script>
+        // Menutup modal saat tombol close diklik
+        closeModalButton.addEventListener('click', function() {
+            passwordModal.hide();
+        });
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
-    <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        // Menutup modal saat luar modal diklik
+        window.addEventListener('click', function(event) {
+            if (event.target == passwordModal._element) {
+                passwordModal.hide();
+            }
+        });
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
+        // Fungsi untuk mengganti password
+        function gantiPassword() {
+            window.location.href =
+                '<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>';
+        }
+        </script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
+        <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
-    <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
 
-    <!-- Include SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <!-- Include SweetAlert2 JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Page level plugins -->
+        <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Bootstrap JavaScript (requires Popper.js) -->
-    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
+        <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+
+        <!-- Include SweetAlert2 CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <!-- Include SweetAlert2 JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <!-- Bootstrap JavaScript (requires Popper.js) -->
+        <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

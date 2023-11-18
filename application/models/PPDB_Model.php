@@ -373,7 +373,6 @@ require_once APPPATH.'../vendor/autoload.php';
                 "NIS" => $NISN,
                 "NISN" => $NISN,
                 "Nama_lengkap" => $nama_lengkap,
-                "Status" => $status,
                 "Tempat_lahir" => $Tempat_lahir,
                 "Tanggal_Lahir" => $Tanggal_Lahir,
                 "Jenis_kelamin" => $Jenis_kelamin,

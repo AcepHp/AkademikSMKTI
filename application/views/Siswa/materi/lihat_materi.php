@@ -35,8 +35,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Data Materi</h1>
-
-
                     </div>
                     <!-- Daftar Materi -->
                     <div class="row">
@@ -55,15 +53,25 @@
                                             </div>
                                         </div>
                                         <div class="col-3 text-right">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <?php
+                                                $fileExtension = pathinfo($item->file_materi, PATHINFO_EXTENSION);
+                                                $iconClass = 'fa-file';
+                                                $buttonClass = 'btn-primary';
+                                                if ($fileExtension === 'pdf') {
+                                                    $iconClass = 'fa-file-pdf';
+                                                } elseif ($fileExtension === 'doc' || $fileExtension === 'docx') {
+                                                    $iconClass = 'fa-file-word';
+                                                }
+                                            ?>
+                                            <i class="fas <?= $iconClass; ?> fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col mb-3 mx-4">
                                         <a href="<?= base_url('assets/uploads/materi/' . $item->file_materi); ?>"
-                                            target="_blank" class="btn btn-primary w-100" style="width: 100%;">Lihat
-                                            Materi</a>
+                                            target="_blank" class="btn <?= $buttonClass; ?> w-100"
+                                            style="width: 100%;">Lihat Materi</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +79,6 @@
                         <?php $materiCount++; // Increment hitungan materi ?>
                         <?php } ?>
                     </div>
-
                 </div>
             </div>
         </div>
