@@ -72,8 +72,6 @@ class Siswa extends CI_Controller {
     
             
 
-   
-
     public function update_data() {
         
          // Validasi form, Anda dapat menggunakan library form_validation CodeIgniter

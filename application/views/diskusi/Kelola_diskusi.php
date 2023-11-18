@@ -72,28 +72,28 @@
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th style="width:5%; text-align: center; vertical-align: middle;">No
-                                                </th>
-                                                <th style="text-align: center; vertical-align: middle;">Tanggal</th>
-                                                <th style="text-align: center; vertical-align: middle;">Nama</th>
-                                                <th style="width:10%; text-align: center; vertical-align: middle;">
-                                                    Status</th>
-                                                <th style="width:10%; text-align: center; vertical-align: middle;">Aksi
+                                                <th style="width:5%; text-align:center; vertical-align:middle;">No</th>
+                                                <th style="text-align:center; vertical-align:middle;">Tanggal</th>
+                                                <th style="text-align:center; vertical-align:middle;">Nama</th>
+                                                <th style="text-align:center; vertical-align:middle;">Status</th>
+                                                <th style="width:10%; text-align:center; vertical-align:middle;">Aksi
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $no = 1; ?>
+                                            <?php $no = 1;?>
                                             <?php foreach ($topik as $row) : ?>
                                             <tr>
-                                                <td style="text-align: center; vertical-align: middle;">
-                                                    <?php echo $no++; ?></td>
-                                                <td><?php echo $row['tanggal']; ?></td>
-                                                <td><?php echo $row['nama']; ?></td>
-                                                <td style="text-align: center; vertical-align: middle;">
+                                                <td style="width:5%; text-align:center; vertical-align:middle;">
+                                                    <?php echo $no++;?></td>
+                                                <td style="text-align:center; vertical-align:middle;">
+                                                    <?php echo $row['tanggal']; ?></td>
+                                                <td style="text-align:center; vertical-align:middle;">
+                                                    <?php echo $row['nama']; ?></td>
+                                                <td style="text-align:center; vertical-align:middle;">
                                                     <?php echo ($row['enum'] == 'Iya') ? 'Disetujui' : 'Di-Nonaktifkan'; ?>
                                                 </td>
-                                                <td style="width:10%; text-align: center; vertical-align: middle;">
+                                                <td style="width:10%; text-align:center; vertical-align:middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#topikModal<?php echo $row['id_topik']; ?>">
@@ -204,8 +204,8 @@
             <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
             <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
             <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
             <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
-
 
             <script>
             new DataTable('#example', {

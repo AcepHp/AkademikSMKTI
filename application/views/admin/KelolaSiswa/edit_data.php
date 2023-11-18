@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SMK-TI GNC</title>
+    <title>Dashboard Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,6 @@
     <link href="<?= base_url('assets/css/edit_datasiswa.css') ?>" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 
 </head>
@@ -69,19 +68,29 @@
                                                 <div class="form-group">
                                                     <label for="nis">NIS</label>
                                                     <input type="text" class="form-control" name="nis"
-                                                        value="<?php echo $siswa_data->NIS; ?>" required>
+                                                        value="<?php echo $siswa_data->NIS; ?>"
+                                                        oninput="allowOnlyNumericInput(this, 'errorNIS')" required>
+                                                    <small id="errorNIS" class="text-danger" style="display:none;">Hanya
+                                                        bisa diisi oleh angka.</small>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="nisn">NISN</label>
                                                     <input type="text" class="form-control" name="nisn"
-                                                        value="<?php echo $siswa_data->NISN; ?>" required>
+                                                        value="<?php echo $siswa_data->NISN; ?>"
+                                                        oninput="allowOnlyNumericInput(this, 'errorNISN')" required>
+                                                    <small id="errorNISN" class="text-danger"
+                                                        style="display:none;">Hanya bisa diisi oleh angka.</small>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="nama_lengkap">Nama Lengkap</label>
                                                     <input type="text" class="form-control" name="nama_lengkap"
-                                                        value="<?php echo $siswa_data->Nama_lengkap; ?>" required>
+                                                        value="<?php echo $siswa_data->Nama_lengkap; ?>"
+                                                        oninput="allowOnlyAlphabeticInput(this, 'errorNamaLengkap')"
+                                                        required>
+                                                    <small id="errorNamaLengkap" class="text-danger"
+                                                        style="display:none;">Hanya bisa diisi oleh huruf saja.</small>
                                                 </div>
 
 
@@ -142,34 +151,54 @@
                                                         <div class="form-group">
                                                             <label for="nama_ayah">Nama Ayah</label>
                                                             <input type="text" class="form-control" name="nama_ayah"
-                                                                value="<?php echo $siswa_data->Nama_ayah; ?>">
+                                                                value="<?php echo $siswa_data->Nama_ayah; ?>"
+                                                                oninput="allowOnlyAlphabeticInput(this, 'errorNamaAyah')">
+                                                            <small id="errorNamaAyah" class="text-danger"
+                                                                style="display:none;">Hanya bisa diisi oleh huruf
+                                                                saja.</small>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="nama_ibu">Nama Ibu</label>
                                                             <input type="text" class="form-control" name="nama_ibu"
-                                                                value="<?php echo $siswa_data->Nama_ibu; ?>">
+                                                                value="<?php echo $siswa_data->Nama_ibu; ?>"
+                                                                oninput="allowOnlyAlphabeticInput(this, 'errorNamaIbu')">
+                                                            <small id="errorNamaIbu" class="text-danger"
+                                                                style="display:none;">Hanya bisa diisi oleh huruf
+                                                                saja.</small>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="nama_wali">Nama Wali</label>
                                                             <input type="text" class="form-control" name="nama_wali"
-                                                                value="<?php echo $siswa_data->Nama_wali; ?>">
+                                                                value="<?php echo $siswa_data->Nama_wali; ?>"
+                                                                oninput="allowOnlyAlphabeticInput(this, 'errorNamaWali')">
+                                                            <small id="errorNamaWali" class="text-danger"
+                                                                style="display:none;">Hanya bisa diisi oleh huruf
+                                                                saja.</small>
                                                         </div>
 
                                                         <div class="form-group">
-                                                            <label for="no_telp_ortu">No Telp Orang
-                                                                Tua</label>
+                                                            <label for="no_telp_ortu">No Telp Orang Tua</label>
                                                             <input type="text" class="form-control" name="no_telp_ortu"
-                                                                value="<?php echo $siswa_data->No_telp_ortu; ?>">
+                                                                value="<?php echo $siswa_data->No_telp_ortu; ?>"
+                                                                oninput="allowOnlyNumericInput(this, 'errorNoTelpOrtu')">
+                                                            <small id="errorNoTelpOrtu" class="text-danger"
+                                                                style="display:none;">Hanya bisa diisi oleh
+                                                                angka.</small>
                                                         </div>
 
+
                                                         <div class="form-group">
-                                                            <label for="no_telp_wali">No Telp
-                                                                Wali</label>
+                                                            <label for="no_telp_wali">No Telp Wali</label>
                                                             <input type="text" class="form-control" name="no_telp_wali"
-                                                                value="<?php echo $siswa_data->No_telp_wali; ?>">
+                                                                value="<?php echo $siswa_data->No_telp_wali; ?>"
+                                                                oninput="allowOnlyNumericInput(this, 'errorNoTelpWali')">
+                                                            <small id="errorNoTelpWali" class="text-danger"
+                                                                style="display:none;">Hanya bisa diisi oleh
+                                                                angka.</small>
                                                         </div>
+
 
                                                         <div class="form-group">
                                                             <label for="new_password">Password
@@ -231,6 +260,39 @@
 
                 <!-- Page level custom scripts -->
                 <script src="<?php echo base_url()?>assets/js/demo/datatables-demo.js"></script>
+
+                <script>
+                function allowOnlyNumericInput(inputElement, errorElementId) {
+                    var inputValue = inputElement.value.replace(/[^0-9]/g, '');
+                    inputElement.value = inputValue;
+
+                    // Display error message if non-numeric characters are entered
+                    var errorElement = document.getElementById(errorElementId);
+                    if (!/^[0-9]+$/.test(inputValue)) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                }
+
+                function allowOnlyAlphabeticInput(inputElement, errorElementId) {
+                    var inputValue = inputElement.value.trim();
+
+                    // Replace non-alphabetic characters with an empty string
+                    var alphabeticValue = inputValue.replace(/[^a-zA-Z\s]/g, '');
+
+                    // Update the input value with the cleaned alphabetic value
+                    inputElement.value = alphabeticValue;
+
+                    // Display error message if non-alphabetic characters are entered
+                    var errorElement = document.getElementById(errorElementId);
+                    if (/[^a-zA-Z\s]/.test(inputValue)) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                }
+                </script>
 
 
 </body>

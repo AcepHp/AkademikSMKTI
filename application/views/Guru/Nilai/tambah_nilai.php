@@ -97,73 +97,92 @@
                                                 <div class="col-10">
                                                     <label for="kehadiran">Nilai Kehadiran</label>
                                                     <input type="text" class="form-control" id="kehadiran"
-                                                        name="kehadiran" required>
+                                                        name="kehadiran"
+                                                        oninput="allowOnlyNumericInput(this, 'error_kehadiran')"
+                                                        required>
                                                 </div>
                                                 <div class="col-2">
                                                     <label for="persentase_kehadirann">Persentase </label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control"
                                                             id="persentase_kehadiran" name="persentase_kehadiran"
+                                                            oninput="allowOnlyNumericInput(this, 'error_persentase_kehadiran')"
                                                             required>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text">%</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div id="error_kehadiran" style="color: red; display: none;">Please
+                                                    Masukan Hanya Angka Untuk Nilai </div>
+                                                <div id="error_persentase_kehadiran" style="color: red; display: none;">
+                                                 Masukan Hanya Angka Untuk Persentase</div>
                                             </div>
 
                                             <div class="form-row">
                                                 <div class="col-10">
                                                     <label for="tugas">Nilai Tugas</label>
                                                     <input type="text" class="form-control" id="tugas" name="tugas"
-                                                        required>
+                                                    oninput="allowOnlyNumericInput(this, 'error_tugas')" required>
                                                 </div>
                                                 <div class="col-2">
                                                     <label for="persentase_tugass">Persentase</label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" id="persentase_tugas"
-                                                            name="persentase_tugas" required>
+                                                            name="persentase_tugas" oninput="allowOnlyNumericInput(this, 'error_persentase_tugas')" required>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text">%</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div id="error_tugas" style="color: red; display: none;">Please
+                                                    Masukan Hanya Angka Untuk Nilai </div>
+                                                <div id="error_persentase_tugas" style="color: red; display: none;">
+                                                 Masukan Hanya Angka Untuk Persentase</div>
                                             </div>
 
                                             <div class="form-row">
                                                 <div class="col-10">
                                                     <label for="uts">Nilai UTS</label>
-                                                    <input type="text" class="form-control" id="uts" name="uts"
+                                                    <input type="text" class="form-control" id="uts" name="uts" oninput="allowOnlyNumericInput(this, 'error_uts')"
                                                         required>
                                                 </div>
                                                 <div class="col-2">
                                                     <label for="persentase_utss">Persentase</label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" id="persentase_uts"
-                                                            name="persentase_uts" required>
+                                                            name="persentase_uts" oninput="allowOnlyNumericInput(this, 'error_persentase_uts')" required>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text">%</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div id="error_uts" style="color: red; display: none;">Please
+                                                    Masukan Hanya Angka Untuk Nilai </div>
+                                                <div id="error_persentase_uts" style="color: red; display: none;">
+                                                 Masukan Hanya Angka Untuk Persentase</div>
                                             </div>
 
                                             <div class="form-row">
                                                 <div class="col-10">
                                                     <label for="uas">Nilai UAS</label>
-                                                    <input type="text" class="form-control" id="uas" name="uas"
+                                                    <input type="text" class="form-control" id="uas" name="uas" oninput="allowOnlyNumericInput(this, 'error_uas')"
                                                         required>
                                                 </div>
                                                 <div class="col-2">
                                                     <label for="persentase_uass">Persentase</label>
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" id="persentase_uas"
-                                                            name="persentase_uas" required>
+                                                            name="persentase_uas" oninput="allowOnlyNumericInput(this, 'error_persentase_uas')" required>
                                                         <div class="input-group-append">
                                                             <span class="input-group-text">%</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div id="error_uas" style="color: red; display: none;">Please
+                                                    Masukan Hanya Angka Untuk Nilai </div>
+                                                <div id="error_persentase_uas" style="color: red; display: none;">
+                                                 Masukan Hanya Angka Untuk Persentase</div>
                                             </div>
 
 
@@ -304,6 +323,20 @@
                 document.getElementById('persentase_uas').addEventListener('input', hitungTotalPersentase);
                 </script>
 
+                <script>
+                function allowOnlyNumericInput(inputElement, errorElementId) {
+                    var inputValue = inputElement.value.replace(/[^0-9]/g, '');
+                    inputElement.value = inputValue;
+
+                    // Display error message if non-numeric characters are entered
+                    var errorElement = document.getElementById(errorElementId);
+                    if (!/^[0-9]+$/.test(inputValue)) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                }
+                </script>
 </body>
 
 </html>
