@@ -74,7 +74,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="wali_kelas">Wali Kelas Baru :</label>
+                                                <label for="wali_kelas">Guru :</label>
                                                 <select class="form-control" name="wali_kelas" required>
                                                     <option value="">Pilih Wali Kelas</option>
                                                     <?php foreach ($guru as $guru_item): ?>

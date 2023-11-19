@@ -55,6 +55,25 @@ class Wali_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
-    
+
+    public function get_kelas_not_in_wali() {
+        // Select the necessary fields
+        $this->db->select('kelas.nama_kelas, kelas.id_kelas, kelas.kode_tingkatan, kelas.kode_jurusan');
+        
+        // Specify the main table
+        $this->db->from('kelas');
+        
+        // Left join with the wali table on the id_kelas
+        $this->db->join('wali', 'kelas.id_kelas = wali.id_kelas', 'left');
+        
+        // Use WHERE to filter out classes that have a wali (wali.id_kelas is not NULL)
+        $this->db->where('wali.id_kelas IS NULL');
+        
+        // Execute the query
+        $query = $this->db->get();
+        
+        // Return the result
+        return $query->result();
+    }    
 }
 ?>

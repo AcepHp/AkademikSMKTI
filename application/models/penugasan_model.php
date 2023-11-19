@@ -52,17 +52,29 @@ class penugasan_model extends CI_Model {
         return $query->result();
     }
 
-    public function get_kelas_tanpa_penugasan($kode_jurusan,$id_mapel, $kode_tingkatan) {
-        // Query untuk mengambil daftar kelas sesuai dengan kondisi yang diberikan
+    public function get_kelas_tanpa_penugasan($kode_jurusan, $id_tahun, $id_semester, $id_mapel, $kode_tingkatan) {
+        // Subquery untuk mendapatkan daftar kelas yang sudah mendapatkan penugasan pada mapel tertentu
+        $subquery = $this->db->select('pengajar_mapel.id_kelas')
+            ->from('pengajar_mapel')
+            ->where('pengajar_mapel.id_mapel', $id_mapel)
+            ->where('pengajar_mapel.id_tahun', $id_tahun)
+            ->where('pengajar_mapel.id_semester', $id_semester)
+            ->get_compiled_select();
+    
+        // Query untuk mengambil daftar kelas yang belum mendapatkan penugasan pada mapel tertentu
         $query = $this->db->select('kelas.id_kelas, kelas.nama_kelas')
             ->from('kelas')
             ->where('kelas.kode_jurusan', $kode_jurusan)
             ->where('kelas.kode_tingkatan', $kode_tingkatan)
+            ->where_not_in('kelas.id_kelas', $subquery, false)
             ->group_by('kelas.id_kelas')
             ->get();
     
         return $query->result();
     }
+    
+    
+    
     
     public function get_all_guru() {
         // Mendapatkan daftar semua guru
