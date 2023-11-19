@@ -56,7 +56,7 @@
                 "judul" => $judul,
                 "deskripsi" => $deskripsi,
                 "author" => $author,                
-                "created" => date('Y-m-d'),
+                "created" => date('Y-m-d'), 
             );
         
             $existing_gambar = $this->db->get_where("berita", array("id_berita" => $id))->row();

@@ -103,7 +103,7 @@
             <?php foreach ($galeriterbaru as $row) : ?>
             <?php if ($counter < 6) : ?>
             <div class="col-md-4 mb-3">
-                <img src="<?php echo $row->gambar ?>" alt="" style="height: 250px; width: 70%">
+                <img src="<?php echo $row->gambar ?>" alt="" style="height: 250px; width: 60%">
                 <h4><?php echo $row->caption ?></h4>
             </div>
             <?php endif; ?>
@@ -119,32 +119,34 @@
         <div class="row text-center mb-3 mt-3">
             <span class="fw-bold" style="font-size: 30px">VIDEO</span>
         </div>
+        <?php
+    $counter = 0;
+    $videoterbaru = array_reverse($video->result());
+    ?>
         <div class="row text-center mb-3">
-            <div class="col">
-                <img src="<?php echo base_url('assets/images/background.png') ?>" alt=""
-                    style="height: 250px; width: 250px">
+            <?php foreach ($videoterbaru as $row) : ?>
+            <?php if ($counter < 6) : ?>
+            <div class="col-md-4 mb-3">
+                <?php
+                    // Mendapatkan ID video YouTube dari URL yang disimpan dalam database
+                    $video_id = $this->Video_Model->get_youtube_video_id($row->url);
+                    // Menampilkan video YouTube menggunakan iframe jika video_id ditemukan
+                    if (!empty($video_id)) {
+                        echo '<div class="embed-responsive embed-responsive-16by9">';
+                        echo '<iframe width="250px" height="70%" class="embed-responsive-item" src="https://www.youtube.com/embed/' . $video_id . '" allowfullscreen></iframe>';
+                        echo '</div>';
+                        echo '<h4>' . $row->judul . '</h4>';
+                    } else {
+                        echo 'Video tidak valid';
+                    }
+                    ?>
             </div>
-            <div class="col">
-                <img src="<?php echo base_url('assets/images/background.png') ?>" alt=""
-                    style="height: 250px; width: 250px">
-            </div>
-            <div class="col">
-                <img src="<?php echo base_url('assets/images/background.png') ?>" alt=""
-                    style="height: 250px; width: 250px">
-            </div>
-        </div>
-        <div class="row text-center mb-3">
-            <div class="col">
-                <span>caption</span>
-            </div>
-            <div class="col">
-                <span>caption</span>
-            </div>
-            <div class="col">
-                <span>caption</span>
-            </div>
+            <?php endif; ?>
+            <?php $counter++; ?>
+            <?php endforeach; ?>
         </div>
     </div>
+
 
     <!-- Tambahkan script JavaScript dari Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

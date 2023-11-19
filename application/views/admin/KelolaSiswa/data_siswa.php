@@ -76,6 +76,45 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <?php if ($this->session->userdata('success_tambah')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_tambah'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_tambah'); ?>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->userdata('success_edit')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_edit'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_edit'); ?>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->userdata('success_hapus')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_hapus'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_hapus'); ?>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->userdata('success_import')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_import'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_import'); ?>
+                                <?php endif; ?>
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
@@ -90,10 +129,14 @@
                                         <?php $no = 1;?>
                                         <?php foreach ($siswa as $row): ?>
                                         <tr>
-                                            <td style="width:5%; text-align: center; vertical-align: middle;"><?php echo $no++;?></td>
-                                            <td><?php echo isset($row->NISN) ? htmlspecialchars($row->NISN) : ''; ?></td>
-                                            <td><?php echo isset($row->Nama_lengkap) ? htmlspecialchars($row->Nama_lengkap) : ''; ?></td>
-                                            <td><?php echo isset($row->Jenis_kelamin) ? htmlspecialchars($row->Jenis_kelamin) : ''; ?></td>
+                                            <td style="width:5%; text-align: center; vertical-align: middle;">
+                                                <?php echo $no++;?></td>
+                                            <td><?php echo isset($row->NISN) ? htmlspecialchars($row->NISN) : ''; ?>
+                                            </td>
+                                            <td><?php echo isset($row->Nama_lengkap) ? htmlspecialchars($row->Nama_lengkap) : ''; ?>
+                                            </td>
+                                            <td><?php echo isset($row->Jenis_kelamin) ? htmlspecialchars($row->Jenis_kelamin) : ''; ?>
+                                            </td>
                                             <td style="width:10%; text-align: center; vertical-align: middle;">
                                                 <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                     data-toggle="modal"

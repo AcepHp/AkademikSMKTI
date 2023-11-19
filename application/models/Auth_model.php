@@ -63,6 +63,10 @@
             }
         }
 
+        public function getuser() {
+            return $this->db->get('users')->result();
+        }
+
         public function getuserbyid($id) {
             $this->db->where('id_users', $id);
             return $this->db->get('users')->row_array();
