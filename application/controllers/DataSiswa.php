@@ -194,8 +194,10 @@ class DataSiswa extends CI_Controller {
         redirect('Datasiswa/index');
     }
 
-    public function import()
-{
+    public function import(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $upload_status = $this->uploadDoc();
         if ($upload_status !== false) {
@@ -272,8 +274,10 @@ class DataSiswa extends CI_Controller {
 
 
 
-	function uploadDoc()
-	{
+	function uploadDoc(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
 		$uploadPath = 'assets/uploads/imports/';
 		if(!is_dir($uploadPath))
 		{

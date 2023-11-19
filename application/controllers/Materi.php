@@ -8,6 +8,9 @@ class Materi extends CI_Controller {
 
 
     public function index() {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         $tahun = $this->Materi_model->get_tahun();
         $semester = $this->Materi_model->get_semester();
     
@@ -26,6 +29,9 @@ class Materi extends CI_Controller {
     }
     
     public function lihat_materi($id_kelas, $id_mapel) {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         // Panggil model dan method untuk mengambil id_tahun dan id_semester aktif
         $id_tahun = $this->Materi_model->get_active_id_tahun();
         $id_semester = $this->Materi_model->get_active_id_semester();
@@ -58,6 +64,9 @@ class Materi extends CI_Controller {
     
 
     public function tambah_materi($id_kelas, $id_mapel) {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Menangani permintaan POST untuk menyimpan data
         $id_kelas = $this->input->post('id_kelas');
@@ -128,6 +137,9 @@ class Materi extends CI_Controller {
 }
 
 public function edit_materi_guru($id_materi) {
+    if ($this->session->userdata('role') !== 'Guru') {
+        redirect('auth');
+    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_kelas = $_POST['id_kelas'];
         $id_mapel = $_POST['id_mapel'];
@@ -183,6 +195,9 @@ public function edit_materi_guru($id_materi) {
 }
 
 public function hapus_materi_guru($id_materi, $id_kelas, $id_mapel) {
+    if ($this->session->userdata('role') !== 'Guru') {
+        redirect('auth');
+    }
     // Panggil model untuk mendapatkan informasi materi
     $materi_info = $this->Materi_model->get_materi_info($id_materi);
     
@@ -212,12 +227,10 @@ public function hapus_materi_guru($id_materi, $id_kelas, $id_mapel) {
     }
 }
 
-
-
-
- ///// MATERI UNTUK SISWA
-    
- public function index_siswa() {
+public function index_siswa() {
+    if ($this->session->userdata('role') !== 'Siswa') {
+        redirect('auth');
+    }
     $tahun = $this->Materi_model->get_tahun();
     $semester = $this->Materi_model->get_semester();
     $kode = $this->Materi_model->get_kode_jurusan($this->session->userdata('nisn'));
@@ -259,41 +272,47 @@ public function hapus_materi_guru($id_materi, $id_kelas, $id_mapel) {
 }
 
 public function lihat_materi_siswa($id_kelas, $id_mapel) {
+    if ($this->session->userdata('role') !== 'Siswa') {
+        redirect('auth');
+    }
      // Panggil model dan method untuk mengambil id_tahun dan id_semester aktif
-     $id_tahun = $this->Materi_model->get_active_id_tahun();
-     $id_semester = $this->Materi_model->get_active_id_semester();
-     
-     if ($id_tahun && $id_semester) {
-         $data['juti'] = $this->Materi_model->get_jurusan_tingkatan_byid($id_mapel);
-         
-         if (!empty($data['juti']) && isset($data['juti'][0]->kode_jurusan) && isset($data['juti'][0]->kode_tingkatan)) {
-             $kode_jurusan = $data['juti'][0]->kode_jurusan;
-             $kode_tingkatan = $data['juti'][0]->kode_tingkatan;
- 
+    $id_tahun = $this->Materi_model->get_active_id_tahun();
+    $id_semester = $this->Materi_model->get_active_id_semester();
+    
+    if ($id_tahun && $id_semester) {
+        $data['juti'] = $this->Materi_model->get_jurusan_tingkatan_byid($id_mapel);
+        
+        if (!empty($data['juti']) && isset($data['juti'][0]->kode_jurusan) && isset($data['juti'][0]->kode_tingkatan)) {
+            $kode_jurusan = $data['juti'][0]->kode_jurusan;
+            $kode_tingkatan = $data['juti'][0]->kode_tingkatan;
+
              // Panggil model untuk mendapatkan materi detail sesuai dengan filter
-             $data['materi'] = $this->Materi_model->get_materi_detail($id_kelas, $id_mapel, $id_tahun, $id_semester, $kode_jurusan, $kode_tingkatan);
-             
+            $data['materi'] = $this->Materi_model->get_materi_detail($id_kelas, $id_mapel, $id_tahun, $id_semester, $kode_jurusan, $kode_tingkatan);
+            
              // Pass the $id_kelas and $id_mapel variables to the view
-             $data['id_kelas'] = $id_kelas;
-             $data['id_mapel'] = $id_mapel;
-         
+            $data['id_kelas'] = $id_kelas;
+            $data['id_mapel'] = $id_mapel;
+    
              // Kirim data ke view yang menampilkan materi detail
-             $this->load->view('Siswa/materi/lihat_materi', $data);
-         } else {
+            $this->load->view('Siswa/materi/lihat_materi', $data);
+        } else {
              // Tampilkan pesan kesalahan jika data jurusan dan tingkatan tidak ditemukan
-             echo "Data jurusan dan tingkatan tidak ditemukan";
-         }
-     } else {
+            echo "Data jurusan dan tingkatan tidak ditemukan";
+        }
+    } else {
          // Tampilkan pesan kesalahan jika tahun atau semester aktif tidak ditemukan
-         echo "Tahun atau semester aktif tidak ditemukan";
-     }
+        echo "Tahun atau semester aktif tidak ditemukan";
+    }
 }
 
 // Materi untuk admin
 public function index_admin() {
+    if ($this->session->userdata('role') !== 'SuperAdmin') {
+        redirect('auth');
+    }
    // Mengambil data tahun dan semester akademik aktif dari model
-   $id_tahun = $this->Materi_model->get_active_id_tahun();
-   $id_semester = $this->Materi_model->get_active_id_semester();
+    $id_tahun = $this->Materi_model->get_active_id_tahun();
+    $id_semester = $this->Materi_model->get_active_id_semester();
 
     $data['materi'] = $this->Materi_model->get_all_materi_detail_admin($id_tahun, $id_semester);
     
@@ -302,6 +321,9 @@ public function index_admin() {
     
 
 public function tambah_materi_admin() {
+    if ($this->session->userdata('role') !== 'SuperAdmin') {
+        redirect('auth');
+    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Menangani permintaan POST untuk menyimpan data
         $id_kelas = $this->input->post('id_kelas');
@@ -376,6 +398,9 @@ public function tambah_materi_admin() {
 }
 
 public function hapus_materi($id_materi) {
+    if ($this->session->userdata('role') !== 'SuperAdmin') {
+        redirect('auth');
+    }
     // Panggil model untuk mendapatkan informasi materi
     $materi_info = $this->Materi_model->get_materi_info($id_materi);
     
@@ -406,8 +431,11 @@ public function hapus_materi($id_materi) {
 }
 
 public function edit_materi_admin($id_materi) {
+    if ($this->session->userdata('role') !== 'SuperAdmin') {
+        redirect('auth');
+    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       
+    
             $config['upload_path'] = './assets/uploads/materi/';
             $config['allowed_types'] = 'pdf|doc|docx|pptx'; // Jenis file yang diizinkan
             $config['max_size'] = 20480; // Ukuran maksimum file (dalam KB)
@@ -427,17 +455,17 @@ public function edit_materi_admin($id_materi) {
                     );
 
                       // Ambil informasi file sebelumnya
-    $old_file_info = $this->Materi_model->get_file_info($id_materi);
+            $old_file_info = $this->Materi_model->get_file_info($id_materi);
 
-    // Panggil model untuk menyimpan data materi ke dalam database
-    $result = $this->Materi_model->editdb_tambahfolder__materi($id_materi, $data);
-// Hapus file lama jika pengunggahan file baru berhasil
-if ($result && $old_file_info) {
-    $old_file_path = './assets/uploads/materi/' . $old_file_info->file_materi;
-    if (file_exists($old_file_path)) {
-        unlink($old_file_path);
-    }
-}
+            // Panggil model untuk menyimpan data materi ke dalam database
+            $result = $this->Materi_model->editdb_tambahfolder__materi($id_materi, $data);
+        // Hapus file lama jika pengunggahan file baru berhasil
+        if ($result && $old_file_info) {
+            $old_file_path = './assets/uploads/materi/' . $old_file_info->file_materi;
+            if (file_exists($old_file_path)) {
+                unlink($old_file_path);
+            }
+        }
         } else {
             // Jika gagal mengunggah file, tampilkan pesan kesalahan
             $error = $this->upload->display_errors();

@@ -26,6 +26,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function kelola_diskusi() {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $enum_values = array('Iya', 'Tidak');
         $data['topik'] = $this->diskusi_model->get_daftar_topik($enum_values);
         $jumlahBaris = $this->diskusi_model->countRowsWithEnumTunggu();
@@ -34,6 +37,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function kelola_komentar() {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $data['komentar'] = $this->diskusi_model->get_daftar_komentar();
         $this->load->view('diskusi/Kelola_komentar', $data); // Memuat halaman Kelola_diskusi.php
     }
@@ -82,6 +88,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function setujui_topik($id_topik) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         // Panggil fungsi model untuk mengubah status topik menjadi "Iya"
@@ -95,6 +104,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function hapus_topik($id_topik) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         // Panggil fungsi model untuk menghapus topik & komentar
@@ -105,6 +117,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function nonaktifkan_topik($id_topik) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         // Panggil fungsi model untuk mengubah status topik menjadi "Iya"
@@ -115,10 +130,13 @@ class Diskusi extends CI_Controller {
         } else {
             // Handle error jika perubahan status gagal
         }
-       
+    
     }
 
     public function setujui_komentar($id_komentar) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         // Panggil fungsi model untuk mengubah status topik menjadi "Iya"
@@ -132,6 +150,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function hapus_komentar($id_komentar) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         $this->diskusi_model->hapus_komentar($id_komentar);
@@ -141,6 +162,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function nonaktifkan_komentar($id_komentar) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         // Panggil fungsi model untuk mengubah status topik menjadi "Iya"
@@ -151,21 +175,27 @@ class Diskusi extends CI_Controller {
         } else {
             // Handle error jika perubahan status gagal
         }
-       
+    
     }
 
     // Untuk Pengajuan 
     public function pengajuan() {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $jumlahBaris = $this->diskusi_model->countRowsWithEnumTunggu();
         $data['jumlahBaris'] = $jumlahBaris;
         $enum = array('tunggu');
         $data['topik'] = $this->diskusi_model->get_daftar_pengajuan($enum);
     
         $this->load->view('diskusi/Kelola_diskusi_pengajuan', $data);
-       
+    
     }
 
     public function setujui_pengajuan($id_topik) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         // Panggil fungsi model untuk mengubah status topik menjadi "Iya"
@@ -179,6 +209,9 @@ class Diskusi extends CI_Controller {
     }
 
     public function hapus_pengajuan($id_topik) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $this->load->model('diskusi_model');
 
         // Panggil fungsi model untuk menghapus topik

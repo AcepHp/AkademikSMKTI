@@ -13,8 +13,10 @@ class KelolaKelas extends CI_Controller
         $this->load->library('user_agent');
     }
 
-    public function index()
-    {
+    public function index(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Mendapatkan data siswa berdasarkan filter jika ada
         $kode_jurusan = $this->input->post('kode_jurusan'); // Ganti 'kode_jurusan' sesuai dengan nama input pada form
         $kode_tingkatan = $this->input->post('kode_tingkatan'); // Ganti 'kode_tingkatan' sesuai dengan nama input pada form
@@ -46,8 +48,10 @@ class KelolaKelas extends CI_Controller
 
 
 
-    public function cari_data()
-    {
+    public function cari_data(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $kode_jurusan = $this->input->get('kode_jurusan');
         $kode_tingkatan = $this->input->get('kode_tingkatan');
         $id_kelas = $this->input->get('id_kelas');
@@ -88,8 +92,7 @@ class KelolaKelas extends CI_Controller
 
 
 
-    public function get_kelas_by_jurusan()
-    {
+    public function get_kelas_by_jurusan(){
         $kode_jurusan = $this->input->post('kode_jurusan');
         $kode_tingkatan = $this->input->post('kode_tingkatan'); // Tambahkan ini
         $kelas = $this->Kelas_model->get_kelas_by_jurusan_tingkatan($kode_jurusan, $kode_tingkatan); // Gantilah fungsi ini sesuai dengan model Anda
@@ -102,8 +105,10 @@ class KelolaKelas extends CI_Controller
         echo json_encode($kelas_dropdown);
     }
 
-    public function tambah_siswa_kelas($id_kelas, $kode_jurusan)
-    {
+    public function tambah_siswa_kelas($id_kelas, $kode_jurusan){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Load the KelolaKelas_model
         $this->load->model('KelolaKelas_model');
 
@@ -145,8 +150,10 @@ class KelolaKelas extends CI_Controller
 
 
 
-    public function tambah_data_siswa_ke_kelas()
-    {
+    public function tambah_data_siswa_ke_kelas(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Ambil data yang dikirimkan melalui form
         $selected_siswa = $this->input->post('selected_siswa');
         $id_kelas = $this->input->post('id_kelas');
@@ -164,8 +171,10 @@ class KelolaKelas extends CI_Controller
         // Contoh: redirect ke halaman daftar siswa dalam kelas
         redirect('kelolakelas/index');
     }
-    public function pindah_kelas($nisn)
-    {
+    public function pindah_kelas($nisn){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $id_kelas_baru = $this->input->post('id_kelas');
 
         // Mengambil data siswa berdasarkan NISN
@@ -182,8 +191,10 @@ class KelolaKelas extends CI_Controller
             echo "NISN tidak valid atau siswa tidak ditemukan.";
         }
     }
-    public function get_kelas_by_tingkatan()
-    {
+    public function get_kelas_by_tingkatan(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $kode_tingkatan = $this->input->post('tingkatan');
         $kelas = $this->KelolaKelas_model->get_kelas_by_tingkatan($kode_tingkatan);
 
@@ -195,8 +206,7 @@ class KelolaKelas extends CI_Controller
         // Mengembalikan data dalam format JSON
         echo json_encode($kelas);
     }
-    public function get_kelas_by_jurusan_tingkatan()
-    {
+    public function get_kelas_by_jurusan_tingkatan(){
         $kode_jurusan = $this->input->post('kode_jurusan');
         $kode_tingkatan = $this->input->post('kode_tingkatan');
 
@@ -205,8 +215,10 @@ class KelolaKelas extends CI_Controller
         // Mengembalikan data dalam format JSON
         echo json_encode($kelas);
     }
-    public function naik_kelas()
-    {
+    public function naik_kelas(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Ambil data yang dikirimkan melalui form
         $current_kelas_id = $this->input->post('current_kelas_id');
         $tingkatan = $this->input->post('tingkatan');

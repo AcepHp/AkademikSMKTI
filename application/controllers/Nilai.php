@@ -15,8 +15,10 @@ class Nilai extends CI_Controller {
         $this->load->model('Tahun_akademik_model'); 
     }
 
-    public function index()
-    {
+    public function index(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Mendapatkan data siswa berdasarkan filter jika ada
         $kode_jurusan = $this->input->post('kode_jurusan'); // Ganti 'kode_jurusan' sesuai dengan nama input pada form
         $kode_tingkatan = $this->input->post('kode_tingkatan'); // Ganti 'kode_tingkatan' sesuai dengan nama input pada form
@@ -48,8 +50,10 @@ class Nilai extends CI_Controller {
 
 
 
-    public function cari_data()
-    {
+    public function cari_data(){
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $kode_jurusan = $this->input->get('kode_jurusan');
         $kode_tingkatan = $this->input->get('kode_tingkatan');
         $id_kelas = $this->input->get('id_kelas');
@@ -100,6 +104,9 @@ class Nilai extends CI_Controller {
         echo json_encode($kelas_dropdown);
     }
     public function tampil_nilai($nisn) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Mendapatkan informasi semester aktif dari model Semester_model
         $this->load->model('Semester_model');
         $semester_aktif = $this->Semester_model->get_active_semester();
@@ -140,6 +147,9 @@ class Nilai extends CI_Controller {
     }
 
     public function tambah_nilai($nisn) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Mendapatkan kode jurusan dan kode_tingkatan menggunakan fungsi get_kode_jurusan_tingkatan_by_NISN
         $kode_jurusan_tingkatan = $this->Nilai_model->get_kode_jurusan_tingkatan_by_NISN($nisn);
     
@@ -187,6 +197,9 @@ class Nilai extends CI_Controller {
     
     
     public function simpan_tambah_nilai() {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Mendapatkan data dari formulir
         $nisn = $this->input->post('nisn');
         $id_tahun = $this->input->post('id_tahun');
@@ -212,6 +225,9 @@ class Nilai extends CI_Controller {
 
     
     public function edit_nilai($id_nilai) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $data['nilai'] = $this->Nilai_model->get_nilai_by_id($id_nilai);
     
         if ($data['nilai']) {
@@ -242,6 +258,9 @@ class Nilai extends CI_Controller {
     }
     
     public function edit_data_nilai() {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         $id_nilai = $this->input->post('id_nilai');
         $id_mapel = $this->input->post('id_mapel');
         $id_tahun = $this->input->post('id_tahun');
@@ -267,6 +286,9 @@ class Nilai extends CI_Controller {
     
     
     public function hapus_nilai($id_nilai) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
         // Pastikan Anda memiliki fungsi di model yang dapat menghapus data berdasarkan ID_Nilai
         $this->Nilai_model->hapus_data_nilai($id_nilai);
         
@@ -277,6 +299,9 @@ class Nilai extends CI_Controller {
      // penilaian untuk guru
 
     public function penilaian() {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         $tahun = $this->Nilai_model->get_tahun();
         $semester = $this->Nilai_model->get_semester();
     
@@ -295,6 +320,9 @@ class Nilai extends CI_Controller {
     }    
 
     public function penilaian_siswa($id_kelas,$id_tahun,$id_mapel) {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         $semester = $this->Nilai_model->get_semester();
         
         // Ambil nilai id_semester dari hasil query semester yang didapat
@@ -310,6 +338,9 @@ class Nilai extends CI_Controller {
     }  
 
     public function tambah_nilai_guru($NISN,$id_kelas) {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         $data['kelas'] = $this->Nilai_model->get_detail_kelas($id_kelas);
         $data['mapel'] = $this->Nilai_model-> get_detail_kelas_mapel($id_kelas);
         $data['siswa'] = $this->Nilai_model->get_siswa_by_NISN_guruu($NISN);
@@ -319,6 +350,9 @@ class Nilai extends CI_Controller {
     } 
 
     public function edit_nilai_guru($NISN,$id_kelas,$id_mapel) {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         $data['kelas'] = $this->Nilai_model->get_detail_kelas($id_kelas);
         $data['mapel'] = $this->Nilai_model-> get_detail_kelas_mapel($id_kelas);
         $data['siswa'] = $this->Nilai_model->get_siswa_by_NISN_guru($NISN,$id_mapel);
@@ -327,6 +361,9 @@ class Nilai extends CI_Controller {
     } 
 
     public function simpan_tambah_nilai_guru() {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         // Mendapatkan data dari formulir
         $id_kelas = $this->input->post('id_kelas');
         $id_semester = $this->input->post('id_semester');
@@ -350,6 +387,9 @@ class Nilai extends CI_Controller {
     }
 
     public function edit_data_nilai_guru() {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         // Mendapatkan data dari formulir
         $id_nilai = $this->input->post('id_nilai');
         $id_kelas = $this->input->post('id_kelas');
@@ -376,6 +416,9 @@ class Nilai extends CI_Controller {
     
     // siswa tampil nilai
     public function siswa_tampil_nilai() {
+        if ($this->session->userdata('role') !== 'Siswa') {
+            redirect('auth');
+        }
         $tahun = $this->Nilai_model->get_tahun();
         $semester = $this->Nilai_model->get_semester();
     
@@ -396,6 +439,9 @@ class Nilai extends CI_Controller {
     }    
 
     public function siswa_tampil_nilai_semester() {
+        if ($this->session->userdata('role') !== 'Siswa') {
+            redirect('auth');
+        }
         $tahun = $this->Nilai_model->get_tahun();
         $semester = $this->Nilai_model->get_semester();
         $tingkat = $this->Nilai_model->get_tingkat_by_nisn($this->session->userdata('nisn'));
@@ -425,6 +471,9 @@ class Nilai extends CI_Controller {
     }
 
     public function cetak_nilai($nisn) {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Siswa') {
+            redirect('auth');
+        }
     // Mendapatkan data nilai siswa berdasarkan tahun akademik dan semester aktif
     $tahun_akademik_id = $this->KelolaKelas_model->get_tahun_akademik_aktif_id();
     $semester_aktif = $this->KelolaKelas_model->get_semester_aktif();

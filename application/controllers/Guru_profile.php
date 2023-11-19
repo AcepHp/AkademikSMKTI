@@ -28,6 +28,9 @@ class Guru_profile extends CI_Controller {
     }
 
     public function change_password() {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         $this->form_validation->set_rules('pwdsekarang', 'Password Sekarang', 'required');
         $this->form_validation->set_rules('pwdbaru', 'Password Baru', 'required|min_length[6]');
     
@@ -60,6 +63,9 @@ class Guru_profile extends CI_Controller {
     }
     
     public function tambah_dan_rubah_foto() {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         $NIP = $this->session->userdata('NIP');
     
         // Configuration for uploading files
@@ -96,6 +102,9 @@ class Guru_profile extends CI_Controller {
 
 
     public function update_data() {
+        if ($this->session->userdata('role') !== 'Guru') {
+            redirect('auth');
+        }
         
         $this->form_validation->set_rules('NIP', 'NIP', 'required');
         $this->form_validation->set_rules('Nama_Lengkap', 'Nama Lengkap');
@@ -111,22 +120,22 @@ class Guru_profile extends CI_Controller {
 
         if ($this->form_validation->run() == TRUE) {
              // Validasi berhasil, lakukan pembaruan data
-             $NIP = $this->session->userdata('NIP');
-             $data = array(
-                 'Nama_Lengkap' => $this->input->post('Nama_Lengkap'),
-                 'Tempat_Lahir' => $this->input->post('Tempat_Lahir'),
-                 'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir'),
-                 'Jenis_Kelamin' => $this->input->post('Jenis_kelamin'),
-                 'Alamat' => $this->input->post('Alamat'),
-                 'Pendidikan' => $this->input->post('Pendidikan'),
-                 'Tanggal_Mulai' => $this->input->post('Tanggal_Mulai')
-             );
- 
+            $NIP = $this->session->userdata('NIP');
+            $data = array(
+                'Nama_Lengkap' => $this->input->post('Nama_Lengkap'),
+                'Tempat_Lahir' => $this->input->post('Tempat_Lahir'),
+                'Tanggal_Lahir' => $this->input->post('Tanggal_Lahir'),
+                'Jenis_Kelamin' => $this->input->post('Jenis_kelamin'),
+                'Alamat' => $this->input->post('Alamat'),
+                'Pendidikan' => $this->input->post('Pendidikan'),
+                'Tanggal_Mulai' => $this->input->post('Tanggal_Mulai')
+            );
+
              // Panggil model untuk melakukan pembaruan data guru
-             $this->Guru_profilemodel->update_guru($NIP, $data);
- 
+            $this->Guru_profilemodel->update_guru($NIP, $data);
+
              // Set flash data untuk pesan sukses
-             $this->session->set_flashdata('success_msg', 'Data siswa berhasil diperbarui.');
+            $this->session->set_flashdata('success_msg', 'Data siswa berhasil diperbarui.');
             redirect('Guru_profile/index');
         } else {
             redirect('Guru_profile/index');
