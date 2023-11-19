@@ -103,6 +103,7 @@ class DataSiswa extends CI_Controller {
             );
     
             $this->Datasiswa_model->create_user_account($user_data);
+            $this->session->set_flashdata('success_tambah', 'Data siswa berhasil ditambahkan.');
             
             redirect('datasiswa/index');
         }
@@ -170,7 +171,7 @@ class DataSiswa extends CI_Controller {
                 );
 
                 $this->Datasiswa_model->update_user_account($data['NISN'], $user_data);
-                
+                $this->session->set_flashdata('success_edit', 'Data siswa berhasil diupdate.');
                 redirect('DataSiswa/index');
             }
         }
@@ -190,6 +191,7 @@ class DataSiswa extends CI_Controller {
 
         // Delete the student data
         $this->Datasiswa_model->hapus_siswa($id);
+        $this->session->set_flashdata('success_hapus', 'Data siswa berhasil dihapus.');
     
         redirect('Datasiswa/index');
     }
@@ -261,7 +263,7 @@ class DataSiswa extends CI_Controller {
                 $this->db->insert('siswa', $data);
                 $count_Rows++;
             }
-            $this->session->set_flashdata('success', 'Berhasil mengimpor data');
+            $this->session->set_flashdata('success_import', 'Berhasil mengimpor data');
             redirect(base_url('DataSiswa'));
         } else {
             $this->session->set_flashdata('error', 'Berkas tidak diunggah');
