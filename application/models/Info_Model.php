@@ -84,6 +84,7 @@
 
         public function delete_info($id) {
             $this->db->where('id_info', $id);
+            $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Card Info berhasil Dihapus !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->delete('info');
         }
 

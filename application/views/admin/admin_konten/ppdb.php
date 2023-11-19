@@ -84,9 +84,9 @@
                                         <thead>
                                             <tr>
                                                 <th style="width:5%; text-align:center; vertical-align:center;">NO</th>
-                                                <th style="text-align:center; vertical-align:center;">Nama</th>
                                                 <th style="text-align:center; vertical-align:center;">Gambar</th>
                                                 <th style="text-align:center; vertical-align:center;">Judul</th>
+                                                <th style="text-align:center; vertical-align:center;">Deskripsi</th>
                                                 <th style="text-align:center; vertical-align:center;">Created</th>
                                                 <th style="width:10%; text-align:center; vertical-align:center;">Aksi</th>
                                             </tr>
@@ -96,12 +96,12 @@
                                             <?php foreach ($ppdb_admin->result() as $row) : ?>
                                             <tr>
                                                 <td style="width:5%; text-align:center; vertical-align:center;"><?php echo $no++; ?></td>
-                                                <td><?php echo $row->nama; ?></td>
                                                 <td style="text-align:center; vertical-align:center;">
                                                     <img src="<?php echo $row->gambar ?>" alt="Gambar"
                                                         style="width: 80px; height: auto;">
                                                 </td>
-                                                <td><?php echo substr($row->judul,0,50) ?>...</td>
+                                                <td><?php echo substr($row->judul,0,20) ?>...</td>
+                                                <td><?php echo substr($row->judul,0,90) ?>...</td>
                                                 <td><?php echo $row->created ?></td>
                                                 <td style="width:10%; text-align:center; vertical-align:center;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"

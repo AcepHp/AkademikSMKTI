@@ -50,10 +50,10 @@ class Kepsek extends CI_Controller
             redirect('auth');
         }
         if($this->Kepsek_Model->editkepsek($id)){
-            redirect('Kelola_Dashboard/Kepsek/kepsek','refresh');
+            redirect('Kelola_Dashboard/Kepsek/kepsek');
 
         } else {
-            redirect('Kelola_Dashboard/Kepsek/edit_kepsek','refresh');
+            redirect('Kelola_Dashboard/Kepsek/edit_kepsek');
             
         }
     }

@@ -129,7 +129,7 @@ $current_page = basename($_SERVER['PHP_SELF']); // Mengambil nama file halaman 
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Berita</div>
+                                                Berita Sekolah</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $berita ?>
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@ $current_page = basename($_SERVER['PHP_SELF']); // Mengambil nama file halaman 
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                Acara</div>
+                                                Acara Sekolah</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $acara ?>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@ $current_page = basename($_SERVER['PHP_SELF']); // Mengambil nama file halaman 
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
-                                                Foto</div>
+                                                Foto Sekolah</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $foto?></div>
                                         </div>
                                         <div class="col-auto">
@@ -188,7 +188,7 @@ $current_page = basename($_SERVER['PHP_SELF']); // Mengambil nama file halaman 
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-                                                Video</div>
+                                                Video Sekolah</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $video ?>
                                             </div>
                                         </div>
