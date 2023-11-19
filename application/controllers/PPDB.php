@@ -28,6 +28,7 @@ class PPDB extends CI_Controller {
    		$data['path'] = base_url('assets');
         $data['jurusan_item']=$this->Jurusan_Model->get_jurusan();
         $data['jurusan'] = $this->Jurusan_Model->get_jurusan();
+        $data['jurusan2']=$this->Jurusan_model->getjurusan();
         $data['nomor_registrasi'] = $this->PPDB_Model->generate_nomor_registrasi();
 
         // var_dump($data);
@@ -200,7 +201,8 @@ class PPDB extends CI_Controller {
 
             // Update tanggal registrasi dalam data yang sudah disimpan
             $this->PPDB_Model->update_tanggal_registrasi($nisn, $tanggal_registrasi);
-        
+
+            $this->session->set_flashdata('success_message', 'Data tersimpan dengan sukses. Cek email secara berkala.');
             // Setelah data berhasil disimpan, arahkan pengguna kembali ke halaman lain atau tampilkan pesan sukses
             redirect('PPDB/form');
             $response = array('status' => 'success', 'message' => 'Data tersimpan dengan sukses.');
