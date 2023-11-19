@@ -20,6 +20,10 @@
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -61,33 +65,35 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Daftar pengajuan (<?php echo $jumlahBaris; ?>)</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Daftar pengajuan
+                                    (<?php echo $jumlahBaris; ?>)</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>ID Topik</th>
-                                                <th>Tanggal</th>
-                                                <th>Nama</th>
-                                                <th>Status</th>
-                                                <th>Aksi</th>
+                                                <th style="width:5%; text-align:center;">No</th>
+                                                <th style="text-align:center;">Tanggal</th>
+                                                <th style="text-align:center;">Nama</th>
+                                                <th style="text-align:center;">Status</th>
+                                                <th style="width:10%; text-align:center;">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php
-                $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Ambil parameter status dari URL
-                foreach ($topik as $row) :
-                    if ($statusFilter === '' || $row['enum'] === $statusFilter) :
-                ?>
+                                            <?php $no = 1;?>
+                                            <?php
+                                        $statusFilter = isset($_GET['status']) ? $_GET['status'] : ''; // Ambil parameter status dari URL
+                                        foreach ($topik as $row) :
+                                            if ($statusFilter === '' || $row['enum'] === $statusFilter) :
+                                        ?>
                                             <?php foreach ($topik as $row)  ?>
                                             <tr>
-                                                <td><?php echo $row['id_topik']; ?></td>
+                                                <td style="width:5%; text-align:center;"><?php echo $no++;?></td>
                                                 <td><?php echo $row['tanggal']; ?></td>
                                                 <td><?php echo $row['nama']; ?></td>
                                                 <td><?php echo ($row['enum'] == 'tunggu') ? 'Pending' : ''; ?></td>
-                                                <td>
+                                                <td style="width:10%; text-align:center; vertical-align:middle;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"
                                                         data-toggle="modal"
                                                         data-target="#topikModal<?php echo $row['id_topik']; ?>">
@@ -110,7 +116,7 @@
                     <!-- End of Main Content -->
 
                     <!-- Footer Admin -->
-                  
+
 
                 </div>
                 <!-- End of Content Wrapper -->
@@ -123,8 +129,8 @@
                 <i class="fas fa-angle-up"></i>
             </a>
 
-             <!-- Footer Admin -->
-    <?php $this->load->view('Bar/Footer_admin'); ?>
+            <!-- Footer Admin -->
+            <?php $this->load->view('Bar/Footer_admin'); ?>
 
 
             <!-- Modal -->
@@ -201,6 +207,27 @@
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
+            <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
+
+            <script>
+            new DataTable('#example', {
+                columnDefs: [{
+                        targets: [0],
+                        orderData: [0, 1]
+                    },
+                    {
+                        targets: [1],
+                        orderData: [1, 0]
+                    },
+                    {
+                        targets: [4],
+                        orderData: [4, 0]
+                    }
+                ]
+            });
+            </script>
 
 
 </body>

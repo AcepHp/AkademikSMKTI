@@ -39,6 +39,9 @@ class Siswa extends CI_Controller {
 
 
     public function change_password() {
+        if ($this->session->userdata('role') !== 'Siswa') {
+            redirect('auth');
+        }
         $this->form_validation->set_rules('pwdsekarang', 'Password Sekarang', 'required');
         $this->form_validation->set_rules('pwdbaru', 'Password Baru', 'required|min_length[6]');
     
@@ -73,9 +76,9 @@ class Siswa extends CI_Controller {
             
 
     public function update_data() {
-        
-         // Validasi form, Anda dapat menggunakan library form_validation CodeIgniter
-
+        if ($this->session->userdata('role') !== 'Siswa') {
+            redirect('auth');
+        }
         $this->form_validation->set_rules('Tempat_lahir', 'Tempat Lahir');
         $this->form_validation->set_rules('Tanggal_Lahir', 'Tanggal Lahir');
         $this->form_validation->set_rules('Jenis_kelamin', 'Jenis Kelamin');
@@ -112,15 +115,14 @@ class Siswa extends CI_Controller {
             $this->session->set_flashdata('success_msg', 'Data siswa berhasil diperbarui.');
             redirect('siswa/settingprofile');
         } else {
-             // Ambil data dari formulir
-           
-
-             // Redirect ke halaman sukses atau halaman lain yang sesuai
             redirect('siswa/settingprofile');
         }
     }
 
     public function tambah_dan_rubah_foto() {
+        if ($this->session->userdata('role') !== 'Siswa') {
+            redirect('auth');
+        }
         $nisn = $this->session->userdata('nisn');
     
         // Configuration for uploading files
@@ -154,8 +156,5 @@ class Siswa extends CI_Controller {
         }
         redirect('siswa/settingprofile');
     }
-    
-    
-    
 }
 ?>
