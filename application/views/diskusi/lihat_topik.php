@@ -80,9 +80,9 @@
                                         <?php } ?>
 
                                         <?php if (isset($komentars)) {
-    foreach ($komentars as $komentar) {
-        if ($komentar['status'] === 'Iya') {
-            ?>
+                                        foreach ($komentars as $komentar) {
+                                            if ($komentar['status'] === 'Iya') {
+                                                ?>
                                         <div class="card mb-3">
                                             <div class="card-body">
                                                 <div class="row align-items-center">

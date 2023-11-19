@@ -95,7 +95,7 @@
                                                     alt="Card image" style="width: 100%; height: 100%;">
                                                 <?php else : ?>
                                                 <img class="card-img-top rounded-circle"
-                                                    src="<?= base_url('assets/images/avatar5.png') ?>" alt="Card image"
+                                                    src="<?= base_url('assets/images/avatar2.png') ?>" alt="Card image"
                                                     style="width: 100%; height: 100%;">
                                                 <?php endif; ?>
                                             </div>

@@ -46,15 +46,16 @@
                     ( <?php echo $this->session->userdata('nisn'); ?> )
                 </span>
 
-                <img class="img-profile rounded-circle" src="<?php $photoBlob = $this->session->userdata('Foto');
-                if ($photoBlob) {
-                    $photoData = base64_encode($photoBlob);
-                    $photoSrc = 'data:image/jpeg;base64,' . $photoData;
-                    echo $photoSrc;
-                } else {
-                    echo base_url('assets/images/avatar5.png');
-                }
-        ?>" alt="Foto Profil">
+                <img class="img-profile rounded-circle" src="<?php
+                        $file_foto = $this->session->userdata('Foto'); // Mengambil data file_foto dari sesi
+
+                        if ($file_foto) {
+                            $photoSrc = base_url('assets/uploads/foto/') . $file_foto; // Mendapatkan URL gambar dari direktori foto
+                            echo $photoSrc;
+                        } else {
+                            echo base_url('assets/images/avatar2.png'); // Jika tidak ada gambar, tampilkan avatar default
+                        }
+                        ?>" alt="Foto Profil">
 
             </a>
             <!-- Dropdown - User Information -->

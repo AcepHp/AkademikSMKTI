@@ -102,8 +102,8 @@
                                                             action="<?php echo site_url('diskusi/tambah_topik'); ?>">
 
                                                             <div class="form-group d-flex align-items-center">
-                                                                <img src="<?php echo base_url('assets/images/logo.png') ?>"
-                                                                    class="rounded-circle" width="48" height="48"
+                                                                <img src="//www.gravatar.com/avatar/<?php echo md5($this->session->userdata('nama_lengkap'));?>?s=40&d=monsterid"
+                                                                    class="rounded-circle" width="40" height="40"
                                                                     alt="Profil">
                                                                 <h4 class="card-title ml-2">
                                                                     <?php echo $this->session->userdata('nama_lengkap'); ?>
