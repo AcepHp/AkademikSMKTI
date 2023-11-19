@@ -3,21 +3,19 @@ final class Admin_Model extends CI_Model{
 
     public function __construct() {
         parent::__construct();
-        $this->load->database(); // Load library database
+        $this->load->database();
     }
 
     public function get_nilai() {
-        // Pilih semua kolom yang diinginkan
         $this->db->select('ID_Nilai, NISN, Nama_Siswa, Nama_Mapel, Kehadiran, Tugas, UTS, UAS, Attitude, Nilai_Akhir');
-        $query = $this->db->get('nilai'); // Mengambil data dari tabel "guru"
-        return $query->result(); // Mengembalikan hasil dalam bentuk array of objects
+        $query = $this->db->get('nilai');
+        return $query->result();
     }
 
     public function get_guru() {
-        // Pilih semua kolom yang diinginkan
         $this->db->select('ID_Guru, NIP, Nama_Lengkap, Tempat_Lahir, Tanggal_Lahir, Jenis_Kelamin, Alamat, Pendidikan, Tanggal_Mulai');
-        $query = $this->db->get('guru'); // Mengambil data dari tabel "guru"
-        return $query->result(); // Mengembalikan hasil dalam bentuk array of objects
+        $query = $this->db->get('guru');
+        return $query->result(); 
     }
 
     public function get_all(){
