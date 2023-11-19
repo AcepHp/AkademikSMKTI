@@ -63,65 +63,64 @@
                         <?php } ?>
                     </div>
                 </div>
-
-                <div class="row">
-
-                    <div class="col-md-6">
-                        <div class="card shadow">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Informasi Akademik</h6>
+                <div class="container-fluid mt-3">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Informasi Kelas</h6>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Tahun Akademik</th>
+                                            <td><?php echo isset($tahun[0]->tahun_akademik) ? $tahun[0]->tahun_akademik : 'Tahun tidak tersedia'; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Semester</th>
+                                            <td><?php echo isset($semester[0]->nama_semester) ? $semester[0]->nama_semester : 'Semester tidak tersedia'; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Jurusan</th>
+                                            <td><?php echo isset($jurusan->nama_jurusan) ? $jurusan->nama_jurusan : 'Jurusan tidak tersedia'; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Tahun Akademik</th>
-                                        <td><?php echo isset($tahun[0]->tahun_akademik) ? $tahun[0]->tahun_akademik : 'Tahun tidak tersedia'; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Semester</th>
-                                        <td><?php echo isset($semester[0]->nama_semester) ? $semester[0]->nama_semester : 'Semester tidak tersedia'; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Jurusan</th>
-                                        <td><?php echo isset($jurusan->nama_jurusan) ? $jurusan->nama_jurusan : 'Jurusan tidak tersedia'; ?>
-                                        </td>
-                                    </tr>
-                                </table>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card shadow">
+                                <div class="card-header py-3 ">
+                                    <h6 class="m-0 font-weight-bold text-primary">Informasi Tahun Akademik</h6>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>Nama Lengkap</th>
+                                            <td><?php echo isset($siswa->Nama_lengkap) ? $siswa->Nama_lengkap : 'Nama tidak tersedia'; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>NISN</th>
+                                            <td><?php echo isset($siswa->NISN) ? $siswa->NISN : 'NISN tidak tersedia'; ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kelas</th>
+                                            <td><?php echo isset($kelas->nama_kelas) ? $kelas->nama_kelas : 'Kelas tidak tersedia'; ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card shadow">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Informasi Siswa</h6>
-                            </div>
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Nama Lengkap</th>
-                                        <td><?php echo isset($siswa->Nama_lengkap) ? $siswa->Nama_lengkap : 'Nama tidak tersedia'; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>NISN</th>
-                                        <td><?php echo isset($siswa->NISN) ? $siswa->NISN : 'NISN tidak tersedia'; ?>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Kelas</th>
-                                        <td><?php echo isset($kelas->nama_kelas) ? $kelas->nama_kelas : 'Kelas tidak tersedia'; ?>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-            </div>
-            <br>
+
+                
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4 mr-4 ml-4">
@@ -132,28 +131,32 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        
                         <?php if (!empty($siswa)) : ?>
                         <table class="table table-bordered" id="example" class="display" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Kehadiran</th>
-                                    <th>Tugas</th>
-                                    <th>UTS</th>
-                                    <th>UAS</th>
-                                    <th>Nilai Akhir</th>
+                                    <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
+                                    <th style="text-align: center; vertical-align: middle;">Mata Pelajaran</th>
+                                    <th style="width:12%; text-align: center; vertical-align: middle;">Kehadiran</th>
+                                    <th style="width:12%; text-align: center; vertical-align: middle;">Tugas</th>
+                                    <th style="width:12%; text-align: center; vertical-align: middle;">UTS</th>
+                                    <th style="width:12%; text-align: center; vertical-align: middle;">UAS</th>
+                                    <th style="width:12%; text-align: center; vertical-align: middle;">Nilai Akhir</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php $no = 1;?>
                                 <?php foreach ($nilai as $data) {
                                         ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($data->nama_mapel); ?></td>
-                                    <td><?php echo htmlspecialchars($data->kehadiran); ?></td>
-                                    <td><?php echo htmlspecialchars($data->tugas); ?></td>
-                                    <td><?php echo htmlspecialchars($data->uts); ?></td>
-                                    <td><?php echo htmlspecialchars($data->uas); ?></td>
-                                    <td><?php echo htmlspecialchars($data->nilai_akhir); ?></td>
+                                    <td style="width:5%; text-align: center; vertical-align: middle;"><?php echo $no++;?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($data->nama_mapel); ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($data->kehadiran); ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($data->tugas); ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($data->uts); ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($data->uas); ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($data->nilai_akhir); ?></td>
                                     <?php } ?>
                                 </tr>
                                 <?php else : ?>
@@ -166,7 +169,7 @@
             </div>
             <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>
-        
+
     </div>
 
     </div>

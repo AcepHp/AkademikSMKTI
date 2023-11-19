@@ -5,6 +5,8 @@ class Siswa extends CI_Controller {
         $this->load->database();
         $this->load->library('form_validation'); // Tambahkan ini
         $this->load->model('siswa_model');
+        $this->load->model('VMT_Model');
+        $this->load->model('Nilai_model');
     }
 
     public function index() {
@@ -12,7 +14,29 @@ class Siswa extends CI_Controller {
             redirect('auth');
         }
 
+        $tahun = $this->Nilai_model->get_tahun();
+        $semester = $this->Nilai_model->get_semester();
+    
+        // Ambil nilai id_tahun dari hasil query tahun yang didapat
+        $id_tahun = $tahun[0]->id_tahun; 
+    
+        // Ambil nilai id_semester dari hasil query semester yang didapat
+        $id_semester = $semester[0]->id_semester; 
+
+        $data['vmt'] = $this->VMT_Model->get_all()->row();
+        $materi_count = $this->siswa_model->get_all_materi($this->session->userdata('nisn'),$id_tahun,$id_semester);
+        $data['materi_count'] = $materi_count;
+        $mapel_count = $this->siswa_model->get_all_mapel($this->session->userdata('nisn'));
+        $data['mapel_count'] = $mapel_count;
         $data['siswa'] = $this->siswa_model->get_siswa_data($this->session->userdata('nisn'));
+       
+        
+        $data['tahun'] = $tahun;
+        $data['semester'] = $semester;
+        $data['nilai'] = $this->Nilai_model->get_nilai_datasiswa_nilai($this->session->userdata('nisn'));
+        $data['siswaa'] = $this->Nilai_model->get_nilai_datasiswa_siswa($this->session->userdata('nisn'));
+       // $data['siswa'] = $this->Nilai_model->get_nilai_datasiswa($this->session->userdata('nisn'));
+        $data['tingkatan'] = $this->Nilai_model->get_tingkatan();
 
         $this->load->view('dashboard/Siswa_dashboard', $data);
     }
@@ -39,9 +63,6 @@ class Siswa extends CI_Controller {
 
 
     public function change_password() {
-        if ($this->session->userdata('role') !== 'Siswa') {
-            redirect('auth');
-        }
         $this->form_validation->set_rules('pwdsekarang', 'Password Sekarang', 'required');
         $this->form_validation->set_rules('pwdbaru', 'Password Baru', 'required|min_length[6]');
     
@@ -76,9 +97,9 @@ class Siswa extends CI_Controller {
             
 
     public function update_data() {
-        if ($this->session->userdata('role') !== 'Siswa') {
-            redirect('auth');
-        }
+        
+         // Validasi form, Anda dapat menggunakan library form_validation CodeIgniter
+
         $this->form_validation->set_rules('Tempat_lahir', 'Tempat Lahir');
         $this->form_validation->set_rules('Tanggal_Lahir', 'Tanggal Lahir');
         $this->form_validation->set_rules('Jenis_kelamin', 'Jenis Kelamin');
@@ -115,14 +136,15 @@ class Siswa extends CI_Controller {
             $this->session->set_flashdata('success_msg', 'Data siswa berhasil diperbarui.');
             redirect('siswa/settingprofile');
         } else {
+             // Ambil data dari formulir
+           
+
+             // Redirect ke halaman sukses atau halaman lain yang sesuai
             redirect('siswa/settingprofile');
         }
     }
 
     public function tambah_dan_rubah_foto() {
-        if ($this->session->userdata('role') !== 'Siswa') {
-            redirect('auth');
-        }
         $nisn = $this->session->userdata('nisn');
     
         // Configuration for uploading files
@@ -156,5 +178,8 @@ class Siswa extends CI_Controller {
         }
         redirect('siswa/settingprofile');
     }
+    
+    
+    
 }
 ?>

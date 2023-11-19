@@ -38,8 +38,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Nilai</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     <!-- Content Row -->
                     <div class="row">
@@ -60,28 +58,46 @@
                                             style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Mata Pelajaran</th>
-                                                    <th>Semester</th>
-                                                    <th>Kehadiran</th>
-                                                    <th>Tugas</th>
-                                                    <th>UTS</th>
-                                                    <th>UAS</th>
-                                                    <th>Nilai Akhir</th>
+                                                    <th style="width:5%; text-align: center; vertical-align: middle;">No
+                                                    </th>
+                                                    <th style="width:20%; text-align: center; vertical-align: middle;">
+                                                        Mata Pelajaran</th>
+                                                    <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                        Semester</th>
+                                                    <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                        Kehadiran</th>
+                                                    <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                        Tugas</th>
+                                                    <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                        UTS</th>
+                                                    <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                        UAS</th>
+                                                    <th style="width:10%; text-align: center; vertical-align: middle;">
+                                                        Nilai Akhir</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php $no = 1;?>
                                                 <?php foreach ($nilai as $data) {
                                                             if ($data->kode_tingkatan == $tingkat->kode_tingkatan) {
                                                                 $dataFound = true;
                                                                 ?>
                                                 <tr>
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <?php echo $no++;?></td>
                                                     <td><?php echo htmlspecialchars($data->nama_mapel); ?></td>
-                                                    <td><?php echo htmlspecialchars($data->nama_semester); ?></td>
-                                                    <td><?php echo htmlspecialchars($data->kehadiran); ?></td>
-                                                    <td><?php echo htmlspecialchars($data->tugas); ?></td>
-                                                    <td><?php echo htmlspecialchars($data->uts); ?></td>
-                                                    <td><?php echo htmlspecialchars($data->uas); ?></td>
-                                                    <td><?php echo htmlspecialchars($data->nilai_akhir); ?></td>
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <?php echo htmlspecialchars($data->nama_semester); ?></td>
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <?php echo htmlspecialchars($data->kehadiran); ?></td>
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <?php echo htmlspecialchars($data->tugas); ?></td>
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <?php echo htmlspecialchars($data->uts); ?></td>
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <?php echo htmlspecialchars($data->uas); ?></td>
+                                                    <td style="text-align: center; vertical-align: middle;">
+                                                        <?php echo htmlspecialchars($data->nilai_akhir); ?></td>
                                                 </tr>
                                                 <?php }
                                                         } ?>
