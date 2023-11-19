@@ -39,43 +39,44 @@
 
 
 
-         <!-- Nav Item - User Information -->
-         <li class="nav-item dropdown no-arrow">
-             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                 aria-haspopup="true" aria-expanded="false">
-                 <h3></h3>
-                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                     <span style="font-weight: bold;">
-                         <?php echo $this->session->userdata('nama_lengkap'); ?>
-                     </span>
-                     ( <?php echo $this->session->userdata('NIP'); ?> )
-                 </span>
-                 <img class="img-profile rounded-circle" src="<?php $photoBlob = $this->session->userdata('Foto');
-                if ($photoBlob) {
-                    $photoData = base64_encode($photoBlob);
-                    $photoSrc = 'data:image/jpeg;base64,' . $photoData;
-                    echo $photoSrc;
-                } else {
-                    echo base_url('assets/images/avatar2.png');
-                }
-        ?>" alt="Foto Profil">
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <h3></h3>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    <span style="font-weight: bold;">
+                        <?php echo $this->session->userdata('nama_lengkap'); ?>
+                    </span>
+                    ( <?php echo $this->session->userdata('NIP'); ?> )
+                </span>
+                <img class="img-profile rounded-circle" src="<?php
+                        $file_foto = $this->session->userdata('Foto'); // Mengambil data file_foto dari sesi
 
-             </a>
-             <!-- Dropdown - User Information -->
-             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                 <a class="dropdown-item" href="<?php echo base_url('Guru_profile/index'); ?>">
-                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                     Settings
-                 </a>
-                 <div class="dropdown-divider"></div>
-                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                     Logout
-                 </a>
-             </div>
-         </li>
+                        if ($file_foto) {
+                            $photoSrc = base_url('assets/uploads/foto/') . $file_foto; // Mendapatkan URL gambar dari direktori foto
+                            echo $photoSrc;
+                        } else {
+                            echo base_url('assets/images/avatar2.png'); // Jika tidak ada gambar, tampilkan avatar default
+                        }
+                        ?>" alt="Foto Profil">
 
-     </ul>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="<?php echo base_url('Guru_profile/index'); ?>">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
 
- </nav>
- <!-- End of Topbar -->
+    </ul>
+
+</nav>
+<!-- End of Topbar -->

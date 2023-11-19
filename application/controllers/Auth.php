@@ -31,13 +31,13 @@ class Auth extends CI_Controller {
                 $this->session->set_userdata('aktif', $user->aktif);
                 $this->session->set_userdata('nama_lengkap', $user->nama_lengkap);
                 $this->session->set_userdata('nisn', $user->NISN);
-                $this->session->set_userdata('Foto', $user->Foto);
+                $this->session->set_userdata('Foto', $user->file_foto);
     
             } elseif ($user->role === 'Guru') {
                 // For Guru role, store the NIP in session
                 $this->session->set_userdata('NIP', $user->NIP);
                 $this->session->set_userdata('nama_lengkap', $user->nama_lengkap);
-                $this->session->set_userdata('Foto', $user->Foto);
+                $this->session->set_userdata('Foto', $user->file_foto);
 
                 $GuruData = $this->auth_model->getGuruDataByNIP($user->NIP);
                 if ($GuruData && isset($GuruData->NIP)) {
@@ -47,22 +47,22 @@ class Auth extends CI_Controller {
                 // For Guru role, store the NIP in session
                 $this->session->set_userdata('NIP', $user->NIP);
                 $this->session->set_userdata('nama_lengkap', $user->nama_lengkap);
-                $this->session->set_userdata('Foto', $user->Foto);
+                $this->session->set_userdata('Foto', $user->file_foto);
             } elseif ($user->role === 'SuperAdmin') {
                 // For Guru role, store the NIP in session
                 $this->session->set_userdata('NIP', $user->NIP);
                 $this->session->set_userdata('nama_lengkap', $user->nama_lengkap);
-                $this->session->set_userdata('Foto', $user->Foto);
+                $this->session->set_userdata('Foto', $user->file_foto);
             }elseif ($user->role === 'Wakasek') {
                 // For Guru role, store the NIP in session
                 $this->session->set_userdata('NIP', $user->NIP);
                 $this->session->set_userdata('nama_lengkap', $user->nama_lengkap);
-                $this->session->set_userdata('Foto', $user->Foto);
+                $this->session->set_userdata('Foto', $user->file_foto);
             }elseif ($user->role === 'Kajur') {
                 // For Guru role, store the NIP in session
                 $this->session->set_userdata('NIP', $user->NIP);
                 $this->session->set_userdata('nama_lengkap', $user->nama_lengkap);
-                $this->session->set_userdata('Foto', $user->Foto);
+                $this->session->set_userdata('Foto', $user->file_foto);
             }
     
             // Redirects
