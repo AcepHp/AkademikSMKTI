@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="form-group" style="display: none;">
-                            <input type="text" class="form-control" name="aktif" id="aktif" value="1" required>
+                            <input type="text" class="form-control" name="aktif" id="aktif" value="0" required>
                         </div>
 
                         <div class="form-group" style="display: none;">

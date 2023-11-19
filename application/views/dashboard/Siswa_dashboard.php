@@ -89,83 +89,48 @@
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-book fa-2x text-gray-300"></i>
+                                            <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                     <div class="row">
                         <!-- Earnings (Monthly) Card Example -->
                         <?php
-                        $labels = array(); // Labels for each tingkatan
-                        $data = array();   // Average nilai_akhir for each tingkatan
+    $labels = array(); // Labels for each tingkatan
+    $data = array();   // Average nilai_akhir for each tingkatan
 
-                        foreach ($tingkatan as $tingkat) {
-                            $labels[] = $tingkat->nama_tingkatan;
-                            $average = 0;
-                            $count = 0;
+    foreach ($tingkatan as $tingkat) {
+        $labels[] = $tingkat->nama_tingkatan;
+        $average = 0;
+        $count = 0;
 
-                            foreach ($nilai as $nilaiData) {
-                                if ($nilaiData->kode_tingkatan == $tingkat->kode_tingkatan) {
-                                    $average += $nilaiData->nilai_akhir;
-                                    $count++;
-                                }
-                            }
+        foreach ($nilai as $nilaiData) {
+            if ($nilaiData->kode_tingkatan == $tingkat->kode_tingkatan) {
+                $average += $nilaiData->nilai_akhir;
+                $count++;
+            }
+        }
 
-                            $data[] = $count > 0 ? round($average / $count, 2) : 0;
-                        }
-                        ?>
+        $data[] = $count > 0 ? round($average / $count, 2) : 0;
+    }
+    ?>
 
                         <div class="col-xl-12 mb-4">
-                            <div class="card">
+                            <div id="chart-card" class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Prestasi Akademik</h5>
-                                    <canvas id="chart-line" height="90" width="300"></canvas>
+                                    <canvas id="chart-line"></canvas>
                                 </div>
                             </div>
                         </div>
 
 
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h4 class="m-0 font-weight-bold text-primary">Tujuan Sekolah</h4>
-                                </div>
-                                <div class="card-body">
-                                    <p class="font-weight-bold"><?php echo $vmt->tujuan?></p>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h4 class="m-0 font-weight-bold text-primary">Visi</h4>
-                                </div>
-                                <div class="card-body">
-                                    <p><?php echo $vmt->visi?></p>
-                                </div>
-                            </div>
-
-                            <!-- Approach -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h4 class="m-0 font-weight-bold text-primary">Misi</h4>
-                                </div>
-                                <div class="card-body">
-                                    <p><?php echo $vmt->misi?></p>
-                                </div>
-                            </div>
-
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -176,7 +141,27 @@
             <!-- Footer -->
             <?php $this->load->view('Bar/Footer_admin'); ?>
             <!-- End of Footer -->
-
+            <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah
+                                password
+                                default dari akun siswa.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                id="closeModal">Nanti Saja</button>
+                            <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password
+                                Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- End of Content Wrapper -->
 
@@ -259,7 +244,7 @@
             data: {
                 labels: <?= json_encode($labels); ?>,
                 datasets: [{
-                    label: 'Rata-rata Nilai Akhir',
+                    label: 'Prestasi Akademik',
                     data: <?= json_encode($data); ?>,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',

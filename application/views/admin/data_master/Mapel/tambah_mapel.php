@@ -59,13 +59,13 @@
                         <?php echo form_open('mapel/proses_tambah_mapel'); ?>
 
                         <div class="form-group">
-                            <label for="nama_mapel">Nama Mata Pelajaran:</label>
+                            <label for="nama_mapel">Nama Mata Pelajaran</label>
                             <input type="text" class="form-control" id="nama_mapel" name="nama_mapel"
                                 placeholder="Masukkan Nama Mapel" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="capaian">Capaian :</label>
+                            <label for="capaian">Capaian</label>
                             <textarea class="form-control" id="capaian" name="capaian"
                                 placeholder="Masukkan Capian Mata Pelajaran" required></textarea>
                         </div>
