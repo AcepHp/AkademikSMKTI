@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SMK-TI GNC</title>
+    <title>Dashboard Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,6 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -42,56 +41,64 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="container-fluid">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Edit Data Wali Kelas</h1>
+                    <div class="container-fluid mt-3">
+                        <div class="row">
+                            <div class="col-md-12 mx-auto mb-3">
+                                <div class="card shadow">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">Edit Data Wali</h6>
+                                    </div>
+                                    <div class="card-body col-10 mx-auto">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th>Jurusan</th>
+                                                <td><?php echo $wali[0]->nama_jurusan; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tingkatan</th>
+                                                <td><?php echo $wali[0]->kode_tingkatan;?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kelas</th>
+                                                <td><?php echo $wali[0]->nama_kelas;?></td>
+                                            </tr>
+                                        </table>
+
+                                        <div class="container mt-3">
+                                            <?php echo form_open('Wali/edit_wali/' . $wali[0]->id_wali); ?>
+
+                                            <div class="form-group">
+                                                <label for="wali_kelas_saat_ini">Wali Kelas Saat Ini:</label>
+                                                <input type="text" class="form-control" name="wali_kelas_saat_ini"
+                                                    value="<?php echo $wali[0]->Nama_Lengkap; ?>" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="wali_kelas">Wali Kelas Baru :</label>
+                                                <select class="form-control" name="wali_kelas" required>
+                                                    <option value="">Pilih Wali Kelas</option>
+                                                    <?php foreach ($guru as $guru_item): ?>
+                                                    <option value="<?php echo $guru_item->ID_Guru; ?>">
+                                                        <?php echo $guru_item->Nama_Lengkap; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <input type="submit" name="submit" value="Simpan"
+                                                    class="btn btn-primary" style="width: 100%; max-width: 300px;">
+                                            </div>
+                                            <?php echo form_close(); ?>
+                                        </div>
+                                        <!-- Content Row -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="container mt-5">
-                        <?php echo form_open('admin/edit_wali/' . $wali[0]->id_wali); ?>
-
-                        <div class="form-group">
-                            <label for="nama_kelas">Nama Kelas:</label>
-                            <input type="text" class="form-control" name="nama_kelas"
-                                value="<?php echo $wali[0]->nama_kelas; ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="kode_tingkatan">Tingkatan:</label>
-                            <select class="form-control" name="kode_tingkatan" required>
-                                <option value="">Pilih Tingkatan</option>
-                                <?php foreach ($Tingkatan as $tingkatan_item): ?>
-                                <option value="<?php echo $tingkatan_item->kode_tingkatan; ?>"
-                                    <?php if ($tingkatan_item->kode_tingkatan == $wali[0]->kode_tingkatan) echo 'selected'; ?>>
-                                    <?php echo $tingkatan_item->nama_tingkatan; ?>
-                                </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="kode_jurusan">Jurusan:</label>
-                            <select class="form-control" name="kode_jurusan" required>
-                                <option value="">Pilih Jurusan</option>
-                                <?php foreach ($Jurusan as $jurusan_item): ?>
-                                <option value="<?php echo $jurusan_item->kode_jurusan; ?>"
-                                    <?php if ($jurusan_item->kode_jurusan == $wali[0]->kode_jurusan) echo 'selected'; ?>>
-                                    <?php echo $jurusan_item->nama_jurusan; ?>
-                                </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="wali_kelas">Wali Kelas:</label>
-                            <input type="text" class="form-control" name="wali_kelas"
-                                value="<?php echo $wali[0]->Nama_Lengkap; ?>" required>
-                        </div>
-
-                        <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
-                    </div>
-                    <!-- Content Row -->
                 </div>
             </div>
+
             <!-- Footer Admin -->
             <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>

@@ -117,7 +117,7 @@
                                                 <div id="error_kehadiran" style="color: red; display: none;">Please
                                                     Masukan Hanya Angka Untuk Nilai </div>
                                                 <div id="error_persentase_kehadiran" style="color: red; display: none;">
-                                                 Masukan Hanya Angka Untuk Persentase</div>
+                                                Masukan Hanya Angka Untuk Persentase</div>
                                             </div>
 
                                             <div class="form-row">
@@ -139,7 +139,7 @@
                                                 <div id="error_tugas" style="color: red; display: none;">Please
                                                     Masukan Hanya Angka Untuk Nilai </div>
                                                 <div id="error_persentase_tugas" style="color: red; display: none;">
-                                                 Masukan Hanya Angka Untuk Persentase</div>
+                                                Masukan Hanya Angka Untuk Persentase</div>
                                             </div>
 
                                             <div class="form-row">
@@ -161,7 +161,7 @@
                                                 <div id="error_uts" style="color: red; display: none;">Please
                                                     Masukan Hanya Angka Untuk Nilai </div>
                                                 <div id="error_persentase_uts" style="color: red; display: none;">
-                                                 Masukan Hanya Angka Untuk Persentase</div>
+                                                Masukan Hanya Angka Untuk Persentase</div>
                                             </div>
 
                                             <div class="form-row">
