@@ -33,6 +33,7 @@
     .table-akademik table td {
         text-align: justify;
     }
+    
     </style>
 </head>
 
@@ -233,12 +234,12 @@
             </tr>
             <tr>
                 <td>....................................</td>
-                <td><u style="border-bottom: 3px solid black; padding-bottom: 10px;">Acep Hand</u></td>
+                <td><u><?php echo $Nama_Lengkap; ?></u></td>
             </tr>
 
             <tr>
-                <td style="width: 60%;"></td>
-                <td style="text-align: left; width: 40%;">NIP.</td>
+                <td></td>
+                <td style="text-align: center;">NIP.<?php echo $NIP_wali; ?></td>
             </tr>
 
         </table>

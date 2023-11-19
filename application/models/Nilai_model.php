@@ -490,6 +490,46 @@ public function get_all_siswa_validasi(){
     return $query->result();
 }
 
+public function get_kelas_id_by_nisnn($nisn){
+    $this->db->select('kelas.id_kelas');
+    $this->db->from('kelas');
+    $this->db->join('kelola_kelas', 'kelas.id_kelas = kelola_kelas.id_kelas');
+    $this->db->where('kelola_kelas.NISN', $nisn);
+    $query = $this->db->get();
+    $result = $query->row();
+    
+    // Check if a result exists before trying to access its properties
+    return ($result) ? $result->id_kelas : null;
+}
+
+
+public function get_nama_lengkap_guru_by_kelas($id_kelas) {
+    $this->db->select('guru.Nama_Lengkap, guru.NIP');
+    $this->db->from('guru');
+    $this->db->join('wali', 'guru.ID_Guru = wali.Nama_Lengkap'); // Assuming there is a correct relationship between guru and wali
+    $this->db->where('wali.id_kelas', $id_kelas); // Assuming there is a field id_kelas in wali table
+    $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+        return $query->row(); // Return the entire row
+    } else {
+        return null;
+    }
+}
+
+// Fungsi untuk mendapatkan nama guru berdasarkan id_guru
+public function get_nama_guru_by_id($id_guru) {
+    $this->db->select('Nama_Lengkap');
+    $this->db->where('ID_Guru', $id_guru);
+    $query = $this->db->get('guru');
+
+    if ($query->num_rows() > 0) {
+        return $query->row()->Nama_Lengkap;
+    } else {
+        return null;
+    }
+}
+
 
 
     

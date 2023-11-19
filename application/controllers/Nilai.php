@@ -474,65 +474,78 @@ class Nilai extends CI_Controller {
         if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Siswa') {
             redirect('auth');
         }
-    // Mendapatkan data nilai siswa berdasarkan tahun akademik dan semester aktif
-    $tahun_akademik_id = $this->KelolaKelas_model->get_tahun_akademik_aktif_id();
-    $semester_aktif = $this->KelolaKelas_model->get_semester_aktif();
     
-    // Pastikan tahun akademik dan semester aktif sudah ditemukan
-    if (!empty($tahun_akademik_id) && !empty($semester_aktif)) {
-        // Mendapatkan nama peserta didik berdasarkan NISN
-        $this->load->model('Nilai_model');
-        $nama_peserta_didik = $this->Nilai_model->get_nama_lengkap_by_nisn($nisn);
-        $this->load->model('Nilai_model');
-        $kelas_info = $this->Nilai_model->getKelasInfoByNISN($nisn);
-
-        $tahun_akademik = $this->Tahun_akademik_model->getTahunAkademikById($tahun_akademik_id);
+        $id_kelas = $this->Nilai_model->get_kelas_id_by_nisnn($nisn);
     
-        if ($nama_peserta_didik) {
-            // Mendapatkan data nilai siswa dari model berdasarkan tahun akademik dan semester aktif
-            $data['nilai_siswa'] = $this->Nilai_model->get_nilai_by_nisn_tahun_semester($nisn, $tahun_akademik_id, $semester_aktif->id_semester);
+        // Mendapatkan data nilai siswa berdasarkan tahun akademik dan semester aktif
+        $tahun_akademik_id = $this->KelolaKelas_model->get_tahun_akademik_aktif_id();
+        $semester_aktif = $this->KelolaKelas_model->get_semester_aktif();
+        
+        // Gantilah sesuai dengan metode pengambilan id_guru yang sesuai
+        $id_guru_data = $this->Nilai_model->get_nama_lengkap_guru_by_kelas($id_kelas);
     
-            // Tambahkan tahun akademik aktif dan semester aktif ke data
-            $data['tahun_akademik_id'] = $tahun_akademik_id;
-            $data['semester_aktif'] = $semester_aktif;
-            $data['nisn'] = $nisn;
-            $data['kelas_info'] = $kelas_info;
-            $data['tahun_akademik'] = $tahun_akademik;
-            
-            // Tambahkan nama peserta didik ke data
-            $data['nama_peserta_didik'] = $nama_peserta_didik;
-
-            // Mendapatkan capaian kompetensi untuk setiap mata pelajaran
-            foreach ($data['nilai_siswa'] as $nilai) {
-                $nilai->capaian = $this->Nilai_model->getCapaianKompetensiById($nilai->id_mapel);
-            }
-
-            // Membuat objek PDF
-            $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-            $pdf->SetMargins(15, 15, 15, true);
-            // Menambahkan halaman pertama
-            $pdf->AddPage();
-
-            // Menambahkan isi HTML ke halaman PDF
-            $html = $this->load->view('guru/nilai/cetak_nilai', $data, true);
-            $pdf->writeHTML($html, true, false, true, false, '');
-
-            // Output PDF ke browser
-            $pdf->Output('Nilai_Siswa.pdf', 'I');
+        // Check if wali kelas data is available
+        if ($id_guru_data) {
+            // Access properties of the $id_guru_data object
+            $data['Nama_Lengkap'] = $id_guru_data->Nama_Lengkap;
+            $data['NIP_wali'] = $id_guru_data->NIP;
         } else {
-            // Handle jika nama peserta didik tidak ditemukan
-            echo "Nama peserta didik tidak ditemukan";
+            // Handle the case when no wali kelas data is available
+            $data['Nama_Lengkap'] = '';
+            $data['NIP_wali'] = '';
         }
-    } else {
-        // Handle jika tahun akademik atau semester aktif tidak ditemukan
-        echo "Tahun akademik atau semester aktif tidak ditemukan";
+    
+        // Pastikan tahun akademik dan semester aktif sudah ditemukan
+        if (!empty($tahun_akademik_id) && !empty($semester_aktif)) {
+            // Mendapatkan nama peserta didik berdasarkan NISN
+            $this->load->model('Nilai_model');
+            $nama_peserta_didik = $this->Nilai_model->get_nama_lengkap_by_nisn($nisn);
+            $this->load->model('Nilai_model');
+            $kelas_info = $this->Nilai_model->getKelasInfoByNISN($nisn);
+    
+            $tahun_akademik = $this->Tahun_akademik_model->getTahunAkademikById($tahun_akademik_id);
+        
+            if ($nama_peserta_didik) {
+                // Mendapatkan data nilai siswa dari model berdasarkan tahun akademik dan semester aktif
+                $data['nilai_siswa'] = $this->Nilai_model->get_nilai_by_nisn_tahun_semester($nisn, $tahun_akademik_id, $semester_aktif->id_semester);
+        
+                // Tambahkan tahun akademik aktif dan semester aktif ke data
+                $data['tahun_akademik_id'] = $tahun_akademik_id;
+                $data['semester_aktif'] = $semester_aktif;
+                $data['nisn'] = $nisn;
+                $data['kelas_info'] = $kelas_info;
+                $data['tahun_akademik'] = $tahun_akademik;
+    
+                // Tambahkan nama peserta didik ke data
+                $data['nama_peserta_didik'] = $nama_peserta_didik;
+    
+                // Mendapatkan capaian kompetensi untuk setiap mata pelajaran
+                foreach ($data['nilai_siswa'] as $nilai) {
+                    $nilai->capaian = $this->Nilai_model->getCapaianKompetensiById($nilai->id_mapel);
+                }
+    
+                // Membuat objek PDF
+                $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+                $pdf->SetMargins(15, 15, 15, true);
+                // Menambahkan halaman pertama
+                $pdf->AddPage();
+    
+                // Menambahkan isi HTML ke halaman PDF
+                $html = $this->load->view('guru/nilai/cetak_nilai', $data, true);
+                $pdf->writeHTML($html, true, false, true, false, '');
+    
+                // Output PDF ke browser
+                $pdf->Output('Nilai_Siswa.pdf', 'I');
+            } else {
+                // Handle jika nama peserta didik tidak ditemukan
+                echo "Nama peserta didik tidak ditemukan";
+            }
+        } else {
+            // Handle jika tahun akademik atau semester aktif tidak ditemukan
+            echo "Tahun akademik atau semester aktif tidak ditemukan";
+        }
     }
-}
-
-    
-    
     
 
-    
 
 }
