@@ -182,10 +182,6 @@
                                     <table class="table table-bordered">
                                         <tbody>
                                             <tr>
-                                                <th>ID Siswa</th>
-                                                <td><?php echo $row->ID_siswa; ?></td>
-                                            </tr>
-                                            <tr>
                                                 <th>NIS</th>
                                                 <td><?php echo $row->NIS; ?></td>
                                             </tr>
