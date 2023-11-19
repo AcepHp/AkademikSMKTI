@@ -141,5 +141,47 @@ class Akses extends CI_Controller{
             redirect('Akses/reset_password_guru/' . $id_users);
         }
     }
+
+    //Akun
+    public function index(){
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
+            redirect('auth');
+        }
+
+        $this->load->model('Auth_model');
+        $data['akun']=$this->Auth_model->getuser();
+        $this->load->view("admin/KelolaAkses/akun", $data);
+    }
     
+    public function tambahakun() {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
+            redirect('auth');
+        }
+        $this->load->view('admin/KelolaAkses/tambah_akun');
+    }
+
+    public function prosestambahakun(){
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
+            redirect('auth');
+        }
+        if($this->KelolaAkses_Model->tambahakun()){
+            redirect('Akses/index','refresh');
+
+        } else {
+            
+            redirect('Akses/tambahakun','refresh');
+            
+        }
+    }
+
+    public function delete_akun($id) {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
+            redirect('auth');
+        }
+        if ($this->KelolaAkses_Model->delete_akun($id)) {
+            redirect('Akses/index','refresh');
+        } else {
+            // Handle error
+        }
+    }
 }

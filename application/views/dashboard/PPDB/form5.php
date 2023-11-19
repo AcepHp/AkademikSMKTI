@@ -617,30 +617,6 @@
     <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-    document.getElementById('submitButton').addEventListener('click', function() {
-        // Lakukan tindakan submit atau validasi lainnya di sini
-        // ...
-
-        // Tampilkan SweetAlert setelah tindakan berhasil
-        Swal.fire({
-            icon: 'success',
-            title: 'Pekerjaan berhasil!',
-            text: 'Silahkan cek email secara berkala untuk mendapatkan balasan.',
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            // Redirect atau lakukan tindakan lainnya setelah mengklik OK
-            if (result.isConfirmed) {
-                // Contoh: Redirect ke halaman lain
-                window.location.href = 'https://www.example.com';
-            }
-        });
-    });
-    </script>
-
-
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const tanggalLahirInput = document.getElementById("Tanggal_Lahir");

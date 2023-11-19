@@ -137,7 +137,6 @@
                         </div>
                     </div>
 
-                    <!-- Content Row -->
                     <!-- Modal -->
                     <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -148,8 +147,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah
-                                        password
-                                        default dari akun siswa.</p>
+                                        password default dari akun siswa.</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
@@ -160,24 +158,11 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                 </div>
             </div>
-            <!-- End of Main Content -->
-
             <!-- Footer -->
             <?php $this->load->view('Bar/Footer_admin'); ?>
-            <!-- End of Footer -->
-
-
-            <!-- End of Content Wrapper -->
-
         </div>
-        <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
@@ -187,6 +172,7 @@
         <!-- include modal Logout -->
         <?php $this->load->view('Bar/Logout_modal'); ?>
 
+        <!-- Script untuk menampilkan Ganti password -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
         // Mengambil elemen modal

@@ -79,4 +79,27 @@ class KelolaAkses_Model extends CI_Model {
         return $query->row();
     }
 
+    public function tambahakun(){
+        $NIP = $this->input->post('NIP');
+        $nama = $this->input->post('nama_lengkap');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $role = $this->input->post('role');
+        $data = [
+            'NIP' => $NIP,
+            'nama_lengkap' => $nama,
+            'username' => $username,
+            'password' => md5($password),
+            'role' => $role
+        ];
+        $this->session->set_flashdata("success_tambah", "<div class='alert alert-success' role='alert'>Akun berhasil dihapus! !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+        return $this->db->insert('users', $data);
+    }
+
+    public function delete_akun($id) {
+        $this->db->where('id_users', $id);
+        $this->session->set_flashdata("success_hapus", "<div class='alert alert-success' role='alert'>Akun berhasil dihapus! !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+        return $this->db->delete('users');
+    }
+
 }
