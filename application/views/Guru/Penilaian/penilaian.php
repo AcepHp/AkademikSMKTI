@@ -50,8 +50,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Data Nilai Siswa <?php echo $tahun[0]->tahun_akademik; ?></h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+
                     </div>
 
 
@@ -93,34 +92,32 @@
                                                                     <?php echo $data->nama_mapel; ?>
                                                                     (<?php echo $data->nama_semester; ?>)
                                                                 </div>
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col-auto">
-                                                                        <div
-                                                                            class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                                            <?php echo $data->nama_kelas; ?>
-                                                                            (<?php echo $data->nama_jurusan; ?>)</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <div
-                                                                            class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                                            <?php foreach ($tahun as $tahun_akademik) { ?>
-                                                                            <a href="<?php echo site_url('Nilai/penilaian_siswa/' . $data->id_kelas. '/' . $tahun[0]->id_tahun. '/' . $data->id_mapel); ?>"
-                                                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                                                    class="fas fa-download fa-sm text-white-50"></i>
-                                                                                Lihat
-                                                                                Detail </a>
-                                                                            <?php } ?>
-                                                                        </div>
-                                                                    </div>
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                    <?php echo $data->nama_kelas; ?>
+                                                                    (<?php echo $data->nama_jurusan; ?>)
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <i
                                                                     class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                                             </div>
-
                                                         </div>
                                                     </div>
+
+
+                                                    <div class="col-auto mt-3 text-center">
+                                                        <div class="h5 mb-0 ml-3 mr-3 font-weight-bold text-gray-800">
+                                                            <?php foreach ($tahun as $tahun_akademik) { ?>
+                                                            <a href="<?php echo site_url('Nilai/penilaian_siswa/' . $data->id_kelas. '/' . $tahun[0]->id_tahun. '/' . $data->id_mapel); ?>"
+                                                                class="d-none d-sm-inline-block btn btn-primary btn-sm w-100 shadow-sm"><i
+                                                                    class="fas fa-eye fa-sm text-white-50"></i> Lihat
+                                                                Detail</a>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
                                             <?php

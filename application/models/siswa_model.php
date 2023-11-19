@@ -33,6 +33,37 @@ class siswa_model extends CI_Model {
         $this->db->where('NISN', $nisn);
         $this->db->update('siswa', $siswa_data);
     }
+
+    public function get_all_materi($NISN, $id_tahun, $id_semester) {
+        $this->db->select('COUNT(*) as materi_count');
+        $this->db->from('materi');
+        $this->db->join('kelola_kelas', 'materi.id_kelas = kelola_kelas.id_kelas', 'left');
+        $this->db->where('kelola_kelas.nisn', $NISN);
+        $this->db->where('materi.id_tahun', $id_tahun);
+        $this->db->where('materi.id_semester', $id_semester);
+    
+        $query = $this->db->get();
+        $result = $query->row();
+    
+        return $result->materi_count;
+    }
+
+    public function get_all_mapel($NISN) {
+        $this->db->select('COUNT(DISTINCT mata_pelajaran.id_mapel) as mapel_count');
+        $this->db->from('kelola_kelas');
+        $this->db->join('tingkatan', 'kelola_kelas.kode_tingkatan = tingkatan.kode_tingkatan', 'left');
+        $this->db->join('mata_pelajaran', 'tingkatan.kode_tingkatan = mata_pelajaran.kode_tingkatan', 'left');
+        $this->db->where('kelola_kelas.nisn', $NISN);
+    
+        $query = $this->db->get();
+        $result = $query->row();
+    
+        return $result->mapel_count;
+    }
+    
+    
+    
+    
     
 
 }

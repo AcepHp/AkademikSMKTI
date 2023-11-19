@@ -51,10 +51,10 @@ class Slide extends CI_Controller
 
         if($this->Slide_Model->editslide($id)){
             $this->session->set_flashdata("success_edit_silder", "<div class='alert alert-success' role='alert'>Gambar Slide berhasil diedit !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-            redirect('Kelola_Dashboard/Slide/slideshow','refresh');
+            redirect('Kelola_Dashboard/Slide/slideshow');
 
         } else {
-            redirect('Kelola_Dashboard/Slide/slideshow','refresh');
+            redirect('Kelola_Dashboard/Slide/slideshow');
             
         }
     }

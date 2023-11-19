@@ -91,25 +91,10 @@
                                                                     <?php echo $data->nama_mapel; ?>
                                                                     (<?php echo $data->nama_semester; ?>)
                                                                 </div>
-                                                                <div class="row no-gutters align-items-center">
-                                                                    <div class="col-auto">
-                                                                        <div
-                                                                            class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                                            <?php echo $data->nama_kelas; ?>
-                                                                            (<?php echo $data->nama_jurusan; ?>)</div>
-                                                                    </div>
-                                                                    <div class="col-auto">
-                                                                        <div
-                                                                            class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                                            <?php foreach ($tahun as $tahun_akademik) { ?>
-                                                                            <a href="<?php echo site_url('Materi/lihat_materi/' . $data->id_kelas. '/'  . $data->id_mapel); ?>"
-                                                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                                                                    class="fas fa-download fa-sm text-white-50"></i>
-                                                                                Lihat
-                                                                                Detail </a>
-                                                                            <?php } ?>
-                                                                        </div>
-                                                                    </div>
+                                                                <div
+                                                                    class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                                    <?php echo $data->nama_kelas; ?>
+                                                                    (<?php echo $data->nama_jurusan; ?>)
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
@@ -118,17 +103,33 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+
+                                                    <div class="col-auto mt-3 text-center">
+                                                        <div class="h5 mb-0 ml-3 mr-3 font-weight-bold text-gray-800">
+                                                            <?php foreach ($tahun as $tahun_akademik) { ?>
+                                                            <a href="<?php echo site_url('Materi/lihat_materi/' . $data->id_kelas. '/'  . $data->id_mapel); ?>"
+                                                                class="d-none d-sm-inline-block btn btn-primary btn-sm w-100 shadow-sm"><i
+                                                                    class="fas fa-eye fa-sm text-white-50"></i> Lihat
+                                                                Detail</a>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
+
+
                                             <?php
-            }
-        }
-        if (!$guruExists) {
-            ?>
+                                                }
+                                            }
+                                            if (!$guruExists) {
+                                                ?>
                                             <p>Tidak Ada</p>
                                             <?php
-       }
-       ?>
+                                        }
+                                        ?>
                                         </div>
                                     </div>
                                 </div>

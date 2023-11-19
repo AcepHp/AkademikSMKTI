@@ -19,7 +19,12 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
+
+    <style>
+
+    </style>
 
 </head>
 
@@ -46,123 +51,137 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-secondary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Pesan Masuk</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                Total Materi</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $materi_count; ?></div>
+
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-newspaper fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-dark shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
+                                            <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+                                                Total Mata Pelajaran</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $mapel_count; ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas fa-book fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <!-- Earnings (Monthly) Card Example -->
+                        <?php
+                        $labels = array(); // Labels for each tingkatan
+                        $data = array();   // Average nilai_akhir for each tingkatan
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah
-                                        password default dari akun siswa.</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                        id="closeModal">Nanti Saja</button>
-                                    <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password
-                                        Sekarang</button>
+                        foreach ($tingkatan as $tingkat) {
+                            $labels[] = $tingkat->nama_tingkatan;
+                            $average = 0;
+                            $count = 0;
+
+                            foreach ($nilai as $nilaiData) {
+                                if ($nilaiData->kode_tingkatan == $tingkat->kode_tingkatan) {
+                                    $average += $nilaiData->nilai_akhir;
+                                    $count++;
+                                }
+                            }
+
+                            $data[] = $count > 0 ? round($average / $count, 2) : 0;
+                        }
+                        ?>
+
+                        <div class="col-xl-12 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Prestasi Akademik</h5>
+                                    <canvas id="chart-line" height="90" width="300"></canvas>
                                 </div>
                             </div>
+                        </div>
+
+
+                        <!-- Content Column -->
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Tujuan Sekolah</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p class="font-weight-bold"><?php echo $vmt->tujuan?></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Visi</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><?php echo $vmt->visi?></p>
+                                </div>
+                            </div>
+
+                            <!-- Approach -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Misi</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><?php echo $vmt->misi?></p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
+
             </div>
+            <!-- End of Main Content -->
+
             <!-- Footer -->
             <?php $this->load->view('Bar/Footer_admin'); ?>
+            <!-- End of Footer -->
+
+
+            <!-- End of Content Wrapper -->
+
         </div>
+        <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
@@ -172,7 +191,6 @@
         <!-- include modal Logout -->
         <?php $this->load->view('Bar/Logout_modal'); ?>
 
-        <!-- Script untuk menampilkan Ganti password -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         <script>
         // Mengambil elemen modal
@@ -181,7 +199,7 @@
 
         // Simulasikan nilai aktif dari database
         var aktif =
-        "<?php echo $this->session->userdata('aktif'); ?>"; // Ganti nilainya sesuai dengan data dari database
+            "<?php echo $this->session->userdata('aktif'); ?>"; // Ganti nilainya sesuai dengan data dari database
 
         // Tampilkan modal jika aktif = 0
         if (aktif === '0') {
@@ -234,6 +252,29 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+        <script>
+        var ctx = document.getElementById("chart-line").getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?= json_encode($labels); ?>,
+                datasets: [{
+                    label: 'Rata-rata Nilai Akhir',
+                    data: <?= json_encode($data); ?>,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
 </body>
 
 </html>
