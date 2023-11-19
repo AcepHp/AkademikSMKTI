@@ -25,7 +25,7 @@ class Wali extends CI_Controller {
         }
         // Ambil data dari model
         $data['jurusan'] = $this->Jurusan_model->get_all_jurusan();
-        $data['kelas'] = $this->Kelas_model->get_kelas();
+        $data['kelas'] = $this->Wali_model->get_kelas_not_in_wali();
         $data['guru'] = $this->Wali_model->get_guru_not_in_kelas();
         $data['Tingkatan'] = $this->Tingkatan_Model->get_all_tingkatan();
     
@@ -54,17 +54,17 @@ class Wali extends CI_Controller {
     }
 
     public function edit_wali($id) {
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
+        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin') {
             redirect('auth');
         }
         $data['Jurusan'] = $this->Jurusan_model->get_all_jurusan();
-        $data['kelas'] = $this->Kelas_model->get_kelas();
+        $data['kelas'] = $this->Kelas_model->get_kelas(); // Fix: Correct model name
         $data['guru'] = $this->Wali_model->get_guru_not_in_kelas();
         $data['Tingkatan'] = $this->Tingkatan_Model->get_all_tingkatan();
         $data['wali'] = $this->Wali_model->get_single_wali($id);
     
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
-            $namaLengkap = $this->input->post('wali_kelas'); // Assuming 'wali_kelas' is the correct field name
+            $namaLengkap = $this->input->post('wali_kelas');
     
             // Use $id parameter instead of $ID_Guru
             $this->Wali_model->edit_wali($id, $namaLengkap);

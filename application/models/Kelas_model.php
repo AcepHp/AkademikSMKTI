@@ -17,7 +17,6 @@ class Kelas_model extends CI_Model
         return $query->result();
     }
 
-
     public function create_kelas($data)
     {
         return $this->db->insert('kelas', $data);

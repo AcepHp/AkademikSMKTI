@@ -33,8 +33,16 @@ class Penugasan extends CI_Controller {
     
     // form tambah penugasan
     public function tambah_penugasan($id_mapel,$kode_jurusan,$kode_tingkatan) {
+        $tahun = $this->penugasan_model->get_tahun();
+        $semester = $this->penugasan_model->get_semester();
+    
+        // Ambil nilai id_tahun dari hasil query tahun yang didapat
+        $id_tahun = $tahun[0]->id_tahun; 
+    
+        // Ambil nilai id_semester dari hasil query semester yang didapat
+        $id_semester = $semester[0]->id_semester; 
         $data['pengajar_mapel'] = $this->penugasan_model->get_mapel_by_id($id_mapel);
-        $data['kelas'] = $this->penugasan_model->get_kelas_tanpa_penugasan($kode_jurusan, $id_mapel, $kode_tingkatan);
+        $data['kelas'] = $this->penugasan_model->get_kelas_tanpa_penugasan($kode_jurusan, $id_tahun, $id_semester, $id_mapel, $kode_tingkatan);
         $data['guru'] = $this->penugasan_model->get_all_guru();
         $data['tahun'] = $this->penugasan_model->get_tahun();
         $data['semester'] = $this->penugasan_model->get_semester();

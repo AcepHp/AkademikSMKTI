@@ -69,17 +69,17 @@ nav {
 
 .inner {
     width: 100%;
-    max-height: calc(60vh - 120px);
+    max-height: calc(60vh - 350px);
 }
 
 .inner img {
     width: 100%;
-    height: 100%;
+    height: 50%;
 }
 
 .jdl-utama h1 {
     font-size: 60px;
-    padding: 0 0 40rem 0;
+    padding: 0 0 52rem 0;
 }
 
 .card {

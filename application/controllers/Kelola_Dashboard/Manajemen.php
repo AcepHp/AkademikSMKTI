@@ -49,10 +49,10 @@ class Manajemen extends CI_Controller
             redirect('auth');
         }
         if($this->Manajemen_Model->editmanajemen($id)){
-            redirect('Kelola_Dashboard/Manajemen/manajemen','refresh');
+            redirect('Kelola_Dashboard/Manajemen/manajemen');
 
         } else {
-            redirect('Kelola_Dashboard/Manajemen/manajemen','refresh');
+            redirect('Kelola_Dashboard/Manajemen/manajemen');
             
         }
     }

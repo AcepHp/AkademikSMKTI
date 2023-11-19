@@ -153,7 +153,8 @@
         <div class="modal-dialog modal-dialog-centered modal-sm" style="max-width: 50%; width: 100%;" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="waliModalLabel" style="font-size: 1.25rem;">Detail Wali Kelas </h5>
+                    <h5 class="modal-title" id="waliModalLabel" style="font-size: 1.25rem;">Detail Wali Kelas -
+                        <?php echo $row->Nama_Lengkap; ?></h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
