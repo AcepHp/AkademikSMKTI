@@ -34,6 +34,7 @@ class Datasiswa_model extends CI_Model {
 
     public function tambah_siswa($data) {
         $this->db->insert('siswa', $data);
+        
     }
 
     public function create_user_account($user_data) {
