@@ -6,6 +6,7 @@ class Wali extends CI_Controller {
         $this->load->model('Jurusan_model'); // Pastikan model ini dimuat
         $this->load->model('Kelas_model'); // Pastikan model ini dimuat
         $this->load->model('Admin_Model'); // Pastikan model ini dimuat
+        $this->load->model('Tingkatan_Model'); // Pastikan model ini dimuat
     }
         
 
@@ -25,7 +26,8 @@ class Wali extends CI_Controller {
         // Ambil data dari model
         $data['jurusan'] = $this->Jurusan_model->get_all_jurusan();
         $data['kelas'] = $this->Kelas_model->get_kelas();
-        $data['guru'] = $this->Admin_Model->get_guru();
+        $data['guru'] = $this->Wali_model->get_guru_not_in_kelas();
+        $data['Tingkatan'] = $this->Tingkatan_Model->get_all_tingkatan();
     
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
             $data_posted = array(
@@ -55,18 +57,19 @@ class Wali extends CI_Controller {
         if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' ) {
             redirect('auth');
         }
+        $data['Jurusan'] = $this->Jurusan_model->get_all_jurusan();
+        $data['kelas'] = $this->Kelas_model->get_kelas();
+        $data['guru'] = $this->Wali_model->get_guru_not_in_kelas();
+        $data['Tingkatan'] = $this->Tingkatan_Model->get_all_tingkatan();
         $data['wali'] = $this->Wali_model->get_single_wali($id);
     
         if ($this->input->server('REQUEST_METHOD') === 'POST') {
-            $data_to_update = array(
-                'id_kelas' => $this->input->post('id_kelas'),
-                'kode_jurusan' => $this->input->post('kode_jurusan'),
-                'Nama_Lengkap' => $this->input->post('Nama_Lengkap'),
-            );
+            $namaLengkap = $this->input->post('wali_kelas'); // Assuming 'wali_kelas' is the correct field name
     
-            $this->Wali_model->update_wali($id, $data_to_update);
-
-            $this->session->set_flashdata('success_edit', 'Wali Kelas berhasil ditambahkan!');
+            // Use $id parameter instead of $ID_Guru
+            $this->Wali_model->edit_wali($id, $namaLengkap);
+    
+            $this->session->set_flashdata('success_edit', 'Wali Kelas berhasil diupdate!');
             redirect('wali/index');
         }
     
@@ -87,6 +90,3 @@ class Wali extends CI_Controller {
     }
     }
 ?>
-
-
-

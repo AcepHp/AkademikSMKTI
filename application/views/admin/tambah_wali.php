@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SMK-TI GNC</title>
+    <title>Dashboard Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=base_url('assets/')?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,7 +19,6 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
-    <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
 
@@ -48,42 +47,75 @@
                         </div>
                     </div>
                     <div class="container mt-5">
-                        <?php echo form_open('Wali/tambah_wali'); ?>
-                        <div class="form-group">
-                            <label for="kode_jurusan">Jurusan</label>
-                            <select class="form-control" name="kode_jurusan" id="kode_jurusan" required>
-                                <option value="">Pilih Jurusan</option>
-                                <?php foreach ($jurusan as $jurusan_item): ?>
-                                <option value="<?php echo $jurusan_item->kode_jurusan; ?>">
-                                    <?php echo $jurusan_item->nama_jurusan; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 mb-4">
+                                <div class="box box-info">
+                                    <div class="box-body">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <?php echo form_open('Wali/tambah_wali'); ?>
+                                                <h1 class="h6 text-gray-800" style="text-align: center;">Tambah Wali
+                                                    Kelas
+                                                </h1>
+                                                <hr>
+                                                <div class="form-group">
+                                                    <label for="kode_jurusan">Jurusan</label>
+                                                    <select class="form-control" name="kode_jurusan" id="kode_jurusan"
+                                                        required>
+                                                        <option value="">Pilih Jurusan</option>
+                                                        <?php foreach ($jurusan as $jurusan_item): ?>
+                                                        <option value="<?php echo $jurusan_item->kode_jurusan; ?>">
+                                                            <?php echo $jurusan_item->nama_jurusan; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
 
-                        <div class="form-group">
-                            <label for="id_kelas">Kelas:</label>
-                            <select class="form-control" name="id_kelas" id="id_kelas" required>
-                                <option value="">Pilih Kelas</option>
-                                <?php foreach ($kelas as $kelas_item): ?>
-                                <option value="<?php echo $kelas_item->id_kelas; ?>"
-                                    data-jurusan="<?php echo $kelas_item->kode_jurusan; ?>">
-                                    <?php echo $kelas_item->nama_kelas; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                                                <div class="form-group">
+                                                    <label for="kode_tingkatan">Tingkatan</label>
+                                                    <select class="form-control" name="kode_tingkatan"
+                                                        id="kode_tingkatan" required>
+                                                        <option value="">Pilih Tingkatan</option>
+                                                        <?php foreach ($Tingkatan as $tingkatan_item): ?>
+                                                        <option value="<?php echo $tingkatan_item->kode_tingkatan; ?>">
+                                                            <?php echo $tingkatan_item->nama_tingkatan; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
 
-                        <div class="form-group">
-                            <label for="wali_kelas">Wali Kelas:</label>
-                            <select class="form-control" name="wali_kelas" required>
-                                <option value="">Pilih Wali Kelas</option>
-                                <?php foreach ($guru as $guru_item): ?>
-                                <option value="<?php echo $guru_item->ID_Guru; ?>">
-                                    <?php echo $guru_item->Nama_Lengkap; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                                                <div class="form-group">
+                                                    <label for="id_kelas">Kelas:</label>
+                                                    <select class="form-control" name="id_kelas" id="id_kelas" required>
+                                                        <option value="">Pilih Kelas</option>
+                                                        <?php foreach ($kelas as $kelas_item): ?>
+                                                        <option value="<?php echo $kelas_item->id_kelas; ?>"
+                                                            data-jurusan="<?php echo $kelas_item->kode_jurusan; ?>"
+                                                            data-tingkatan="<?php echo $kelas_item->kode_tingkatan; ?>">
+                                                            <?php echo $kelas_item->nama_kelas; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="wali_kelas">Wali Kelas:</label>
+                                                    <select class="form-control" name="wali_kelas" required>
+                                                        <option value="">Pilih Wali Kelas</option>
+                                                        <?php foreach ($guru as $guru_item): ?>
+                                                        <option value="<?php echo $guru_item->ID_Guru; ?>">
+                                                            <?php echo $guru_item->Nama_Lengkap; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="text-center">
+                                                    <input type="submit" name="Submit" value="Simpan"
+                                                        class="btn btn-primary" style="width: 100%; max-width: 300px;">
+                                                </div>
+                                                <?php echo form_close(); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <input type="submit" name="Submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -93,6 +125,8 @@
     </div>
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
+
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
@@ -112,30 +146,34 @@
     <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
     <script>
-    // Get the Jurusan and Kelas dropdowns
     var jurusanDropdown = document.getElementById('kode_jurusan');
+    var tingkatanDropdown = document.getElementById('kode_tingkatan');
     var kelasDropdown = document.getElementById('id_kelas');
 
-    // Add event listener to Jurusan dropdown
-    jurusanDropdown.addEventListener('change', function() {
-        // Get the selected Jurusan value
-        var selectedJurusan = jurusanDropdown.value;
+    jurusanDropdown.addEventListener('change', updateKelasOptions);
+    tingkatanDropdown.addEventListener('change', updateKelasOptions);
 
-        // Clear previous options in Kelas dropdown
+    function updateKelasOptions() {
+        var selectedJurusan = jurusanDropdown.value;
+        var selectedTingkatan = tingkatanDropdown.value;
+
         kelasDropdown.innerHTML = '<option value="">Pilih Kelas</option>';
 
-        // Filter and add new options in Kelas dropdown based on selected Jurusan
         <?php foreach ($kelas as $kelas_item): ?>
-        <?php // Check if the current Kelas item matches the selected Jurusan ?>
-        if ('<?php echo $kelas_item->kode_jurusan; ?>' === selectedJurusan) {
+        <?php // Check if the current Kelas item matches the selected Jurusan and Tingkatan ?>
+        if (
+            '<?php echo $kelas_item->kode_jurusan; ?>' === selectedJurusan &&
+            '<?php echo $kelas_item->kode_tingkatan; ?>' === selectedTingkatan
+        ) {
             var option = document.createElement('option');
             option.value = '<?php echo $kelas_item->id_kelas; ?>';
             option.textContent = '<?php echo $kelas_item->nama_kelas; ?>';
             kelasDropdown.appendChild(option);
         }
         <?php endforeach; ?>
-    });
+    }
     </script>
+
 </body>
 
 </html>
