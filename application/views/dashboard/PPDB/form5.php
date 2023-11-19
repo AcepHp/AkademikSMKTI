@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -61,17 +62,11 @@
                                 JURUSAN
                             </a>
                             <ul class="dropdown-menu">
+                                <?php foreach ($jurusan2 as $item): ?>
                                 <li><a class="dropdown-item"
-                                        href="<?php echo site_url('Jurusan/Animasi'); ?>">Animasi</a></li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/DKV'); ?>">DKV</a></li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TKJT'); ?>">TKJT</a>
+                                        href="<?php echo site_url('Jurusan/Animasi/').$item->id_jurusan; ?>"><?php echo $item->nama_jurusan; ?></a>
                                 </li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/TJAT'); ?>">TJAT</a>
-                                </li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/PPLG'); ?>">PPLG</a>
-                                </li>
-                                <li><a class="dropdown-item" href="<?php echo site_url('Jurusan/MPLB'); ?>">MPLB</a>
-                                </li>
+                                <?php endforeach; ?>
                             </ul>
                         </li>
                         <li class="nav-item mx-2">
@@ -103,31 +98,25 @@
 
     <br>
     <!-- Judul -->
-    <div class="jppdb container-fluid">
+    <div class="jppdb container">
         <div class="judul">FORM PPDB TAHUN 2023-2024</div>
         <div class="judul mb-5">SMK TI GARUDA NUSANTARA CIMAHI</div>
     </div>
 
     <div class="container d-flex flex-column align-items-center mb-5">
+        <?php if ($this->session->userdata('success_message')): ?>
+        <div class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="mr-3"><?php echo $this->session->userdata('success_message'); ?></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <?php $this->session->unset_userdata('success_message'); ?>
+        <?php endif; ?>
         <div class="card" style="width: 60%; background-color: #F5F5F5; border: none;">
             <div class="header card-header">Form Pendaftaran</div>
-            <!-- <div class="container" style="padding: 40px;">
-                <div class="position-relative m-4">
-                    <div class="progress" style="height: 1px;">
-                        <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <button type="button"
-                        class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill"
-                        style="width: 2rem; height:2rem;">1</button>
-                    <button type="button"
-                        class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill"
-                        style="width: 2rem; height:2rem;">2</button>
-                    <button type="button"
-                        class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
-                        style="width: 2rem; height:2rem;">3</button>
-                </div>
-            </div> -->
 
             <!-- form -->
             <form class="form-register" id="mainForm" action="<?php echo base_url('PPDB/simpan_pendaftaran'); ?>"
