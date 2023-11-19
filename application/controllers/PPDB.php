@@ -8,10 +8,17 @@ class PPDB extends CI_Controller {
         $this->load->model('Jurusan_Model');
         $this->load->model('Jurusan_model');
         $this->load->model('Tahun_akademik_model');
+        $this->load->model('Kepsek_Model');
+        $this->load->model('Info_Model');
+        $this->load->model('Berita_Model');
     }
 
     public function index() {
         $data['jurusan']=$this->Jurusan_model->getjurusan();
+        $data['ppdb']=$this->PPDB_Model->getppdb()->row();
+        $data['berita']=$this->Berita_Model->getberita();
+        $data['kepsek']=$this->Kepsek_Model->getkepsek()->row();
+        $data['info']=$this->Info_Model->getinfo();
         $this->load->view('dashboard/PPDB/ppdb', $data);
     }
 

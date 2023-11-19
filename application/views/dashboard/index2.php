@@ -165,7 +165,7 @@
                     <img src="<?php echo $row->gambar ?>" alt="" class="card-img-top">
                     <p><?php echo substr($row->deskripsi, 0,100) ?>...</p>
                 </div>
-                <a href="<?php echo site_url('K_Konten/detailinfo/'.$row->id_info); ?>"
+                <a href="<?php echo site_url('Kelola_Dashboard/Info/detailinfo/'.$row->id_info); ?>"
                     class="btn btn-primary">Selengkapnya</a>
             </div>
             <?php endif; ?>

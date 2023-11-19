@@ -19,7 +19,6 @@ require_once APPPATH.'../vendor/autoload.php';
         }
 
         //Fungsi2 untuk mengatur Halaman PPDB (Kelola Dashboard)
-
         public function getppdb() {
             return $this->db->get('ppdb_admin');
         }
@@ -59,12 +58,10 @@ require_once APPPATH.'../vendor/autoload.php';
         }
         
         public function editppdb($id) {
-            $nama = $this->input->post("nama");
             $judul = $this->input->post("judul");
             $deskripsi = $this->input->post("deskripsi");            
             
             $ppdb_admin = array(
-                "nama" => $nama,
                 "judul" => $judul,
                 "deskripsi" => $deskripsi,                
                 "created" => date('Y-m-d'),

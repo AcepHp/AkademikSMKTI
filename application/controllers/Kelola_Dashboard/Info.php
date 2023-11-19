@@ -5,6 +5,7 @@ class Info extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Info_Model');
+        $this->load->model('Jurusan_model');
     }
 
     public function info() {
@@ -59,11 +60,9 @@ class Info extends CI_Controller
     }
 
     public function detailinfo($id){
-        if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
-            redirect('auth');
-        }
+        $data['jurusan']=$this->Jurusan_model->getjurusan();
         $data['info']=$this->Info_Model->getinfobyid($id)->row();
-        $this->load->view('dashboard/Info/kenapaTI',$data);
+        $this->load->view('dashboard/Info/kenapaTI', $data);
     }
 
     public function delete_info($id) {

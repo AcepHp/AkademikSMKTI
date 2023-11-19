@@ -20,6 +20,8 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 </head>
 
@@ -41,47 +43,42 @@
                 <?php $this->load->view('Bar/Navbar_admin'); ?>
 
                 <!-- Begin Page Content -->
+
+                <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="container-fluid">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Edit Data PPDB</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Edit Halaman PPDB</h1>
                         </div>
                     </div>
-
                     <div class="container mt-5">
                         <?php echo $this->session->userdata('error');?>
                         <?php $this->session->unset_userdata('error');?>
-                        <?php echo form_open_multipart('Kelola_Dashboard/PPDB_Admin/proseseditppdb/' . $ppdb_admin->id_ppdb); ?>
-                        <div class="form-group">
-                            <label for="nama">Nama:</label>
-                            <input type="text" class="form-control" name="nama"
-                                value="<?php echo $ppdb_admin->nama; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="judul">Judul:</label>
-                            <input type="text" class="form-control" name="judul"
-                                value="<?php echo $ppdb_admin->judul; ?>">
-                        </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi:</label>
-                            <textarea type="text" class="form-control" name="deskripsi"
-                                value="<?php echo $ppdb_admin->deskripsi; ?>"><?php echo $ppdb_admin->deskripsi; ?></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gambar">Gambar Saat Ini:</label>
-                            <img src="<?php echo $ppdb_admin->gambar; ?>" alt="Gambar Saat Ini" width="150">
-                        </div>
-                        <div class="form-group">
-                            <label for="new_gambar">Pilih Gambar Baru:</label>
-                            <input type="file" class="form-control" name="gambar">
-                        </div>
-
-                        <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
+                        <form id="myForm"
+                            action="<?php echo site_url('Kelola_Dashboard/PPDB_Admin/proseseditppdb/' . $ppdb_admin->id_ppdb); ?>"
+                            method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="judul">Judul:</label>
+                                <input type="text" class="form-control" name="judul"
+                                    value="<?php echo $ppdb_admin->judul; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi:</label>
+                                <div id="deskripsieditor"></div>
+                                <input class="form-control" name="deskripsi" type="hidden" id="deskripsiinput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gambar">Gambar Saat Ini:</label>
+                                <img src="<?php echo $ppdb_admin->gambar; ?>" alt="Gambar Saat Ini" width="150">
+                            </div>
+                            <div class="form-group">
+                                <label for="new_gambar">Pilih Gambar Baru:</label>
+                                <input type="file" class="form-control" name="gambar">
+                            </div>
+                            <input type="submit" name="submit" value="Simpan" class="btn btn-primary">
+                        </form>
                     </div>
                 </div>
-            </div>
             <!-- Footer Admin -->
             <?php $this->load->view('Bar/Footer_admin'); ?>
         </div>>
@@ -89,6 +86,21 @@
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
 
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    var ppdb_admin = `<?= $ppdb_admin->deskripsi ?>`;
+    var deskripsieditor = new Quill('#deskripsieditor', {
+        theme: 'snow'
+    });
+    deskripsieditor.root.innerHTML = ppdb_admin;
+
+    var form = document.getElementById('myForm');
+    var deskripsiinput = document.getElementById('deskripsiinput');
+
+    form.addEventListener('submit', function(event) {
+        deskripsiinput.value = deskripsieditor.root.innerHTML;
+    });
+    </script>
 
 
     <!-- Bootstrap core JavaScript-->

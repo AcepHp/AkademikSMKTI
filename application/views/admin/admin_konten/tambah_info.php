@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="<?=base_url('assets/')?>css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
 </head>
@@ -41,32 +43,36 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="container-fluid">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tambah Data Info</h1>
-                        </div>
+                    <div class="container mb-3 p-0">
+                        <span class="h3">Tambah Card Info</span>
                     </div>
-
-                    <div class="container mt-5">
-                        <?php echo $this->session->userdata('error');?>
-                        <?php $this->session->unset_userdata('error');?>
-                        <?php echo form_open_multipart('Kelola_Dashboard/Info/prosestambahinfo'); ?>
-                        <div class="form-group">
-                            <label for="judul">Judul:</label>
-                            <input type="text" class="form-control" name="judul" required>
+                    <div class="row">
+                        <div class="col">
+                            <div class="container"
+                                style="box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                                <?php echo $this->session->userdata('error');?>
+                                <?php $this->session->unset_userdata('error');?>
+                                <form id="myForm"
+                                    action="<?php echo site_url('Kelola_Dashboard/Info/prosestambahinfo'); ?>"
+                                    method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="judul">Judul:</label>
+                                        <input type="text" class="form-control" name="judul" required>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <label for="deskripsi">Deskripsi:</label>
+                                        <div id="deskripsieditor"></div>
+                                        <input class="form-control" name="deskripsi" type="hidden" id="deskripsiinput"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gambar:</label>
+                                        <input type="file" class="form-control" name="gambar" required>
+                                    </div>
+                                    <input type="submit" name="Submit" value="Simpan" class="btn btn-primary mb-2">
+                                </form>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="deskripsi">deskripsi:</label>
-                            <textarea class="form-control" name="deskripsi" required></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="gambar">gambar:</label>
-                            <input type="file" class="form-control" name="gambar" required>
-                        </div>
-
-                        <input type="submit" name="Submit" value="Simpan" class="btn btn-primary">
-                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
@@ -76,6 +82,20 @@
     </div>
 
     <?php $this->load->view('Bar/Logout_modal'); ?>
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+    var deskripsieditor = new Quill('#deskripsieditor', {
+        theme: 'snow'
+    });
+
+    var form = document.getElementById('myForm');
+    var deskripsiinput = document.getElementById('deskripsiinput');
+
+    form.addEventListener('submit', function(event) {
+        deskripsiinput.value = deskripsieditor.root.innerHTML;
+    });
+    </script>
 
 
 

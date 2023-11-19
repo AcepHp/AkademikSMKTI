@@ -105,8 +105,7 @@
     <br>
     <!-- Judul -->
     <div class="judul mb-5 mt-5">
-        <span>PENERIMAAN PESERTA DIDIK BARU</span><br>
-        <span>SMK TI GARUDA NUSANTARA CIMAHI</span>
+        <span><?php echo $ppdb->judul?></span><br>
     </div>
 
     <div class="container-fluid">
@@ -114,7 +113,7 @@
             <div class="row">
                 <div class="col">
                     <div class="row mb-5">
-                        <img src="<?php echo base_url('assets/images/ppdb.jpg') ?>" alt=""
+                        <img src="<?php echo $ppdb->gambar ?>" alt=""
                             style="max-width: 100%; height: auto;">
                         <div class="col">
                             <a href="<?php echo site_url('PPDB/form'); ?>"
@@ -122,74 +121,46 @@
                                 DISINI</a>
                         </div>
                     </div>
-                    <div class="row">
-                        <h3>Informasi Penerimaan Peserta Didik Baru Tahun Pelajaran 2023 - 2024</h3>
-                    </div>
                     <div class="row mb-2">
-                        <span>Peraturan Menteri Pendidikan dan Kebudayaan Nomor 1 Tahun 2021 tentang PPDB Pada
-                            Taman Kanak-kanak, Sekolah Dasar, Sekolah Menengah Pertama, Sekolah Menengah Atas, dan Sekolah Menengah Kejuruan.
-                        </span>
-                        <span>SE Mendikbud No. 1 Thn. 2020 tentang Kebijakan Merdeka Belajar Dalam Penentuan
-                                Kelulusan Peserta
-                                Didik & Pelaksanaan PPDB Thn.Ajaran 2020-2021 :
-                                <ul>
-                                <li>Juknis PPDB, penetapan zona, tidak menggunakan nilai UN/nilai ujian lainnya
-                                    pada jalur afirmasi
-                                    dan
-                                    zonasi;</li>
-                                <li>Kewajiban melakukan sosialisasi, melaporkan, dan koordinasi PPDB</li>
-                            </ul>
-                        </span>
-                    </div>
-                    <div class="row">
-                        <h3>MATERI YANG DIAJARKAN</h3>
-                    </div>
-                    <div class="row mb-5">
-                        <span>1. Komputer dan Desain</span>
+                        <span><?php echo $ppdb->deskripsi?></span>
                     </div>
                 </div>
                 <div class="col-md-3 d-flex flex-column align-items-end">
-                    <div class="kepsek card text-white mb-3">
+                    <div class="kepsek card text-white mb-5">
                         <h5 class="jabatan">Kepala Sekolah</h5>
                         <div class="isi card-body">
-                            <img src="<?php echo base_url('assets/images/background.png') ?>" alt="Foto Kepala Sekolah">
+                            <img src="<?php echo $kepsek->gambar?>" alt="Foto Kepala Sekolah">
                         </div>
-                        <p class="isi-text card-text">RidoAmaludinToyibST</p>
+                        <p class="isi-text card-text"><?php echo $kepsek->nama?></p>
                     </div>
-                    <div class="info card mb-3">
+                    <div class="info card mb-5">
                         <ul class="list-group list-group-flush">
                             <div class="info-title card-header">Info</div>
-                            <a href="<?php echo site_url('Info/kenapaTI'); ?>">
-                                <li class="list-group-item">Kenapa TI?</li>
+                            <?php $counter = 0; $infoterbaru=array_reverse($info->result());?>
+                            <?php foreach ($infoterbaru as $row) : ?>
+                            <?php if ($counter < 3) : ?>
+                            <a href="<?php echo site_url('K_Konten/detailinfo/'.$row->id_info); ?>">
+                                <li class="list-group-item"><?php echo $row->judul ?></li>
                             </a>
-                            <a href="<?php echo site_url('Info/kompetensi'); ?>">
-                                <li class="list-group-item">Kompetensi Keahlian</li>
-                            </a>
-                            <a href="<?php echo site_url('Info/Ekstrakulikuler'); ?>">
-                                <li class="list-group-item">Ekstrakulikuler</li>
-                            </a>
+                            <?php endif; ?>
+                            <?php $counter++; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                     <div class="populer card mb-5">
                         <div class="populer-judul card-header">Berita</div>
-                        <img src="<?php echo base_url('assets/images/background.png') ?>" class="card-img-top"
+                        <?php $counter = 0; $beritaterbaru=array_reverse($berita->result());?>
+                        <?php foreach ($beritaterbaru as $row) : ?>
+                        <?php if ($counter < 2) : ?>
+                        <img src="<?php echo $row->gambar ?>" class="card-img-top"
                             alt="...">
                         <div class="card-body">
-                            <p><a href="<?php echo site_url('Berita/isi'); ?>" class="isi-berita">Some quick example
-                                    text to build on
-                                    the card title and make up
-                                    the bulk of the card's content.</a></p>
+                            <p><a href="<?php echo site_url('Berita/isi/' . $row->id_berita); ?>" class="isi-berita"><?php echo substr($row->judul, 0,100) ?></a></p>
                             <hr>
                         </div>
-                        <img src="<?php echo base_url('assets/images/background.png') ?>" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <p><a href="<?php echo site_url('Berita/isi'); ?>" class="isi-berita">Some quick example
-                                    text to build on
-                                    the card title and make up
-                                    the bulk of the card's content.</a></p>
-                            <hr>
-                        </div>
+                        <?php endif; ?>
+                        <?php $counter++; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

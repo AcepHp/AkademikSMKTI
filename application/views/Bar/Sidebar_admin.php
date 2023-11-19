@@ -111,7 +111,7 @@
 
     <!-- Data Guru -->
     <?php if($this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
-    <li class="nav-item <?php echo (site_url('admin') === current_url() || site_url('Wali/index') === current_url() || site_url('admin/pengajar') === current_url() 
+    <li class="nav-item <?php echo (site_url('pengajar') === current_url() || site_url('Wali/index') === current_url() || site_url('admin/pengajar') === current_url() 
         || site_url('Penugasan') === current_url() || site_url('Jurusan/index') === current_url() || site_url('Kelas/index') === current_url() 
         || site_url('Mapel/index') === current_url()  ) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"

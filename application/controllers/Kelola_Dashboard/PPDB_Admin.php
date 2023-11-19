@@ -11,6 +11,7 @@ class PPDB_Admin extends CI_Controller
         if ($this->session->userdata('role') !== 'SuperAdmin' && $this->session->userdata('role') !== 'Admin' && $this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur') {
             redirect('auth');
         }
+        
         $data['ppdb_admin']=$this->PPDB_Model->getppdb();
         $this->load->view('admin/admin_konten/ppdb',$data);
     }
@@ -50,10 +51,10 @@ class PPDB_Admin extends CI_Controller
             redirect('auth');
         }
         if($this->PPDB_Model->editppdb($id)){
-            redirect('Kelola_Dashboard/PPDB_Admin/ppdb','refresh');
+            redirect('Kelola_Dashboard/PPDB_Admin/ppdb');
 
         } else {
-            redirect('Kelola_Dashboard/PPDB_Admin/ppdb','refresh');
+            redirect('Kelola_Dashboard/PPDB_Admin/ppdb');
             
         }
     }

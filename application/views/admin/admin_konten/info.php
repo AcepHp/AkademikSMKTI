@@ -61,7 +61,7 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Gambar</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Tabel Card Info</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -72,6 +72,10 @@
                                     <!-- Flash Data Berhasil edit data -->
                                     <?php echo $this->session->userdata('success_edit');?>
                                     <?php $this->session->unset_userdata('success_edit');?>
+
+                                    <!-- Flash Data Berhasil edit data -->
+                                    <?php echo $this->session->userdata('success_hapus');?>
+                                    <?php $this->session->unset_userdata('success_hapus');?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>
@@ -80,14 +84,16 @@
                                                 <th style="text-align:center; vertical-align:center;">Deskripsi</th>
                                                 <th style="text-align:center; vertical-align:center;">Gambar</th>
                                                 <th style="text-align:center; vertical-align:center;">Created</th>
-                                                <th style="width:15%; text-align:center; vertical-align:center;">Aksi</th>
+                                                <th style="width:15%; text-align:center; vertical-align:center;">Aksi
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $no = 1; ?>
                                             <?php foreach ($info->result() as $row) : ?>
-
                                             <tr>
-                                                <td style="width:5%; text-align:center; vertical-align:center;"><?php echo $row->id_info; ?></td>
+                                                <td style="width:5%; text-align:center; vertical-align:center;">
+                                                    <?php echo $no++; ?></td>
                                                 <td><?php echo $row->judul; ?></td>
                                                 <td><?php echo substr($row->deskripsi,0,50) ?>...</td>
                                                 <td>
