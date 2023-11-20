@@ -87,96 +87,121 @@
                                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                         <h1 class="h3 mb-0 text-gray-800">Forum Diskusi</h1>
                                     </div>
-                                    <?php } else {
-                                        redirect('auth');  // Redirect jika role tidak dikenali
-                                    } ?>
 
-                                    <div class="container mt-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <!-- Kotak untuk membuat postingan baru (pindahkan ke atas) -->
-                                                <div class="card mb-3">
-                                                    <div class="card-body mx-3">
-                                                        <h5 class="card-title">Buat Postingan Baru</h5>
-                                                        <form method="POST"
-                                                            action="<?php echo site_url('diskusi/tambah_topik'); ?>">
 
-                                                            <div class="form-group d-flex align-items-center">
-                                                                <img src="//www.gravatar.com/avatar/<?php echo md5($this->session->userdata('nama_lengkap'));?>?s=40&d=monsterid"
-                                                                    class="rounded-circle" width="40" height="40"
-                                                                    alt="Profil">
-                                                                <h4 class="card-title ml-2">
-                                                                    <?php echo $this->session->userdata('nama_lengkap'); ?>
-                                                                    <input type="text" name="nama" class="form-control"
-                                                                        style="display: none;"
-                                                                        value="<?php echo $this->session->userdata('nama_lengkap'); ?>"
-                                                                        readonly />
-                                                                </h4>
-
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="form-group">
-                                                                    <textarea class="form-control custom-textarea"
-                                                                        rows="3" name="deskripsi"
-                                                                        placeholder="Apa yang ingin Anda bagikan?"></textarea>
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Kirim</button>
-                                                            </div>
-                                                        </form>
+                                    <?php } elseif ($this->session->userdata('role') === 'SuperAdmin') { ?>
+                                    <div id="wrapper">
+                                        <!-- Sidebar Guru -->
+                                        <?php $this->load->view('Bar/Sidebar_admin'); ?>
+                                        <!-- Content Wrapper -->
+                                        <div id="content-wrapper" class="d-flex flex-column">
+                                            <!-- Main Content -->
+                                            <div id="content">
+                                                <!-- TopBar Guru -->
+                                                <?php $this->load->view('Bar/Navbar_admin'); ?>
+                                                <div class="container-fluid">
+                                                    <!-- Page Heading -->
+                                                    <div
+                                                        class="d-sm-flex align-items-center justify-content-between mb-4">
+                                                        <h1 class="h3 mb-0 text-gray-800">Forum Diskusi</h1>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <?php } else {
+                                                        redirect('auth');  // Redirect jika role tidak dikenali
+                                                    } ?>
 
-                                            <div class="col-md-12">
+                                                    <div class="container mt-3">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <!-- Kotak untuk membuat postingan baru (pindahkan ke atas) -->
+                                                                <div class="card mb-3">
+                                                                    <div class="card-body mx-3">
+                                                                        <h5 class="card-title">Buat Postingan Baru</h5>
+                                                                        <form method="POST"
+                                                                            action="<?php echo ($this->session->userdata('role') === 'SuperAdmin') ? site_url('diskusi/tambah_topik_admin') : site_url('diskusi/tambah_topik'); ?>">
 
-                                                <?php foreach ($query as $data) {
+
+                                                                            <div
+                                                                                class="form-group d-flex align-items-center">
+                                                                                <img src="//www.gravatar.com/avatar/<?php echo md5($this->session->userdata('nama_lengkap'));?>?s=40&d=monsterid"
+                                                                                    class="rounded-circle" width="40"
+                                                                                    height="40" alt="Profil">
+                                                                                <h4 class="card-title ml-2">
+                                                                                    <?php echo $this->session->userdata('nama_lengkap'); ?>
+                                                                                    <input type="text" name="nama"
+                                                                                        class="form-control"
+                                                                                        style="display: none;"
+                                                                                        value="<?php echo $this->session->userdata('nama_lengkap'); ?>"
+                                                                                        readonly />
+                                                                                </h4>
+
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="form-group">
+                                                                                    <textarea
+                                                                                        class="form-control custom-textarea"
+                                                                                        rows="3" name="deskripsi"
+                                                                                        placeholder="Apa yang ingin Anda bagikan?"></textarea>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Kirim</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+
+                                                                <?php foreach ($query as $data) {
                                                 if ($data['enum'] == 'Iya') { // Hanya tampilkan topik dengan enum 'Iya'
                                             ?>
-                                                <!-- Daftar postingan -->
-                                                <!-- Postingan pertama -->
-                                                <div class="card mb-3">
-                                                    <div class="card-body mx-3">
-                                                        <div class="d-flex justify-content-between align-items-center">
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="//www.gravatar.com/avatar/<?php echo md5($data['nama']);?>?s=40&d=monsterid"
-                                                                    class="rounded-circle" width="40" height="40"
-                                                                    alt="Profil">
-                                                                <h4 class="card-title ml-2">
-                                                                    <?php echo htmlentities($data['nama']);?></h4>
-                                                            </div>
-                                                            <p class="text-secondary">
-                                                                <?php echo date('d M Y', strtotime($data['tanggal']));?>
-                                                            </p>
-                                                        </div>
+                                                                <!-- Daftar postingan -->
+                                                                <!-- Postingan pertama -->
+                                                                <div class="card mb-3">
+                                                                    <div class="card-body mx-3">
+                                                                        <div
+                                                                            class="d-flex justify-content-between align-items-center">
+                                                                            <div class="d-flex align-items-center">
+                                                                                <img src="//www.gravatar.com/avatar/<?php echo md5($data['nama']);?>?s=40&d=monsterid"
+                                                                                    class="rounded-circle" width="40"
+                                                                                    height="40" alt="Profil">
+                                                                                <h4 class="card-title ml-2">
+                                                                                    <?php echo htmlentities($data['nama']);?>
+                                                                                </h4>
+                                                                            </div>
+                                                                            <p class="text-secondary">
+                                                                                <?php echo date('d M Y', strtotime($data['tanggal']));?>
+                                                                            </p>
+                                                                        </div>
 
-                                                        <p class="card-text mt-1">
-                                                            <?php echo htmlentities($data['deskripsi']);?></p>
-                                                        <a href="<?php echo base_url('Diskusi/lihat_topik/') . $data['id_topik']; ?>"
-                                                            class="btn btn-primary">Komentar</a>
-                                                    </div>
-                                                </div>
-                                                <?php
+                                                                        <p class="card-text mt-1">
+                                                                            <?php echo htmlentities($data['deskripsi']);?>
+                                                                        </p>
+                                                                        <a href="<?php echo base_url('Diskusi/lihat_topik/') . $data['id_topik']; ?>"
+                                                                            class="btn btn-primary">Komentar</a>
+                                                                    </div>
+                                                                </div>
+                                                                <?php
                                     }
                                     }
                                     ?>
+                                                            </div>
+
+                                                            <?php if ($this->session->userdata('role') === 'Guru' || $this->session->userdata('role') === 'Siswa') { ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <!--include Footer Guru-->
+                                            <?php $this->load->view('Bar/Footer_admin'); ?>
+                                            <?php } ?>
 
-                                            <?php if ($this->session->userdata('role') === 'Guru' || $this->session->userdata('role') === 'Siswa') { ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--include Footer Guru-->
-                            <?php $this->load->view('Bar/Footer_admin'); ?>
-                            <?php } ?>
-
-                            <!-- include modal -->
-                            <?php $this->load->view('Bar/Logout_modal'); ?>
+                                            <!-- include modal -->
+                                            <?php $this->load->view('Bar/Logout_modal'); ?>
 </body>
 
 </html>

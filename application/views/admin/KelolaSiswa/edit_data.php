@@ -126,7 +126,7 @@
 
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input type="text" class="form-control" name="email"
+                                                    <input type="email" class="form-control" name="email"
                                                         value="<?php echo $siswa_data->email; ?>">
                                                 </div>
 
@@ -201,9 +201,8 @@
 
 
                                                         <div class="form-group">
-                                                            <label for="new_password">Password
-                                                                Baru</label>
-                                                            <input type="password" class="form-control"
+                                                        
+                                                            <input type="hidden" class="form-control"
                                                                 name="new_password"
                                                                 placeholder="Masukkan password baru">
                                                         </div>

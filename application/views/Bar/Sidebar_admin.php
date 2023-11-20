@@ -174,7 +174,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="<?php echo site_url('Diskusi/Kelola_diskusi'); ?>">Kelola Topik</a>
                 <a class="collapse-item" href="<?php echo site_url('Diskusi/Kelola_komentar'); ?>">Kelola Komentar</a>
-                <!-- <a class="collapse-item" href="<?php echo site_url('Diskusi/index'); ?>">Forum Diskusi</a> -->
+                <a class="collapse-item" href="<?php echo site_url('Diskusi/index'); ?>">Forum Diskusi</a>
             </div>
     </li>
     <?php }?>
