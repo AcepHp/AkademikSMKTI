@@ -50,10 +50,10 @@ class Jurusan extends CI_Controller
             redirect('auth');
         }
         if($this->Jurusan_model->editjurusan($id)){
-            redirect('Kelola_Dashboard/Jurusan/jurusan','refresh');
+            redirect('Kelola_Dashboard/Jurusan/jurusan');
 
         } else {
-            redirect('Kelola_Dashboard/Jurusan/jurusan','refresh');
+            redirect('Kelola_Dashboard/Jurusan/jurusan');
             
         }
     }

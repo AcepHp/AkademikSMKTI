@@ -66,6 +66,7 @@ class admin extends CI_Controller {
                 'Alamat' => $this->input->post('alamat'),
                 'Pendidikan' => $this->input->post('pendidikan'),
                 'Tanggal_Mulai' => $this->input->post('tanggal_mulai'),
+                'Status' => $this->input->post('wali'),
             );
 
             $this->Admin_Model->tambah_guru($data);

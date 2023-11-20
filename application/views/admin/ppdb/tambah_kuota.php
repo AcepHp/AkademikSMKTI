@@ -55,7 +55,7 @@
                             <select class="form-control" name="tahun" required>
                                 <option value="">Pilih Tahun</option>
                                 <?php foreach ($tahun->result() as $tahun_item): ?>
-                                <?php echo '<option value="'.$tahun_item->tahun_akademik.'"'.$selected.'>'.$tahun_item->tahun_akademik.'-'.$tahun_item->semester.'</option>' ?>
+                                <?php echo '<option value="'.$tahun_item->tahun_akademik.'"'.$selected.'>'.$tahun_item->tahun_akademik.''.$tahun_item->semester.'</option>' ?>
                                 <?php endforeach; ?>
                             </select>
                         </div>

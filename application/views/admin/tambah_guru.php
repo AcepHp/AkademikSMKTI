@@ -97,9 +97,9 @@
                         <div class="form-group">
                             <label for="Wali">Status Wali Kelas:</label>
                             <div>
-                                <label class="radio-inline"><input type="radio" name="wali" value="ya" required>
+                                <label class="radio-inline"><input type="radio" name="wali" value="Iya" required>
                                     YA</label>
-                                <label class="radio-inline"><input type="radio" name="wali" value="tidak" required>
+                                <label class="radio-inline"><input type="radio" name="wali" value="Tidak" required>
                                     TIDAK</label>
                             </div>
                         </div>

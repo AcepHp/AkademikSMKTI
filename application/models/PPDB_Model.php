@@ -58,17 +58,18 @@ require_once APPPATH.'../vendor/autoload.php';
         }
         
         public function editppdb($id) {
+            $gambar = $this->input->post("gambar");
             $judul = $this->input->post("judul");
-            $deskripsi = $this->input->post("deskripsi");            
-            
+            $deskripsi = $this->input->post("deskripsi");
+        
             $ppdb_admin = array(
                 "judul" => $judul,
-                "deskripsi" => $deskripsi,                
+                "deskripsi" => $deskripsi,
                 "created" => date('Y-m-d'),
             );
         
             $existing_gambar = $this->db->get_where("ppdb_admin", array("id_ppdb" => $id))->row();
-            
+        
             // Check if a new image is uploaded
             if ($_FILES['gambar']['error'] !== UPLOAD_ERR_NO_FILE) {
                 $config['upload_path'] = './assets/images';
@@ -81,11 +82,11 @@ require_once APPPATH.'../vendor/autoload.php';
                     redirect($_SERVER['HTTP_REFERER']);
                 } else {
                     $upload_data = $this->upload->data();
-                    $ppdb['gambar'] = base_url("assets/images/") . $upload_data['file_name'];
+                    $ppdb_admin['gambar'] = base_url("assets/images/") . $upload_data['file_name'];
         
                     // Delete the old image if it exists
                     if (!empty($existing_gambar->gambar)) {
-                        unlink($existing_gambar->gambar); // Remove the old file
+                        unlink('./assets/images/' . basename($existing_gambar->gambar)); // Remove the old file
                     }
                 }
             } else {
@@ -97,6 +98,7 @@ require_once APPPATH.'../vendor/autoload.php';
             $this->session->set_flashdata("success_edit", "<div class='alert alert-success' role='alert'>Halaman PPDB berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("ppdb_admin", $ppdb_admin);
         }
+        
 
         public function delete_ppdb($id) {
             $this->db->where('id_ppdb', $id);
@@ -363,7 +365,7 @@ require_once APPPATH.'../vendor/autoload.php';
                 $this->Jurusan_model->ambilkuota($nama_jurusan2, $kuota2);
             }else{
                 $this->session->set_flashdata("success", "<div class='alert alert-danger' role='alert'>Kuota Penuh !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
-                return redirect('PPDB/pendaftar','refresh');
+                return redirect('PPDB/pendaftar');
             }
 
             $siswa = array(
@@ -430,7 +432,7 @@ require_once APPPATH.'../vendor/autoload.php';
             } else {
                 // Status diterima
                 $this->email->subject('Selamat! Anda Telah Diterima');
-                $this->email->message("Assalamualaikum wr. wb, ini akun Anda. Silahkan login menggunakan username = " . str_replace(" ", "", $nama_lengkap) . " dan password = siswatignc");
+                $this->email->message("Assalamualaikum wr. wb, ini akun Anda. Silahkan login menggunakan username = " . str_replace(" ", "", $nama_lengkap) . " dan password = siswasmktignc");
                 
                 // Jika pengguna (users) belum ada, lakukan insert
                 $this->PPDB_Model->insert_account($account);
@@ -442,7 +444,7 @@ require_once APPPATH.'../vendor/autoload.php';
             }
         
             $this->db->where("id_ppdb", $id);
-            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Slide show berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
+            $this->session->set_flashdata("success", "<div class='alert alert-success' role='alert'>Status berhasil diupdate !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>");
             return $this->db->update("ppdb", $data);
         }
 
