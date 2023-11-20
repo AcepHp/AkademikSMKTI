@@ -101,7 +101,7 @@
                                                         style="width: 80px; height: auto;">
                                                 </td>
                                                 <td><?php echo substr($row->judul,0,20) ?>...</td>
-                                                <td><?php echo substr($row->judul,0,90) ?>...</td>
+                                                <td><?php echo substr($row->deskripsi,0,90) ?>...</td>
                                                 <td><?php echo $row->created ?></td>
                                                 <td style="width:10%; text-align:center; vertical-align:center;">
                                                     <a href="#" class="btn btn-sm btn-info" title="Detail"

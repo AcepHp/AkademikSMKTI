@@ -50,6 +50,7 @@ class Wali_model extends CI_Model {
         $this->db->select('guru.Nama_Lengkap, guru.ID_Guru, guru.NIP');
         $this->db->from('guru');
         $this->db->join('wali', 'guru.ID_Guru = wali.Nama_Lengkap', 'left');  // Use left join to include teachers without a match in wali
+        $this->db->where('guru.Status','Iya');  // Filter teachers not in wali
         $this->db->where('wali.Nama_Lengkap IS NULL');  // Filter teachers not in wali
     
         $query = $this->db->get();

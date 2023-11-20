@@ -51,10 +51,10 @@ class Info extends CI_Controller
             redirect('auth');
         }
         if($this->Info_Model->editinfo($id)){
-            redirect('Kelola_Dashboard/Info/info','refresh');
+            redirect('Kelola_Dashboard/Info/info');
 
         } else {
-            redirect('Kelola_Dashboard/Info/info','refresh');
+            redirect('Kelola_Dashboard/Info/info');
             
         }
     }

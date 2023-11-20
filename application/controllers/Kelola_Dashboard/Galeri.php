@@ -50,10 +50,10 @@ class Galeri extends CI_Controller
             redirect('auth');
         }
         if($this->Galeri_Model->editgaleri($id)){
-            redirect('Kelola_Dashboard/Galeri/galeri','refresh');
+            redirect('Kelola_Dashboard/Galeri/galeri');
 
         } else {
-            redirect('Kelola_Dashboard/Galeri/galeri','refresh');
+            redirect('Kelola_Dashboard/Galeri/galeri');
             
         }
     }

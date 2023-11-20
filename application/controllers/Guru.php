@@ -5,6 +5,8 @@ class Guru extends CI_Controller {
         $this->load->model('Datasiswa_model');
         $this->load->model('Jurusan_model');
         $this->load->model('Kelas_model');
+        $this->load->model('Guru_model');
+        $this->load->model('Nilai_model');
         $this->load->library('form_validation');
     }
 
@@ -12,7 +14,19 @@ class Guru extends CI_Controller {
         if ($this->session->userdata('role') !== 'Guru') {
             redirect('auth');
         }
-        $this->load->view('dashboard/Guru_dashboard');
+        $tahun = $this->Nilai_model->get_tahun();
+        $semester = $this->Nilai_model->get_semester();
+    
+        // Ambil nilai id_tahun dari hasil query tahun yang didapat
+        $id_tahun = $tahun[0]->id_tahun; 
+    
+        // Ambil nilai id_semester dari hasil query semester yang didapat
+        $id_semester = $semester[0]->id_semester; 
+
+        $get_idguru = $this->Guru_model->get_NIP($this->session->userdata('NIP'));
+        $materi_count = $this->Guru_model->get_all_materi($get_idguru,$id_tahun,$id_semester);
+        $data['materi'] =  $materi_count;
+        $this->load->view('dashboard/Guru_dashboard',$data);
     }
 
     

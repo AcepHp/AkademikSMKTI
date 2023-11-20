@@ -90,10 +90,6 @@
                                                         class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger" title="Hapus"
-                                                        onclick="Delete_Kuota('<?php echo $row->id_users; ?>')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
                                                 </td>
                                             </tr>
                                             <?php endforeach; ?>
