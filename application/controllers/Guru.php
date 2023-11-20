@@ -7,6 +7,7 @@ class Guru extends CI_Controller {
         $this->load->model('Kelas_model');
         $this->load->model('Guru_model');
         $this->load->model('Nilai_model');
+        $this->load->model('VMT_Model');
         $this->load->library('form_validation');
     }
 
@@ -22,10 +23,11 @@ class Guru extends CI_Controller {
     
         // Ambil nilai id_semester dari hasil query semester yang didapat
         $id_semester = $semester[0]->id_semester; 
-
-        $get_idguru = $this->Guru_model->get_NIP($this->session->userdata('NIP'));
-        $materi_count = $this->Guru_model->get_all_materi($get_idguru,$id_tahun,$id_semester);
-        $data['materi'] =  $materi_count;
+        $get_idguru = $this->Guru_model->get_ID_Guru($this->session->userdata('NIP'));
+        $data['muridcount'] = $this->Guru_model->get_total_murid($get_idguru, $id_tahun);
+        $data['kelascount'] = $this->Guru_model->get_all_kelas($get_idguru, $id_tahun, $id_semester);
+        $data['materiCount'] = $this->Guru_model->get_all_materi($get_idguru, $id_tahun, $id_semester);
+        $data['vmt'] = $this->VMT_Model->get_all()->row();
         $this->load->view('dashboard/Guru_dashboard',$data);
     }
 

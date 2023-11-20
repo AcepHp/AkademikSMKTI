@@ -69,7 +69,7 @@
                                                     <label for="nis">NIS</label>
                                                     <input type="text" class="form-control" name="nis"
                                                         value="<?php echo $siswa_data->NIS; ?>"
-                                                        oninput="allowOnlyNumericInput(this, 'errorNIS')" required>
+                                                        oninput="allowOnlyNumericInput(this, 'errorNIS')" required maxlength="10">
                                                     <small id="errorNIS" class="text-danger" style="display:none;">Hanya
                                                         bisa diisi oleh angka.</small>
                                                 </div>
@@ -78,7 +78,7 @@
                                                     <label for="nisn">NISN</label>
                                                     <input type="text" class="form-control" name="nisn"
                                                         value="<?php echo $siswa_data->NISN; ?>"
-                                                        oninput="allowOnlyNumericInput(this, 'errorNISN')" required>
+                                                        oninput="allowOnlyNumericInput(this, 'errorNISN')" required maxlength="10">
                                                     <small id="errorNISN" class="text-danger"
                                                         style="display:none;">Hanya bisa diisi oleh angka.</small>
                                                 </div>

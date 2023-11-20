@@ -82,7 +82,7 @@
                                             <div class="form-group">
                                                 <label for="nis">NIS</label>
                                                 <input type="text" class="form-control" name="nis"
-                                                    oninput="allowOnlyNumericInput(this, 'errorNIS')" required>
+                                                    oninput="allowOnlyNumericInput(this, 'errorNIS')" required maxlength="10">
                                                 <small id="errorNIS" class="text-danger" style="display:none;">Hanya
                                                     bisa diisi oleh angka.</small>
                                                 <?php echo form_error('nis', '<small class="text-danger">', '</small>'); ?>
@@ -92,7 +92,7 @@
                                                 <label for="nisn">NISN</label>
                                                 <input type="text" class="form-control" name="nisn" id="nisn"
                                                     oninput="allowOnlyNumericInput(this, 'errorNISN'); setUsernameFromNISN()"
-                                                    required>
+                                                    required maxlength="10">
                                                 <small id="errorNISN" class="text-danger" style="display:none;">Hanya
                                                     bisa diisi oleh angka.</small>
                                                 <?php echo form_error('nisn', '<small class="text-danger">', '</small>'); ?>

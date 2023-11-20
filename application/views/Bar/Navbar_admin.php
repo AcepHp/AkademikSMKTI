@@ -46,7 +46,6 @@
                     <span style="font-weight: bold;">
                         <?php echo $this->session->userdata('nama_lengkap'); ?>
                     </span>
-                    ( <?php echo $this->session->userdata('NIP'); ?> )
                 </span>
                 <img class="img-profile rounded-circle" src="<?php
                         $file_foto = $this->session->userdata('Foto'); // Mengambil data file_foto dari sesi

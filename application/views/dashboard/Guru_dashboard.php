@@ -46,22 +46,55 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-
                         <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-secondary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                            Total Materi</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $materiCount?></div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-newspaper fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                            Siswa Yang Diampuh</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $muridcount ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Materi</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $materi ?></div>
+                                                Kelas Yang Diampuh</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $kelascount; ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -71,108 +104,140 @@
                             </div>
                         </div>
 
-                        
-
-                    <!-- Content Row -->
-
-
-
                     </div>
-            </div
+                    <div class="row">
+
+                        <!-- Content Column -->
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Project Card Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Tujuan Sekolah</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p class="font-weight-bold"><?php echo $vmt->tujuan?></p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6 mb-4">
+
+                            <!-- Illustrations -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Visi</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><?php echo $vmt->visi?></p>
+                                </div>
+                            </div>
+
+                            <!-- Approach -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="m-0 font-weight-bold text-primary">Misi</h4>
+                                </div>
+                                <div class="card-body">
+                                    <p><?php echo $vmt->misi?></p>
+                                </div>
+                            </div>
+                        </div> </div>
+                    </div>
+
+
+                    <!-- End of Main Content -->
+
+                    <!-- Footer -->
+                    <?php $this->load->view('Bar/Footer_admin'); ?>
+                    <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah
+                                        password
+                                        default dari akun siswa.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                        id="closeModal">Nanti
+                                        Saja</button>
+                                    <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password
+                                        Sekarang</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Footer -->
+
                 </div>
+                <!-- End of Content Wrapper -->
+
             </div>
-    
-  
-    <!-- End of Main Content -->
 
-    <!-- Footer -->
-    <?php $this->load->view('Bar/Footer_admin'); ?>
-    <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">PEMBERITAHUAN!</h5>
-                </div>
-                <div class="modal-body">
-                    <p>Harap ganti password terlebih dahulu! karena password yang sekarang adalah
-                        password
-                        default dari akun siswa.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal">Nanti
-                        Saja</button>
-                    <button onclick="gantiPassword()" class="btn btn-primary">Ganti Password
-                        Sekarang</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of Footer -->
+            <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Content Wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-    </div>
+            <?php $this->load->view('Bar/Logout_modal'); ?>
 
-    <!-- End of Page Wrapper -->
+            <!-- Bootstrap core JavaScript-->
+            <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
+            <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+            <!-- Core plugin JavaScript-->
+            <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <?php $this->load->view('Bar/Logout_modal'); ?>
+            <!-- Custom scripts for all pages-->
+            <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="<?=base_url('assets/')?>vendor/jquery/jquery.min.js"></script>
-    <script src="<?=base_url('assets/')?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="<?=base_url('assets/')?>vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Page level custom scripts -->
+            <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
+            <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            <script>
+            // Mengambil elemen modal
+            var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
+            var closeModalButton = document.getElementById('closeModal');
 
-    <!-- Custom scripts for all pages-->
-    <script src="<?=base_url('assets/')?>js/sb-admin-2.min.js"></script>
+            // Simulasikan nilai aktif dari database
+            var aktif =
+                "<?php echo $this->session->userdata('aktif'); ?>"; // Ganti nilainya sesuai dengan data dari database
 
-    <!-- Page level plugins -->
-    <script src="<?=base_url('assets/')?>vendor/chart.js/Chart.min.js"></script>
+            // Tampilkan modal jika aktif = 0
+            if (aktif === '0') {
+                passwordModal.show();
+            }
 
-    <!-- Page level custom scripts -->
-    <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
-    <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    // Mengambil elemen modal
-    var passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
-    var closeModalButton = document.getElementById('closeModal');
+            // Menutup modal saat tombol close diklik
+            closeModalButton.addEventListener('click', function() {
+                passwordModal.hide();
+            });
 
-    // Simulasikan nilai aktif dari database
-    var aktif =
-        "<?php echo $this->session->userdata('aktif'); ?>"; // Ganti nilainya sesuai dengan data dari database
+            // Menutup modal saat luar modal diklik
+            window.addEventListener('click', function(event) {
+                if (event.target == passwordModal._element) {
+                    passwordModal.hide();
+                }
+            });
 
-    // Tampilkan modal jika aktif = 0
-    if (aktif === '0') {
-        passwordModal.show();
-    }
-
-    // Menutup modal saat tombol close diklik
-    closeModalButton.addEventListener('click', function() {
-        passwordModal.hide();
-    });
-
-    // Menutup modal saat luar modal diklik
-    window.addEventListener('click', function(event) {
-        if (event.target == passwordModal._element) {
-            passwordModal.hide();
-        }
-    });
-
-    // Fungsi untuk mengganti password
-    function gantiPassword() {
-        window.location.href =
-            '<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>';
-    }
-    </script>
+            // Fungsi untuk mengganti password
+            function gantiPassword() {
+                window.location.href =
+                    '<?php echo site_url('Auth/ganti_password/' . $this->session->userdata('id_users')) ?>';
+            }
+            </script>
 
 </body>
 
