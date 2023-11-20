@@ -367,6 +367,9 @@ public function tambah_materi_admin() {
             $result = $this->Materi_model->tambah_materi($data);
 
             if ($result) {
+                $this->session->set_flashdata('success', 'Materi berhasil ditambahkan.');
+                // Debug statement
+                echo "Flashdata set: " . $this->session->flashdata('success');
                 // Redirect ke halaman "lihat materi" setelah berhasil menyimpan data
                 redirect('Materi/index_admin/');
             } else {
@@ -389,8 +392,6 @@ public function tambah_materi_admin() {
         $data['tingkatan'] = $this->Materi_model->get_tingkatan();
         $data['kelas'] = $this->Materi_model->get_kelas();
         $data['mapel'] = $this->Materi_model->get_mapel();
-
-        
 
         // Memuat tampilan untuk menampilkan formulir "Tambah Materi"
         $this->load->view('admin/Materi/tambah_materi', $data);
@@ -416,7 +417,7 @@ public function hapus_materi($id_materi) {
         
         if ($result) {
             // Redirect atau tampilkan pesan sukses setelah berhasil menghapus materi
-            $this->session->set_flashdata('success', 'Materi berhasil dihapus.');
+            $this->session->set_flashdata('success_hapus', 'Materi berhasil dihapus.');
             redirect('Materi/index_admin');
         } else {
             // Redirect atau tampilkan pesan kesalahan jika gagal menghapus materi dari database
@@ -476,6 +477,8 @@ public function edit_materi_admin($id_materi) {
         }
 
     if ($result) {
+
+        $this->session->set_flashdata('success_edit', 'Materi berhasil diedit.');
         // Redirect ke halaman "lihat materi" setelah berhasil menyimpan data
         redirect('Materi/index_admin/');
     } else {

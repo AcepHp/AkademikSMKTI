@@ -115,6 +115,18 @@
         </div>
         <?php $this->session->unset_userdata('success_message'); ?>
         <?php endif; ?>
+
+        <?php if ($this->session->userdata('error_message')): ?>
+        <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="mr-3"><?php echo $this->session->userdata('error_message'); ?></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <?php $this->session->unset_userdata('error_message'); ?>
+        <?php endif; ?>
         <div class="card" style="width: 60%; background-color: #F5F5F5; border: none;">
             <div class="header card-header">Form Pendaftaran</div>
 
