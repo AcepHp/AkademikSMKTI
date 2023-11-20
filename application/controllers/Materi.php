@@ -494,10 +494,6 @@ public function edit_materi_admin($id_materi) {
                     $asss = $this->Materi_model->editdb_tambahfolder__materi($id_materi, $data);
                     redirect('Materi/index_admin/');
                 }
-
-                
-  
-    
     } else {
         $data['materi'] = $this->Materi_model->get_data_materi($id_materi);
 

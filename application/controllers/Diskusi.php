@@ -16,6 +16,10 @@ class Diskusi extends CI_Controller {
             $data['guru'] = $this->diskusi_model->get_guru_data($this->session->userdata('NIP'));
             $data['query'] = $this->diskusi_model->get_daftar_topik_biasa();
             $this->load->view('diskusi/forum_diskusi', $data);
+        } elseif ($this->session->userdata('role') === 'SuperAdmin') {
+            $data['SuperAdmin'] = $this->diskusi_model->get_guru_data($this->session->userdata('NIP'));
+            $data['query'] = $this->diskusi_model->get_daftar_topik_biasa();
+            $this->load->view('diskusi/forum_diskusi', $data);
         } else {
             redirect('auth'); // Redirect jika role tidak dikenali
         }
@@ -52,6 +56,26 @@ class Diskusi extends CI_Controller {
                 'deskripsi' => $this->input->post('deskripsi'),
                 'tanggal' => date('Y-m-d'), // Mengambil tanggal sekarang
                 'enum' => 'tunggu',
+            );
+
+            $insert_id = $this->diskusi_model->tambah_topik($data);
+
+            if ($insert_id) {
+                // Jika berhasil disimpan, lakukan sesuatu (misalnya: tampilkan pesan sukses)
+                redirect('diskusi'); // Ganti dengan URL yang sesuai
+            }
+        }
+
+        $this->load->view('diskusi/tambah_topik'); // Memuat halaman tambah_topik.php
+    }
+    public function tambah_topik_admin() {
+        if ($this->input->post()) {
+            // Data topik yang akan disimpan
+            $data = array(
+                'nama' => $this->session->userdata('nama_lengkap'), // Mengambil nama dari session
+                'deskripsi' => $this->input->post('deskripsi'),
+                'tanggal' => date('Y-m-d'), // Mengambil tanggal sekarang
+                'enum' => 'Iya',
             );
 
             $insert_id = $this->diskusi_model->tambah_topik($data);
