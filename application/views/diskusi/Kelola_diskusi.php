@@ -70,6 +70,35 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                <?php if ($this->session->userdata('success')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success'); ?>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->userdata('success_nonaktif')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_nonaktif'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_nonaktif'); ?>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->userdata('success_hapus')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_hapus'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_hapus'); ?>
+                                <?php endif; ?>
                                     <table class="table table-bordered" id="example" class="display" style="width:100%">
                                         <thead>
                                             <tr>

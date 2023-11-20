@@ -102,6 +102,7 @@ class PPDB extends CI_Controller {
         $desa_input = ($desa_data) ? $desa_data->nama : "Desa Tidak Ditemukan";
         // Generate the registration number
         $nomor_registrasi = $this->PPDB_Model->generate_nomor_registrasi();
+        $nisn = $this->input->post('NISN', true);
         
         $data = array(
             'NISN' => $this->input->post('NISN', true),
@@ -146,7 +147,11 @@ class PPDB extends CI_Controller {
             'Tahun_akademik' => $this->input->post('Tahun_akademik', true),
             'status' => 2
         );
-    
+
+    if ($this->PPDB_Model->nisn_terdaftar($nisn)) {
+        $this->session->set_flashdata('error_message', 'NISN sudah terdaftar. Silakan gunakan NISN yang lain.');
+        redirect('PPDB/form');
+    } else {
         // Panggil fungsi simpan_pendaftaran dari model untuk menyimpan data
         if ($this->PPDB_Model->simpan_pendaftaran($data)) {
             $data = array(
@@ -213,6 +218,7 @@ class PPDB extends CI_Controller {
     
         // Mengembalikan respons dalam format JSON
         echo json_encode($response);
+    }
     }
 
     //Pop Up

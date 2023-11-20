@@ -227,6 +227,13 @@ require_once APPPATH.'../vendor/autoload.php';
             return $this->db->affected_rows() > 0;
         }
 
+        public function nisn_terdaftar($nisn) {
+            $this->db->where('NISN', $nisn);
+            $query = $this->db->get('ppdb');
+        
+            return $query->num_rows() > 0;
+        }
+
         // Semua Pendaftar
         public function getpendaftar() {
             return $this->db->get('ppdb')->result();
@@ -398,12 +405,6 @@ require_once APPPATH.'../vendor/autoload.php';
                 "role" => 'siswa',
                 "NIP" => $NISN,
             );
-
-            // $siswa = array(
-            //     "NISN" => $NISN,
-            //     "nama_lengkap" => $nama_lengkap,
-            //     "NIS" => $NIS
-            // )
         
             $config = array(
                 'mailtype' => 'html',

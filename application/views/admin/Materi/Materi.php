@@ -64,8 +64,6 @@
                         </div>
                     </div>
 
-
-
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -73,6 +71,35 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+                                <?php if ($this->session->userdata('success')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success'); ?>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->userdata('success_edit')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_edit'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_edit'); ?>
+                                <?php endif; ?>
+
+                                <?php if ($this->session->userdata('success_hapus')): ?>
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <?php echo $this->session->userdata('success_hapus'); ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php $this->session->unset_userdata('success_hapus'); ?>
+                                <?php endif; ?>
                                 <table class="table table-bordered" id="example" class="display" style="width:100%">
                                     <thead>
                                         <tr>
@@ -90,8 +117,9 @@
                                         <?php $no = 1;?>
                                         <?php foreach ($materi as $row): ?>
                                         <tr>
-                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++;?></td>
-                                            <td ><?php echo isset($row->nama_mapel) ? htmlspecialchars($row->nama_mapel) : ''; ?>
+                                            <td style="text-align: center; vertical-align: middle;"><?php echo $no++;?>
+                                            </td>
+                                            <td><?php echo isset($row->nama_mapel) ? htmlspecialchars($row->nama_mapel) : ''; ?>
                                             </td>
                                             <td><?php echo isset($row->nama_materi) ? htmlspecialchars($row->nama_materi) : ''; ?>
                                             </td>

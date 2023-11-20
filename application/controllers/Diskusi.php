@@ -97,6 +97,7 @@ class Diskusi extends CI_Controller {
         $result = $this->diskusi_model->update_status_topik($id_topik, 'Iya');
 
         if ($result) {
+            $this->session->set_flashdata('success', 'Topik berhasil Disetujui.');
             redirect('diskusi/kelola_diskusi'); // Ganti dengan URL yang sesuai
         } else {
             // Handle error jika perubahan status gagal
@@ -126,6 +127,7 @@ class Diskusi extends CI_Controller {
         $result = $this->diskusi_model->update_status_topik($id_topik, 'Tidak');
 
         if ($result) {
+            $this->session->set_flashdata('success_nonaktif', 'Topik berhasil Dinonaktifkan!.');
             redirect('diskusi/kelola_diskusi'); // Ganti dengan URL yang sesuai
         } else {
             // Handle error jika perubahan status gagal
@@ -156,6 +158,7 @@ class Diskusi extends CI_Controller {
         $this->load->model('diskusi_model');
 
         $this->diskusi_model->hapus_komentar($id_komentar);
+        $this->session->set_flashdata('success_hapus', 'Topik berhasil Disetujui.');
         
         redirect('diskusi/kelola_komentar'); 
     
@@ -202,6 +205,7 @@ class Diskusi extends CI_Controller {
         $result = $this->diskusi_model->update_status_topik($id_topik, 'Iya');
 
         if ($result) {
+            $this->session->set_flashdata('success', 'Topik berhasil Disetujui.');
             redirect('diskusi/kelola_diskusi'); // Ganti dengan URL yang sesuai
         } else {
             // Handle error jika perubahan status gagal
