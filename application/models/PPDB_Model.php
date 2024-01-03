@@ -522,7 +522,6 @@ require_once APPPATH.'../vendor/autoload.php';
         }
 
         public function edit_email($id) {
-
             $email = $this->input->post('email');
             $pass_app = $this->input->post('pass_app');
 
@@ -535,7 +534,28 @@ require_once APPPATH.'../vendor/autoload.php';
             return $this->db->update('email', $data);
         }
 
+        //Report PPDB
+        public function report() {
+            $this->db->select('tahun_akademik.tahun_akademik,ppdb.Tahun_akademik');
+            $this->db->from('tahun_akademik');
+            $this->db->join('ppdb', 'ppdb.id_ppdb = ppdb.id_ppdb');
+            $this->db->where('ppdb.status',1);
+            $this->db->where('ppdb.Tahun_akademik','tahun_akademik.tahun_akademik');
+        
+            $query = $this->db->get();
+            return $query->result();
+        }
+        // public function filter_tahun(){
+        //     $this->db->select('*');
+        //     $this->db-between('tanggal_registrasi');
+        //     return $this->db->get("ppdb");
+        // }
 
-    
+        public function getFilter() {
+            $query = $this->db->get_where('ppdb', array('Tahun_akademik' , 'status' => 1));
+            // $result['data'] = $query->result();
+            $result['count'] = $query->num_rows();
+            return $result;
+        }    
     }
 ?>

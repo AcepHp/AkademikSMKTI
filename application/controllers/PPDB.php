@@ -88,6 +88,8 @@ class PPDB extends CI_Controller {
         $kabkot = $this->input->post('kabupaten_kota', true);
         $kecamatan = $this->input->post('kecamatan', true);
         $desa = $this->input->post('kelurahan_desa', true);
+        $tahun = $this->Tahun_akademik_model->get_tahun_akademik_aktif();
+        $tahunak = $tahun->tahun_akademik;
         
         $provinsi_data = $this->db->get_where('wilayah_provinsi', array('id' => $provinsi))->row();
         $provinsi_input = ($provinsi_data) ? $provinsi_data->nama : "Provinsi Tidak Ditemukan";
@@ -144,7 +146,7 @@ class PPDB extends CI_Controller {
             'tb' => $this->input->post('tb', true),
             'bb' => $this->input->post('bb', true),
             'jumlah_saudara' => $this->input->post('jumlah_saudara', true),
-            'Tahun_akademik' => $this->input->post('Tahun_akademik', true),
+            'Tahun_akademik' => $tahunak,
             'status' => 2
         );
 
@@ -194,7 +196,7 @@ class PPDB extends CI_Controller {
             'tb' => $this->input->post('tb', true),
             'bb' => $this->input->post('bb', true),
             'jumlah_saudara' => $this->input->post('jumlah_saudara', true),
-            'Tahun_akademik' => $this->input->post('Tahun_akademik', true),
+            'Tahun_akademik' => $tahunak,
             'status' => 2
             );
         
@@ -414,5 +416,41 @@ class PPDB extends CI_Controller {
             
         }
     }
+
+    // Report PPDB
+// public function report(){
+//     $data['tahun_akademik'] = $this->Tahun_akademik_model->get_tahun_akademik();
+//     $data['ppdb'] = $this->PPDB_Model->getpendaftar();// Ambil tahun dari filter (pastikan untuk memvalidasi input sesuai kebutuhan)
+//     $selected_year = $this->input->get('filter_year');
     
+//     // Filter data berdasarkan tahun
+//     if ($selected_year) {
+//         $filtered_ppdb = array();
+    
+//         foreach ($data['ppdb'] as $row) {
+//             // Ambil tahun dari tanggal registrasi (menggunakan substr untuk mengambil 4 karakter pertama)
+//             $registration_year = substr($row->tanggal_registrasi, 0, 4);
+    
+//             // Periksa apakah tahun dari tanggal registrasi cocok dengan tahun yang dipilih
+//             if ($registration_year == $selected_year) {
+//                 $filtered_ppdb[] = $row;
+//             }
+//         }
+    
+//         // Ganti data ppdb dengan data yang telah difilter
+//         $data['ppdb'] = $filtered_ppdb;
+//     }
+    
+//     // Ambil tahun-tahun unik dari data untuk dropdown (sesuaikan dengan struktur model Anda)
+
+//     $this->load->view('admin/ppdb/report', $data);
+// }
+
+public function report() {
+    
+    $data['ppdb'] = $this->PPDB_Model->getpendaftar();
+        $data['tahun_akademik'] = $this->Tahun_akademik_model->get_all_tahun_akademik();
+    $this->load->view('admin/ppdb/report', $data);
+}
+
 }

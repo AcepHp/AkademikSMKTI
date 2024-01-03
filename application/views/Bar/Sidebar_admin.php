@@ -143,7 +143,7 @@
     <?php if($this->session->userdata('role') !== 'Wakasek' && $this->session->userdata('role') !== 'Kajur'){ ?>
     <li class="nav-item <?php echo (site_url('ppdb') === current_url() || site_url('PPDB/popup') === current_url() || site_url('PPDB/kuota') === current_url() 
         || site_url('PPDB/pendaftar') === current_url() || site_url('PPDB/diterima') === current_url() || site_url('PPDB/tidakditerima') === current_url() 
-        || site_url('PPDB/tampil_email') === current_url()  ) ? 'active':'';?>">
+        || site_url('PPDB/tampil_email') === current_url() || site_url('PPDB/report') === current_url()  ) ? 'active':'';?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true"
             aria-controls="collapseThree">
             <i class="fas fa-fw fa-university"></i>
@@ -157,6 +157,7 @@
                 <a class="collapse-item" href="<?php echo site_url('PPDB/diterima'); ?>">Diterima</a>
                 <a class="collapse-item" href="<?php echo site_url('PPDB/tidakditerima'); ?>">Tidak Diterima</a>
                 <a class="collapse-item" href="<?php echo site_url('PPDB/tampil_email'); ?>">Email PPDB</a>
+                <a class="collapse-item" href="<?php echo site_url('PPDB/report'); ?>">Report PPDB</a>
             </div>
         </div>
     </li>

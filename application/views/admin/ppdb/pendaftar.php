@@ -205,7 +205,7 @@
     </div>
     <?php endforeach; ?>
 
-    <!-- Modal Lihat Data Pendaftar -->
+    <!-- Modal Edit Data Pendaftar -->
     <?php foreach ($ppdb as $row): ?>
     <div class="modal fade" id="modalEditData<?php echo $row->id_ppdb; ?>" tabindex="-1" role="dialog"
         aria-labelledby="modalEditDataLabel" aria-hidden="true">
