@@ -57,16 +57,27 @@
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800 mx-4">Data Nilai</h1>
                         <div class="d-flex">
+
+
+                            <?php if ($sikap_available): ?>
                             <a href="<?php echo site_url('nilai/cetak_nilai/' . $siswa->NISN); ?>"
                                 class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm mr-2">
                                 <i class="fas fa-print fa-sm text-white-50"></i> Cetak Nilai
                             </a>
 
-                            <a href="<?php echo site_url('nilai/tambah_nilai/' .$siswa->NISN.'/'.$siswa->kode_jurusan.'/'.$siswa->id_kelas); ?>"
-                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2">
-                                <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Nilai
+                            <a href="<?php echo site_url('nilai/edit_sikap/' . $siswa->NISN); ?>"
+                                class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm mr-2">
+                                <i class="fas fa-edit fa-sm text-white-50"></i> Edit Sikap
                             </a>
+                            <?php else: ?>
+
+                            <a href="<?php echo site_url('nilai/tambah_sikap/' . $siswa->NISN); ?>"
+                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2">
+                                <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Sikap
+                            </a>
+                            <?php endif; ?>
                         </div>
+
                     </div>
                     <div class="container-fluid mt-3">
                         <div class="row">
@@ -128,7 +139,6 @@
                                             <th style="text-align: center; vertical-align: middle;">UTS</th>
                                             <th style="text-align: center; vertical-align: middle;">UAS</th>
                                             <th style="text-align: center; vertical-align: middle;">Nilai Akhir</th>
-                                            <th style="width:10%; text-align: center; vertical-align: middle;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -137,24 +147,20 @@
                                         <tr>
                                             <td style="width:5%; text-align: center; vertical-align: middle;">
                                                 <?php echo $no++; ?></td>
-                                            <td style="text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->NISN); ?></td>
-                                            <td><?php echo htmlspecialchars($n->nama_mapel); ?></td>
-                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->kehadiran); ?></td>
-                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->tugas); ?></td>
-                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->uts); ?></td>
-                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->uas); ?></td>
-                                            <td style="width:10%; text-align: center; vertical-align: middle;"><?php echo htmlspecialchars($n->nilai_akhir); ?></td>
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <a href="<?php echo base_url('nilai/edit_nilai/' . $n->ID_Nilai); ?>"
-                                                    class="btn btn-sm btn-warning" title="Edit">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm btn-danger" title="Hapus"
-                                                    onclick="hapusNilai(<?php echo $n->ID_Nilai; ?>)">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                                <?php echo htmlspecialchars($n->NISN); ?></td>
+                                            <td><?php echo htmlspecialchars($n->nama_mapel); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;">
+                                                <?php echo htmlspecialchars($n->kehadiran); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;">
+                                                <?php echo htmlspecialchars($n->tugas); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;">
+                                                <?php echo htmlspecialchars($n->uts); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;">
+                                                <?php echo htmlspecialchars($n->uas); ?></td>
+                                            <td style="width:10%; text-align: center; vertical-align: middle;">
+                                                <?php echo htmlspecialchars($n->nilai_akhir); ?></td>
 
-                                            </td>
 
                                         </tr>
                                         <?php } ?>

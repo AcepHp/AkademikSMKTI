@@ -125,9 +125,33 @@
                                 <div class="box-body">
                                     <div class="card mb-4">
                                         <div class="card-body">
+                                            <?php if ($this->session->flashdata('success_pindah')): ?>
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <?php echo $this->session->flashdata('success_pindah'); ?>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <?php $this->session->unset_userdata('success_pindah'); ?>
+                                            <?php endif; ?>
+
+
+                                            <?php if ($this->session->flashdata('success_naik_kelas')): ?>
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <?php echo $this->session->flashdata('success_naik_kelas'); ?>
+                                                <button type="button" class="close" data-dismiss="alert"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <?php $this->session->unset_userdata('success_naik_kelas'); ?>
+                                            <?php endif; ?>
+
                                             <?php if (!empty($siswa)) : ?>
                                             <table class="table table-bordered" id="example" class="display"
                                                 style="width:100%">
+
                                                 <thead>
                                                     <tr>
 
@@ -281,7 +305,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Pilih Siswa yang akan Naik Kelas / </label>
-                                    <a href="#" id="selectAll" class="btn btn-sm btn-primary">Pilih Acep</a>
+                                    <a href="#" id="selectAll" class="btn btn-sm btn-primary">Pilih Semua</a>
                                     <!-- Tampilkan daftar siswa dengan checkbox -->
                                     <?php foreach ($siswa as $siswa_item) : ?>
                                     <div class="custom-control custom-checkbox">

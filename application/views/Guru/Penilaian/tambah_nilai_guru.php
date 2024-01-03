@@ -26,6 +26,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
 
+    <style>
+    .custom-input {
+        height: 100px;
+        /* Sesuaikan tinggi kolom sesuai kebutuhan */
+    }
+    </style>
 
 
 </head>

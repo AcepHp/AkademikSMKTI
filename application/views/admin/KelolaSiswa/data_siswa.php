@@ -22,8 +22,9 @@
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url()?>assets/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
-    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <link rel="icon" href="<?php echo base_url('assets/images/logo.png') ?>" type="image/x-icon">
@@ -276,12 +277,6 @@
             <script src="<?=base_url('assets/')?>js/demo/chart-area-demo.js"></script>
             <script src="<?=base_url('assets/')?>js/demo/chart-pie-demo.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
-            <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
-
-            <!-- Page level custom scripts -->
-            <script src="assets/js/demo/datatables-demo.js"></script>
             <script>
             function hapusSiswa(id) {
                 Swal.fire({

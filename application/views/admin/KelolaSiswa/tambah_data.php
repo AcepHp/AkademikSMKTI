@@ -80,22 +80,23 @@
                                             </h1>
                                             <hr>
                                             <div class="form-group">
-                                                <label for="nis">NIS</label>
-                                                <input type="text" class="form-control" name="nis"
-                                                    oninput="allowOnlyNumericInput(this, 'errorNIS')" required maxlength="10">
-                                                <small id="errorNIS" class="text-danger" style="display:none;">Hanya
-                                                    bisa diisi oleh angka.</small>
-                                                <?php echo form_error('nis', '<small class="text-danger">', '</small>'); ?>
+                                                <label for="nisn">NISN</label>
+                                                <input type="text" class="form-control" name="nisn" id="nisn"
+                                                    oninput="validateNISNLength(this, 'errorNISN'); allowOnlyNumericInput(this, 'errorNISN'); setUsernameFromNISN()"
+                                                    required pattern="[0-9]{10}" maxlength="10">
+                                                <small id="errorNISN" class="text-danger" style="display:none;">Harus
+                                                    terdiri dari 10 digit angka.</small>
+                                                <?php echo form_error('nisn', '<small class="text-danger">', '</small>'); ?>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="nisn">NISN</label>
-                                                <input type="text" class="form-control" name="nisn" id="nisn"
-                                                    oninput="allowOnlyNumericInput(this, 'errorNISN'); setUsernameFromNISN()"
-                                                    required maxlength="10">
-                                                <small id="errorNISN" class="text-danger" style="display:none;">Hanya
+                                                <label for="nis">NIS</label>
+                                                <input type="text" class="form-control" name="nis"
+                                                    oninput="allowOnlyNumericInput(this, 'errorNIS')" required
+                                                    maxlength="10">
+                                                <small id="errorNIS" class="text-danger" style="display:none;">Hanya
                                                     bisa diisi oleh angka.</small>
-                                                <?php echo form_error('nisn', '<small class="text-danger">', '</small>'); ?>
+                                                <?php echo form_error('nis', '<small class="text-danger">', '</small>'); ?>
                                             </div>
 
                                             <div class="form-group">
@@ -124,7 +125,12 @@
 
                                             <div class="form-group">
                                                 <label for="tanggal_lahir">Tanggal Lahir</label>
-                                                <input type="date" class="form-control" name="tanggal_lahir" required>
+                                                <input type="date" class="form-control" name="tanggal_lahir"
+                                                    id="tanggal_lahir" required
+                                                    max="<?php echo date('Y-m-d', strtotime('-10 years')); ?>"
+                                                    min="<?php echo date('Y-m-d', strtotime('-21 years')); ?>">
+                                                <small id="errorTanggalLahir" class="text-danger"
+                                                    style="display:none;">Umur harus antara 10 dan 21 tahun.</small>
                                             </div>
 
                                             <div class="form-group">
@@ -285,6 +291,45 @@
             <script src="assets/js/demo/datatables-demo.js"></script>
 
             <script>
+            document.getElementById('tanggal_lahir').addEventListener('change', function() {
+                validateAgeRange(this, 'errorTanggalLahir');
+            });
+
+            function validateAgeRange(dateInput, errorElementId) {
+                var selectedDate = new Date(dateInput.value);
+                var currentDate = new Date();
+                var minAgeDate = new Date(currentDate.getFullYear() - 21, currentDate.getMonth(), currentDate
+                    .getDate() + 1);
+                var maxAgeDate = new Date(currentDate.getFullYear() - 10, currentDate.getMonth(), currentDate
+                    .getDate());
+
+                var errorElement = document.getElementById(errorElementId);
+
+                if (selectedDate < minAgeDate || selectedDate > maxAgeDate) {
+                    errorElement.style.display = 'block';
+                    document.getElementById('submitButton').disabled = true; // Menonaktifkan tombol "Simpan"
+                } else {
+                    errorElement.style.display = 'none';
+                    document.getElementById('submitButton').disabled = false; // Mengaktifkan tombol "Simpan"
+                }
+            }
+            </script>
+
+            <script>
+            function validateNISNLength(inputElement, errorElementId) {
+                var inputValue = inputElement.value.trim();
+
+                // Display error message if NISN length is not equal to 10
+                var errorElement = document.getElementById(errorElementId);
+                if (inputValue.length !== 10) {
+                    errorElement.style.display = 'block';
+                    document.getElementById('submitButton').disabled = true; // Menonaktifkan tombol "Simpan"
+                } else {
+                    errorElement.style.display = 'none';
+                    document.getElementById('submitButton').disabled = false; // Mengaktifkan tombol "Simpan"
+                }
+            }
+
             function allowOnlyNumericInput(inputElement, errorElementId) {
                 var inputValue = inputElement.value.replace(/[^0-9]/g, '');
                 inputElement.value = inputValue;

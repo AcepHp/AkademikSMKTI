@@ -76,7 +76,7 @@ class Materi extends CI_Controller {
         $config['upload_path'] = './assets/uploads/materi/';
         $config['allowed_types'] = 'pdf|doc|docx|pptx'; // Jenis file yang diizinkan
         $config['max_size'] = 20480; // Ukuran maksimum file (dalam KB)
-        $config['file_name'] = uniqid(); // Nama unik untuk file yang diunggah
+
 
         $this->load->library('upload', $config);
 

@@ -13,6 +13,9 @@ class Auth extends CI_Controller {
     public function index() {
         $this->load->view('Auth/login');
     }
+    public function index_admin() {
+        $this->load->view('Auth/login');
+    }
 
     public function do_login() {
         $username = $this->input->post('username');

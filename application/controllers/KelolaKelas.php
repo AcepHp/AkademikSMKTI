@@ -184,12 +184,15 @@ class KelolaKelas extends CI_Controller
             // Mengupdate kelas siswa dengan kelas baru
             $this->KelolaKelas_model->update_kelas_siswa($nisn, $id_kelas_baru);
 
+            $this->session->set_flashdata('success_pindah', 'Kelas siswa berhasil diubah.');
+
             // Redirect ke halaman yang sesuai setelah pemindahan kelas
             redirect($this->agent->referrer()); // Ganti dengan URL yang sesuai
         } else {
             // Tampilkan pesan kesalahan jika NISN tidak valid
             echo "NISN tidak valid atau siswa tidak ditemukan.";
         }
+        
     }
     public function get_kelas_by_tingkatan(){
         if ($this->session->userdata('role') !== 'SuperAdmin') {
@@ -228,12 +231,11 @@ class KelolaKelas extends CI_Controller
 
         // Panggil model untuk memproses peningkatan kelas
         $this->load->model('KelolaKelas_model');
-
+        
         // Memanggil fungsi naik_kelas dari model dengan memberikan argumen yang sesuai
         $this->KelolaKelas_model->naik_kelas($current_kelas_id, $tingkatan, $next_kelas_id, $tahun_akademik, $selected_siswa);
+        $this->session->set_flashdata('success_naik_kelas', 'Siswa berhasil dinaikkan ke kelas berikutnya.');
 
-        // Setelah berhasil memproses peningkatan kelas, Anda bisa mengarahkan pengguna ke halaman yang sesuai.
-        // Contoh: redirect ke halaman yang menampilkan daftar siswa di kelas yang baru.
         redirect('kelolakelas/index');
     }
 }

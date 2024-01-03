@@ -65,8 +65,6 @@
 
                     </div>
 
-
-
                     <div class="card">
                         <div class="card-body">
                             <form action="<?=base_url('Datasiswa/import')?>" enctype="multipart/form-data"
@@ -81,7 +79,6 @@
                                         style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Submit</button>
                                 </div>
                             </form>
-
 
                         </div>
                     </div>

@@ -30,6 +30,72 @@ class Nilai_model extends CI_Model {
         $result = $query->row();
         return $result->Nama_Lengkap;
     }
+
+    public function get_sikap_by_nisn_tahun_semester($nisn, $id_tahun, $id_semester) {
+        $this->db->where('NISN', $nisn);
+        $this->db->where('Id_tahun', $id_tahun);
+        $this->db->where('Id_semester', $id_semester);
+        $query = $this->db->get('sikap');
+        return $query->row();
+    }
+
+    public function update_sikap($id_sikap, $data) {
+        $this->db->where('ID_Sikap', $id_sikap);
+        $this->db->update('sikap', $data);
+    }
+
+    public function simpan_tambah_sikap($nisn, $id_tahun, $id_semester, $sikap_satu, $penjelasan_sikap_satu, $sikap_dua, $penjelasan_sikap_dua, $sikap_tiga, $penjelasan_sikap_tiga, $sikap_empat, $penjelasan_sikap_empat, $sikap_lima, $penjelasan_sikap_lima, $sikap_enam, $penjelasan_sikap_enam) {
+        $data = array(
+            'Sikap_satu' => $sikap_satu,
+            'Sikap_dua' => $sikap_dua,
+            'Sikap_tiga' => $sikap_tiga,
+            'Sikap_empat' => $sikap_empat,
+            'Sikap_lima' => $sikap_lima,
+            'Sikap_enam' => $sikap_enam,
+            'Penjelasan_sikap_satu' => $penjelasan_sikap_satu,
+            'Penjelasan_sikap_dua' => $penjelasan_sikap_dua,
+            'Penjelasan_sikap_tiga' => $penjelasan_sikap_tiga,
+            'Penjelasan_sikap_empat' => $penjelasan_sikap_empat,
+            'Penjelasan_sikap_lima' => $penjelasan_sikap_lima,
+            'Penjelasan_sikap_enam' => $penjelasan_sikap_enam,
+            'NISN' => $nisn,
+            'Id_tahun' => $id_tahun,
+            'Id_semester' => $id_semester,
+        );
+
+        // Memasukkan data ke dalam tabel
+        $this->db->insert('sikap', $data);
+    }
+
+    public function cek_sikap_ada($nisn)
+    {
+        // Memeriksa apakah data sikap sudah ada untuk NISN tertentu
+        $this->db->where('NISN', $nisn);
+        $query = $this->db->get('sikap');
+
+        return $query->num_rows() > 0;
+    }
+
+    public function get_siswa_by_nisn_tahun_semester($nisn, $id_tahun, $id_semester)
+    {
+        $this->db->select('*');
+        $this->db->from('sikap');
+        $this->db->where('NISN', $nisn);
+        $this->db->where('id_tahun', $id_tahun);
+        $this->db->where('id_semester', $id_semester);
+
+        // Perform the query
+        $query = $this->db->get();
+
+        // Check if there is a result
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
+
+
     public function simpan_data_nilai($nisn, $id_tahun, $id_semester, $id_mapel, $kehadiran, $tugas, $uts, $uas, $nilai_akhir, $persentase_kehadiran, $persentase_tugas, $persentase_uts, $persentase_uas) {
         $data = array(
             'NISN' => $nisn,

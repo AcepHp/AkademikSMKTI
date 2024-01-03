@@ -6,11 +6,10 @@
         }
     
         public function login($username, $password) {
-            // Enkripsi password dengan MD5 sebelum mencocokkannya dengan yang ada di basis data
             $password_md5 = md5($password);
     
             $this->db->where('username', $username);
-            $this->db->where('password', $password_md5); // Menggunakan password yang dienkripsi dengan MD5
+            $this->db->where('password', $password_md5);
             $query = $this->db->get('users');
     
             if ($query->num_rows() == 1) {
@@ -34,7 +33,7 @@
         
         public function check_username($username) {
             $query = $this->db->get_where('users', array('username' => $username));
-            return $query->num_rows() > 0; // Kembalikan TRUE jika username valid, FALSE jika tidak valid
+            return $query->num_rows() > 0;
         }
     
         public function check_password($username, $password) {
