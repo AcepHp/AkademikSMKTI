@@ -587,13 +587,13 @@
                                     name="jumlah_saudara" style="width: 100%;">
                             </div>
                         </div>
-                        <div class="form-row">
+                        <!-- <div class="form-row">
                             <div class="form-holder form-holder-2 col-12 mb-3">
                                 <label for="Tahun_akademik">Tahun Akademik</label>
                                 <input type="text" class="form-control col-sm-10" id="Tahun_akademik"
                                     name="Tahun_akademik" style="width: 100%;">
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-12 mb-4 text-end">
                         <button id="backButton4" class="btn btn-primary btn-lg">Kembali</button>

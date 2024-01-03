@@ -5,11 +5,13 @@ class Tahun_akademik extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Tahun_akademik_model');
+        $this->load->model('PPDB_Model');
     }
 
     // Fungsi untuk menampilkan daftar tahun akademik
     public function index()
     {
+        $data['ppdb'] = $this->PPDB_Model->getpendaftar();
         $data['tahun_akademik'] = $this->Tahun_akademik_model->get_all_tahun_akademik();
         $this->load->view('admin/data_master/tahun_akademik/data_tahun', $data);
     }

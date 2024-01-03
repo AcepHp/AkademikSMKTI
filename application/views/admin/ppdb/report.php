@@ -52,20 +52,13 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Tahun Akademik</h1>
-                        <div class="d-flex">
-                            <a href="<?php echo site_url('Tahun_akademik/tambah_tahun'); ?>"
-                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-2">
-                                <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Tahun Akademik
-                            </a>
-
-                        </div>
+                        <h1 class="h3 mb-0 text-gray-800">Report PPDB</h1>
 
                     </div>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Table Tahun Akademik</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Table Report Pertahun</h6>
                         </div>
                         <div class="card-body">
                             <?php if ($this->session->userdata('success_tambah')): ?>
@@ -97,16 +90,28 @@
                             </div>
                             <?php $this->session->unset_userdata('success_hapus'); ?>
                             <?php endif; ?>
+                            <div style="display: flex; justify-content: space-between; width: 100%; margin: auto;">
+                                <div class="card mx-auto" style="width: 30rem;">
+                                    <div class="card-body d-flex flex-row-reverse align-items-center">
+                                        <canvas id="pieChart" width="8" height="8"></canvas>
+                                    </div>
+                                </div>
+
+                                <div style="width: 60rem;">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+
+
+                            <br>
 
                             <div class="table-responsive">
-                                <table class="table table-bordered display id=" example" class="display"
-                                    style="width:100%">
+                                <table class="table table-bordered display" id="example" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th style="width:5%; text-align: center; vertical-align: middle;">No</th>
-                                            <th style="text-align:center; vertical-align:center;">Tahun Akademik</th>
-                                            <th style="text-align: center; vertical-align: middle;">Status</th>
-                                            <th style="text-align: center; vertical-align: middle;">Aksi</th>
+                                            <th style="text-align:center; vertical-align:center;">Periode</th>
+                                            <th style="text-align: center; vertical-align: middle;">Jumlah siswa yang Diterima</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -116,24 +121,21 @@
                                             <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?>
                                             </td>
                                             <td><?php echo htmlspecialchars($tahun->tahun_akademik); ?></td>
-                                            <td><?php echo htmlspecialchars($tahun->status);    ?></td>
-                                            
                                             <td style="text-align: center; vertical-align: middle;">
-                                                <a href="
-                                                <?php echo site_url('Tahun_akademik/edit_tahun/'.$tahun->id_tahun); ?>"
-                                                    class="btn btn-sm btn-warning" title="Edit">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="#" class="btn btn-sm btn-danger" title="Hapus"
-                                                    onclick="hapusTahun('<?php echo $tahun->id_tahun; ?>')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                                <?php
+                                                $jumlah_siswa = 0;
+                                                foreach ($ppdb as $row) {
+                                                    if ($row->Tahun_akademik == $tahun->tahun_akademik) {
+                                                        $jumlah_siswa++;
+                                                    }
+                                                }
+                                                echo $jumlah_siswa;
+                                                ?>
                                             </td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
-
 
 
                             </div>
@@ -142,17 +144,20 @@
 
 
 
-
                 </div>
                 <!-- /.container-fluid -->
 
+
             </div>
             <!-- End of Main Content -->
+
+
 
             <!-- Footer Admin -->
             <?php $this->load->view('Bar/Footer_admin'); ?>
 
             <?php $this->load->view('Bar/Logout_modal'); ?>
+
 
 
             <!-- Bootstrap core JavaScript-->
@@ -176,29 +181,89 @@
             <script src="<?php echo base_url()?>assets/datatables/jquery.dataTables.min.js"></script>
             <script src="<?php echo base_url()?>assets/datatables/dataTables.bootstrap4.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="assets/js/demo/datatables-demo.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
             <script>
-            function hapusTahun(id_tahun) {
-                Swal.fire({
-                    title: 'Apakah Anda yakin?',
-                    text: "Data Tahun Akademik akan dihapus dan tidak dapat dikembalikan!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, hapus!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Ganti URL di bawah ini dengan URL yang sesuai untuk menghapus siswa
-                        window.location.href = '<?php echo site_url("Tahun_akademik/hapus_tahun/") ?>' +
-                            id_tahun;
-                    }
-                });
-            }
+            // Ambil data untuk grafik dari PHP dan format menjadi objek Chart.js
+            var data = {
+                labels: <?php echo json_encode(array_column($tahun_akademik, 'tahun_akademik')); ?>,
+                datasets: [{
+                    data: <?php echo json_encode(array_map(function ($tahun) use ($ppdb) {
+                        $jumlah_siswa = 0;
+                        foreach ($ppdb as $row) {
+                            if ($row->Tahun_akademik == $tahun->tahun_akademik) {
+                                $jumlah_siswa++;
+                            }
+                        }
+                        return $jumlah_siswa;
+                    }, $tahun_akademik)); ?>,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            };
+
+            // Setup grafik
+            var ctx = document.getElementById('pieChart').getContext('2d');
+            var pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: data
+            });
             </script>
+            <script>
+            // Extract data from the table and prepare for the chart
+            var labels = [];
+            var data = [];
 
+            // Iterate through table rows
+            var tableRows = document.querySelectorAll("#example tbody tr");
+            tableRows.forEach(function(row) {
+                var columns = row.querySelectorAll("td");
+                labels.push(columns[1].textContent
+            .trim()); // Assuming the academic year is in the second column
+                data.push(parseInt(columns[2].textContent
+            .trim())); // Assuming the number of students is in the third column
+            });
 
+            // Create a bar chart
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Yang di terima ',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            </script>
 </body>
+
 
 </html>
