@@ -59,9 +59,6 @@
                                                 <?php endif; ?>
                                             </div>
                                             <div class="card-body text-center">
-                                                <p class="card-text"
-                                                    style="font-family: Poppins,sans-serif;font-size: 12px;color: #617182;">
-                                                    Max Upload Photo 10 MB :</p>
                                                 <h4 class="card-title"
                                                     style="font-family: Poppins,sans-serif;font-size: 15px; margin-bottom: 0px;">
                                                     <?= isset($guru->Nama_Lengkap) ? $guru->Nama_Lengkap : 'Guru'; ?>

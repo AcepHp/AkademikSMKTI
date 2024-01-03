@@ -102,24 +102,36 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+
     <script>
     function hapusMateri(id_materi, id_kelas, id_mapel) {
         Swal.fire({
-            title: 'Apakah Anda yakin?',
+            title: 'Apakah Kamu Yakin?',
             text: "Data Materi akan dihapus dan tidak dapat dikembalikan!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus!'
+            confirmButtonText: 'Yes, Hapus!'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '<?= site_url("Materi/hapus_materi_guru/") ?>' + id_materi + '/' +
-                    id_kelas + '/' + id_mapel;
+                // Perform the deletion
+                Swal.fire(
+                    'Terhapus!',
+                    'Data Materi Berhasil dihapus',
+                    'success'
+                ).then(() => {
+                    // Redirect to the specified URL
+                    window.location.href = '<?= site_url("Materi/hapus_materi_guru/") ?>' + id_materi +
+                        '/' +
+                        id_kelas + '/' + id_mapel;
+                });
             }
         });
     }
     </script>
+
+
 
 
 </body>

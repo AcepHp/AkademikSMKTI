@@ -131,6 +131,8 @@ class Nilai extends CI_Controller {
             $data['nilai'] = $this->Nilai_model->get_nilai_by_nisn_tahun_semester($nisn, $tahun_akademik_aktif_id, $semester_aktif->id_semester);
     
             $data['semester_aktif'] = $semester_aktif->nama_semester;
+            $data['sikap_available'] = $this->Nilai_model->cek_sikap_ada($nisn);
+
         } else {
             $data['siswa'] = array(); // Jika tidak ada data siswa atau tahun akademik aktif, set array siswa kosong
             $data['nama_kelas'] = 'Tidak Ada Kelas'; // Jika tidak ada data siswa atau tahun akademik aktif, set pesan default untuk kelas
@@ -145,6 +147,168 @@ class Nilai extends CI_Controller {
     
         $this->load->view('Guru/nilai/data_nilai', $data);
     }
+
+    public function tambah_sikap($nisn) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
+        // Mendapatkan kode jurusan dan kode_tingkatan menggunakan fungsi get_kode_jurusan_tingkatan_by_NISN
+        $kode_jurusan_tingkatan = $this->Nilai_model->get_kode_jurusan_tingkatan_by_NISN($nisn);
+    
+        if ($kode_jurusan_tingkatan) {
+            $kode_jurusan = $kode_jurusan_tingkatan->kode_jurusan;
+            $kode_tingkatan = $kode_jurusan_tingkatan->kode_tingkatan;
+    
+            // Mengambil detail siswa berdasarkan NISN yang diberikan
+            $data['siswa'] = $this->Nilai_model->get_siswa_by_NISN($nisn);
+    
+            if ($data['siswa']) {
+                // Mendapatkan semua data mata pelajaran yang tersedia berdasarkan kode jurusan dan kode_tingkatan siswa
+                $data['semesteraktif'] = $this->Nilai_model->get_active_semester();
+    
+                // Mendapatkan tahun akademik aktif
+                $this->load->model('Tahun_Akademik_model');
+                $tahun_akademik_aktif = $this->Tahun_Akademik_model->get_tahun_akademik_aktif();
+    
+                // Mendapatkan informasi semester aktif
+                $this->load->model('Semester_model');
+                $semester_aktif = $this->Semester_model->get_active_semester();
+    
+                if ($tahun_akademik_aktif && $semester_aktif) {
+                    $data['tahun_akademik'] = $tahun_akademik_aktif->id_tahun; // Menggunakan id_tahun
+                    $data['semester_aktif'] = $semester_aktif->id_semester; // Menggunakan id_semester
+    
+                    $this->load->view('Guru/nilai/tambah_sikap', $data);
+                } else {
+                    // Menangani kasus ketika tahun akademik atau semester aktif tidak ditemukan
+                    // Anda dapat mengarahkan ke halaman error atau menampilkan pesan kesalahan di sini
+                    echo "Tahun akademik atau semester aktif tidak ditemukan"; // Sesuaikan pesan ini sesuai kebutuhan
+                }
+            } else {
+                // Menangani kasus ketika siswa dengan NISN yang diberikan tidak ditemukan
+                // Anda dapat mengarahkan ke halaman error atau menampilkan pesan kesalahan di sini
+                echo "Siswa tidak ditemukan"; // Sesuaikan pesan ini sesuai kebutuhan
+            }
+        } else {
+            // Handle jika data kode jurusan atau kode_tingkatan tidak ditemukan
+            echo "Data kode jurusan atau kode_tingkatan tidak ditemukan"; // Sesuaikan pesan ini sesuai kebutuhan
+        }
+    }
+
+    public function simpan_tambah_sikap() {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
+        // Mendapatkan data dari formulir
+        $nisn = $this->input->post('nisn');
+        $id_tahun = $this->input->post('id_tahun');
+        $id_semester = $this->input->post('id_semester');
+        $sikap_satu = $this->input->post('sikap_satu');
+        $penjelasan_sikap_satu = $this->input->post('penjelasan_sikap_satu');
+        $sikap_dua = $this->input->post('sikap_dua');
+        $penjelasan_sikap_dua = $this->input->post('penjelasan_sikap_dua');
+        $sikap_tiga = $this->input->post('sikap_tiga');
+        $penjelasan_sikap_tiga = $this->input->post('penjelasan_sikap_tiga');
+        $sikap_empat = $this->input->post('sikap_empat');
+        $penjelasan_sikap_empat = $this->input->post('penjelasan_sikap_empat');
+        $sikap_lima = $this->input->post('sikap_lima');
+        $penjelasan_sikap_lima = $this->input->post('penjelasan_sikap_lima');
+        $sikap_enam = $this->input->post('sikap_enam');
+        $penjelasan_sikap_enam = $this->input->post('penjelasan_sikap_enam');
+    
+        // Memanggil model untuk menyimpan data
+        $this->Nilai_model->simpan_tambah_sikap($nisn, $id_tahun, $id_semester, $sikap_satu, $penjelasan_sikap_satu, $sikap_dua, $penjelasan_sikap_dua, $sikap_tiga, $penjelasan_sikap_tiga, $sikap_empat, $penjelasan_sikap_empat, $sikap_lima, $penjelasan_sikap_lima, $sikap_enam, $penjelasan_sikap_enam);
+    
+        // Redirect ke halaman yang sesuai dengan NISN
+        redirect('nilai/tampil_nilai/' . $nisn); // Pastikan NISN ada di sini
+    }
+
+    public function edit_sikap($nisn) {
+        if ($this->session->userdata('role') !== 'SuperAdmin') {
+            redirect('auth');
+        }
+        // Mendapatkan kode jurusan dan kode_tingkatan menggunakan fungsi get_kode_jurusan_tingkatan_by_NISN
+        $kode_jurusan_tingkatan = $this->Nilai_model->get_kode_jurusan_tingkatan_by_NISN($nisn);
+    
+        if ($kode_jurusan_tingkatan) {
+            $kode_jurusan = $kode_jurusan_tingkatan->kode_jurusan;
+            $kode_tingkatan = $kode_jurusan_tingkatan->kode_tingkatan;
+    
+            // Mengambil detail siswa berdasarkan NISN yang diberikan
+            $data['siswa'] = $this->Nilai_model->get_siswa_by_NISN($nisn);
+    
+            if ($data['siswa']) {
+                // Mendapatkan semua data mata pelajaran yang tersedia berdasarkan kode jurusan dan kode_tingkatan siswa
+                $data['semesteraktif'] = $this->Nilai_model->get_active_semester();
+    
+                // Mendapatkan tahun akademik aktif
+                $this->load->model('Tahun_Akademik_model');
+                $tahun_akademik_aktif = $this->Tahun_Akademik_model->get_tahun_akademik_aktif();
+    
+                // Mendapatkan informasi semester aktif
+                $this->load->model('Semester_model');
+                $semester_aktif = $this->Semester_model->get_active_semester();
+    
+                if ($tahun_akademik_aktif && $semester_aktif) {
+                    $data['tahun_akademik'] = $tahun_akademik_aktif->id_tahun;
+                    $data['semester_aktif'] = $semester_aktif->id_semester;
+                    $data['siswaa'] = $this->Nilai_model->get_sikap_by_nisn_tahun_semester($nisn, $data['tahun_akademik'], $data['semester_aktif']);
+    
+                    $this->load->view('Guru/nilai/edit_sikap', $data);
+                    
+                } else {
+                    echo "Tahun akademik atau semester aktif tidak ditemukan"; 
+                }
+            } else {
+               
+                echo "Siswa tidak ditemukan";
+            }
+        } else {
+           
+            echo "Data kode jurusan atau kode_tingkatan tidak ditemukan";
+        }
+    }
+
+
+    public function simpan_edit_sikap() {
+
+        $nisn = $this->input->post('nisn');
+        $id_tahun = $this->input->post('id_tahun');
+        $id_semester = $this->input->post('id_semester');
+        $id_sikap = $this->input->post('id_sikap');
+        $sikap_satu = $this->input->post('sikap_satu');
+        $penjelasan_sikap_satu = $this->input->post('penjelasan_sikap_satu');
+        $sikap_dua = $this->input->post('sikap_dua');
+        $penjelasan_sikap_dua = $this->input->post('penjelasan_sikap_dua');
+        $sikap_tiga = $this->input->post('sikap_tiga');
+        $penjelasan_sikap_tiga = $this->input->post('penjelasan_sikap_tiga');
+        $sikap_empat = $this->input->post('sikap_empat');
+        $penjelasan_sikap_empat = $this->input->post('penjelasan_sikap_empat');
+        $sikap_lima = $this->input->post('sikap_lima');
+        $penjelasan_sikap_lima = $this->input->post('penjelasan_sikap_lima');
+        $sikap_enam = $this->input->post('sikap_enam');
+        $penjelasan_sikap_enam = $this->input->post('penjelasan_sikap_enam');
+
+        $data = array(
+            'Sikap_satu' => $sikap_satu,
+            'Penjelasan_sikap_satu' => $penjelasan_sikap_satu,
+            'Sikap_dua' => $sikap_dua,
+            'Penjelasan_sikap_dua' => $penjelasan_sikap_dua,
+            'Sikap_tiga' => $sikap_tiga,
+            'Penjelasan_sikap_tiga' => $penjelasan_sikap_tiga,
+            'Sikap_empat' => $sikap_empat,
+            'Penjelasan_sikap_empat' => $penjelasan_sikap_empat,
+            'Sikap_lima' => $sikap_lima,
+            'Penjelasan_sikap_lima' => $penjelasan_sikap_lima,
+            'Sikap_enam' => $sikap_enam,
+            'Penjelasan_sikap_enam' => $penjelasan_sikap_enam,
+        );
+
+        $this->Nilai_model->update_sikap($id_sikap, $data);
+ 
+        redirect('nilai/tampil_nilai/' . $nisn);
+    }
+
 
     public function tambah_nilai($nisn) {
         if ($this->session->userdata('role') !== 'SuperAdmin') {
@@ -508,6 +672,7 @@ class Nilai extends CI_Controller {
             if ($nama_peserta_didik) {
                 // Mendapatkan data nilai siswa dari model berdasarkan tahun akademik dan semester aktif
                 $data['nilai_siswa'] = $this->Nilai_model->get_nilai_by_nisn_tahun_semester($nisn, $tahun_akademik_id, $semester_aktif->id_semester);
+                $data['sikap_siswa'] = $this->Nilai_model->get_siswa_by_nisn_tahun_semester($nisn, $tahun_akademik_id, $semester_aktif->id_semester);
         
                 // Tambahkan tahun akademik aktif dan semester aktif ke data
                 $data['tahun_akademik_id'] = $tahun_akademik_id;

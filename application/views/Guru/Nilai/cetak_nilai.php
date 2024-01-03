@@ -33,7 +33,6 @@
     .table-akademik table td {
         text-align: justify;
     }
-    
     </style>
 </head>
 
@@ -89,37 +88,19 @@
                 <th style="height: 25px; background-color: #EEEDED;">Dimensi</th>
                 <th style="height: 25px; background-color: #EEEDED;">Penjelasan</th>
             </tr>
-            <tr>
-                <td>Beriman, bertakwa kepada Tuhan Yang Maha Esa, dan Berakhlak Mulia
-                </td>
-                <td>Melaksanakan ibadah secara rutin dan mandiri sesuai dengan tuntunan
-                    agama/kepercayaan, serta berpartisipasi pada perayaan hari-hari besar</td>
-            </tr>
-            <tr>
-                <td>Bernalar Kritis </td>
-                <td>Berani Mengajukan pertanyaan untuk menjawab keingintahuannya dan
-                    untuk mengidentiﬁkasi suatu permasalahan mengenai dirinya dan lingkungan sekitarnya.</td>
-            </tr>
-            <tr>
-                <td>Mandiri</td>
-                <td>Mampu Mengidentiﬁkasi perbedaan emosi yang dirasakannya dan
-                    situasi-situasi yang menyebabkan- nya: serta mengekspresi-kan secara wajar</td>
-            </tr>
-            <tr>
-                <td>Berkebinekaan Global</td>
-                <td>Menghargai perbedaan pendapat teman-temannya saat berdiskusi di
-                    kelas</td>
-            </tr>
-            <tr>
-                <td>Perkembangan Dimensi Kreatif</td>
-                <td>Mampu Menggabungkan beberapa gagasan menjadi ide atau gagasan
-                    imajinatif yang bermakna untuk mengekspresikan pikiran dan/atau perasaannya</td>
-            </tr>
-            <tr>
-                <td>Bergotong royong</td>
-                <td>Terbiasa bekerja bersama dalam melakukah kegiatan dengan kelompok
-                </td>
-            </tr>
+            <?php
+    $sikap_keys = array('satu', 'dua', 'tiga', 'empat', 'lima', 'enam');
+
+    foreach ($sikap_keys as $key) {
+        $sikap_name = 'Sikap_' . $key;
+        $penjelasan_name = 'Penjelasan_sikap_' . $key;
+
+        echo '<tr>';
+        echo '<td>' . $sikap_siswa->$sikap_name . '</td>';
+        echo '<td>' . $sikap_siswa->$penjelasan_name . '</td>';
+        echo '</tr>';
+    }
+    ?>
         </table>
     </div>
     <table>

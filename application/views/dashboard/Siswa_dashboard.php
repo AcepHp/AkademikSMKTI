@@ -123,14 +123,14 @@
                         <div class="col-xl-12 mb-4">
                             <div id="chart-card" class="card">
                                 <div class="card-body">
-                                    <canvas id="chart-line"></canvas>
+                                    <canvas id="chart-line" height="85"></canvas>
                                 </div>
                             </div>
                         </div>
 
 
                         <!-- Content Column -->
-                        
+
                     </div>
                 </div>
 
@@ -238,28 +238,37 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
+        // Replace any negative values with 0
+        var sanitizedData = <?= json_encode($data); ?>;
+        sanitizedData = sanitizedData.map(value => Math.max(0, value));
+
         var ctx = document.getElementById("chart-line").getContext('2d');
         var chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: <?= json_encode($labels); ?>,
                 datasets: [{
-                    label: 'Prestasi Akademik',
-                    data: <?= json_encode($data); ?>,
+                    label: 'Rata-Rata Nilai',
+                    data: sanitizedData,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
+                    borderWidth: 1,
+                    fill: false, // Set to false for a line chart without filling the area under the line
+                    tension: 0.1 // Adjust the tension of the line (0.1 is the default)
                 }]
             },
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        min: 0
                     }
                 }
             }
         });
         </script>
+
+
 </body>
 
 </html>

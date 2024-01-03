@@ -66,21 +66,25 @@
                                                 </h1>
                                                 <hr>
                                                 <div class="form-group">
-                                                    <label for="nis">NIS</label>
-                                                    <input type="text" class="form-control" name="nis"
-                                                        value="<?php echo $siswa_data->NIS; ?>"
-                                                        oninput="allowOnlyNumericInput(this, 'errorNIS')" required maxlength="10">
-                                                    <small id="errorNIS" class="text-danger" style="display:none;">Hanya
-                                                        bisa diisi oleh angka.</small>
+                                                    <label for="nisn">NISN</label>
+                                                    <input type="text" class="form-control" name="nisn" id="nisn"
+                                                        value="<?php echo $siswa_data->NISN; ?>"
+                                                        oninput="validateNISNLength(this, 'errorNISN'); allowOnlyNumericInput(this, 'errorNISN');"
+                                                        required pattern="[0-9]{10}" maxlength="10">
+                                                    <small id="errorNISN" class="text-danger"
+                                                        style="display:none;">Harus
+                                                        terdiri dari 10 digit angka.</small>
+                                                    <?php echo form_error('nisn', '<small class="text-danger">', '</small>'); ?>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="nisn">NISN</label>
-                                                    <input type="text" class="form-control" name="nisn"
-                                                        value="<?php echo $siswa_data->NISN; ?>"
-                                                        oninput="allowOnlyNumericInput(this, 'errorNISN')" required maxlength="10">
-                                                    <small id="errorNISN" class="text-danger"
-                                                        style="display:none;">Hanya bisa diisi oleh angka.</small>
+                                                    <label for="nis">NIS</label>
+                                                    <input type="text" class="form-control" name="nis"
+                                                        value="<?php echo $siswa_data->NIS; ?>"
+                                                        oninput="allowOnlyNumericInput(this, 'errorNIS')" required
+                                                        maxlength="10">
+                                                    <small id="errorNIS" class="text-danger" style="display:none;">Hanya
+                                                        bisa diisi oleh angka.</small>
                                                 </div>
 
                                                 <div class="form-group">
@@ -126,7 +130,7 @@
 
                                                 <div class="form-group">
                                                     <label for="email">Email</label>
-                                                    <input type="email" class="form-control" name="email"
+                                                    <input type="text" class="form-control" name="email"
                                                         value="<?php echo $siswa_data->email; ?>">
                                                 </div>
 
@@ -201,7 +205,7 @@
 
 
                                                         <div class="form-group">
-                                                        
+
                                                             <input type="hidden" class="form-control"
                                                                 name="new_password"
                                                                 placeholder="Masukkan password baru">
@@ -261,6 +265,20 @@
                 <script src="<?php echo base_url()?>assets/js/demo/datatables-demo.js"></script>
 
                 <script>
+                function validateNISNLength(inputElement, errorElementId) {
+                    var inputValue = inputElement.value.trim();
+
+                    // Display error message if NISN length is not equal to 10
+                    var errorElement = document.getElementById(errorElementId);
+                    if (inputValue.length !== 10) {
+                        errorElement.style.display = 'block';
+                        document.getElementById('submitButton').disabled = true; // Menonaktifkan tombol "Simpan"
+                    } else {
+                        errorElement.style.display = 'none';
+                        document.getElementById('submitButton').disabled = false; // Mengaktifkan tombol "Simpan"
+                    }
+                }
+
                 function allowOnlyNumericInput(inputElement, errorElementId) {
                     var inputValue = inputElement.value.replace(/[^0-9]/g, '');
                     inputElement.value = inputValue;
